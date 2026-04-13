@@ -1,7 +1,13 @@
 import fs from "fs";
 import path from "path";
+import seedData from "./seed-performance.json";
 
-const DATA_FILE = path.join(process.cwd(), "data", "performance.json");
+// On Vercel: use /tmp (writable but ephemeral per invocation)
+// Locally: use data/ directory
+const IS_VERCEL = !!process.env.VERCEL;
+const DATA_FILE = IS_VERCEL
+  ? path.join("/tmp", "performance.json")
+  : path.join(process.cwd(), "data", "performance.json");
 
 export interface DailyPrediction {
   symbol: string;
@@ -35,13 +41,24 @@ export function loadPerformance(): PerformanceData {
       return JSON.parse(raw);
     }
   } catch {
-    // corrupted file, start fresh
+    // file not readable
   }
-  return { records: [] };
+
+  // Fallback: use bundled seed data
+  return seedData as PerformanceData;
 }
 
 export function savePerformance(data: PerformanceData): void {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+  try {
+    // Ensure directory exists
+    const dir = path.dirname(DATA_FILE);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+  } catch {
+    // On Vercel /tmp may fail across invocations — that's ok
+  }
 }
 
 export function getTodayDate(): string {
