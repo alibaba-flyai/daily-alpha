@@ -2,6 +2,9 @@
 
 # dependencies
 /node_modules
+
+# generated data
+/data
 /.pnp
 .pnp.*
 .yarn/*

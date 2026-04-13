@@ -1,0 +1,557 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+interface DailyPrediction {
+  symbol: string;
+  name: string;
+  predictedWinRate: number;
+  predictedWin: boolean;
+  priceAtPrediction: number;
+}
+
+interface DailyResult extends DailyPrediction {
+  priceAtClose: number;
+  actualWin: boolean;
+  correct: boolean;
+}
+
+interface DailyRecord {
+  date: string;
+  predictions: DailyPrediction[];
+  results: DailyResult[] | null;
+  accuracy: number | null;
+}
+
+interface PerformanceResponse {
+  records: DailyRecord[];
+  stats: {
+    totalDays: number;
+    totalPredictions: number;
+    totalCorrect: number;
+    overallAccuracy: number | null;
+  };
+}
+
+interface PerformancePanelProps {
+  onSearch: (query: string) => void;
+}
+
+function SentimentIcon({ positive }: { positive: boolean }) {
+  return (
+    <span className={`shrink-0 w-4 h-4 flex items-center justify-center rounded bg-black border ${positive ? "border-emerald-500/30" : "border-red-500/30"}`}>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke={positive ? "#22c55e" : "#ef4444"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        {positive ? (
+          <><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></>
+        ) : (
+          <><polyline points="22 17 13.5 8.5 8.5 13.5 2 7" /><polyline points="16 17 22 17 22 11" /></>
+        )}
+      </svg>
+    </span>
+  );
+}
+
+// --- Market Clock ---
+function MarketClock() {
+  const [now, setNow] = useState(new Date());
+  useEffect(() => {
+    const t = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  const et = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+  const hours = et.getHours(), minutes = et.getMinutes();
+  const totalMins = hours * 60 + minutes;
+  const marketOpen = 9 * 60 + 30, marketClose = 16 * 60;
+  const isWeekday = et.getDay() >= 1 && et.getDay() <= 5;
+  const isOpen = isWeekday && totalMins >= marketOpen && totalMins < marketClose;
+  const isPreMarket = isWeekday && totalMins < marketOpen;
+
+  let statusText: string, statusColor: string, countdown: string;
+  if (!isWeekday) {
+    statusText = "Weekend"; statusColor = "text-zinc-500"; countdown = "Opens Mon 9:30 AM";
+  } else if (isOpen) {
+    const m = marketClose - totalMins;
+    statusText = "Market Open"; statusColor = "text-emerald-400"; countdown = `Closes in ${Math.floor(m / 60)}h ${m % 60}m`;
+  } else if (isPreMarket) {
+    const m = marketOpen - totalMins;
+    statusText = "Pre-Market"; statusColor = "text-yellow-400"; countdown = `Opens in ${Math.floor(m / 60)}h ${m % 60}m`;
+  } else {
+    statusText = "After Hours"; statusColor = "text-zinc-500"; countdown = "Opens tmrw 9:30 AM";
+  }
+
+  const etTime = et.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
+  let progress = 0;
+  if (isOpen) progress = ((totalMins - marketOpen) / (marketClose - marketOpen)) * 100;
+  else if (!isWeekday || totalMins >= marketClose) progress = 100;
+
+  return (
+    <div className="bg-zinc-900/50 rounded-lg p-3 mb-4">
+      <div className="flex items-center justify-between mb-1.5">
+        <div className="flex items-center gap-2">
+          <span className={`relative flex h-2 w-2 ${isOpen ? "" : "opacity-50"}`}>
+            {isOpen && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />}
+            <span className={`relative inline-flex rounded-full h-2 w-2 ${isOpen ? "bg-emerald-400" : "bg-zinc-600"}`} />
+          </span>
+          <span className={`text-[11px] font-semibold ${statusColor}`}>{statusText}</span>
+        </div>
+        <span className="text-[11px] font-mono text-zinc-400">{etTime} ET</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="flex-1 h-1 bg-zinc-800 rounded-full overflow-hidden">
+          <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${progress}%`, background: isOpen ? "#22c55e" : "#3f3f46" }} />
+        </div>
+        <span className="text-[9px] text-zinc-600 shrink-0">{countdown}</span>
+      </div>
+      <div className="flex justify-between text-[8px] text-zinc-700 mt-0.5 px-0.5">
+        <span>9:30 AM</span>
+        <span>4:00 PM</span>
+      </div>
+    </div>
+  );
+}
+
+// --- Interactive Accuracy Chart with hover tooltips ---
+function AccuracyChart({ records, selectedDate, onSelectDate }: {
+  records: DailyRecord[];
+  selectedDate: string;
+  onSelectDate: (date: string) => void;
+}) {
+  const [hovered, setHovered] = useState<number | null>(null);
+
+  const evaluated = records
+    .filter((r) => r.accuracy !== null)
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .slice(-14);
+
+  // Also include today (pending) as the last point if it exists
+  const today = new Date().toISOString().split("T")[0];
+  const todayRecord = records.find((r) => r.date === today && r.results === null);
+  const allPoints = [...evaluated];
+  if (todayRecord) allPoints.push({ ...todayRecord, accuracy: null });
+
+  if (allPoints.length < 2) return null;
+
+  const w = 300, h = 80, pad = 8, padTop = 20;
+  const points = allPoints.map((r, i) => ({
+    x: pad + (i / (allPoints.length - 1)) * (w - pad * 2),
+    y: r.accuracy !== null
+      ? padTop + ((100 - r.accuracy) / 100) * (h - padTop - pad)
+      : h - pad,
+    accuracy: r.accuracy,
+    date: r.date,
+    isPending: r.accuracy === null,
+  }));
+
+  const evalPoints = points.filter((p) => !p.isPending);
+  const line = evalPoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
+  const area = evalPoints.length > 1
+    ? `${line} L ${evalPoints[evalPoints.length - 1].x} ${h - pad} L ${evalPoints[0].x} ${h - pad} Z`
+    : "";
+
+  return (
+    <div className="mt-3 relative">
+      <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="w-full">
+        <defs>
+          <linearGradient id="acc-grad2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.2" />
+            <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {/* 50% baseline */}
+        <line x1={pad} y1={padTop + (h - padTop - pad) / 2} x2={w - pad} y2={padTop + (h - padTop - pad) / 2} stroke="#27272a" strokeWidth="1" strokeDasharray="4 4" />
+        {/* Area */}
+        {area && <path d={area} fill="url(#acc-grad2)" />}
+        {/* Line */}
+        {evalPoints.length > 1 && (
+          <path d={line} fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        )}
+        {/* Points — interactive */}
+        {points.map((p, i) => (
+          <g key={i}>
+            {/* Invisible larger hit area */}
+            <circle
+              cx={p.x} cy={p.y} r={12} fill="transparent"
+              className="cursor-pointer"
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              onClick={() => onSelectDate(p.date)}
+            />
+            {/* Selected indicator */}
+            {p.date === selectedDate && (
+              <circle cx={p.x} cy={p.y} r={6} fill="none" stroke="#22c55e" strokeWidth="1" opacity="0.4" />
+            )}
+            {/* Dot */}
+            <circle
+              cx={p.x} cy={p.y}
+              r={p.date === selectedDate ? 4 : 3}
+              fill={p.isPending ? "#3f3f46" : (p.accuracy || 0) >= 50 ? "#22c55e" : "#ef4444"}
+              stroke="#18181b" strokeWidth="1.5"
+              className="cursor-pointer"
+            />
+          </g>
+        ))}
+        {/* Hover tooltip */}
+        {hovered !== null && points[hovered] && (
+          <g>
+            <rect
+              x={Math.min(Math.max(points[hovered].x - 30, 0), w - 60)}
+              y={Math.max(points[hovered].y - 28, 0)}
+              width="60" height="22" rx="4"
+              fill="#18181b" stroke="#3f3f46" strokeWidth="1"
+            />
+            <text
+              x={Math.min(Math.max(points[hovered].x, 30), w - 30)}
+              y={Math.max(points[hovered].y - 13, 14)}
+              textAnchor="middle" dominantBaseline="middle"
+              fontSize="9" fontFamily="monospace"
+              fill={points[hovered].isPending ? "#71717a" : (points[hovered].accuracy || 0) >= 50 ? "#22c55e" : "#ef4444"}
+            >
+              {points[hovered].date.slice(5)} {points[hovered].isPending ? "pending" : `${points[hovered].accuracy}%`}
+            </text>
+          </g>
+        )}
+      </svg>
+      <div className="flex justify-between text-[9px] text-zinc-600 mt-0.5 px-1">
+        <span>{allPoints[0].date.slice(5)}</span>
+        <span className="text-zinc-500">50% baseline</span>
+        <span>{allPoints[allPoints.length - 1].date.slice(5)}</span>
+      </div>
+    </div>
+  );
+}
+
+// --- Day Tabs ---
+function DayTabs({ records, selectedDate, onSelect }: {
+  records: DailyRecord[];
+  selectedDate: string;
+  onSelect: (date: string) => void;
+}) {
+  const today = new Date().toISOString().split("T")[0];
+
+  // Show last 7 records + today
+  const visible = records.slice(0, 8);
+
+  return (
+    <div className="flex gap-1 overflow-x-auto pb-1 mt-4 mb-2 scrollbar-none">
+      {visible.map((r) => {
+        const isSelected = r.date === selectedDate;
+        const isToday = r.date === today;
+        const hasResults = r.results !== null;
+        const d = new Date(r.date + "T12:00:00");
+        const dayLabel = isToday ? "Today" : d.toLocaleDateString("en-US", { weekday: "short" });
+        const dateLabel = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+        return (
+          <button
+            key={r.date}
+            onClick={() => onSelect(r.date)}
+            className={`shrink-0 px-3 py-1.5 rounded-lg border text-center transition-all ${
+              isSelected
+                ? "border-emerald-500/40 bg-emerald-950/20 text-emerald-400"
+                : "border-zinc-800 bg-zinc-900/30 text-zinc-500 hover:text-zinc-300 hover:border-zinc-700"
+            }`}
+          >
+            <div className="text-[10px] font-semibold">{dayLabel}</div>
+            <div className="text-[9px]">{dateLabel}</div>
+            {hasResults && r.accuracy !== null && (
+              <div className={`text-[9px] font-mono font-bold mt-0.5 ${
+                r.accuracy >= 60 ? "text-emerald-400" : r.accuracy >= 50 ? "text-yellow-400" : "text-red-400"
+              }`}>
+                {r.accuracy}%
+              </div>
+            )}
+            {!hasResults && (
+              <div className="text-[9px] text-zinc-600 mt-0.5">pending</div>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// --- Mini Sparkline ---
+function MiniSparkline({ points, isUp }: { points: { price: number }[]; isUp: boolean }) {
+  if (points.length < 2) return null;
+  const w = 48, h = 16, pad = 1;
+  const prices = points.map((p) => p.price);
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+  const range = max - min || 1;
+
+  const pathPoints = prices.map((p, i) => ({
+    x: pad + (i / (prices.length - 1)) * (w - pad * 2),
+    y: pad + ((max - p) / range) * (h - pad * 2),
+  }));
+
+  const d = pathPoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
+
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="shrink-0">
+      <path d={d} fill="none" stroke={isUp ? "#22c55e" : "#ef4444"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+// --- Intraday data type ---
+interface IntradayData {
+  points: { price: number; time: number }[];
+  currentPrice: number;
+  openPrice: number;
+  change: number;
+}
+
+// --- Prediction Table ---
+function PredictionTable({
+  record,
+  onSearch,
+}: {
+  record: DailyRecord;
+  onSearch: (q: string) => void;
+}) {
+  const hasResults = record.results !== null;
+  const isPending = !hasResults;
+  const items = hasResults ? record.results! : record.predictions;
+
+  const today = new Date().toISOString().split("T")[0];
+  const isToday = record.date === today;
+
+  // Fetch intraday data for today's pending predictions
+  const [intraday, setIntraday] = useState<Record<string, IntradayData>>({});
+  useEffect(() => {
+    if (!isToday || !isPending) return;
+    const symbols = items.map((p) => p.symbol).join(",");
+    fetch(`/api/intraday?symbols=${symbols}`)
+      .then((r) => r.json())
+      .then(setIntraday)
+      .catch(() => {});
+
+    // Refresh every 60s during market hours
+    const interval = setInterval(() => {
+      fetch(`/api/intraday?symbols=${symbols}`)
+        .then((r) => r.json())
+        .then(setIntraday)
+        .catch(() => {});
+    }, 60000);
+    return () => clearInterval(interval);
+  }, [isToday, isPending, items]);
+
+  const showLive = isToday && isPending && Object.keys(intraday).length > 0;
+
+  return (
+    <div>
+      {/* Column headers */}
+      <div className="flex items-center gap-1.5 mb-1 text-[9px] text-zinc-600 uppercase">
+        <span className="w-4" />
+        <span className="w-12">Ticker</span>
+        <span className="flex-1">Name</span>
+        <span className="w-10 text-right">Pred</span>
+        {showLive && <span className="w-12 text-center">Live</span>}
+        {showLive && <span className="w-14 text-right">Now</span>}
+        {hasResults && <span className="w-14 text-right">Actual</span>}
+        <span className="w-6 text-center">{hasResults ? "W/L" : showLive ? "W/L" : ""}</span>
+      </div>
+
+      <div className="space-y-0.5">
+        {items.map((p, i) => {
+          const r = hasResults ? (record.results![i]) : null;
+          const live = intraday[p.symbol];
+          const liveUp = live ? live.change >= 0 : false;
+          // For live: check if current direction matches prediction
+          const liveCorrect = live ? (p.predictedWin === (live.change > 0)) : null;
+
+          return (
+            <button
+              key={p.symbol}
+              onClick={() => onSearch(p.symbol)}
+              className="flex items-center gap-1.5 w-full py-1 px-1 -mx-1 rounded hover:bg-zinc-800/30 transition-colors text-left"
+            >
+              <SentimentIcon positive={p.predictedWin} />
+              <span className="text-[11px] font-mono text-zinc-300 w-12">{p.symbol}</span>
+              <span className="text-[11px] text-zinc-500 flex-1 truncate">{p.name}</span>
+              <span className={`text-[11px] font-mono w-10 text-right ${
+                p.predictedWinRate > 50 ? "text-emerald-400" : p.predictedWinRate < 50 ? "text-red-400" : "text-zinc-400"
+              }`}>
+                {p.predictedWinRate}%
+              </span>
+              {showLive && live && (
+                <>
+                  <span className="w-12 flex justify-center">
+                    <MiniSparkline points={live.points} isUp={liveUp} />
+                  </span>
+                  <span className={`text-[11px] font-mono w-14 text-right ${liveUp ? "text-emerald-400" : "text-red-400"}`}>
+                    {liveUp ? "+" : ""}{live.change.toFixed(2)}%
+                  </span>
+                </>
+              )}
+              {showLive && !live && (
+                <>
+                  <span className="w-12" />
+                  <span className="w-14 text-right text-[9px] text-zinc-700">—</span>
+                </>
+              )}
+              {r ? (
+                <>
+                  <span className={`text-[11px] font-mono w-14 text-right ${r.actualWin ? "text-emerald-400" : "text-red-400"}`}>
+                    {r.actualWin ? "↑" : "↓"}{Math.abs((r.priceAtClose - r.priceAtPrediction) / r.priceAtPrediction * 100).toFixed(1)}%
+                  </span>
+                  <span className="w-6 text-center">
+                    <span className={`text-[11px] font-bold ${r.correct ? "text-emerald-400" : "text-red-400"}`}>
+                      {r.correct ? "W" : "L"}
+                    </span>
+                  </span>
+                </>
+              ) : (
+                <span className="w-6 text-center">
+                  {liveCorrect !== null ? (
+                    <span className={`text-[11px] font-bold ${liveCorrect ? "text-emerald-400/60" : "text-red-400/60"}`}>
+                      {liveCorrect ? "W" : "L"}
+                    </span>
+                  ) : (
+                    <span className="text-[9px] text-zinc-700">—</span>
+                  )}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Summary */}
+      {hasResults && record.accuracy !== null && (
+        <div className="mt-2 pt-2 border-t border-zinc-800/50 flex items-center justify-between">
+          <div className="flex items-center gap-3 text-[10px]">
+            <span className="text-emerald-500">{record.results!.filter(r => r.correct).length}W</span>
+            <span className="text-red-500">{record.results!.filter(r => !r.correct).length}L</span>
+          </div>
+          <span className={`text-xs font-bold font-mono ${
+            record.accuracy >= 60 ? "text-emerald-400" : record.accuracy >= 50 ? "text-yellow-400" : "text-red-400"
+          }`}>
+            {record.accuracy}%
+          </span>
+        </div>
+      )}
+      {isPending && showLive && (
+        <div className="mt-2 pt-2 border-t border-zinc-800/50 flex items-center justify-between">
+          <div className="flex items-center gap-3 text-[10px]">
+            {(() => {
+              const liveWins = items.filter((p) => {
+                const l = intraday[p.symbol];
+                return l && p.predictedWin === (l.change > 0);
+              }).length;
+              const liveTotal = items.filter((p) => intraday[p.symbol]).length;
+              return (
+                <>
+                  <span className="text-emerald-500">{liveWins}W</span>
+                  <span className="text-red-500">{liveTotal - liveWins}L</span>
+                  <span className="text-zinc-600">(live)</span>
+                </>
+              );
+            })()}
+          </div>
+          <span className="text-[10px] text-zinc-500">Updates every 60s</span>
+        </div>
+      )}
+      {isPending && !showLive && (
+        <div className="mt-2 pt-2 border-t border-zinc-800/50 text-center">
+          <span className="text-[10px] text-zinc-600">Waiting for market data</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// --- Main Component ---
+export default function PerformancePanel({ onSearch }: PerformancePanelProps) {
+  const [data, setData] = useState<PerformanceResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedDate, setSelectedDate] = useState("");
+
+  useEffect(() => {
+    fetch("/api/performance")
+      .then((res) => res.json())
+      .then((d: PerformanceResponse) => {
+        setData(d);
+        // Default to today if exists, else most recent
+        const today = new Date().toISOString().split("T")[0];
+        const todayExists = d.records.some((r) => r.date === today);
+        setSelectedDate(todayExists ? today : d.records[0]?.date || "");
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="bg-zinc-950 border border-zinc-800/80 rounded-xl p-5 animate-pulse">
+        <div className="h-4 bg-zinc-800 rounded w-32 mb-4" />
+        <div className="h-20 bg-zinc-800/50 rounded" />
+      </div>
+    );
+  }
+
+  if (!data || data.records.length === 0) return null;
+
+  const { stats } = data;
+  const selectedRecord = data.records.find((r) => r.date === selectedDate);
+
+  return (
+    <div className="bg-zinc-950 border border-zinc-800/80 rounded-xl p-5">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <span className="text-sm">🏆</span>
+          <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
+            Prediction Track Record
+          </span>
+        </div>
+        {stats.overallAccuracy !== null && (
+          <span className={`text-lg font-bold font-mono ${
+            stats.overallAccuracy >= 60 ? "text-emerald-400" : stats.overallAccuracy >= 50 ? "text-yellow-400" : "text-red-400"
+          }`}>
+            {stats.overallAccuracy}%
+          </span>
+        )}
+      </div>
+
+      {/* Market Clock */}
+      <MarketClock />
+
+      {/* Stats row */}
+      {stats.totalDays > 0 && (
+        <div className="flex gap-3 mb-2">
+          <div className="flex-1 bg-zinc-900/50 rounded-lg p-2 text-center">
+            <div className="text-base font-bold text-zinc-200 font-mono">{stats.totalDays}</div>
+            <div className="text-[8px] text-zinc-600 uppercase">Days</div>
+          </div>
+          <div className="flex-1 bg-zinc-900/50 rounded-lg p-2 text-center">
+            <div className="text-base font-bold text-emerald-400 font-mono">{stats.totalCorrect}</div>
+            <div className="text-[8px] text-zinc-600 uppercase">Wins</div>
+          </div>
+          <div className="flex-1 bg-zinc-900/50 rounded-lg p-2 text-center">
+            <div className="text-base font-bold text-red-400 font-mono">{stats.totalPredictions - stats.totalCorrect}</div>
+            <div className="text-[8px] text-zinc-600 uppercase">Losses</div>
+          </div>
+          <div className="flex-1 bg-zinc-900/50 rounded-lg p-2 text-center">
+            <div className={`text-base font-bold font-mono ${(stats.overallAccuracy || 0) >= 50 ? "text-emerald-400" : "text-red-400"}`}>
+              {stats.overallAccuracy ?? "—"}%
+            </div>
+            <div className="text-[8px] text-zinc-600 uppercase">Accuracy</div>
+          </div>
+        </div>
+      )}
+
+      {/* Interactive History Chart — click/hover points to select day */}
+      <AccuracyChart records={data.records} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+
+      {/* Day Tabs */}
+      <DayTabs records={data.records} selectedDate={selectedDate} onSelect={setSelectedDate} />
+
+      {/* Selected day's predictions */}
+      {selectedRecord && (
+        <PredictionTable record={selectedRecord} onSearch={onSearch} />
+      )}
+    </div>
+  );
+}
