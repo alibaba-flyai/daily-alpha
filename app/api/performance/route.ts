@@ -155,9 +155,9 @@ export async function POST() {
     }
   }
 
-  // Evaluate past unevaluated records
+  // Evaluate past unevaluated records (only dates before today)
   for (const record of perf.records) {
-    if (record.date === today) continue;
+    if (record.date >= today) continue; // don't evaluate today or future
     if (record.results !== null) continue;
     try {
       const results = await evaluateRecord(record);

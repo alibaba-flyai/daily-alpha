@@ -135,9 +135,10 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // 2. Evaluate any other unevaluated past records
+  // 2. Evaluate any other unevaluated past records (skip future predictions)
   for (const record of perf.records) {
-    if (record.date === today) continue;
+    if (record.date === today) continue; // already handled in step 1
+    if (record.date > today) continue; // future — don't evaluate yet
     if (record.results !== null) continue;
     try {
       const results = await evaluateRecord(record);
