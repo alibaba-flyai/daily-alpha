@@ -15,7 +15,6 @@ function getGenAI() {
   return new GoogleGenerativeAI(key);
 }
 
-// --- Fetch trending tickers ---
 async function fetchTrendingSymbols(): Promise<{ symbol: string; name: string; price: number }[]> {
   try {
     const res = await fetch(
@@ -35,7 +34,6 @@ async function fetchTrendingSymbols(): Promise<{ symbol: string; name: string; p
   }
 }
 
-// --- Quick price check ---
 async function fetchCurrentPrice(symbol: string): Promise<number | null> {
   try {
     const res = await fetch(
@@ -50,23 +48,16 @@ async function fetchCurrentPrice(symbol: string): Promise<number | null> {
   }
 }
 
-// --- LLM batch prediction ---
 async function predictBatch(
   assets: { symbol: string; name: string; price: number }[]
 ): Promise<{ symbol: string; winRate: number }[]> {
   try {
     const model = getGenAI().getGenerativeModel({
       model: "gemini-2.5-flash",
-      generationConfig: {
-        temperature: 0.3,
-        maxOutputTokens: 8192,
-        responseMimeType: "application/json",
-      },
+      generationConfig: { temperature: 0.3, maxOutputTokens: 8192, responseMimeType: "application/json" },
     });
 
-    const assetList = assets
-      .map((a) => `- ${a.symbol} (${a.name}) at $${a.price.toFixed(2)}`)
-      .join("\n");
+    const assetList = assets.map((a) => `- ${a.symbol} (${a.name}) at $${a.price.toFixed(2)}`).join("\n");
 
     const prompt = `You are a quantitative analyst making daily stock predictions. For each asset below, predict the probability (0-100) that its closing price TOMORROW will be higher than today's current price.
 
@@ -82,23 +73,15 @@ Return a JSON array of objects with "symbol" and "winRate" (integer 0-100):
     const text = response.response.text().trim();
     const cleaned = text.replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "");
     return JSON.parse(cleaned);
-  } catch (err) {
-    console.error("Batch prediction failed:", err);
-    // Fallback: random-ish predictions based on nothing
+  } catch {
     return assets.map((a) => ({ symbol: a.symbol, winRate: 50 }));
   }
 }
 
-// --- Generate today's predictions ---
 async function generatePredictions(): Promise<DailyPrediction[]> {
   const trending = await fetchTrendingSymbols();
   if (trending.length === 0) return [];
-
-  // Randomly pick 10
-  const shuffled = trending.sort(() => Math.random() - 0.5);
-  const picked = shuffled.slice(0, 10);
-
-  // Get LLM predictions
+  const picked = trending.sort(() => Math.random() - 0.5).slice(0, 10);
   const predictions = await predictBatch(picked);
 
   return picked.map((asset) => {
@@ -114,99 +97,88 @@ async function generatePredictions(): Promise<DailyPrediction[]> {
   });
 }
 
-// --- Evaluate a past record ---
 async function evaluateRecord(record: DailyRecord): Promise<DailyResult[]> {
   const results: DailyResult[] = [];
-
   for (const pred of record.predictions) {
     const currentPrice = await fetchCurrentPrice(pred.symbol);
     if (currentPrice === null) {
-      // Can't evaluate, assume neutral
-      results.push({
-        ...pred,
-        priceAtClose: pred.priceAtPrediction,
-        actualWin: false,
-        correct: !pred.predictedWin, // if we predicted lose and price didn't change, count as correct
-      });
+      results.push({ ...pred, priceAtClose: pred.priceAtPrediction, actualWin: false, correct: !pred.predictedWin });
       continue;
     }
-
     const actualWin = currentPrice > pred.priceAtPrediction;
-    results.push({
-      ...pred,
-      priceAtClose: currentPrice,
-      actualWin,
-      correct: pred.predictedWin === actualWin,
-    });
+    results.push({ ...pred, priceAtClose: currentPrice, actualWin, correct: pred.predictedWin === actualWin });
   }
-
   return results;
+}
+
+function computeStats(records: DailyRecord[]) {
+  const evaluated = records.filter((r) => r.results !== null);
+  const totalPredictions = evaluated.reduce((s, r) => s + (r.results?.length || 0), 0);
+  const totalCorrect = evaluated.reduce((s, r) => s + (r.results?.filter((x) => x.correct).length || 0), 0);
+  return {
+    totalDays: evaluated.length,
+    totalPredictions,
+    totalCorrect,
+    overallAccuracy: totalPredictions > 0 ? Math.round((totalCorrect / totalPredictions) * 100) : null,
+  };
 }
 
 export async function GET() {
   const perf = loadPerformance();
   const today = getTodayDate();
 
-  // Check if today's predictions exist
-  const todayRecord = perf.records.find((r) => r.date === today);
+  // Return historical data IMMEDIATELY — no waiting for LLM
+  const sorted = [...perf.records].sort((a, b) => b.date.localeCompare(a.date));
+  const stats = computeStats(perf.records);
 
-  if (!todayRecord) {
-    // Generate today's predictions
+  const response = NextResponse.json({ records: sorted, stats });
+
+  // Fire-and-forget: generate today's predictions + evaluate past records in background
+  // This runs after the response is sent (Next.js waitUntil pattern)
+  const needsToday = !perf.records.some((r) => r.date === today);
+  const needsEval = perf.records.some((r) => r.date !== today && r.results === null);
+
+  if (needsToday || needsEval) {
+    // Use a non-blocking approach: start the async work but don't await
+    doBackgroundWork(perf, today).catch((err) =>
+      console.error("Background performance work failed:", err)
+    );
+  }
+
+  return response;
+}
+
+async function doBackgroundWork(perf: ReturnType<typeof loadPerformance>, today: string) {
+  let changed = false;
+
+  // Generate today's predictions
+  if (!perf.records.some((r) => r.date === today)) {
     try {
       const predictions = await generatePredictions();
       if (predictions.length > 0) {
-        const newRecord: DailyRecord = {
-          date: today,
-          predictions,
-          results: null,
-          accuracy: null,
-        };
-        perf.records.push(newRecord);
+        perf.records.push({ date: today, predictions, results: null, accuracy: null });
+        changed = true;
       }
     } catch (err) {
       console.error("Failed to generate predictions:", err);
     }
   }
 
-  // Evaluate any unevaluated past records (not today)
+  // Evaluate past unevaluated records
   for (const record of perf.records) {
-    if (record.date === today) continue; // don't evaluate today
-    if (record.results !== null) continue; // already evaluated
-
+    if (record.date === today) continue;
+    if (record.results !== null) continue;
     try {
       const results = await evaluateRecord(record);
       record.results = results;
-      record.accuracy =
-        results.length > 0
-          ? Math.round((results.filter((r) => r.correct).length / results.length) * 100)
-          : null;
+      record.accuracy = results.length > 0
+        ? Math.round((results.filter((r) => r.correct).length / results.length) * 100)
+        : null;
+      changed = true;
     } catch (err) {
       console.error(`Failed to evaluate ${record.date}:`, err);
     }
   }
 
-  // Save
-  savePerformance(perf);
-
-  // Sort by date descending
-  const sorted = [...perf.records].sort((a, b) => b.date.localeCompare(a.date));
-
-  // Compute overall stats
-  const evaluated = sorted.filter((r) => r.results !== null);
-  const totalPredictions = evaluated.reduce((s, r) => s + (r.results?.length || 0), 0);
-  const totalCorrect = evaluated.reduce(
-    (s, r) => s + (r.results?.filter((x) => x.correct).length || 0),
-    0
-  );
-  const overallAccuracy = totalPredictions > 0 ? Math.round((totalCorrect / totalPredictions) * 100) : null;
-
-  return NextResponse.json({
-    records: sorted,
-    stats: {
-      totalDays: evaluated.length,
-      totalPredictions,
-      totalCorrect,
-      overallAccuracy,
-    },
-  });
+  if (changed) savePerformance(perf);
 }
