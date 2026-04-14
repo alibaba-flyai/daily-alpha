@@ -51,8 +51,8 @@ function SentimentIcon({ positive }: { positive: boolean }) {
   );
 }
 
-// --- Market Clock ---
-function MarketClock() {
+// --- Compact Market Pill ---
+function MarketPill() {
   const [now, setNow] = useState(new Date());
   useEffect(() => {
     const t = setInterval(() => setNow(new Date()), 1000);
@@ -67,52 +67,37 @@ function MarketClock() {
   const isOpen = isWeekday && totalMins >= marketOpen && totalMins < marketClose;
   const isPreMarket = isWeekday && totalMins < marketOpen;
 
-  let statusText: string, statusColor: string, countdown: string;
+  let label: string, timeLeft: string, dotColor: string, borderColor: string;
   if (!isWeekday) {
-    statusText = "Weekend"; statusColor = "text-zinc-500"; countdown = "Opens Mon 9:30 AM";
+    label = "Closed"; timeLeft = "Mon"; dotColor = "bg-zinc-600"; borderColor = "border-zinc-700";
   } else if (isOpen) {
     const m = marketClose - totalMins;
-    statusText = "Market Open"; statusColor = "text-emerald-400"; countdown = `Closes in ${Math.floor(m / 60)}h ${m % 60}m`;
+    label = "Open"; timeLeft = `${Math.floor(m / 60)}h${m % 60}m`; dotColor = "bg-emerald-400"; borderColor = "border-emerald-800/50";
   } else if (isPreMarket) {
     const m = marketOpen - totalMins;
-    statusText = "Pre-Market"; statusColor = "text-yellow-400"; countdown = `Opens in ${Math.floor(m / 60)}h ${m % 60}m`;
+    label = "Pre"; timeLeft = `${Math.floor(m / 60)}h${m % 60}m`; dotColor = "bg-yellow-400"; borderColor = "border-yellow-800/50";
   } else {
-    statusText = "After Hours"; statusColor = "text-zinc-500"; countdown = "Opens tmrw 9:30 AM";
+    label = "Closed"; timeLeft = "Tmrw"; dotColor = "bg-zinc-600"; borderColor = "border-zinc-700";
   }
 
-  const etTime = et.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
-  let progress = 0;
-  if (isOpen) progress = ((totalMins - marketOpen) / (marketClose - marketOpen)) * 100;
-  else if (!isWeekday || totalMins >= marketClose) progress = 100;
-
   return (
-    <div className="bg-zinc-900/50 rounded-lg p-3 mb-4">
-      <div className="flex items-center justify-between mb-1.5">
-        <div className="flex items-center gap-2">
-          <span className={`relative flex h-2 w-2 ${isOpen ? "" : "opacity-50"}`}>
-            {isOpen && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />}
-            <span className={`relative inline-flex rounded-full h-2 w-2 ${isOpen ? "bg-emerald-400" : "bg-zinc-600"}`} />
-          </span>
-          <span className={`text-[11px] font-semibold ${statusColor}`}>{statusText}</span>
-        </div>
-        <span className="text-[11px] font-mono text-zinc-400">{etTime} ET</span>
+    <div className={`shrink-0 flex flex-col items-center gap-1 px-2.5 py-1.5 rounded-lg border bg-zinc-900/50 ${borderColor}`}>
+      <div className="flex items-center gap-1.5">
+        <span className={`relative flex h-1.5 w-1.5`}>
+          {isOpen && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />}
+          <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${dotColor}`} />
+        </span>
+        <span className={`text-[9px] font-semibold uppercase ${
+          isOpen ? "text-emerald-400" : isPreMarket ? "text-yellow-400" : "text-zinc-500"
+        }`}>{label}</span>
       </div>
-      <div className="flex items-center gap-2">
-        <div className="flex-1 h-1 bg-zinc-800 rounded-full overflow-hidden">
-          <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${progress}%`, background: isOpen ? "#22c55e" : "#3f3f46" }} />
-        </div>
-        <span className="text-[9px] text-zinc-600 shrink-0">{countdown}</span>
-      </div>
-      <div className="flex justify-between text-[8px] text-zinc-700 mt-0.5 px-0.5">
-        <span>9:30 AM</span>
-        <span>4:00 PM</span>
-      </div>
+      <span className="text-[10px] font-mono text-zinc-400 leading-none">{timeLeft}</span>
     </div>
   );
 }
 
-// --- Interactive Accuracy Chart with hover tooltips ---
-function AccuracyChart({ records, selectedDate, onSelectDate }: {
+// --- Compact Inline Accuracy Chart ---
+function AccuracyChartInline({ records, selectedDate, onSelectDate }: {
   records: DailyRecord[];
   selectedDate: string;
   onSelectDate: (date: string) => void;
@@ -124,15 +109,14 @@ function AccuracyChart({ records, selectedDate, onSelectDate }: {
     .sort((a, b) => a.date.localeCompare(b.date))
     .slice(-14);
 
-  // Also include today (pending) as the last point if it exists
   const today = new Date().toISOString().split("T")[0];
   const todayRecord = records.find((r) => r.date === today && r.results === null);
   const allPoints = [...evaluated];
   if (todayRecord) allPoints.push({ ...todayRecord, accuracy: null });
 
-  if (allPoints.length < 2) return null;
+  if (allPoints.length < 2) return <div className="h-10" />;
 
-  const w = 300, h = 80, pad = 8, padTop = 20;
+  const w = 200, h = 40, pad = 4, padTop = 14;
   const points = allPoints.map((r, i) => ({
     x: pad + (i / (allPoints.length - 1)) * (w - pad * 2),
     y: r.accuracy !== null
@@ -150,73 +134,54 @@ function AccuracyChart({ records, selectedDate, onSelectDate }: {
     : "";
 
   return (
-    <div className="mt-3 relative">
+    <div className="relative">
       <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="w-full">
         <defs>
-          <linearGradient id="acc-grad2" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.2" />
+          <linearGradient id="acc-grad-il" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.15" />
             <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
           </linearGradient>
         </defs>
         {/* 50% baseline */}
-        <line x1={pad} y1={padTop + (h - padTop - pad) / 2} x2={w - pad} y2={padTop + (h - padTop - pad) / 2} stroke="#27272a" strokeWidth="1" strokeDasharray="4 4" />
-        {/* Area */}
-        {area && <path d={area} fill="url(#acc-grad2)" />}
-        {/* Line */}
+        <line x1={pad} y1={padTop + (h - padTop - pad) / 2} x2={w - pad} y2={padTop + (h - padTop - pad) / 2} stroke="#27272a" strokeWidth="0.5" strokeDasharray="3 3" />
+        {area && <path d={area} fill="url(#acc-grad-il)" />}
         {evalPoints.length > 1 && (
-          <path d={line} fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d={line} fill="none" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         )}
-        {/* Points — interactive */}
         {points.map((p, i) => (
           <g key={i}>
-            {/* Invisible larger hit area */}
-            <circle
-              cx={p.x} cy={p.y} r={12} fill="transparent"
-              className="cursor-pointer"
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
+            <circle cx={p.x} cy={p.y} r={10} fill="transparent" className="cursor-pointer"
+              onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)}
               onClick={() => onSelectDate(p.date)}
             />
-            {/* Selected indicator */}
             {p.date === selectedDate && (
-              <circle cx={p.x} cy={p.y} r={6} fill="none" stroke="#22c55e" strokeWidth="1" opacity="0.4" />
+              <circle cx={p.x} cy={p.y} r={5} fill="none" stroke="#22c55e" strokeWidth="0.8" opacity="0.4" />
             )}
-            {/* Dot */}
-            <circle
-              cx={p.x} cy={p.y}
-              r={p.date === selectedDate ? 4 : 3}
+            <circle cx={p.x} cy={p.y}
+              r={p.date === selectedDate ? 3 : 2}
               fill={p.isPending ? "#3f3f46" : (p.accuracy || 0) >= 50 ? "#22c55e" : "#ef4444"}
-              stroke="#18181b" strokeWidth="1.5"
-              className="cursor-pointer"
+              stroke="#18181b" strokeWidth="1" className="cursor-pointer"
             />
           </g>
         ))}
-        {/* Hover tooltip */}
         {hovered !== null && points[hovered] && (
           <g>
             <rect
-              x={Math.min(Math.max(points[hovered].x - 30, 0), w - 60)}
-              y={Math.max(points[hovered].y - 28, 0)}
-              width="60" height="22" rx="4"
-              fill="#18181b" stroke="#3f3f46" strokeWidth="1"
+              x={Math.min(Math.max(points[hovered].x - 24, 0), w - 48)}
+              y={0} width="48" height="14" rx="3"
+              fill="#18181b" stroke="#3f3f46" strokeWidth="0.5"
             />
             <text
-              x={Math.min(Math.max(points[hovered].x, 30), w - 30)}
-              y={Math.max(points[hovered].y - 13, 14)}
-              textAnchor="middle" dominantBaseline="middle"
-              fontSize="9" fontFamily="monospace"
+              x={Math.min(Math.max(points[hovered].x, 24), w - 24)}
+              y={8} textAnchor="middle" dominantBaseline="middle"
+              fontSize="8" fontFamily="monospace"
               fill={points[hovered].isPending ? "#71717a" : (points[hovered].accuracy || 0) >= 50 ? "#22c55e" : "#ef4444"}
             >
-              {points[hovered].date.slice(5)} {points[hovered].isPending ? "pending" : `${points[hovered].accuracy}%`}
+              {points[hovered].date.slice(5)} {points[hovered].isPending ? "?" : `${points[hovered].accuracy}%`}
             </text>
           </g>
         )}
       </svg>
-      <div className="flex justify-between text-[9px] text-zinc-600 mt-0.5 px-1">
-        <span>{allPoints[0].date.slice(5)}</span>
-        <span className="text-zinc-500">50% baseline</span>
-        <span>{allPoints[allPoints.length - 1].date.slice(5)}</span>
-      </div>
     </div>
   );
 }
@@ -550,52 +515,39 @@ export default function PerformancePanel({ onSearch }: PerformancePanelProps) {
 
   return (
     <div className="bg-zinc-950 border border-zinc-800/80 rounded-xl p-5">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <span className="text-sm">🏆</span>
-          <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-            Prediction Track Record
-          </span>
-        </div>
-        {stats.overallAccuracy !== null && (
-          <span className={`text-lg font-bold font-mono ${
-            stats.overallAccuracy >= 60 ? "text-emerald-400" : stats.overallAccuracy >= 50 ? "text-yellow-400" : "text-red-400"
-          }`}>
-            {stats.overallAccuracy}%
+      {/* Compact header: Title + Stats inline */}
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-sm">🏆</span>
+        <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">Track Record</span>
+        {stats.totalDays > 0 && (
+          <span className="text-[10px] text-zinc-600 font-mono ml-1">
+            {stats.totalCorrect}W {stats.totalPredictions - stats.totalCorrect}L / {stats.totalDays}d
           </span>
         )}
       </div>
 
-      {/* Market Clock */}
-      <MarketClock />
-
-      {/* Stats row */}
-      {stats.totalDays > 0 && (
-        <div className="flex gap-3 mb-2">
-          <div className="flex-1 bg-zinc-900/50 rounded-lg p-2 text-center">
-            <div className="text-base font-bold text-zinc-200 font-mono">{stats.totalDays}</div>
-            <div className="text-[8px] text-zinc-600 uppercase">Days</div>
-          </div>
-          <div className="flex-1 bg-zinc-900/50 rounded-lg p-2 text-center">
-            <div className="text-base font-bold text-emerald-400 font-mono">{stats.totalCorrect}</div>
-            <div className="text-[8px] text-zinc-600 uppercase">Wins</div>
-          </div>
-          <div className="flex-1 bg-zinc-900/50 rounded-lg p-2 text-center">
-            <div className="text-base font-bold text-red-400 font-mono">{stats.totalPredictions - stats.totalCorrect}</div>
-            <div className="text-[8px] text-zinc-600 uppercase">Losses</div>
-          </div>
-          <div className="flex-1 bg-zinc-900/50 rounded-lg p-2 text-center">
-            <div className={`text-base font-bold font-mono ${(stats.overallAccuracy || 0) >= 50 ? "text-emerald-400" : "text-red-400"}`}>
-              {stats.overallAccuracy ?? "—"}%
-            </div>
-            <div className="text-[8px] text-zinc-600 uppercase">Accuracy</div>
-          </div>
+      {/* One line: Chart (left) + Score (center) + Market Status (right) */}
+      <div className="flex items-center gap-3 mb-3">
+        {/* Mini chart */}
+        <div className="flex-1 min-w-0">
+          <AccuracyChartInline records={data.records} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
         </div>
-      )}
 
-      {/* Interactive History Chart — click/hover points to select day */}
-      <AccuracyChart records={data.records} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+        {/* Score */}
+        {stats.overallAccuracy !== null && (
+          <div className="text-center shrink-0 px-2">
+            <div className={`text-2xl font-bold font-mono leading-none ${
+              stats.overallAccuracy >= 60 ? "text-emerald-400" : stats.overallAccuracy >= 50 ? "text-yellow-400" : "text-red-400"
+            }`}>
+              {stats.overallAccuracy}%
+            </div>
+            <div className="text-[8px] text-zinc-600 uppercase mt-0.5">accuracy</div>
+          </div>
+        )}
+
+        {/* Market status pill */}
+        <MarketPill />
+      </div>
 
       {/* Day Tabs */}
       <DayTabs records={data.records} selectedDate={selectedDate} onSelect={setSelectedDate} />
