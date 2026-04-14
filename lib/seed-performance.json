@@ -1591,8 +1591,109 @@
           "priceAtPrediction": 155.62
         }
       ],
-      "results": null,
-      "accuracy": null
+      "results": [
+        {
+          "symbol": "HPQ",
+          "name": "HP Inc.",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 19.23,
+          "priceAtClose": 18.99,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "NOK",
+          "name": "Nokia Corporation Sponsored",
+          "predictedWinRate": 48,
+          "predictedWin": false,
+          "priceAtPrediction": 10.37,
+          "priceAtClose": 10.35,
+          "actualWin": false,
+          "correct": true
+        },
+        {
+          "symbol": "HOLX",
+          "name": "Hologic, Inc.",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 76.01,
+          "priceAtClose": 76.01,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 58,
+          "predictedWin": true,
+          "priceAtPrediction": 352.42,
+          "priceAtClose": 364.2,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "MARA",
+          "name": "MARA Holdings, Inc.",
+          "predictedWinRate": 52,
+          "predictedWin": true,
+          "priceAtPrediction": 10.36,
+          "priceAtClose": 10.49,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 47,
+          "predictedWin": false,
+          "priceAtPrediction": 27.34,
+          "priceAtClose": 27.11,
+          "actualWin": false,
+          "correct": true
+        },
+        {
+          "symbol": "AMZN",
+          "name": "Amazon.com, Inc.",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 239.89,
+          "priceAtClose": 249.02,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "CRWV",
+          "name": "CoreWeave, Inc.",
+          "predictedWinRate": 65,
+          "predictedWin": true,
+          "priceAtPrediction": 110.27,
+          "priceAtClose": 117.2,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "BBD",
+          "name": "Banco Bradesco Sa",
+          "predictedWinRate": 49,
+          "predictedWin": false,
+          "priceAtPrediction": 4.09,
+          "priceAtClose": 4.11,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "ORCL",
+          "name": "Oracle Corporation",
+          "predictedWinRate": 59,
+          "predictedWin": true,
+          "priceAtPrediction": 155.62,
+          "priceAtClose": 163,
+          "actualWin": true,
+          "correct": true
+        }
+      ],
+      "accuracy": 70
     },
     {
       "date": "2026-04-15",
