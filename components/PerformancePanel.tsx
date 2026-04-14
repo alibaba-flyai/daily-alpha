@@ -302,6 +302,38 @@ interface IntradayData {
   change: number;
 }
 
+// --- Market hours helper ---
+function useMarketStatus() {
+  const [status, setStatus] = useState(() => getMarketStatus());
+  useEffect(() => {
+    const t = setInterval(() => setStatus(getMarketStatus()), 10000);
+    return () => clearInterval(t);
+  }, []);
+  return status;
+}
+
+function getMarketStatus() {
+  const et = new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }));
+  const hours = et.getHours(), minutes = et.getMinutes();
+  const totalMins = hours * 60 + minutes;
+  const marketOpen = 9 * 60 + 30, marketClose = 16 * 60;
+  const isWeekday = et.getDay() >= 1 && et.getDay() <= 5;
+  const isOpen = isWeekday && totalMins >= marketOpen && totalMins < marketClose;
+  const isPreMarket = isWeekday && totalMins < marketOpen;
+
+  let countdown = "";
+  if (isPreMarket) {
+    const m = marketOpen - totalMins;
+    countdown = `${Math.floor(m / 60)}h ${m % 60}m`;
+  } else if (!isWeekday) {
+    countdown = "Monday 9:30 AM ET";
+  } else if (!isOpen) {
+    countdown = "tomorrow 9:30 AM ET";
+  }
+
+  return { isOpen, isPreMarket, isWeekday, countdown };
+}
+
 // --- Prediction Table ---
 function PredictionTable({
   record,
@@ -316,18 +348,18 @@ function PredictionTable({
 
   const today = new Date().toISOString().split("T")[0];
   const isToday = record.date === today;
+  const market = useMarketStatus();
 
-  // Fetch intraday data for today's pending predictions
+  // Only fetch intraday data when market is open
   const [intraday, setIntraday] = useState<Record<string, IntradayData>>({});
   useEffect(() => {
-    if (!isToday || !isPending) return;
+    if (!isToday || !isPending || !market.isOpen) return;
     const symbols = items.map((p) => p.symbol).join(",");
     fetch(`/api/intraday?symbols=${symbols}`)
       .then((r) => r.json())
       .then(setIntraday)
       .catch(() => {});
 
-    // Refresh every 60s during market hours
     const interval = setInterval(() => {
       fetch(`/api/intraday?symbols=${symbols}`)
         .then((r) => r.json())
@@ -335,9 +367,10 @@ function PredictionTable({
         .catch(() => {});
     }, 60000);
     return () => clearInterval(interval);
-  }, [isToday, isPending, items]);
+  }, [isToday, isPending, items, market.isOpen]);
 
-  const showLive = isToday && isPending && Object.keys(intraday).length > 0;
+  const showLive = isToday && isPending && market.isOpen && Object.keys(intraday).length > 0;
+  const showPreMarket = isToday && isPending && !market.isOpen;
 
   return (
     <div>
@@ -453,7 +486,21 @@ function PredictionTable({
           <span className="text-[10px] text-zinc-500">Updates every 60s</span>
         </div>
       )}
-      {isPending && !showLive && (
+      {showPreMarket && (
+        <div className="mt-3 pt-3 border-t border-zinc-800/50">
+          <div className="flex items-center justify-center gap-2 py-2 px-3 bg-zinc-900/50 rounded-lg">
+            <span className="text-sm">🕐</span>
+            <div className="text-center">
+              <p className="text-[11px] text-zinc-400">
+                {market.isPreMarket ? "Market opens in " : "Market opens "}
+                <span className="font-mono text-yellow-400">{market.countdown}</span>
+              </p>
+              <p className="text-[9px] text-zinc-600 mt-0.5">Live prices and W/L will appear when trading starts</p>
+            </div>
+          </div>
+        </div>
+      )}
+      {isPending && !showLive && !showPreMarket && (
         <div className="mt-2 pt-2 border-t border-zinc-800/50 text-center">
           <span className="text-[10px] text-zinc-600">Waiting for market data</span>
         </div>
