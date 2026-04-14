@@ -152,27 +152,19 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // 3. Generate tomorrow's predictions
-  try {
-    // Get next trading day
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    // Skip weekends
-    if (tomorrow.getDay() === 6) tomorrow.setDate(tomorrow.getDate() + 2); // Sat → Mon
-    if (tomorrow.getDay() === 0) tomorrow.setDate(tomorrow.getDate() + 1); // Sun → Mon
-    const nextDay = tomorrow.toISOString().split("T")[0];
-
-    if (!perf.records.some((r) => r.date === nextDay)) {
+  // 3. Generate today's predictions if missing
+  if (!perf.records.some((r) => r.date === today)) {
+    try {
       const predictions = await generatePredictions();
       if (predictions.length > 0) {
-        perf.records.push({ date: nextDay, predictions, results: null, accuracy: null });
-        log.push(`Generated ${predictions.length} predictions for ${nextDay}`);
+        perf.records.push({ date: today, predictions, results: null, accuracy: null });
+        log.push(`Generated ${predictions.length} predictions for ${today}`);
       }
-    } else {
-      log.push(`Predictions for ${nextDay} already exist`);
+    } catch (err) {
+      log.push(`Failed to generate predictions: ${err}`);
     }
-  } catch (err) {
-    log.push(`Failed to generate predictions: ${err}`);
+  } else {
+    log.push(`Predictions for ${today} already exist`);
   }
 
   // 4. Save locally

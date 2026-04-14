@@ -130,8 +130,10 @@ export async function GET() {
   const today = getTodayDate();
 
   const hasToday = perf.records.some((r) => r.date === today);
-  const sorted = [...perf.records].sort((a, b) => b.date.localeCompare(a.date));
-  const stats = computeStats(perf.records);
+  // Only return records up to today — no future dates
+  const filtered = perf.records.filter((r) => r.date <= today);
+  const sorted = [...filtered].sort((a, b) => b.date.localeCompare(a.date));
+  const stats = computeStats(filtered);
 
   return NextResponse.json({ records: sorted, stats, needsGenerate: !hasToday });
 }
@@ -177,8 +179,9 @@ export async function POST() {
     persistToGitHub(perf).catch(() => {});
   }
 
-  const sorted = [...perf.records].sort((a, b) => b.date.localeCompare(a.date));
-  const stats = computeStats(perf.records);
+  const filtered = perf.records.filter((r) => r.date <= today);
+  const sorted = [...filtered].sort((a, b) => b.date.localeCompare(a.date));
+  const stats = computeStats(filtered);
 
   return NextResponse.json({ records: sorted, stats, needsGenerate: false });
 }
