@@ -123,35 +123,25 @@ function computeStats(records: DailyRecord[]) {
   };
 }
 
+// GET: return history instantly, flag if today is missing
 export async function GET() {
   const perf = loadPerformance();
   const today = getTodayDate();
 
-  // Return historical data IMMEDIATELY — no waiting for LLM
+  const hasToday = perf.records.some((r) => r.date === today);
   const sorted = [...perf.records].sort((a, b) => b.date.localeCompare(a.date));
   const stats = computeStats(perf.records);
 
-  const response = NextResponse.json({ records: sorted, stats });
-
-  // Fire-and-forget: generate today's predictions + evaluate past records in background
-  // This runs after the response is sent (Next.js waitUntil pattern)
-  const needsToday = !perf.records.some((r) => r.date === today);
-  const needsEval = perf.records.some((r) => r.date !== today && r.results === null);
-
-  if (needsToday || needsEval) {
-    // Use a non-blocking approach: start the async work but don't await
-    doBackgroundWork(perf, today).catch((err) =>
-      console.error("Background performance work failed:", err)
-    );
-  }
-
-  return response;
+  return NextResponse.json({ records: sorted, stats, needsGenerate: !hasToday });
 }
 
-async function doBackgroundWork(perf: ReturnType<typeof loadPerformance>, today: string) {
+// POST: generate today's predictions + evaluate past records (called by client after initial load)
+export async function POST() {
+  const perf = loadPerformance();
+  const today = getTodayDate();
   let changed = false;
 
-  // Generate today's predictions
+  // Generate today's predictions if missing
   if (!perf.records.some((r) => r.date === today)) {
     try {
       const predictions = await generatePredictions();
@@ -181,4 +171,9 @@ async function doBackgroundWork(perf: ReturnType<typeof loadPerformance>, today:
   }
 
   if (changed) savePerformance(perf);
+
+  const sorted = [...perf.records].sort((a, b) => b.date.localeCompare(a.date));
+  const stats = computeStats(perf.records);
+
+  return NextResponse.json({ records: sorted, stats, needsGenerate: false });
 }

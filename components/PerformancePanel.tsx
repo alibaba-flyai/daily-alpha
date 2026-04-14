@@ -484,15 +484,27 @@ export default function PerformancePanel({ onSearch }: PerformancePanelProps) {
   const [selectedDate, setSelectedDate] = useState("");
 
   useEffect(() => {
+    // Fast load: get history instantly
     fetch("/api/performance")
       .then((res) => res.json())
-      .then((d: PerformanceResponse) => {
+      .then((d: PerformanceResponse & { needsGenerate?: boolean }) => {
         setData(d);
-        // Default to today if exists, else most recent
         const today = new Date().toISOString().split("T")[0];
         const todayExists = d.records.some((r) => r.date === today);
         setSelectedDate(todayExists ? today : d.records[0]?.date || "");
         setLoading(false);
+
+        // If today's predictions don't exist, trigger generation
+        if (d.needsGenerate) {
+          fetch("/api/performance", { method: "POST" })
+            .then((res) => res.json())
+            .then((updated: PerformanceResponse) => {
+              setData(updated);
+              const updatedToday = updated.records.some((r) => r.date === today);
+              if (updatedToday) setSelectedDate(today);
+            })
+            .catch(() => {});
+        }
       })
       .catch(() => setLoading(false));
   }, []);
