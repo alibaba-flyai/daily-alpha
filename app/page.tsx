@@ -171,13 +171,14 @@ export default function Home() {
             </a>
             <a
               href="/"
-              className="flex items-center justify-center w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-emerald-700 hover:bg-emerald-950/30 transition-all"
+              className="flex items-center gap-1 px-2 py-1 rounded-lg bg-emerald-950/30 border border-emerald-800/40 hover:bg-emerald-950/50 hover:border-emerald-600/50 transition-all"
               title="Trending & Track Record"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
                 <polyline points="16 7 22 7 22 13" />
               </svg>
+              <span className="text-[10px] font-semibold text-emerald-400">Trending</span>
             </a>
           </div>
           {loading && (
