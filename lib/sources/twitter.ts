@@ -73,7 +73,10 @@ async function fetchUserTweets(handle: string): Promise<RawTweet[]> {
       }
     }
 
-    tweetCache.set(handle, { tweets, ts: Date.now() });
+    // Only cache non-empty results
+    if (tweets.length > 0) {
+      tweetCache.set(handle, { tweets, ts: Date.now() });
+    }
     return tweets;
   } catch {
     return cached?.tweets || [];
