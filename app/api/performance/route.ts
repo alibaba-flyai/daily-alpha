@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import {
   loadPerformance,
   savePerformance,
+  persistToGitHub,
   getTodayDate,
   DailyPrediction,
   DailyResult,
@@ -170,7 +171,11 @@ export async function POST() {
     }
   }
 
-  if (changed) savePerformance(perf);
+  if (changed) {
+    savePerformance(perf);
+    // Also persist to GitHub for cross-deploy durability
+    persistToGitHub(perf).catch(() => {});
+  }
 
   const sorted = [...perf.records].sort((a, b) => b.date.localeCompare(a.date));
   const stats = computeStats(perf.records);

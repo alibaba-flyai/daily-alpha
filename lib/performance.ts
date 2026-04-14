@@ -61,6 +61,41 @@ export function savePerformance(data: PerformanceData): void {
   }
 }
 
+export async function persistToGitHub(data: PerformanceData): Promise<boolean> {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) return false;
+
+  const repo = "alibaba-flyai/daily-alpha";
+  const filePath = "lib/seed-performance.json";
+  const content = Buffer.from(JSON.stringify(data, null, 2)).toString("base64");
+
+  try {
+    const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+      headers: { Authorization: `token ${token}`, "User-Agent": "daily-alpha" },
+    });
+    const existing = await getRes.json();
+    const sha = existing?.sha;
+
+    const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `token ${token}`,
+        "User-Agent": "daily-alpha",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: `[auto] Update predictions — ${new Date().toISOString().split("T")[0]}`,
+        content,
+        sha,
+      }),
+    });
+
+    return putRes.ok;
+  } catch {
+    return false;
+  }
+}
+
 export function getTodayDate(): string {
   return new Date().toISOString().split("T")[0];
 }
