@@ -186,7 +186,7 @@ function AccuracyChartInline({ records, selectedDate, onSelectDate }: {
   );
 }
 
-// --- Day Tabs ---
+// --- Day Tabs (compact, horizontal scroll) ---
 function DayTabs({ records, selectedDate, onSelect }: {
   records: DailyRecord[];
   selectedDate: string;
@@ -194,40 +194,36 @@ function DayTabs({ records, selectedDate, onSelect }: {
 }) {
   const today = new Date().toISOString().split("T")[0];
 
-  // Show last 7 records + today
-  const visible = records.slice(0, 8);
-
   return (
-    <div className="flex gap-1 overflow-x-auto pb-1 mt-4 mb-2 scrollbar-none">
-      {visible.map((r) => {
+    <div className="flex gap-1 pb-0.5">
+      {records.map((r) => {
         const isSelected = r.date === selectedDate;
         const isToday = r.date === today;
         const hasResults = r.results !== null;
         const d = new Date(r.date + "T12:00:00");
         const dayLabel = isToday ? "Today" : d.toLocaleDateString("en-US", { weekday: "short" });
-        const dateLabel = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const dateNum = d.getDate();
 
         return (
           <button
             key={r.date}
             onClick={() => onSelect(r.date)}
-            className={`shrink-0 px-3 py-1.5 rounded-lg border text-center transition-all ${
+            className={`shrink-0 w-10 py-1.5 rounded-lg border text-center transition-all ${
               isSelected
-                ? "border-emerald-500/40 bg-emerald-950/20 text-emerald-400"
-                : "border-zinc-800 bg-zinc-900/30 text-zinc-500 hover:text-zinc-300 hover:border-zinc-700"
+                ? "border-emerald-500/40 bg-emerald-950/20"
+                : "border-zinc-800/50 bg-zinc-900/30 hover:border-zinc-700"
             }`}
           >
-            <div className="text-[10px] font-semibold">{dayLabel}</div>
-            <div className="text-[9px]">{dateLabel}</div>
-            {hasResults && r.accuracy !== null && (
-              <div className={`text-[9px] font-mono font-bold mt-0.5 ${
+            <div className={`text-[8px] font-semibold uppercase ${isSelected ? "text-emerald-400" : "text-zinc-600"}`}>{dayLabel}</div>
+            <div className={`text-[11px] font-bold font-mono ${isSelected ? "text-zinc-200" : "text-zinc-500"}`}>{dateNum}</div>
+            {hasResults && r.accuracy !== null ? (
+              <div className={`text-[8px] font-mono font-bold ${
                 r.accuracy >= 60 ? "text-emerald-400" : r.accuracy >= 50 ? "text-yellow-400" : "text-red-400"
               }`}>
                 {r.accuracy}%
               </div>
-            )}
-            {!hasResults && (
-              <div className="text-[9px] text-zinc-600 mt-0.5">pending</div>
+            ) : (
+              <div className="text-[8px] text-zinc-700">···</div>
             )}
           </button>
         );
@@ -517,45 +513,42 @@ export default function PerformancePanel({ onSearch }: PerformancePanelProps) {
 
   return (
     <div className="bg-zinc-950 border border-zinc-800/80 rounded-xl p-5">
-      {/* Compact header: Title + Soccer-style scoreboard */}
+      {/* Header: Title + Score + W:L + Market pill */}
       <div className="flex items-center gap-2 mb-3">
         <span className="text-sm">🏆</span>
         <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">Track Record</span>
+        {stats.overallAccuracy !== null && (
+          <span className={`text-sm font-bold font-mono ${
+            stats.overallAccuracy >= 60 ? "text-emerald-400" : stats.overallAccuracy >= 50 ? "text-yellow-400" : "text-red-400"
+          }`}>
+            {stats.overallAccuracy}%
+          </span>
+        )}
         {stats.totalDays > 0 && (
-          <div className="flex items-center gap-1 ml-auto bg-zinc-900/80 rounded-lg px-2.5 py-1 border border-zinc-800">
-            <span className="text-sm font-bold font-mono text-emerald-400">{stats.totalCorrect}</span>
-            <span className="text-[10px] text-zinc-600">:</span>
-            <span className="text-sm font-bold font-mono text-red-400">{stats.totalPredictions - stats.totalCorrect}</span>
-            <span className="text-[9px] text-zinc-600 ml-1 font-mono">{stats.totalDays}d</span>
+          <div className="flex items-center gap-1 bg-zinc-900/80 rounded px-2 py-0.5 border border-zinc-800">
+            <span className="text-[11px] font-bold font-mono text-emerald-400">{stats.totalCorrect}</span>
+            <span className="text-[9px] text-zinc-600">:</span>
+            <span className="text-[11px] font-bold font-mono text-red-400">{stats.totalPredictions - stats.totalCorrect}</span>
+            <span className="text-[8px] text-zinc-600 ml-0.5 font-mono">{stats.totalDays}d</span>
           </div>
         )}
+        <div className="ml-auto">
+          <MarketPill />
+        </div>
       </div>
 
-      {/* One line: Chart (left) + Score (center) + Market Status (right) */}
-      <div className="flex items-center gap-3 mb-3">
-        {/* Mini chart */}
-        <div className="flex-1 min-w-0">
+      {/* Chart (left) + Day calendar (right) side by side */}
+      <div className="flex items-stretch gap-3 mb-3">
+        {/* Accuracy curve */}
+        <div className="w-[45%] shrink-0">
           <AccuracyChartInline records={data.records} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
         </div>
 
-        {/* Score */}
-        {stats.overallAccuracy !== null && (
-          <div className="text-center shrink-0 px-2">
-            <div className={`text-2xl font-bold font-mono leading-none ${
-              stats.overallAccuracy >= 60 ? "text-emerald-400" : stats.overallAccuracy >= 50 ? "text-yellow-400" : "text-red-400"
-            }`}>
-              {stats.overallAccuracy}%
-            </div>
-            <div className="text-[8px] text-zinc-600 uppercase mt-0.5">accuracy</div>
-          </div>
-        )}
-
-        {/* Market status pill */}
-        <MarketPill />
+        {/* Day calendar — scrollable, max 7 visible */}
+        <div className="flex-1 overflow-x-auto scrollbar-none">
+          <DayTabs records={data.records} selectedDate={selectedDate} onSelect={setSelectedDate} />
+        </div>
       </div>
-
-      {/* Day Tabs */}
-      <DayTabs records={data.records} selectedDate={selectedDate} onSelect={setSelectedDate} />
 
       {/* Selected day's predictions */}
       {selectedRecord && (

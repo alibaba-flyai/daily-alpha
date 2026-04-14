@@ -81,6 +81,10 @@ body {
   border-radius: 2px;
 }
 
+/* Hide scrollbar */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
 /* Line clamp utility */
 .line-clamp-2 {
   display: -webkit-box;
