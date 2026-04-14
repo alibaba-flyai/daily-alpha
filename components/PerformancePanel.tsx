@@ -458,15 +458,17 @@ function PredictionTable({
       )}
       {showPreMarket && (
         <div className="mt-3 pt-3 border-t border-zinc-800/50">
-          <div className="flex items-center justify-center gap-2 py-2 px-3 bg-zinc-900/50 rounded-lg">
-            <span className="text-sm">🕐</span>
-            <div className="text-center">
-              <p className="text-[11px] text-zinc-400">
-                {market.isPreMarket ? "Market opens in " : "Market opens "}
-                <span className="font-mono text-yellow-400">{market.countdown}</span>
-              </p>
-              <p className="text-[9px] text-zinc-600 mt-0.5">Live prices and W/L will appear when trading starts</p>
-            </div>
+          <div className="flex items-center justify-center gap-2 py-1.5 px-3 bg-zinc-900/50 rounded-lg">
+            <span className={`relative flex h-1.5 w-1.5`}>
+              <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${market.isPreMarket ? "bg-yellow-400" : "bg-zinc-600"}`} />
+            </span>
+            <span className={`text-[10px] font-semibold ${market.isPreMarket ? "text-yellow-400" : "text-zinc-500"}`}>
+              {market.isPreMarket ? "Pre-Market" : "Closed"}
+            </span>
+            <span className="text-[10px] text-zinc-500">·</span>
+            <span className="text-[10px] font-mono text-zinc-400">
+              {market.isPreMarket ? `Opens in ${market.countdown}` : `Opens ${market.countdown}`}
+            </span>
           </div>
         </div>
       )}
@@ -515,14 +517,17 @@ export default function PerformancePanel({ onSearch }: PerformancePanelProps) {
 
   return (
     <div className="bg-zinc-950 border border-zinc-800/80 rounded-xl p-5">
-      {/* Compact header: Title + Stats inline */}
+      {/* Compact header: Title + Soccer-style scoreboard */}
       <div className="flex items-center gap-2 mb-3">
         <span className="text-sm">🏆</span>
         <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">Track Record</span>
         {stats.totalDays > 0 && (
-          <span className="text-[10px] text-zinc-600 font-mono ml-1">
-            {stats.totalCorrect}W {stats.totalPredictions - stats.totalCorrect}L / {stats.totalDays}d
-          </span>
+          <div className="flex items-center gap-1 ml-auto bg-zinc-900/80 rounded-lg px-2.5 py-1 border border-zinc-800">
+            <span className="text-sm font-bold font-mono text-emerald-400">{stats.totalCorrect}</span>
+            <span className="text-[10px] text-zinc-600">:</span>
+            <span className="text-sm font-bold font-mono text-red-400">{stats.totalPredictions - stats.totalCorrect}</span>
+            <span className="text-[9px] text-zinc-600 ml-1 font-mono">{stats.totalDays}d</span>
+          </div>
         )}
       </div>
 
