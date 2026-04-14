@@ -8,6 +8,7 @@ import SpeedMeter from "@/components/SpeedMeter";
 import TrendingSection from "@/components/TrendingSection";
 import PerformancePanel from "@/components/PerformancePanel";
 import { PredictionResult, TraceStep, StreamEvent, FormulaComponent } from "@/lib/types";
+import TypewriterText from "@/components/TypewriterText";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 
@@ -256,15 +257,16 @@ export default function Home() {
                   query={currentQuery}
                 />
 
-                {/* Narrative — below meter, appears after result */}
+                {/* Narrative — streams in after score lands */}
                 {showResults && result.narrative && (
-                  <div className="bg-zinc-950 border border-zinc-800/80 rounded-xl p-4 animate-fade-slide-in">
-                    <div className="flex items-start gap-2.5">
-                      <span className="text-sm mt-0.5 shrink-0">⚡</span>
-                      <p className="text-[12px] text-zinc-300 leading-relaxed">
-                        {result.narrative}
-                      </p>
+                  <div className="bg-zinc-950 border border-emerald-900/30 rounded-xl p-4 animate-fade-slide-in">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs">⚡</span>
+                      <span className="text-[9px] font-semibold text-emerald-500 uppercase tracking-wider">Analysis</span>
                     </div>
+                    <p className="text-[13px] text-zinc-200 leading-relaxed font-medium">
+                      <TypewriterText text={result.narrative} speed={12} />
+                    </p>
                   </div>
                 )}
 

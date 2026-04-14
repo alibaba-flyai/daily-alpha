@@ -108,11 +108,10 @@ Based on ALL the data above, produce a professional daily win-rate analysis. You
 
 5. **Write a one-liner** — a single sentence a non-expert would understand. Frame it as "buy today, win tomorrow" advice.
 
-6. **Write a narrative** (2-4 sentences) — a short, punchy analysis like a Bloomberg terminal flash or breaking news alert. Must include:
-   - The KEY catalyst or driver (a specific headline, event, data point, or market move)
-   - Why it matters for tomorrow specifically
-   - Reference actual data from the signals (a price, a percentage, a prediction market odds, a headline)
-   - Sound like a professional analyst, not a generic AI summary
+6. **Write a narrative** — a brief, punchy 2-sentence analysis. Format: "[CATALYST]. [IMPLICATION]."
+   - Sentence 1: The single most important driver — cite a specific fact (price, %, headline, or market odds)
+   - Sentence 2: What this means for tomorrow — the risk or opportunity
+   - Be direct like a trading desk alert. No filler words. Max 40 words total.
 
 Respond in this exact JSON format:
 {
@@ -120,7 +119,7 @@ Respond in this exact JSON format:
   "assetType": "equity",
   "winDefinition": "Win = TSLA closing price tomorrow is higher than todays close",
   "oneLiner": "Tesla has a 58% chance of closing higher tomorrow based on positive momentum and mixed news.",
-  "narrative": "Tesla surged after Europe greenlighted FSD Supervised in the Netherlands — the first EU approval. Polymarket gives only 4% odds on near-term catalysts, but the news cycle is firmly bullish with 7 of 10 headlines positive. At $348.95, TSLA is still 11% below its 50-day average, suggesting room for a relief rally. The risk: broader market weakness could cap upside.",
+  "narrative": "FSD approved in Netherlands — first EU market, 8 of 10 headlines bullish. At $348, TSLA sits 11% below its 50-day avg with momentum turning positive.",
   "formula": {
     "expression": "Win Rate = 0.4 * 62 + 0.3 * 55 + 0.2 * 48 + 0.1 * 50 = 56.1",
     "components": [
