@@ -372,6 +372,9 @@ function PredictionTable({
   const showLive = isToday && isPending && market.isOpen && Object.keys(intraday).length > 0;
   const showPreMarket = isToday && isPending && !market.isOpen;
 
+  // Show extra columns for today (live or pending) and for evaluated results
+  const showExtraCols = isToday && isPending;
+
   return (
     <div>
       {/* Column headers */}
@@ -380,18 +383,17 @@ function PredictionTable({
         <span className="w-12">Ticker</span>
         <span className="flex-1">Name</span>
         <span className="w-10 text-right">Pred</span>
-        {showLive && <span className="w-12 text-center">Live</span>}
-        {showLive && <span className="w-14 text-right">Now</span>}
+        {showExtraCols && <span className="w-12 text-center">Live</span>}
+        {showExtraCols && <span className="w-14 text-right">Now</span>}
         {hasResults && <span className="w-14 text-right">Actual</span>}
-        <span className="w-6 text-center">{hasResults ? "W/L" : showLive ? "W/L" : ""}</span>
+        <span className="w-6 text-center">{hasResults || showExtraCols ? "W/L" : ""}</span>
       </div>
 
       <div className="space-y-0.5">
         {items.map((p, i) => {
           const r = hasResults ? (record.results![i]) : null;
-          const live = intraday[p.symbol];
+          const live = showLive ? intraday[p.symbol] : null;
           const liveUp = live ? live.change >= 0 : false;
-          // For live: check if current direction matches prediction
           const liveCorrect = live ? (p.predictedWin === (live.change > 0)) : null;
 
           return (
@@ -408,22 +410,25 @@ function PredictionTable({
               }`}>
                 {p.predictedWinRate}%
               </span>
-              {showLive && live && (
-                <>
-                  <span className="w-12 flex justify-center">
-                    <MiniSparkline points={live.points} isUp={liveUp} />
-                  </span>
-                  <span className={`text-[11px] font-mono w-14 text-right ${liveUp ? "text-emerald-400" : "text-red-400"}`}>
-                    {liveUp ? "+" : ""}{live.change.toFixed(2)}%
-                  </span>
-                </>
+              {/* Live sparkline + change — or pending placeholder */}
+              {showExtraCols && (
+                live ? (
+                  <>
+                    <span className="w-12 flex justify-center">
+                      <MiniSparkline points={live.points} isUp={liveUp} />
+                    </span>
+                    <span className={`text-[11px] font-mono w-14 text-right ${liveUp ? "text-emerald-400" : "text-red-400"}`}>
+                      {liveUp ? "+" : ""}{live.change.toFixed(2)}%
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="w-12 text-center text-[9px] text-zinc-700">—</span>
+                    <span className="w-14 text-right text-[9px] text-zinc-700">—</span>
+                  </>
+                )
               )}
-              {showLive && !live && (
-                <>
-                  <span className="w-12" />
-                  <span className="w-14 text-right text-[9px] text-zinc-700">—</span>
-                </>
-              )}
+              {/* Actual results for evaluated records */}
               {r ? (
                 <>
                   <span className={`text-[11px] font-mono w-14 text-right ${r.actualWin ? "text-emerald-400" : "text-red-400"}`}>
