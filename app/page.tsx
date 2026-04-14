@@ -265,7 +265,7 @@ export default function Home() {
                       <span className="text-[9px] font-semibold text-emerald-500 uppercase tracking-wider">Analysis</span>
                     </div>
                     <p className="text-[13px] text-zinc-200 leading-relaxed font-medium">
-                      <TypewriterText text={result.narrative} speed={12} />
+                      <TypewriterText text={result.narrative} speed={35} />
                     </p>
                   </div>
                 )}

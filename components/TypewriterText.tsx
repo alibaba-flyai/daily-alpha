@@ -26,9 +26,7 @@ export default function TypewriterText({ text, speed = 15 }: TypewriterTextProps
 
     const timer = setInterval(() => {
       if (indexRef.current < text.length) {
-        // Type 2-3 chars at a time for speed
-        const chunk = text.slice(indexRef.current, indexRef.current + 3);
-        indexRef.current += chunk.length;
+        indexRef.current += 1;
         setDisplayed(text.slice(0, indexRef.current));
       } else {
         setDone(true);
