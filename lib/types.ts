@@ -21,6 +21,7 @@ export interface PredictionResult {
   assetType: AssetType;
   winDefinition: string;
   oneLiner: string;
+  narrative: string; // short powerful analysis with facts/quotes/catalysts
   formula: {
     components: FormulaComponent[];
     expression: string;

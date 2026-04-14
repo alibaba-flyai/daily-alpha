@@ -256,7 +256,19 @@ export default function Home() {
                   query={currentQuery}
                 />
 
-                {/* LLM Synthesis bar — right below meter */}
+                {/* Narrative — below meter, appears after result */}
+                {showResults && result.narrative && (
+                  <div className="bg-zinc-950 border border-zinc-800/80 rounded-xl p-4 animate-fade-slide-in">
+                    <div className="flex items-start gap-2.5">
+                      <span className="text-sm mt-0.5 shrink-0">⚡</span>
+                      <p className="text-[12px] text-zinc-300 leading-relaxed">
+                        {result.narrative}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* LLM Synthesis bar */}
                 {(() => {
                   const llmStep = [...steps].reverse().find((s) => s.id === "llm");
                   if (!llmStep) return null;

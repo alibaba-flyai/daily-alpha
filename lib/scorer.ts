@@ -23,6 +23,7 @@ interface LLMScorerOutput {
   assetType: string;
   winDefinition: string;
   oneLiner: string;
+  narrative: string;
   formula: {
     expression: string;
     components: FormulaComponent[];
@@ -42,6 +43,7 @@ export async function computeWinRate(
       assetType: llmResult.assetType as PredictionResult["assetType"],
       winDefinition: llmResult.winDefinition,
       oneLiner: llmResult.oneLiner,
+      narrative: llmResult.narrative || "",
       formula: llmResult.formula,
       signals,
       timestamp: new Date().toISOString(),
@@ -106,12 +108,19 @@ Based on ALL the data above, produce a professional daily win-rate analysis. You
 
 5. **Write a one-liner** — a single sentence a non-expert would understand. Frame it as "buy today, win tomorrow" advice.
 
+6. **Write a narrative** (2-4 sentences) — a short, punchy analysis like a Bloomberg terminal flash or breaking news alert. Must include:
+   - The KEY catalyst or driver (a specific headline, event, data point, or market move)
+   - Why it matters for tomorrow specifically
+   - Reference actual data from the signals (a price, a percentage, a prediction market odds, a headline)
+   - Sound like a professional analyst, not a generic AI summary
+
 Respond in this exact JSON format:
 {
   "winRate": 58,
   "assetType": "equity",
   "winDefinition": "Win = TSLA closing price tomorrow is higher than todays close",
   "oneLiner": "Tesla has a 58% chance of closing higher tomorrow based on positive momentum and mixed news.",
+  "narrative": "Tesla surged after Europe greenlighted FSD Supervised in the Netherlands — the first EU approval. Polymarket gives only 4% odds on near-term catalysts, but the news cycle is firmly bullish with 7 of 10 headlines positive. At $348.95, TSLA is still 11% below its 50-day average, suggesting room for a relief rally. The risk: broader market weakness could cap upside.",
   "formula": {
     "expression": "Win Rate = 0.4 * 62 + 0.3 * 55 + 0.2 * 48 + 0.1 * 50 = 56.1",
     "components": [
@@ -181,6 +190,7 @@ function fallbackScore(
     assetType: "general",
     winDefinition: `Win = ${query} closing price tomorrow is higher than today's close.`,
     oneLiner: `${query} has a ${winRate}% chance of closing higher tomorrow based on available signals.`,
+    narrative: "",
     formula: {
       components,
       expression: active.length > 0
