@@ -165,473 +165,487 @@
       "date": "2026-04-01",
       "predictions": [
         {
-          "symbol": "BABA",
-          "name": "Alibaba Group Holding Limited",
-          "predictedWinRate": 35,
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 39,
           "predictedWin": false,
-          "priceAtPrediction": 123.73
+          "priceAtPrediction": 478.5
         },
         {
-          "symbol": "MRK",
-          "name": "Merck & Company, Inc.",
-          "predictedWinRate": 35,
-          "predictedWin": false,
-          "priceAtPrediction": 120.84
-        },
-        {
-          "symbol": "ORCL",
-          "name": "Oracle Corporation",
-          "predictedWinRate": 55,
-          "predictedWin": true,
-          "priceAtPrediction": 145.23
-        },
-        {
-          "symbol": "SNAP",
-          "name": "Snap Inc.",
-          "predictedWinRate": 47,
-          "predictedWin": false,
-          "priceAtPrediction": 4.9
-        },
-        {
-          "symbol": "COIN",
-          "name": "Coinbase Global, Inc.",
-          "predictedWinRate": 41,
-          "predictedWin": false,
-          "priceAtPrediction": 172.99
-        },
-        {
-          "symbol": "WMT",
-          "name": "Walmart Inc.",
-          "predictedWinRate": 32,
-          "predictedWin": false,
-          "priceAtPrediction": 124.74
-        },
-        {
-          "symbol": "AMZN",
-          "name": "Amazon.com, Inc.",
-          "predictedWinRate": 42,
-          "predictedWin": false,
-          "priceAtPrediction": 210.57
-        },
-        {
-          "symbol": "ADBE",
-          "name": "Adobe Inc.",
+          "symbol": "JNJ",
+          "name": "Johnson & Johnson",
           "predictedWinRate": 33,
           "predictedWin": false,
-          "priceAtPrediction": 241.37
+          "priceAtPrediction": 244.12
         },
         {
-          "symbol": "DIS",
-          "name": "Walt Disney Company (The)",
-          "predictedWinRate": 35,
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 74,
+          "predictedWin": true,
+          "priceAtPrediction": 210.21
+        },
+        {
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 68,
+          "predictedWin": true,
+          "priceAtPrediction": 48.03
+        },
+        {
+          "symbol": "META",
+          "name": "Meta Platforms, Inc.",
+          "predictedWinRate": 74,
+          "predictedWin": true,
+          "priceAtPrediction": 579.23
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 297.39
+        },
+        {
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 38,
           "predictedWin": false,
-          "priceAtPrediction": 96.56
+          "priceAtPrediction": 28.55
+        },
+        {
+          "symbol": "MS",
+          "name": "Morgan Stanley",
+          "predictedWinRate": 68,
+          "predictedWin": true,
+          "priceAtPrediction": 166.17
+        },
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 44,
+          "predictedWin": false,
+          "priceAtPrediction": 255.63
+        },
+        {
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 69,
+          "predictedWin": true,
+          "priceAtPrediction": 144.09
         }
       ],
       "results": [
         {
-          "symbol": "BABA",
-          "name": "Alibaba Group Holding Limited",
-          "predictedWinRate": 35,
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 39,
           "predictedWin": false,
-          "priceAtPrediction": 123.73,
-          "priceAtClose": 122.05,
+          "priceAtPrediction": 478.5,
+          "priceAtClose": 477.35,
           "actualWin": false,
           "correct": true
         },
         {
-          "symbol": "MRK",
-          "name": "Merck & Company, Inc.",
-          "predictedWinRate": 35,
-          "predictedWin": false,
-          "priceAtPrediction": 120.84,
-          "priceAtClose": 120.87,
-          "actualWin": true,
-          "correct": false
-        },
-        {
-          "symbol": "ORCL",
-          "name": "Oracle Corporation",
-          "predictedWinRate": 55,
-          "predictedWin": true,
-          "priceAtPrediction": 145.23,
-          "priceAtClose": 146.38,
-          "actualWin": true,
-          "correct": true
-        },
-        {
-          "symbol": "SNAP",
-          "name": "Snap Inc.",
-          "predictedWinRate": 47,
-          "predictedWin": false,
-          "priceAtPrediction": 4.9,
-          "priceAtClose": 4.63,
-          "actualWin": false,
-          "correct": true
-        },
-        {
-          "symbol": "COIN",
-          "name": "Coinbase Global, Inc.",
-          "predictedWinRate": 41,
-          "predictedWin": false,
-          "priceAtPrediction": 172.99,
-          "priceAtClose": 171.46,
-          "actualWin": false,
-          "correct": true
-        },
-        {
-          "symbol": "WMT",
-          "name": "Walmart Inc.",
-          "predictedWinRate": 32,
-          "predictedWin": false,
-          "priceAtPrediction": 124.74,
-          "priceAtClose": 125.79,
-          "actualWin": true,
-          "correct": false
-        },
-        {
-          "symbol": "AMZN",
-          "name": "Amazon.com, Inc.",
-          "predictedWinRate": 42,
-          "predictedWin": false,
-          "priceAtPrediction": 210.57,
-          "priceAtClose": 209.77,
-          "actualWin": false,
-          "correct": true
-        },
-        {
-          "symbol": "ADBE",
-          "name": "Adobe Inc.",
+          "symbol": "JNJ",
+          "name": "Johnson & Johnson",
           "predictedWinRate": 33,
           "predictedWin": false,
-          "priceAtPrediction": 241.37,
-          "priceAtClose": 242.92,
+          "priceAtPrediction": 244.12,
+          "priceAtClose": 243.04,
+          "actualWin": false,
+          "correct": true
+        },
+        {
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 74,
+          "predictedWin": true,
+          "priceAtPrediction": 210.21,
+          "priceAtClose": 217.5,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 68,
+          "predictedWin": true,
+          "priceAtPrediction": 48.03,
+          "priceAtClose": 50.38,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "META",
+          "name": "Meta Platforms, Inc.",
+          "predictedWinRate": 74,
+          "predictedWin": true,
+          "priceAtPrediction": 579.23,
+          "priceAtClose": 574.46,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 297.39,
+          "priceAtClose": 295.77,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 38,
+          "predictedWin": false,
+          "priceAtPrediction": 28.55,
+          "priceAtClose": 28.32,
+          "actualWin": false,
+          "correct": true
+        },
+        {
+          "symbol": "MS",
+          "name": "Morgan Stanley",
+          "predictedWinRate": 68,
+          "predictedWin": true,
+          "priceAtPrediction": 166.17,
+          "priceAtClose": 165.81,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 44,
+          "predictedWin": false,
+          "priceAtPrediction": 255.63,
+          "priceAtClose": 255.92,
           "actualWin": true,
           "correct": false
         },
         {
-          "symbol": "DIS",
-          "name": "Walt Disney Company (The)",
-          "predictedWinRate": 35,
-          "predictedWin": false,
-          "priceAtPrediction": 96.56,
-          "priceAtClose": 96.61,
-          "actualWin": true,
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 69,
+          "predictedWin": true,
+          "priceAtPrediction": 144.09,
+          "priceAtClose": 143.12,
+          "actualWin": false,
           "correct": false
         }
       ],
-      "accuracy": 56
+      "accuracy": 50
     },
     {
       "date": "2026-04-02",
       "predictions": [
         {
-          "symbol": "SNAP",
-          "name": "Snap Inc.",
-          "predictedWinRate": 72,
+          "symbol": "ADBE",
+          "name": "Adobe Inc.",
+          "predictedWinRate": 74,
           "predictedWin": true,
-          "priceAtPrediction": 4.63
+          "priceAtPrediction": 242.92
         },
         {
           "symbol": "BABA",
           "name": "Alibaba Group Holding Limited",
-          "predictedWinRate": 57,
-          "predictedWin": true,
+          "predictedWinRate": 47,
+          "predictedWin": false,
           "priceAtPrediction": 122.05
         },
         {
-          "symbol": "WMT",
-          "name": "Walmart Inc.",
-          "predictedWinRate": 66,
+          "symbol": "JNJ",
+          "name": "Johnson & Johnson",
+          "predictedWinRate": 69,
           "predictedWin": true,
-          "priceAtPrediction": 125.79
+          "priceAtPrediction": 243.04
         },
         {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 37,
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 50,
+          "predictedWin": true,
+          "priceAtPrediction": 360.59
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 72,
+          "predictedWin": true,
+          "priceAtPrediction": 477.35
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
+          "predictedWinRate": 39,
           "predictedWin": false,
-          "priceAtPrediction": 8.71
+          "priceAtPrediction": 295.77
+        },
+        {
+          "symbol": "NKE",
+          "name": "Nike, Inc.",
+          "predictedWinRate": 46,
+          "predictedWin": false,
+          "priceAtPrediction": 44.19
         },
         {
           "symbol": "AMZN",
           "name": "Amazon.com, Inc.",
-          "predictedWinRate": 41,
-          "predictedWin": false,
+          "predictedWinRate": 73,
+          "predictedWin": true,
           "priceAtPrediction": 209.77
         },
         {
-          "symbol": "COIN",
-          "name": "Coinbase Global, Inc.",
-          "predictedWinRate": 68,
+          "symbol": "META",
+          "name": "Meta Platforms, Inc.",
+          "predictedWinRate": 70,
           "predictedWin": true,
-          "priceAtPrediction": 171.46
+          "priceAtPrediction": 574.46
         },
         {
-          "symbol": "HD",
-          "name": "Home Depot, Inc. (The)",
-          "predictedWinRate": 64,
-          "predictedWin": true,
-          "priceAtPrediction": 321.63
-        },
-        {
-          "symbol": "CRM",
-          "name": "Salesforce, Inc.",
-          "predictedWinRate": 55,
-          "predictedWin": true,
-          "priceAtPrediction": 187.18
-        },
-        {
-          "symbol": "RIOT",
-          "name": "Riot Platforms, Inc.",
-          "predictedWinRate": 30,
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 12.86
-        },
-        {
-          "symbol": "ORCL",
-          "name": "Oracle Corporation",
-          "predictedWinRate": 31,
-          "predictedWin": false,
-          "priceAtPrediction": 146.38
+          "priceAtPrediction": 143.12
         }
       ],
       "results": [
         {
-          "symbol": "SNAP",
-          "name": "Snap Inc.",
-          "predictedWinRate": 72,
+          "symbol": "ADBE",
+          "name": "Adobe Inc.",
+          "predictedWinRate": 74,
           "predictedWin": true,
-          "priceAtPrediction": 4.63,
-          "priceAtClose": 4.71,
+          "priceAtPrediction": 242.92,
+          "priceAtClose": 244.36,
           "actualWin": true,
           "correct": true
         },
         {
           "symbol": "BABA",
           "name": "Alibaba Group Holding Limited",
-          "predictedWinRate": 57,
-          "predictedWin": true,
+          "predictedWinRate": 47,
+          "predictedWin": false,
           "priceAtPrediction": 122.05,
           "priceAtClose": 122.31,
           "actualWin": true,
-          "correct": true
+          "correct": false
         },
         {
-          "symbol": "WMT",
-          "name": "Walmart Inc.",
-          "predictedWinRate": 66,
+          "symbol": "JNJ",
+          "name": "Johnson & Johnson",
+          "predictedWinRate": 69,
           "predictedWin": true,
-          "priceAtPrediction": 125.79,
-          "priceAtClose": 126.79,
-          "actualWin": true,
-          "correct": true
+          "priceAtPrediction": 243.04,
+          "priceAtClose": 240.97,
+          "actualWin": false,
+          "correct": false
         },
         {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 37,
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 50,
+          "predictedWin": true,
+          "priceAtPrediction": 360.59,
+          "priceAtClose": 352.82,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 72,
+          "predictedWin": true,
+          "priceAtPrediction": 477.35,
+          "priceAtClose": 476.38,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
+          "predictedWinRate": 39,
           "predictedWin": false,
-          "priceAtPrediction": 8.71,
-          "priceAtClose": 8.85,
+          "priceAtPrediction": 295.77,
+          "priceAtClose": 299.99,
           "actualWin": true,
           "correct": false
+        },
+        {
+          "symbol": "NKE",
+          "name": "Nike, Inc.",
+          "predictedWinRate": 46,
+          "predictedWin": false,
+          "priceAtPrediction": 44.19,
+          "priceAtClose": 44.03,
+          "actualWin": false,
+          "correct": true
         },
         {
           "symbol": "AMZN",
           "name": "Amazon.com, Inc.",
-          "predictedWinRate": 41,
-          "predictedWin": false,
+          "predictedWinRate": 73,
+          "predictedWin": true,
           "priceAtPrediction": 209.77,
           "priceAtClose": 212.79,
           "actualWin": true,
-          "correct": false
-        },
-        {
-          "symbol": "COIN",
-          "name": "Coinbase Global, Inc.",
-          "predictedWinRate": 68,
-          "predictedWin": true,
-          "priceAtPrediction": 171.46,
-          "priceAtClose": 174.79,
-          "actualWin": true,
           "correct": true
         },
         {
-          "symbol": "HD",
-          "name": "Home Depot, Inc. (The)",
-          "predictedWinRate": 64,
+          "symbol": "META",
+          "name": "Meta Platforms, Inc.",
+          "predictedWinRate": 70,
           "predictedWin": true,
-          "priceAtPrediction": 321.63,
-          "priceAtClose": 326.65,
-          "actualWin": true,
-          "correct": true
-        },
-        {
-          "symbol": "CRM",
-          "name": "Salesforce, Inc.",
-          "predictedWinRate": 55,
-          "predictedWin": true,
-          "priceAtPrediction": 187.18,
-          "priceAtClose": 185.03,
+          "priceAtPrediction": 574.46,
+          "priceAtClose": 573.02,
           "actualWin": false,
           "correct": false
         },
         {
-          "symbol": "RIOT",
-          "name": "Riot Platforms, Inc.",
-          "predictedWinRate": 30,
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 12.86,
-          "priceAtClose": 13.52,
-          "actualWin": true,
-          "correct": false
-        },
-        {
-          "symbol": "ORCL",
-          "name": "Oracle Corporation",
-          "predictedWinRate": 31,
-          "predictedWin": false,
-          "priceAtPrediction": 146.38,
-          "priceAtClose": 145.54,
+          "priceAtPrediction": 143.12,
+          "priceAtClose": 142.77,
           "actualWin": false,
           "correct": true
         }
       ],
-      "accuracy": 60
+      "accuracy": 40
     },
     {
       "date": "2026-04-06",
       "predictions": [
         {
-          "symbol": "DIS",
-          "name": "Walt Disney Company (The)",
-          "predictedWinRate": 44,
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
+          "predictedWinRate": 49,
           "predictedWin": false,
-          "priceAtPrediction": 96.28
+          "priceAtPrediction": 299.99
         },
         {
-          "symbol": "WMT",
-          "name": "Walmart Inc.",
-          "predictedWinRate": 67,
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 51,
           "predictedWin": true,
-          "priceAtPrediction": 126.79
+          "priceAtPrediction": 142.77
         },
         {
-          "symbol": "CRM",
-          "name": "Salesforce, Inc.",
-          "predictedWinRate": 28,
-          "predictedWin": false,
-          "priceAtPrediction": 185.03
-        },
-        {
-          "symbol": "BA",
-          "name": "Boeing Company (The)",
-          "predictedWinRate": 35,
-          "predictedWin": false,
-          "priceAtPrediction": 212.3
-        },
-        {
-          "symbol": "ADBE",
-          "name": "Adobe Inc.",
-          "predictedWinRate": 39,
-          "predictedWin": false,
-          "priceAtPrediction": 244.36
-        },
-        {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 54,
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 70,
           "predictedWin": true,
-          "priceAtPrediction": 8.85
+          "priceAtPrediction": 220.18
+        },
+        {
+          "symbol": "MS",
+          "name": "Morgan Stanley",
+          "predictedWinRate": 30,
+          "predictedWin": false,
+          "priceAtPrediction": 166.55
+        },
+        {
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 30,
+          "predictedWin": false,
+          "priceAtPrediction": 352.82
         },
         {
           "symbol": "AMZN",
           "name": "Amazon.com, Inc.",
-          "predictedWinRate": 36,
+          "predictedWinRate": 37,
           "predictedWin": false,
           "priceAtPrediction": 212.79
         },
         {
-          "symbol": "HD",
-          "name": "Home Depot, Inc. (The)",
-          "predictedWinRate": 49,
-          "predictedWin": false,
-          "priceAtPrediction": 326.65
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 69,
+          "predictedWin": true,
+          "priceAtPrediction": 50.78
         },
         {
-          "symbol": "BABA",
-          "name": "Alibaba Group Holding Limited",
-          "predictedWinRate": 49,
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 45,
           "predictedWin": false,
-          "priceAtPrediction": 122.31
+          "priceAtPrediction": 258.86
+        },
+        {
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 27.83
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 73,
+          "predictedWin": true,
+          "priceAtPrediction": 476.38
         }
       ],
       "results": [
         {
-          "symbol": "DIS",
-          "name": "Walt Disney Company (The)",
-          "predictedWinRate": 44,
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
+          "predictedWinRate": 49,
           "predictedWin": false,
-          "priceAtPrediction": 96.28,
-          "priceAtClose": 95.78,
-          "actualWin": false,
-          "correct": true
+          "priceAtPrediction": 299.99,
+          "priceAtClose": 305.46,
+          "actualWin": true,
+          "correct": false
         },
         {
-          "symbol": "WMT",
-          "name": "Walmart Inc.",
-          "predictedWinRate": 67,
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 51,
           "predictedWin": true,
-          "priceAtPrediction": 126.79,
-          "priceAtClose": 122.49,
+          "priceAtPrediction": 142.77,
+          "priceAtClose": 141.3,
           "actualWin": false,
           "correct": false
         },
         {
-          "symbol": "CRM",
-          "name": "Salesforce, Inc.",
-          "predictedWinRate": 28,
-          "predictedWin": false,
-          "priceAtPrediction": 185.03,
-          "priceAtClose": 182.96,
-          "actualWin": false,
-          "correct": true
-        },
-        {
-          "symbol": "BA",
-          "name": "Boeing Company (The)",
-          "predictedWinRate": 35,
-          "predictedWin": false,
-          "priceAtPrediction": 212.3,
-          "priceAtClose": 210,
-          "actualWin": false,
-          "correct": true
-        },
-        {
-          "symbol": "ADBE",
-          "name": "Adobe Inc.",
-          "predictedWinRate": 39,
-          "predictedWin": false,
-          "priceAtPrediction": 244.36,
-          "priceAtClose": 240.14,
-          "actualWin": false,
-          "correct": true
-        },
-        {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 54,
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 70,
           "predictedWin": true,
-          "priceAtPrediction": 8.85,
-          "priceAtClose": 8.96,
+          "priceAtPrediction": 220.18,
+          "priceAtClose": 221.53,
           "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "MS",
+          "name": "Morgan Stanley",
+          "predictedWinRate": 30,
+          "predictedWin": false,
+          "priceAtPrediction": 166.55,
+          "priceAtClose": 168.43,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 30,
+          "predictedWin": false,
+          "priceAtPrediction": 352.82,
+          "priceAtClose": 346.65,
+          "actualWin": false,
           "correct": true
         },
         {
           "symbol": "AMZN",
           "name": "Amazon.com, Inc.",
-          "predictedWinRate": 36,
+          "predictedWinRate": 37,
           "predictedWin": false,
           "priceAtPrediction": 212.79,
           "priceAtClose": 213.77,
@@ -639,527 +653,759 @@
           "correct": false
         },
         {
-          "symbol": "HD",
-          "name": "Home Depot, Inc. (The)",
-          "predictedWinRate": 49,
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 69,
+          "predictedWin": true,
+          "priceAtPrediction": 50.78,
+          "priceAtClose": 52.91,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 45,
           "predictedWin": false,
-          "priceAtPrediction": 326.65,
-          "priceAtClose": 318.77,
+          "priceAtPrediction": 258.86,
+          "priceAtClose": 253.5,
           "actualWin": false,
           "correct": true
         },
         {
-          "symbol": "BABA",
-          "name": "Alibaba Group Holding Limited",
-          "predictedWinRate": 49,
-          "predictedWin": false,
-          "priceAtPrediction": 122.31,
-          "priceAtClose": 119.72,
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 27.83,
+          "priceAtClose": 27.1,
           "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 73,
+          "predictedWin": true,
+          "priceAtPrediction": 476.38,
+          "priceAtClose": 478.08,
+          "actualWin": true,
           "correct": true
         }
       ],
-      "accuracy": 78
+      "accuracy": 50
     },
     {
       "date": "2026-04-07",
       "predictions": [
         {
-          "symbol": "BA",
-          "name": "Boeing Company (The)",
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 29,
+          "predictedWin": false,
+          "priceAtPrediction": 141.3
+        },
+        {
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 68,
+          "predictedWin": true,
+          "priceAtPrediction": 27.1
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 27,
+          "predictedWin": false,
+          "priceAtPrediction": 478.08
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
+          "predictedWinRate": 38,
+          "predictedWin": false,
+          "priceAtPrediction": 305.46
+        },
+        {
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 30,
+          "predictedWin": false,
+          "priceAtPrediction": 52.91
+        },
+        {
+          "symbol": "MS",
+          "name": "Morgan Stanley",
+          "predictedWinRate": 56,
+          "predictedWin": true,
+          "priceAtPrediction": 168.43
+        },
+        {
+          "symbol": "NKE",
+          "name": "Nike, Inc.",
           "predictedWinRate": 37,
           "predictedWin": false,
-          "priceAtPrediction": 210
+          "priceAtPrediction": 42.69
         },
         {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 42,
-          "predictedWin": false,
-          "priceAtPrediction": 8.96
-        },
-        {
-          "symbol": "HD",
-          "name": "Home Depot, Inc. (The)",
-          "predictedWinRate": 66,
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 62,
           "predictedWin": true,
-          "priceAtPrediction": 318.77
+          "priceAtPrediction": 221.53
         },
         {
-          "symbol": "SNAP",
-          "name": "Snap Inc.",
-          "predictedWinRate": 28,
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 38,
           "predictedWin": false,
-          "priceAtPrediction": 4.8
+          "priceAtPrediction": 253.5
         },
         {
-          "symbol": "COIN",
-          "name": "Coinbase Global, Inc.",
-          "predictedWinRate": 72,
-          "predictedWin": true,
-          "priceAtPrediction": 175.18
-        },
-        {
-          "symbol": "MRK",
-          "name": "Merck & Company, Inc.",
-          "predictedWinRate": 60,
-          "predictedWin": true,
-          "priceAtPrediction": 119.28
-        },
-        {
-          "symbol": "BABA",
-          "name": "Alibaba Group Holding Limited",
-          "predictedWinRate": 37,
+          "symbol": "JNJ",
+          "name": "Johnson & Johnson",
+          "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 119.72
-        },
-        {
-          "symbol": "AMZN",
-          "name": "Amazon.com, Inc.",
-          "predictedWinRate": 67,
-          "predictedWin": true,
-          "priceAtPrediction": 213.77
-        },
-        {
-          "symbol": "RIOT",
-          "name": "Riot Platforms, Inc.",
-          "predictedWinRate": 37,
-          "predictedWin": false,
-          "priceAtPrediction": 14.19
+          "priceAtPrediction": 238.41
         }
       ],
       "results": [
         {
-          "symbol": "BA",
-          "name": "Boeing Company (The)",
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 29,
+          "predictedWin": false,
+          "priceAtPrediction": 141.3,
+          "priceAtClose": 144.9,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 68,
+          "predictedWin": true,
+          "priceAtPrediction": 27.1,
+          "priceAtClose": 27.47,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 27,
+          "predictedWin": false,
+          "priceAtPrediction": 478.08,
+          "priceAtClose": 479.75,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
+          "predictedWinRate": 38,
+          "predictedWin": false,
+          "priceAtPrediction": 305.46,
+          "priceAtClose": 317.32,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 30,
+          "predictedWin": false,
+          "priceAtPrediction": 52.91,
+          "priceAtClose": 58.95,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "MS",
+          "name": "Morgan Stanley",
+          "predictedWinRate": 56,
+          "predictedWin": true,
+          "priceAtPrediction": 168.43,
+          "priceAtClose": 176.02,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "NKE",
+          "name": "Nike, Inc.",
           "predictedWinRate": 37,
           "predictedWin": false,
-          "priceAtPrediction": 210,
-          "priceAtClose": 217.8,
+          "priceAtPrediction": 42.69,
+          "priceAtClose": 43.13,
           "actualWin": true,
           "correct": false
         },
         {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 42,
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 62,
+          "predictedWin": true,
+          "priceAtPrediction": 221.53,
+          "priceAtClose": 231.82,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 38,
           "predictedWin": false,
-          "priceAtPrediction": 8.96,
-          "priceAtClose": 9.5,
+          "priceAtPrediction": 253.5,
+          "priceAtClose": 258.9,
           "actualWin": true,
           "correct": false
         },
         {
-          "symbol": "HD",
-          "name": "Home Depot, Inc. (The)",
-          "predictedWinRate": 66,
-          "predictedWin": true,
-          "priceAtPrediction": 318.77,
-          "priceAtClose": 336.16,
-          "actualWin": true,
-          "correct": true
-        },
-        {
-          "symbol": "SNAP",
-          "name": "Snap Inc.",
-          "predictedWinRate": 28,
+          "symbol": "JNJ",
+          "name": "Johnson & Johnson",
+          "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 4.8,
-          "priceAtClose": 4.73,
-          "actualWin": false,
-          "correct": true
-        },
-        {
-          "symbol": "COIN",
-          "name": "Coinbase Global, Inc.",
-          "predictedWinRate": 72,
-          "predictedWin": true,
-          "priceAtPrediction": 175.18,
-          "priceAtClose": 175.09,
-          "actualWin": false,
-          "correct": false
-        },
-        {
-          "symbol": "MRK",
-          "name": "Merck & Company, Inc.",
-          "predictedWinRate": 60,
-          "predictedWin": true,
-          "priceAtPrediction": 119.28,
-          "priceAtClose": 123.18,
-          "actualWin": true,
-          "correct": true
-        },
-        {
-          "symbol": "BABA",
-          "name": "Alibaba Group Holding Limited",
-          "predictedWinRate": 37,
-          "predictedWin": false,
-          "priceAtPrediction": 119.72,
-          "priceAtClose": 125.32,
-          "actualWin": true,
-          "correct": false
-        },
-        {
-          "symbol": "AMZN",
-          "name": "Amazon.com, Inc.",
-          "predictedWinRate": 67,
-          "predictedWin": true,
-          "priceAtPrediction": 213.77,
-          "priceAtClose": 221.25,
-          "actualWin": true,
-          "correct": true
-        },
-        {
-          "symbol": "RIOT",
-          "name": "Riot Platforms, Inc.",
-          "predictedWinRate": 37,
-          "predictedWin": false,
-          "priceAtPrediction": 14.19,
-          "priceAtClose": 16.11,
+          "priceAtPrediction": 238.41,
+          "priceAtClose": 241.3,
           "actualWin": true,
           "correct": false
         }
       ],
-      "accuracy": 44
+      "accuracy": 30
     },
     {
       "date": "2026-04-08",
       "predictions": [
         {
-          "symbol": "DIS",
-          "name": "Walt Disney Company (The)",
-          "predictedWinRate": 65,
+          "symbol": "BABA",
+          "name": "Alibaba Group Holding Limited",
+          "predictedWinRate": 74,
           "predictedWin": true,
-          "priceAtPrediction": 99.18
+          "priceAtPrediction": 125.32
         },
         {
-          "symbol": "ADBE",
-          "name": "Adobe Inc.",
-          "predictedWinRate": 56,
+          "symbol": "JNJ",
+          "name": "Johnson & Johnson",
+          "predictedWinRate": 68,
           "predictedWin": true,
-          "priceAtPrediction": 239.31
+          "priceAtPrediction": 241.3
         },
         {
-          "symbol": "RIOT",
-          "name": "Riot Platforms, Inc.",
-          "predictedWinRate": 62,
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 53,
           "predictedWin": true,
-          "priceAtPrediction": 16.11
+          "priceAtPrediction": 479.75
         },
         {
-          "symbol": "MRK",
-          "name": "Merck & Company, Inc.",
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 40,
+          "predictedWin": false,
+          "priceAtPrediction": 58.95
+        },
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 67,
+          "predictedWin": true,
+          "priceAtPrediction": 258.9
+        },
+        {
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 66,
+          "predictedWin": true,
+          "priceAtPrediction": 144.9
+        },
+        {
+          "symbol": "MS",
+          "name": "Morgan Stanley",
+          "predictedWinRate": 57,
+          "predictedWin": true,
+          "priceAtPrediction": 176.02
+        },
+        {
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 33,
+          "predictedWin": false,
+          "priceAtPrediction": 231.82
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
           "predictedWinRate": 70,
           "predictedWin": true,
-          "priceAtPrediction": 123.18
+          "priceAtPrediction": 317.32
         },
         {
-          "symbol": "SNAP",
-          "name": "Snap Inc.",
-          "predictedWinRate": 52,
-          "predictedWin": true,
-          "priceAtPrediction": 4.73
-        },
-        {
-          "symbol": "BA",
-          "name": "Boeing Company (The)",
-          "predictedWinRate": 64,
-          "predictedWin": true,
-          "priceAtPrediction": 217.8
-        },
-        {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 51,
-          "predictedWin": true,
-          "priceAtPrediction": 9.5
-        },
-        {
-          "symbol": "HD",
-          "name": "Home Depot, Inc. (The)",
-          "predictedWinRate": 63,
-          "predictedWin": true,
-          "priceAtPrediction": 336.16
-        },
-        {
-          "symbol": "CRM",
-          "name": "Salesforce, Inc.",
-          "predictedWinRate": 26,
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 37,
           "predictedWin": false,
-          "priceAtPrediction": 176.37
+          "priceAtPrediction": 27.47
         }
       ],
       "results": [
         {
-          "symbol": "DIS",
-          "name": "Walt Disney Company (The)",
-          "predictedWinRate": 65,
+          "symbol": "BABA",
+          "name": "Alibaba Group Holding Limited",
+          "predictedWinRate": 74,
           "predictedWin": true,
-          "priceAtPrediction": 99.18,
-          "priceAtClose": 99.79,
+          "priceAtPrediction": 125.32,
+          "priceAtClose": 127.68,
           "actualWin": true,
           "correct": true
         },
         {
-          "symbol": "ADBE",
-          "name": "Adobe Inc.",
-          "predictedWinRate": 56,
+          "symbol": "JNJ",
+          "name": "Johnson & Johnson",
+          "predictedWinRate": 68,
           "predictedWin": true,
-          "priceAtPrediction": 239.31,
-          "priceAtClose": 229.94,
-          "actualWin": false,
+          "priceAtPrediction": 241.3,
+          "priceAtClose": 241.31,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 479.75,
+          "priceAtClose": 485.2,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 40,
+          "predictedWin": false,
+          "priceAtPrediction": 58.95,
+          "priceAtClose": 61.72,
+          "actualWin": true,
           "correct": false
         },
         {
-          "symbol": "RIOT",
-          "name": "Riot Platforms, Inc.",
-          "predictedWinRate": 62,
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 67,
           "predictedWin": true,
-          "priceAtPrediction": 16.11,
-          "priceAtClose": 16.69,
+          "priceAtPrediction": 258.9,
+          "priceAtClose": 260.49,
           "actualWin": true,
           "correct": true
         },
         {
-          "symbol": "MRK",
-          "name": "Merck & Company, Inc.",
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 66,
+          "predictedWin": true,
+          "priceAtPrediction": 144.9,
+          "priceAtClose": 146.66,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "MS",
+          "name": "Morgan Stanley",
+          "predictedWinRate": 57,
+          "predictedWin": true,
+          "priceAtPrediction": 176.02,
+          "priceAtClose": 178.16,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 33,
+          "predictedWin": false,
+          "priceAtPrediction": 231.82,
+          "priceAtClose": 236.64,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
           "predictedWinRate": 70,
           "predictedWin": true,
-          "priceAtPrediction": 123.18,
-          "priceAtClose": 122.68,
-          "actualWin": false,
-          "correct": false
-        },
-        {
-          "symbol": "SNAP",
-          "name": "Snap Inc.",
-          "predictedWinRate": 52,
-          "predictedWin": true,
-          "priceAtPrediction": 4.73,
-          "priceAtClose": 4.95,
+          "priceAtPrediction": 317.32,
+          "priceAtClose": 318.49,
           "actualWin": true,
           "correct": true
         },
         {
-          "symbol": "BA",
-          "name": "Boeing Company (The)",
-          "predictedWinRate": 64,
-          "predictedWin": true,
-          "priceAtPrediction": 217.8,
-          "priceAtClose": 220.06,
-          "actualWin": true,
-          "correct": true
-        },
-        {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 51,
-          "predictedWin": true,
-          "priceAtPrediction": 9.5,
-          "priceAtClose": 9.67,
-          "actualWin": true,
-          "correct": true
-        },
-        {
-          "symbol": "HD",
-          "name": "Home Depot, Inc. (The)",
-          "predictedWinRate": 63,
-          "predictedWin": true,
-          "priceAtPrediction": 336.16,
-          "priceAtClose": 339.58,
-          "actualWin": true,
-          "correct": true
-        },
-        {
-          "symbol": "CRM",
-          "name": "Salesforce, Inc.",
-          "predictedWinRate": 26,
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 37,
           "predictedWin": false,
-          "priceAtPrediction": 176.37,
-          "priceAtClose": 170.85,
+          "priceAtPrediction": 27.47,
+          "priceAtClose": 27.22,
           "actualWin": false,
           "correct": true
         }
       ],
-      "accuracy": 78
+      "accuracy": 80
     },
     {
       "date": "2026-04-09",
       "predictions": [
         {
-          "symbol": "BA",
-          "name": "Boeing Company (The)",
-          "predictedWinRate": 31,
-          "predictedWin": false,
-          "priceAtPrediction": 220.06
-        },
-        {
-          "symbol": "HD",
-          "name": "Home Depot, Inc. (The)",
-          "predictedWinRate": 47,
-          "predictedWin": false,
-          "priceAtPrediction": 339.58
-        },
-        {
-          "symbol": "SNAP",
-          "name": "Snap Inc.",
-          "predictedWinRate": 47,
-          "predictedWin": false,
-          "priceAtPrediction": 4.95
-        },
-        {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 55,
-          "predictedWin": true,
-          "priceAtPrediction": 9.67
-        },
-        {
-          "symbol": "WMT",
-          "name": "Walmart Inc.",
-          "predictedWinRate": 72,
-          "predictedWin": true,
-          "priceAtPrediction": 129.13
-        },
-        {
-          "symbol": "MRK",
-          "name": "Merck & Company, Inc.",
-          "predictedWinRate": 34,
-          "predictedWin": false,
-          "priceAtPrediction": 122.68
-        },
-        {
           "symbol": "BABA",
           "name": "Alibaba Group Holding Limited",
-          "predictedWinRate": 73,
-          "predictedWin": true,
+          "predictedWinRate": 40,
+          "predictedWin": false,
           "priceAtPrediction": 127.68
         },
         {
-          "symbol": "CRM",
-          "name": "Salesforce, Inc.",
-          "predictedWinRate": 54,
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 50,
           "predictedWin": true,
-          "priceAtPrediction": 170.85
+          "priceAtPrediction": 27.22
         },
         {
-          "symbol": "ORCL",
-          "name": "Oracle Corporation",
-          "predictedWinRate": 31,
-          "predictedWin": false,
-          "priceAtPrediction": 137.86
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 65,
+          "predictedWin": true,
+          "priceAtPrediction": 260.49
         },
         {
-          "symbol": "AMZN",
-          "name": "Amazon.com, Inc.",
-          "predictedWinRate": 38,
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 63,
+          "predictedWin": true,
+          "priceAtPrediction": 345.62
+        },
+        {
+          "symbol": "META",
+          "name": "Meta Platforms, Inc.",
+          "predictedWinRate": 27,
           "predictedWin": false,
-          "priceAtPrediction": 233.65
+          "priceAtPrediction": 628.39
+        },
+        {
+          "symbol": "ADBE",
+          "name": "Adobe Inc.",
+          "predictedWinRate": 70,
+          "predictedWin": true,
+          "priceAtPrediction": 229.94
+        },
+        {
+          "symbol": "JNJ",
+          "name": "Johnson & Johnson",
+          "predictedWinRate": 27,
+          "predictedWin": false,
+          "priceAtPrediction": 241.31
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 41,
+          "predictedWin": false,
+          "priceAtPrediction": 485.2
+        },
+        {
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 42,
+          "predictedWin": false,
+          "priceAtPrediction": 236.64
+        },
+        {
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
+          "predictedWinRate": 72,
+          "predictedWin": true,
+          "priceAtPrediction": 146.66
         }
       ],
       "results": [
         {
-          "symbol": "BA",
-          "name": "Boeing Company (The)",
-          "predictedWinRate": 31,
+          "symbol": "BABA",
+          "name": "Alibaba Group Holding Limited",
+          "predictedWinRate": 40,
           "predictedWin": false,
-          "priceAtPrediction": 220.06,
-          "priceAtClose": 217.63,
+          "priceAtPrediction": 127.68,
+          "priceAtClose": 127.33,
           "actualWin": false,
           "correct": true
         },
         {
-          "symbol": "HD",
-          "name": "Home Depot, Inc. (The)",
-          "predictedWinRate": 47,
-          "predictedWin": false,
-          "priceAtPrediction": 339.58,
-          "priceAtClose": 337.34,
-          "actualWin": false,
-          "correct": true
-        },
-        {
-          "symbol": "SNAP",
-          "name": "Snap Inc.",
-          "predictedWinRate": 47,
-          "predictedWin": false,
-          "priceAtPrediction": 4.95,
-          "priceAtClose": 4.82,
-          "actualWin": false,
-          "correct": true
-        },
-        {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 55,
+          "symbol": "PFE",
+          "name": "Pfizer, Inc.",
+          "predictedWinRate": 50,
           "predictedWin": true,
-          "priceAtPrediction": 9.67,
-          "priceAtClose": 9.54,
+          "priceAtPrediction": 27.22,
+          "priceAtClose": 26.92,
           "actualWin": false,
           "correct": false
         },
         {
-          "symbol": "WMT",
-          "name": "Walmart Inc.",
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 65,
+          "predictedWin": true,
+          "priceAtPrediction": 260.49,
+          "priceAtClose": 260.48,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 63,
+          "predictedWin": true,
+          "priceAtPrediction": 345.62,
+          "priceAtClose": 348.95,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "META",
+          "name": "Meta Platforms, Inc.",
+          "predictedWinRate": 27,
+          "predictedWin": false,
+          "priceAtPrediction": 628.39,
+          "priceAtClose": 629.86,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "ADBE",
+          "name": "Adobe Inc.",
+          "predictedWinRate": 70,
+          "predictedWin": true,
+          "priceAtPrediction": 229.94,
+          "priceAtClose": 225.35,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "JNJ",
+          "name": "Johnson & Johnson",
+          "predictedWinRate": 27,
+          "predictedWin": false,
+          "priceAtPrediction": 241.31,
+          "priceAtClose": 238.46,
+          "actualWin": false,
+          "correct": true
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 41,
+          "predictedWin": false,
+          "priceAtPrediction": 485.2,
+          "priceAtClose": 479.9,
+          "actualWin": false,
+          "correct": true
+        },
+        {
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 42,
+          "predictedWin": false,
+          "priceAtPrediction": 236.64,
+          "priceAtClose": 245.04,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "PG",
+          "name": "Procter & Gamble Company (The)",
           "predictedWinRate": 72,
           "predictedWin": true,
-          "priceAtPrediction": 129.13,
-          "priceAtClose": 126.77,
+          "priceAtPrediction": 146.66,
+          "priceAtClose": 145.16,
           "actualWin": false,
+          "correct": false
+        }
+      ],
+      "accuracy": 40
+    },
+    {
+      "date": "2026-04-10",
+      "predictions": [
+        {
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 348.95
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 317.24
+        },
+        {
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 28,
+          "predictedWin": false,
+          "priceAtPrediction": 62.38
+        },
+        {
+          "symbol": "MS",
+          "name": "Morgan Stanley",
+          "predictedWinRate": 30,
+          "predictedWin": false,
+          "priceAtPrediction": 177.64
+        },
+        {
+          "symbol": "META",
+          "name": "Meta Platforms, Inc.",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 629.86
+        },
+        {
+          "symbol": "NKE",
+          "name": "Nike, Inc.",
+          "predictedWinRate": 71,
+          "predictedWin": true,
+          "priceAtPrediction": 42.62
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 479.9
+        },
+        {
+          "symbol": "BABA",
+          "name": "Alibaba Group Holding Limited",
+          "predictedWinRate": 30,
+          "predictedWin": false,
+          "priceAtPrediction": 127.33
+        },
+        {
+          "symbol": "AMZN",
+          "name": "Amazon.com, Inc.",
+          "predictedWinRate": 31,
+          "predictedWin": false,
+          "priceAtPrediction": 238.38
+        },
+        {
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 73,
+          "predictedWin": true,
+          "priceAtPrediction": 245.04
+        }
+      ],
+      "results": [
+        {
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 348.95,
+          "priceAtClose": 352.42,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet Inc.",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 317.24,
+          "priceAtClose": 321.31,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 28,
+          "predictedWin": false,
+          "priceAtPrediction": 62.38,
+          "priceAtClose": 65.18,
+          "actualWin": true,
           "correct": false
         },
         {
-          "symbol": "MRK",
-          "name": "Merck & Company, Inc.",
-          "predictedWinRate": 34,
+          "symbol": "MS",
+          "name": "Morgan Stanley",
+          "predictedWinRate": 30,
           "predictedWin": false,
-          "priceAtPrediction": 122.68,
-          "priceAtClose": 121.42,
-          "actualWin": false,
+          "priceAtPrediction": 177.64,
+          "priceAtClose": 181.14,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "META",
+          "name": "Meta Platforms, Inc.",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 629.86,
+          "priceAtClose": 634.53,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "NKE",
+          "name": "Nike, Inc.",
+          "predictedWinRate": 71,
+          "predictedWin": true,
+          "priceAtPrediction": 42.62,
+          "priceAtClose": 42.91,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "BRK-B",
+          "name": "Berkshire Hathaway Inc. New",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 479.9,
+          "priceAtClose": 480.19,
+          "actualWin": true,
           "correct": true
         },
         {
           "symbol": "BABA",
           "name": "Alibaba Group Holding Limited",
-          "predictedWinRate": 73,
-          "predictedWin": true,
-          "priceAtPrediction": 127.68,
-          "priceAtClose": 127.33,
-          "actualWin": false,
-          "correct": false
-        },
-        {
-          "symbol": "CRM",
-          "name": "Salesforce, Inc.",
-          "predictedWinRate": 54,
-          "predictedWin": true,
-          "priceAtPrediction": 170.85,
-          "priceAtClose": 164.96,
-          "actualWin": false,
-          "correct": false
-        },
-        {
-          "symbol": "ORCL",
-          "name": "Oracle Corporation",
-          "predictedWinRate": 31,
+          "predictedWinRate": 30,
           "predictedWin": false,
-          "priceAtPrediction": 137.86,
-          "priceAtClose": 138.09,
+          "priceAtPrediction": 127.33,
+          "priceAtClose": 128.01,
           "actualWin": true,
           "correct": false
         },
         {
           "symbol": "AMZN",
           "name": "Amazon.com, Inc.",
-          "predictedWinRate": 38,
+          "predictedWinRate": 31,
           "predictedWin": false,
-          "priceAtPrediction": 233.65,
-          "priceAtClose": 238.38,
+          "priceAtPrediction": 238.38,
+          "priceAtClose": 239.89,
           "actualWin": true,
           "correct": false
+        },
+        {
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "predictedWinRate": 73,
+          "predictedWin": true,
+          "priceAtPrediction": 245.04,
+          "priceAtClose": 246.83,
+          "actualWin": true,
+          "correct": true
         }
       ],
-      "accuracy": 40
+      "accuracy": 60
     },
     {
       "date": "2026-04-13",
