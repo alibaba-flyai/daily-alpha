@@ -164,10 +164,22 @@ export default function Home() {
       {/* Header */}
       <header className="border-b border-zinc-800/50 sticky top-0 bg-black/90 backdrop-blur-lg z-10">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          <a href="/" className="text-lg font-bold tracking-tight hover:opacity-80 transition-opacity">
-            <span className="text-zinc-500 font-normal">The</span>{" "}
-            Daily <span className="text-emerald-400">Alpha</span>
-          </a>
+          <div className="flex items-center gap-2">
+            <a href="/" className="text-lg font-bold tracking-tight hover:opacity-80 transition-opacity">
+              <span className="text-zinc-500 font-normal">The</span>{" "}
+              Daily <span className="text-emerald-400">Alpha</span>
+            </a>
+            <a
+              href="/"
+              className="flex items-center justify-center w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-emerald-700 hover:bg-emerald-950/30 transition-all"
+              title="Trending & Track Record"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                <polyline points="16 7 22 7 22 13" />
+              </svg>
+            </a>
+          </div>
           {loading && (
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
