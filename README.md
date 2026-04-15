@@ -120,13 +120,89 @@ Most investment tools give you data. Dashboards. Charts. Numbers.
 
 It's not a black box. The formula is visible. The sources are linked. The sentiment reasoning is explained. And every prediction is publicly tracked -- no cherry-picking, no hindsight bias.
 
-The system evolves:
-- **Query expansion** learns to search broader as it discovers what Polymarket, news, and Twitter actually cover
-- **Sentiment analysis** uses LLM understanding, not keyword matching -- "FSD approved in Netherlands" is bullish even though no keyword says so
-- **Formula weights** are dynamically assigned per query -- Polymarket matters more for prediction-market-native events, price momentum matters more for stocks
-- **Performance tracking** creates accountability -- if accuracy drops below 50%, something needs to change
+The system evolves -- not with heuristics, but with principled optimization.
 
-This is day one. The track record starts now.
+---
+
+## Self-Improving via Online Optimization
+
+Most AI systems are static after deployment. The Daily Alpha gets better every day through two mathematically grounded optimization algorithms, plus qualitative LLM feedback.
+
+### 1. Multiplicative Weights Update (Hedge Algorithm)
+
+Each data source (Polymarket, Yahoo Finance, News, Twitter) has a weight that determines how much it influences the final score. These weights are **learned from actual prediction accuracy**, not hardcoded.
+
+```
+After each daily evaluation:
+  For each source i:
+    reward_i = (source accuracy - 0.5) * 2     # map [0,1] -> [-1,+1]
+    w_i = w_i * exp(eta * reward_i)             # multiplicative update
+  Normalize: w_i = w_i / sum(w)                 # weights sum to 1
+  Decay: eta = 0.3 / sqrt(epoch)               # learning rate shrinks
+```
+
+**Why this works:** The Hedge algorithm is a foundational result in online learning theory. It guarantees a regret bound of O(sqrt(T * log N)) -- meaning after T days, our cumulative loss is within sqrt(T * log N) of the best possible fixed-weight strategy we could have chosen in hindsight. This is provably optimal.
+
+**What you see:** On the dashboard, source weights shift over time. If News Sentiment has been the most accurate source for equities, its weight grows from 25% toward 40%. If Twitter sentiment is noisy, its weight shrinks toward 5%. The system converges toward the empirically best weighting.
+
+### 2. Online Gradient Descent on Confidence Threshold
+
+The system also learns the optimal **decision boundary** -- above what win rate should we predict "win"?
+
+```
+For each prediction near the threshold boundary:
+  If false positive (predicted win, actual lose):
+    gradient += proximity_weight      # push threshold up
+  If false negative (predicted lose, actual win):
+    gradient -= proximity_weight      # push threshold down
+
+SGD with momentum:
+  momentum = 0.7 * momentum + 0.3 * gradient
+  threshold = threshold - alpha * momentum
+  alpha = 2.0 / sqrt(epoch)          # decaying learning rate
+  threshold = clamp(threshold, 30, 70)  # stability bounds
+```
+
+**Why this works:** This is standard SGD with momentum applied to a binary classification boundary. The momentum term (beta=0.7) smooths noisy daily gradients. The decaying learning rate ensures convergence -- early days make large adjustments, later days make fine-tuning tweaks. The clamp prevents degenerate solutions.
+
+### 3. LLM Postmortem Loop (Qualitative)
+
+After each daily evaluation, Gemini analyzes the results:
+
+```
+Day N closes -> Evaluate predictions -> Postmortem
+                                           |
+  "INTC (53% WIN) went down -- moderate-confidence
+   tech calls failed. High-conviction >= 57% calls
+   were 100% accurate."
+                                           |
+                                    Synthesize learnings
+                                           |
+  "Rule: Only trust WIN signals >= 57%.
+   Rule: Momentum signals work for large-cap tech
+   but fail for hardware stocks."
+                                           |
+                                    Inject into next prediction
+```
+
+The postmortem provides **qualitative** insights that complement the quantitative Hedge/GD updates. Together, they form a complete feedback loop.
+
+### Convergence Visualization
+
+The optimization dashboard shows:
+- **Weight evolution chart** -- colored lines per source diverging from the 25% uniform baseline
+- **Threshold + accuracy trend** -- the decision boundary shifting as it learns
+- **Learning rate decay** -- progress bar showing convergence (eta shrinking toward zero)
+- **Latest insight** -- the most recent postmortem analysis
+
+### Why Not Just Retrain?
+
+Traditional ML would retrain a model on historical data. But we have:
+- Very few data points (1 per day)
+- Non-stationary distribution (markets change)
+- No ground truth for source weights (only composite outcomes)
+
+Online learning algorithms like Hedge are designed exactly for this: **learn incrementally, adapt to distribution shift, and guarantee performance bounds with minimal data**. They're the right tool for a self-improving daily predictor.
 
 ---
 
@@ -136,8 +212,9 @@ This is day one. The track record starts now.
 |-------|--------|-------------|
 | `/api/predict` | POST | Stream-analyze any asset (SSE) |
 | `/api/trending` | GET | Today's most active, gainers, losers |
-| `/api/performance` | GET | Prediction track record + auto-evaluate |
+| `/api/performance` | GET/POST | Prediction track record + generate today's picks |
 | `/api/intraday` | GET | Live intraday prices for multiple tickers |
+| `/api/cron` | GET | Daily cron: evaluate, optimize, generate (Mon-Fri 4:05 PM ET) |
 
 ---
 
@@ -153,19 +230,23 @@ app/
   page.tsx         Main page with two-column layout
 
 components/
-  AgentPanel       Rich per-source visualization (markets, headlines, tweets, prices)
-  SpeedMeter       Animated semicircular gauge with live needle
-  Trajectory       Streaming execution timeline with interim results
-  SearchBar        Controlled search input
-  TrendingSection  Homepage trending dashboard
-  PerformancePanel Track record with chart, tabs, market clock
+  AgentPanel          Rich per-source visualization (markets, headlines, tweets, prices)
+  SpeedMeter          Animated semicircular gauge with live needle
+  Trajectory          Streaming execution timeline with interim results
+  SearchBar           Controlled search input
+  TrendingSection     Homepage trending dashboard
+  PerformancePanel    Track record with chart, tabs, market clock
+  OptimizationPanel   Weight evolution, threshold, convergence visualization
+  TypewriterText      Streaming character-by-character text reveal
 
 lib/
-  scorer.ts        Gemini-powered win-rate synthesis
-  sentiment.ts     Gemini batch sentiment classifier
-  query-expander.ts LLM query expansion (tickers, people, categories)
-  performance.ts   Prediction storage and evaluation
-  types.ts         Shared TypeScript types
+  scorer.ts           Gemini-powered win-rate synthesis (with optimization context injection)
+  sentiment.ts        Gemini batch sentiment classifier
+  query-expander.ts   LLM query expansion (tickers, people, categories)
+  performance.ts      Prediction storage, evaluation, GitHub persistence
+  optimizer.ts        Hedge algorithm + online GD (principled self-improvement)
+  postmortem.ts       Daily LLM analysis of prediction accuracy
+  types.ts            Shared TypeScript types
   sources/
     polymarket.ts  Polymarket public-search with relevance filtering
     market.ts      Yahoo Finance v8 chart with related assets
