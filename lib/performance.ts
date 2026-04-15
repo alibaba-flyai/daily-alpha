@@ -9,12 +9,19 @@ const DATA_FILE = IS_VERCEL
   ? path.join("/tmp", "performance.json")
   : path.join(process.cwd(), "data", "performance.json");
 
+export interface SourceScore {
+  source: string;
+  score: number; // 0-100
+  bullish: boolean; // score > 50
+}
+
 export interface DailyPrediction {
   symbol: string;
   name: string;
   predictedWinRate: number; // 0-100
   predictedWin: boolean; // winRate > 50
   priceAtPrediction: number;
+  sourceScores?: SourceScore[]; // per-source signals for Hedge optimization
 }
 
 export interface DailyResult extends DailyPrediction {

@@ -56,9 +56,15 @@ async function fetchCurrentPrice(symbol: string): Promise<number | null> {
   }
 }
 
+interface BatchPrediction {
+  symbol: string;
+  winRate: number;
+  sourceScores: { source: string; score: number }[];
+}
+
 async function predictBatch(
   assets: { symbol: string; name: string; price: number }[]
-): Promise<{ symbol: string; winRate: number }[]> {
+): Promise<BatchPrediction[]> {
   try {
     const model = getGenAI().getGenerativeModel({
       model: "gemini-2.5-flash",
@@ -68,16 +74,32 @@ async function predictBatch(
     const assetList = assets.map((a) => `- ${a.symbol} (${a.name}) at $${a.price.toFixed(2)}`).join("\n");
     const prompt = `You are a quantitative analyst. For each asset, predict the probability (0-100) that tomorrow's closing price will be higher than today's.
 
+For each asset, also estimate what each data source would signal (0-100):
+- Polymarket: based on prediction market sentiment for this asset/sector
+- Market Data: based on recent price momentum and trend
+- News Sentiment: based on recent news tone for this asset
+- X / Twitter: based on social media sentiment
+
 Assets:
 ${assetList}
 
-Return JSON array: [{"symbol": "NVDA", "winRate": 55}]`;
+Return JSON array:
+[{"symbol": "NVDA", "winRate": 55, "sourceScores": [{"source": "Polymarket", "score": 45}, {"source": "Market Data", "score": 62}, {"source": "News Sentiment", "score": 58}, {"source": "X / Twitter", "score": 50}]}]`;
 
     const response = await model.generateContent(prompt);
     const text = response.response.text().trim().replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "");
     return JSON.parse(text);
   } catch {
-    return assets.map((a) => ({ symbol: a.symbol, winRate: 50 }));
+    return assets.map((a) => ({
+      symbol: a.symbol,
+      winRate: 50,
+      sourceScores: [
+        { source: "Polymarket", score: 50 },
+        { source: "Market Data", score: 50 },
+        { source: "News Sentiment", score: 50 },
+        { source: "X / Twitter", score: 50 },
+      ],
+    }));
   }
 }
 
@@ -94,6 +116,11 @@ async function generatePredictions(): Promise<DailyPrediction[]> {
       symbol: asset.symbol, name: asset.name,
       predictedWinRate: winRate, predictedWin: winRate > 50,
       priceAtPrediction: asset.price,
+      sourceScores: (pred?.sourceScores || []).map((s) => ({
+        source: s.source,
+        score: s.score,
+        bullish: s.score > 50,
+      })),
     };
   });
 }
@@ -186,11 +213,30 @@ export async function GET(req: NextRequest) {
   const latestEvaluated = newlyEvaluated[newlyEvaluated.length - 1];
   if (latestEvaluated?.results && latestEvaluated.date !== perf.optimizationState?.lastOptimizedDate) {
     const results = latestEvaluated.results;
+
+    // Compute per-source accuracy: for each source, how often was its bullish/bearish call correct?
+    const sourceCorrect: Record<string, number> = {};
+    const sourceTotal: Record<string, number> = {};
+    for (const r of results) {
+      if (!r.sourceScores) continue;
+      for (const ss of r.sourceScores) {
+        sourceTotal[ss.source] = (sourceTotal[ss.source] || 0) + 1;
+        if (ss.bullish === r.actualWin) {
+          sourceCorrect[ss.source] = (sourceCorrect[ss.source] || 0) + 1;
+        }
+      }
+    }
+    // Convert to 0-100 accuracy scores
+    const sourceAccuracyScores: Record<string, number> = {};
+    for (const [source, total] of Object.entries(sourceTotal)) {
+      sourceAccuracyScores[source] = Math.round(((sourceCorrect[source] || 0) / total) * 100);
+    }
+
     const { state: updatedOpt, report } = optimizationStep(optState, {
       date: latestEvaluated.date,
       winRates: results.map((r) => r.predictedWinRate),
       outcomes: results.map((r) => r.actualWin),
-      sourceScores: {},
+      sourceScores: sourceAccuracyScores,
       predictedWins: results.map((r) => r.predictedWin),
       accuracy: latestEvaluated.accuracy || 50,
     });

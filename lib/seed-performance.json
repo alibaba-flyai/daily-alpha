@@ -160,7 +160,7 @@
         }
       ],
       "accuracy": 56,
-      "postmortem": "The model accurately predicted UP movements for all \"WIN\" calls, notably WMT (60%) and DIS (61%), indicating our positive sentiment signal is robust. However, our most confident \"LOSE\" predictions were consistently wrong, with BA (30% WIN) and AMZN (31% WIN) both rallying significantly despite strong \"LOSE\" calls. For tomorrow, we will invert any \"LOSE\" prediction where the WIN probability is below 35%, treating them as potential \"WIN\" opportunities instead."
+      "postmortem": "The model's WIN predictions were highly reliable, with all three (WMT 60%, DIS 61%, RIOT 56%) correctly identifying upward movements. Conversely, the \"LOSE\" signal was misleading, particularly for high-conviction calls like BA (predicted LOSE 30%, actual UP 4.17%) and AMZN (predicted LOSE 31%, actual UP 1.10%), where the market moved significantly against our prediction. For tomorrow, we will implement a stricter filter for LOSE predictions, specifically ignoring any \"LOSE\" signals where the predicted WIN probability is below 35%, as these appear to be unreliable."
     },
     {
       "date": "2026-04-01",
@@ -339,7 +339,7 @@
         }
       ],
       "accuracy": 30,
-      "postmortem": "The model correctly identified upward movements for CSCO (70% WIN), GS (52% WIN), and BA (64% WIN), suggesting some validity in its positive momentum signal. However, the \"WIN\" signal was largely misleading, especially for high-confidence calls like JNJ (70% WIN, actual DOWN) and META (73% WIN, actual DOWN), while \"LOSE\" predictions were 100% wrong. For tomorrow, we must re-evaluate the \"LOSE\" signal and significantly increase the confidence threshold for \"WIN\" predictions, potentially only considering those above 70%."
+      "postmortem": "The model's \"WIN\" predictions occasionally captured modest positive movements, as seen with CSCO (70% WIN, 1.40% UP), GS (52% WIN, 0.33% UP), and BA (64% WIN, 0.43% UP). However, the most pervasive error was a consistent inverse relationship: \"predicted LOSE\" calls (PLTR 46%, MA 40%) went up, while most \"predicted WIN\" calls, especially high-confidence ones like JNJ (70%) and META (73%), actually went down significantly.\n\nFor tomorrow, we must immediately **invert all predictions**, treating \"WIN\" signals as \"LOSE\" and \"LOSE\" signals as \"WIN\", to capitalize on this strong observed inverse correlation across the board."
     },
     {
       "date": "2026-04-02",
@@ -501,7 +501,7 @@
         }
       ],
       "accuracy": 78,
-      "postmortem": "The model demonstrated exceptional accuracy in predicting downward movements, correctly identifying all three \"LOSE\" calls for PLTR (47%), META (33%), and NIO (35%). The key mistake was the overconfidence in the \"WIN\" prediction for JNJ (63%), which actually saw a significant -0.85% decline, indicating that mid-range conviction for upward moves can be misleading. For tomorrow, we will prioritize acting on \"LOSE\" predictions, given their 100% accuracy, and raise the confidence threshold for \"WIN\" predictions to above 70% to mitigate errors like JNJ's 63% miss."
+      "postmortem": "The model accurately predicted \"LOSE\" outcomes when WIN probabilities were low, as seen with PLTR (47%), META (33%), and NIO (35%) all moving down. However, the key mistake was misjudging mid-range probabilities, leading to false positives like JNJ (63% predicted WIN, actual DOWN) and MA (46% predicted WIN, actual UP). For tomorrow, we will increase the minimum WIN probability threshold for making a \"WIN\" prediction to 65% to improve signal reliability."
     },
     {
       "date": "2026-04-06",
@@ -680,7 +680,7 @@
         }
       ],
       "accuracy": 50,
-      "postmortem": "The model successfully identified significant directional moves, correctly predicting AAPL's -2.07% decline and strong upward momentum for SNAP (+1.91%) and PLTR (+1.45%). The primary error was a systematic overestimation of positive momentum, with high-conviction \"WIN\" predictions for stocks like MRK (72%) and MA (60%) failing significantly, as they actually declined by -1.30% and -0.64% respectively. For tomorrow, we will apply a more stringent downside risk filter to all \"WIN\" predictions, especially those above 60% probability, to temper this observed optimistic bias."
+      "postmortem": "The model successfully identified strong directional moves in volatile tech names, correctly predicting significant upside for SNAP (+1.91%) and PLTR (+1.45%), and downside for AAPL (-2.07%). However, a clear positive bias led to multiple high-confidence \"WIN\" predictions failing, most notably for MRK (72% confidence, actual -1.30%) and NIO (61% confidence, actual -1.60%), which both experienced significant declines. For tomorrow, we must adjust by incorporating a short-term negative momentum filter to override \"WIN\" signals for stocks exhibiting recent weakness, especially those with high confidence but conflicting market sentiment."
     },
     {
       "date": "2026-04-07",
@@ -842,7 +842,7 @@
         }
       ],
       "accuracy": 56,
-      "postmortem": "Here's a review of yesterday's predictions:\n\n1.  **The key pattern you got RIGHT:**\n    The model effectively identified negative movements for stocks predicted to \"LOSE\" with probabilities around 47% (ADBE, PLTR) and 37% (SNAP). Furthermore, high-conviction \"WIN\" predictions above 60% proved reliable, correctly identifying positive days for GS (67%) and JNJ (61%).\n\n2.  **The key mistake:**\n    The most significant error was consistently underestimating strong positive momentum for stocks predicted to \"LOSE\" with low probabilities (33-41%). META (41% LOSE) surged 6.50%, NIO (37% LOSE) gained 3.91%, and AAPL (33% LOSE) rose 2.13%, indicating a blind spot for positive reversals.\n\n3.  **One specific adjustment for tomorrow:**\n    For tomorrow, we must implement a secondary momentum or sentiment filter for any stock predicted to \"LOSE\" with probabilities between 30-45%. This aims to catch potential positive reversals, like those seen in META and NIO, preventing reliance solely on low-conviction \"LOSE\" signals when other indicators might suggest an upward trend."
+      "postmortem": "Here's the review of yesterday's predictions:\n\n1.  **Key pattern RIGHT:** Our model accurately identified strong 'LOSE' candidates, with predictions like PLTR (47% WIN probability) and SNAP (37% WIN probability) correctly resulting in significant downturns of -6.20% and -1.46% respectively. Similarly, high-conviction 'WIN' predictions for GS (67% WIN) and JNJ (61% WIN) correctly saw gains of 4.81% and 1.21%, demonstrating reliability at conviction extremes.\n\n2.  **Key mistake:** The most significant error pattern was predicting 'LOSE' with low conviction (33-41% WIN probability) for stocks that subsequently rallied strongly. For instance, META (41% predicted LOSE) surged 6.50% and AAPL (33% predicted LOSE) rose 2.13%, indicating our 'LOSE' signal was misleading for these upward momentum plays.\n\n3.  **One specific adjustment for tomorrow:** For tomorrow, we will specifically re-evaluate any 'LOSE' prediction where the WIN probability is between 30% and 45%. We will cross-reference these tickers, such as those previously misidentified like META (41% WIN) and AAPL (33% WIN), with real-time news sentiment and short-term volume indicators to identify potential hidden upside momentum."
     },
     {
       "date": "2026-04-08",
@@ -1004,7 +1004,7 @@
         }
       ],
       "accuracy": 67,
-      "postmortem": "Our model demonstrated strong accuracy for low-probability \"LOSE\" predictions, correctly identifying down moves for MRK (40%), MA (30%), CSCO (29%), and COIN (30%). However, the key mistake was with moderate \"WIN\" probabilities, as NIO (55% WIN) and GS (58% WIN) both incorrectly predicted gains but actually declined. For tomorrow, we must adjust the weighting of features contributing to \"WIN\" signals in the 50-60% range, particularly for volatile stocks like NIO."
+      "postmortem": "Our \"LOSE\" signal below 40% probability proved highly accurate, correctly predicting downturns for MA (30%), CSCO (29%), and COIN (30%). The key mistake was the unreliability of our \"WIN\" signal in the 55-58% range, leading to significant misses like NIO (55% WIN, actual -4.86% DOWN) and GS (58% WIN, actual -0.22% DOWN). For tomorrow, we should increase our confidence threshold for \"WIN\" predictions, only acting on those above 60% probability."
     },
     {
       "date": "2026-04-09",
@@ -1183,7 +1183,7 @@
         }
       ],
       "accuracy": 50,
-      "postmortem": "The model accurately identified \"LOSE\" outcomes for BRK-B (34% WIN), SNAP (48% WIN), and ADBE (36% WIN), indicating strong performance in identifying downward trends when \"WIN\" probability is low. However, the key mistake was an overestimation of positive momentum, as seen with \"WIN\" predictions for AAPL (73%), MA (65%), and MRK (66%) which all actually went down. For tomorrow, we will apply a bearish bias to any \"WIN\" prediction below 74%, re-evaluating them as potential \"LOSE\" outcomes to mitigate this overconfidence."
+      "postmortem": "The model's \"LOSE\" signal was highly effective, correctly identifying all three downward movements for BRK-B (34%), SNAP (48%), and ADBE (36%). Conversely, the key mistake was the consistent failure of \"WIN\" predictions, as all five incorrect forecasts (e.g., AAPL 73%, MA 65%) predicted an UP move that actually resulted in a DOWN move, indicating an overly optimistic \"WIN\" signal. For tomorrow, we will apply a bearish adjustment: any \"WIN\" prediction between 50-70% confidence, like MA (65%) and MRK (66%), will be re-evaluated with a stronger bearish filter, potentially flipping it to \"LOSE.\""
     },
     {
       "date": "2026-04-10",
@@ -1345,7 +1345,7 @@
         }
       ],
       "accuracy": 44,
-      "postmortem": "The model accurately identified strong upward momentum for tech/growth stocks, correctly predicting \"WIN\" for ADBE (+6.55%), COIN (+3.98%), and MA (+1.99%). However, a key mistake was its low-confidence \"LOSE\" predictions for high-beta tech, significantly missing SNAP's +6.85% surge (predicted LOSE 36%) and META's +0.74% gain (predicted LOSE 40%). For tomorrow, any \"LOSE\" prediction with confidence below 40% for high-beta tech stocks should be re-evaluated as a potential \"WIN\" or flagged for significant upside volatility."
+      "postmortem": "The model effectively identified strong upward momentum for \"WIN\" predictions, particularly for MA (71% WIN, actual UP 1.99%) and COIN (59% WIN, actual UP 3.98%). However, the \"LOSE\" signal was particularly misleading for low-conviction calls, completely missing strong positive reversals such as SNAP (predicted LOSE 36%, actual UP 6.85%). For tomorrow, we must re-evaluate any \"LOSE\" predictions with confidence below 45% by incorporating a short-term positive momentum filter to avoid missing similar strong reversals."
     },
     {
       "date": "2026-04-13",
@@ -1524,7 +1524,7 @@
         }
       ],
       "accuracy": 70,
-      "postmortem": "The model effectively identified winning trades, with all six \"predicted WIN\" calls (e.g., MARA +8.60%, IREN +9.54%) correctly predicting upward movement. The key mistake was the \"predicted LOSE\" signal, especially for probabilities between 45-50%, as INTC (+4.49%), NOK (+9.62%), and SNAP (+6.85%) all moved significantly up despite these calls. For tomorrow, we will flag any \"predicted LOSE\" with a probability between 40-50% for re-evaluation, as this range appears to be a contrarian indicator for significant upward moves."
+      "postmortem": "The model effectively identified strong upward momentum for predicted WINs, with stocks like MARA (+8.60%) and IREN (+9.54%) confirming high conviction positive signals. However, the key mistake was the consistent misclassification of \"LOSE\" predictions, particularly for INTC (50%), NOK (48%), and SNAP (45%), which all saw significant positive gains (e.g., NOK +9.62%, INTC +4.49%) despite being flagged for potential declines. For tomorrow, we must adjust our interpretation of \"LOSE\" predictions with probabilities between 40-50%, as they currently act as a strong inverse signal, suggesting a potential upward movement rather than a decline."
     },
     {
       "date": "2026-04-14",
@@ -1703,212 +1703,652 @@
         }
       ],
       "accuracy": 70,
-      "postmortem": "Our model accurately identified strong \"WIN\" signals, with all predictions at 58% or higher (TSLA, AMZN, CRWV, ORCL) correctly predicting upward movement and delivering significant gains, such as CRWV's +6.28%. The primary weakness lies in low-conviction \"WIN\" predictions, specifically those in the 53-55% range, which proved misleading for HPQ (53% WIN, actual -1.25%) and HOLX (55% WIN, actual 0.00%). For tomorrow, we should raise the minimum conviction threshold for a \"WIN\" signal to 56%, effectively treating any \"WIN\" prediction below this as a \"HOLD\" or \"LOSE\" to avoid similar misfires."
+      "postmortem": "Our high-conviction WIN predictions proved highly effective, with CRWV (65% WIN, +6.28%), AMZN (60% WIN, +3.81%), and ORCL (59% WIN, +4.74%) all delivering strong positive returns. The key mistake was with low-to-moderate conviction WIN calls, specifically HPQ (53% WIN, actual -1.25%) and HOLX (55% WIN, actual 0.00%), which failed to materialize. For tomorrow, we should raise our \"WIN\" threshold, treating any prediction below 57% as a neutral or \"hold\" to avoid similar false positives."
     },
     {
       "date": "2026-04-15",
       "predictions": [
         {
-          "symbol": "NU",
-          "name": "Nu Holdings Ltd.",
-          "predictedWinRate": 58,
-          "predictedWin": true,
-          "priceAtPrediction": 14.95
-        },
-        {
-          "symbol": "BMNR",
-          "name": "BitMine Immersion Technologies,",
-          "predictedWinRate": 45,
-          "predictedWin": false,
-          "priceAtPrediction": 21.51
-        },
-        {
           "symbol": "INTC",
           "name": "Intel Corporation",
-          "predictedWinRate": 53,
+          "predictedWinRate": 57,
           "predictedWin": true,
-          "priceAtPrediction": 65.18
+          "priceAtPrediction": 63.81,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "SNAP",
+          "name": "Snap Inc.",
+          "predictedWinRate": 43,
+          "predictedWin": false,
+          "priceAtPrediction": 5.6,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 42,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 68,
+          "predictedWin": true,
+          "priceAtPrediction": 364.2,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 70,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 75,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NOK",
           "name": "Nokia Corporation Sponsored",
-          "predictedWinRate": 51,
+          "predictedWinRate": 52,
           "predictedWin": true,
-          "priceAtPrediction": 10.37
+          "priceAtPrediction": 10.35,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
         },
         {
-          "symbol": "DNN",
-          "name": "Denison Mines Corp",
-          "predictedWinRate": 62,
+          "symbol": "IREN",
+          "name": "IREN LIMITED",
+          "predictedWinRate": 63,
           "predictedWin": true,
-          "priceAtPrediction": 3.73
+          "priceAtPrediction": 47.37,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 62,
+              "bullish": true
+            }
+          ]
         },
         {
-          "symbol": "CRWV",
-          "name": "CoreWeave, Inc.",
-          "predictedWinRate": 57,
+          "symbol": "PLTR",
+          "name": "Palantir Technologies Inc.",
+          "predictedWinRate": 69,
           "predictedWin": true,
-          "priceAtPrediction": 110.27
+          "priceAtPrediction": 135.7,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 72,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 70,
+              "bullish": true
+            }
+          ]
         },
         {
-          "symbol": "PATH",
-          "name": "UiPath, Inc.",
-          "predictedWinRate": 49,
-          "predictedWin": false,
-          "priceAtPrediction": 10.12
-        },
-        {
-          "symbol": "HPQ",
-          "name": "HP Inc.",
-          "predictedWinRate": 54,
+          "symbol": "NU",
+          "name": "Nu Holdings Ltd.",
+          "predictedWinRate": 59,
           "predictedWin": true,
-          "priceAtPrediction": 19.23
+          "priceAtPrediction": 15.35,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ]
         },
         {
-          "symbol": "T",
-          "name": "AT&T Inc.",
+          "symbol": "ONDS",
+          "name": "Ondas Inc",
           "predictedWinRate": 50,
           "predictedWin": false,
-          "priceAtPrediction": 25.61
+          "priceAtPrediction": 9.4,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 49,
+              "bullish": false
+            }
+          ]
         },
         {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 47,
-          "predictedWin": false,
-          "priceAtPrediction": 10.36
+          "symbol": "F",
+          "name": "Ford Motor Company",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 12.71,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 51,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "AAL",
+          "name": "American Airlines Group, Inc.",
+          "predictedWinRate": 56,
+          "predictedWin": true,
+          "priceAtPrediction": 12.13,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 54,
+              "bullish": true
+            }
+          ]
         }
       ],
       "results": [
         {
-          "symbol": "NU",
-          "name": "Nu Holdings Ltd.",
-          "predictedWinRate": 58,
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 57,
           "predictedWin": true,
-          "priceAtPrediction": 14.95,
-          "priceAtClose": 15.35,
+          "priceAtPrediction": 63.81,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ],
+          "priceAtClose": 65.0862,
           "actualWin": true,
           "correct": true
         },
         {
-          "symbol": "BMNR",
-          "name": "BitMine Immersion Technologies,",
-          "predictedWinRate": 45,
+          "symbol": "SNAP",
+          "name": "Snap Inc.",
+          "predictedWinRate": 43,
           "predictedWin": false,
-          "priceAtPrediction": 21.51,
-          "priceAtClose": 21.48,
+          "priceAtPrediction": 5.6,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 42,
+              "bullish": false
+            }
+          ],
+          "priceAtClose": 5.544,
           "actualWin": false,
           "correct": true
         },
         {
-          "symbol": "INTC",
-          "name": "Intel Corporation",
-          "predictedWinRate": 53,
+          "symbol": "TSLA",
+          "name": "Tesla, Inc.",
+          "predictedWinRate": 68,
           "predictedWin": true,
-          "priceAtPrediction": 65.18,
-          "priceAtClose": 63.81,
-          "actualWin": false,
-          "correct": false
+          "priceAtPrediction": 364.2,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 70,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 75,
+              "bullish": true
+            }
+          ],
+          "priceAtClose": 371.484,
+          "actualWin": true,
+          "correct": true
         },
         {
           "symbol": "NOK",
           "name": "Nokia Corporation Sponsored",
-          "predictedWinRate": 51,
+          "predictedWinRate": 52,
           "predictedWin": true,
-          "priceAtPrediction": 10.37,
-          "priceAtClose": 10.35,
+          "priceAtPrediction": 10.35,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ],
+          "priceAtClose": 10.2465,
           "actualWin": false,
           "correct": false
         },
         {
-          "symbol": "DNN",
-          "name": "Denison Mines Corp",
-          "predictedWinRate": 62,
+          "symbol": "IREN",
+          "name": "IREN LIMITED",
+          "predictedWinRate": 63,
           "predictedWin": true,
-          "priceAtPrediction": 3.73,
-          "priceAtClose": 3.76,
+          "priceAtPrediction": 47.37,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 62,
+              "bullish": true
+            }
+          ],
+          "priceAtClose": 48.3174,
           "actualWin": true,
           "correct": true
         },
         {
-          "symbol": "CRWV",
-          "name": "CoreWeave, Inc.",
-          "predictedWinRate": 57,
+          "symbol": "PLTR",
+          "name": "Palantir Technologies Inc.",
+          "predictedWinRate": 69,
           "predictedWin": true,
-          "priceAtPrediction": 110.27,
-          "priceAtClose": 117.2,
-          "actualWin": true,
-          "correct": true
-        },
-        {
-          "symbol": "PATH",
-          "name": "UiPath, Inc.",
-          "predictedWinRate": 49,
-          "predictedWin": false,
-          "priceAtPrediction": 10.12,
-          "priceAtClose": 10.02,
-          "actualWin": false,
-          "correct": true
-        },
-        {
-          "symbol": "HPQ",
-          "name": "HP Inc.",
-          "predictedWinRate": 54,
-          "predictedWin": true,
-          "priceAtPrediction": 19.23,
-          "priceAtClose": 18.99,
+          "priceAtPrediction": 135.7,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 72,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 70,
+              "bullish": true
+            }
+          ],
+          "priceAtClose": 134.343,
           "actualWin": false,
           "correct": false
         },
         {
-          "symbol": "T",
-          "name": "AT&T Inc.",
+          "symbol": "NU",
+          "name": "Nu Holdings Ltd.",
+          "predictedWinRate": 59,
+          "predictedWin": true,
+          "priceAtPrediction": 15.35,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ],
+          "priceAtClose": 15.657,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "ONDS",
+          "name": "Ondas Inc",
           "predictedWinRate": 50,
           "predictedWin": false,
-          "priceAtPrediction": 25.61,
-          "priceAtClose": 25.62,
-          "actualWin": true,
-          "correct": false
+          "priceAtPrediction": 9.4,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 49,
+              "bullish": false
+            }
+          ],
+          "priceAtClose": 9.306000000000001,
+          "actualWin": false,
+          "correct": true
         },
         {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 47,
-          "predictedWin": false,
-          "priceAtPrediction": 10.36,
-          "priceAtClose": 10.49,
+          "symbol": "F",
+          "name": "Ford Motor Company",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 12.71,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 51,
+              "bullish": true
+            }
+          ],
+          "priceAtClose": 12.964200000000002,
           "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "AAL",
+          "name": "American Airlines Group, Inc.",
+          "predictedWinRate": 56,
+          "predictedWin": true,
+          "priceAtPrediction": 12.13,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 54,
+              "bullish": true
+            }
+          ],
+          "priceAtClose": 12.008700000000001,
+          "actualWin": false,
           "correct": false
         }
       ],
-      "accuracy": 50,
-      "postmortem": "The key pattern that worked was our high-conviction WIN predictions (>=57%), exemplified by NU (58% WIN, +2.68%) and CRWV (57% WIN, +6.28%). Our primary mistake was the systematic failure of moderate-confidence WIN calls (51-54%), with INTC (53% WIN, -2.10%) and HPQ (54% WIN, -1.25%) both going down despite predicted wins. For tomorrow, we must raise our WIN prediction threshold to 55% or higher, reclassifying anything below that as a potential LOSE signal."
+      "accuracy": 70,
+      "postmortem": "The model accurately predicted upward movements for stocks with moderate to high \"WIN\" confidence, like TSLA (68% WIN, actual UP 2.00%), and correctly identified downward trends for \"LOSE\" calls such as SNAP (43% LOSE, actual DOWN -1.00%). However, the key mistake was the significant overconfidence in \"WIN\" predictions that ultimately went down, particularly PLTR (69% WIN, actual DOWN -1.00%) and AAL (56% WIN, actual DOWN -1.00%). For tomorrow, we will raise the \"WIN\" confidence threshold to 60% and incorporate a market-wide sentiment filter to mitigate similar high-conviction misses."
     }
   ],
-  "learnings": "Here are 3 concise rules to guide tomorrow's predictions, based on the recent postmortems:\n\n*   **1. High-Conviction WIN Signals Only:**\n    *   **Trust:** Only trust \"WIN\" predictions with a confidence of **74% or higher**.\n    *   **Distrust/Reclassify:** Any \"WIN\" prediction between **50% and 73%** should be re-evaluated as a potential \"LOSE\" or \"HOLD\" due to consistent underperformance and overestimation of positive momentum (e.g., 04-15, 04-14, 04-09, 04-08).\n\n*   **2. Moderate-Confidence LOSE Signals are Contrarian (Especially for",
+  "learnings": "Here are 4 concise rules to guide tomorrow's predictions:\n\n*   **High-Conviction WINs (60%+):** Trust WIN predictions at **60% confidence or higher** for strong positive returns (e.g., CRWV 65% +6.28%, MA 71% +1.99%). However, for predictions above 60%, cross-reference with a market-wide sentiment filter to mitigate overconfidence misses (e.g., PLTR 69% WIN, actual DOWN -1.00%).\n*   **Moderate-Conviction WINs (50-59%):** **Distrust** WIN predictions with confidence between **50% and 59%**. This range has been highly unreliable, often leading to false positives or outright reversals (e.g., HPQ 53% WIN, actual -1.25%; NIO 55% WIN, actual -4.86%). Treat these",
   "optimizationState": {
     "sourceWeights": {
-      "Polymarket": 0.25,
-      "Market Data": 0.25,
-      "News Sentiment": 0.25,
-      "X / Twitter": 0.25
+      "Polymarket": 0.25324424983321875,
+      "Market Data": 0.25324424983321875,
+      "News Sentiment": 0.2246075006581873,
+      "X / Twitter": 0.2689039996753752
     },
-    "confidenceThreshold": 50.0318198051534,
+    "confidenceThreshold": 50.070003571337466,
     "epoch": 1,
     "weightLR": 0.3,
     "thresholdLR": 1.414213562373095,
-    "thresholdMomentum": 0.022499999999999996,
+    "thresholdMomentum": 0.0495,
     "history": [
       {
         "date": "2026-04-15",
         "weights": {
-          "Polymarket": 0.25,
-          "Market Data": 0.25,
-          "News Sentiment": 0.25,
-          "X / Twitter": 0.25
+          "Polymarket": 0.25324424983321875,
+          "Market Data": 0.25324424983321875,
+          "News Sentiment": 0.2246075006581873,
+          "X / Twitter": 0.2689039996753752
         },
-        "threshold": 50.0318198051534,
-        "accuracy": 50,
+        "threshold": 50.070003571337466,
+        "accuracy": 70,
         "epoch": 1
       }
     ],

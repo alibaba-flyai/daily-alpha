@@ -88,29 +88,23 @@ export function updateSourceWeights(
   const eta = 0.3 / Math.sqrt(newState.epoch);
   newState.weightLR = eta;
 
-  // For each source, compute reward:
-  // If source score > 50 and actual was win → positive reward
-  // If source score ≤ 50 and actual was lose → positive reward
-  // Otherwise → negative reward
+  // For each source, compute reward from per-source accuracy
+  // sourceScores contains accuracy (0-100) for each source on this day
   for (const source of DEFAULT_SOURCES) {
-    const score = sourceScores[source];
-    if (score === undefined) continue;
+    const accuracy = sourceScores[source];
+    const currentWeight = newState.sourceWeights[source] || (1 / DEFAULT_SOURCES.length);
 
-    const sourcePredictsWin = score > 50;
-    let correct = 0;
-    let total = 0;
-
-    for (let i = 0; i < outcomes.length; i++) {
-      total++;
-      if (sourcePredictsWin === outcomes[i]) correct++;
+    if (accuracy === undefined) {
+      // No data for this source — no update, keep current weight
+      newState.sourceWeights[source] = currentWeight;
+      continue;
     }
 
-    // Reward: [-1, +1] based on accuracy
-    const accuracy = total > 0 ? correct / total : 0.5;
-    const reward = (accuracy - 0.5) * 2; // map [0,1] → [-1,+1]
+    // Reward: map accuracy [0, 100] → [-1, +1]
+    // 50% accuracy = 0 reward (random), 100% = +1, 0% = -1
+    const reward = (accuracy / 100 - 0.5) * 2;
 
     // Multiplicative update: w *= exp(η × reward)
-    const currentWeight = newState.sourceWeights[source] || (1 / DEFAULT_SOURCES.length);
     newState.sourceWeights[source] = currentWeight * Math.exp(eta * reward);
   }
 
