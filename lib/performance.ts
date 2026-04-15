@@ -72,7 +72,7 @@ export function loadPerformance(): PerformanceData {
   }
 
   // Fallback: use bundled seed data
-  return seedData as PerformanceData;
+  return seedData as unknown as PerformanceData;
 }
 
 export function savePerformance(data: PerformanceData): void {

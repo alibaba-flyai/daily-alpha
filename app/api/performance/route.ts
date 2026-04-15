@@ -147,7 +147,12 @@ export async function GET() {
   const sorted = [...filtered].sort((a, b) => b.date.localeCompare(a.date));
   const stats = computeStats(filtered);
 
-  return NextResponse.json({ records: sorted, stats, needsGenerate: !hasToday });
+  return NextResponse.json({
+    records: sorted,
+    stats,
+    needsGenerate: !hasToday,
+    optimization: perf.optimizationState || null,
+  });
 }
 
 // POST: generate today's predictions + evaluate past records (called by client after initial load)
@@ -195,5 +200,10 @@ export async function POST() {
   const sorted = [...filtered].sort((a, b) => b.date.localeCompare(a.date));
   const stats = computeStats(filtered);
 
-  return NextResponse.json({ records: sorted, stats, needsGenerate: false });
+  return NextResponse.json({
+    records: sorted,
+    stats,
+    needsGenerate: false,
+    optimization: perf.optimizationState || null,
+  });
 }

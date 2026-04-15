@@ -187,10 +187,12 @@ export async function GET(req: NextRequest) {
   if (latestEvaluated?.results && latestEvaluated.date !== perf.optimizationState?.lastOptimizedDate) {
     const results = latestEvaluated.results;
     const { state: updatedOpt, report } = optimizationStep(optState, {
+      date: latestEvaluated.date,
       winRates: results.map((r) => r.predictedWinRate),
       outcomes: results.map((r) => r.actualWin),
-      sourceScores: {}, // we don't have per-source scores in results yet — weights still update from overall accuracy
+      sourceScores: {},
       predictedWins: results.map((r) => r.predictedWin),
+      accuracy: latestEvaluated.accuracy || 50,
     });
     updatedOpt.lastOptimizedDate = latestEvaluated.date;
     perf.optimizationState = updatedOpt;

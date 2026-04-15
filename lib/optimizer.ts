@@ -30,6 +30,15 @@ export interface OptimizationState {
 
   // Track last processed day to avoid re-optimization
   lastOptimizedDate?: string;
+
+  // History for visualization
+  history: {
+    date: string;
+    weights: Record<string, number>;
+    threshold: number;
+    accuracy: number;
+    epoch: number;
+  }[];
 }
 
 const DEFAULT_SOURCES = ["Polymarket", "Market Data", "News Sentiment", "X / Twitter"];
@@ -42,11 +51,12 @@ export function initOptimizationState(): OptimizationState {
 
   return {
     sourceWeights,
-    confidenceThreshold: 50, // start at 50%
+    confidenceThreshold: 50,
     epoch: 0,
-    weightLR: 0.3, // initial learning rate for Hedge
-    thresholdLR: 2.0, // initial learning rate for threshold
+    weightLR: 0.3,
+    thresholdLR: 2.0,
     thresholdMomentum: 0,
+    history: [],
   };
 }
 
@@ -194,10 +204,12 @@ export function updateConfidenceThreshold(
 export function optimizationStep(
   state: OptimizationState,
   dayResults: {
+    date: string;
     winRates: number[];
     outcomes: boolean[];
     sourceScores: Record<string, number>;
     predictedWins: boolean[];
+    accuracy: number;
   }
 ): { state: OptimizationState; report: string } {
   // Step 1: Update source weights (Hedge)
@@ -205,6 +217,15 @@ export function optimizationStep(
 
   // Step 2: Update confidence threshold (Online GD)
   newState = updateConfidenceThreshold(newState, dayResults);
+
+  // Step 3: Record history for visualization
+  newState.history = [...(state.history || []), {
+    date: dayResults.date,
+    weights: { ...newState.sourceWeights },
+    threshold: newState.confidenceThreshold,
+    accuracy: dayResults.accuracy,
+    epoch: newState.epoch,
+  }].slice(-30); // keep last 30 days
 
   // Generate report
   const weightStr = Object.entries(newState.sourceWeights)

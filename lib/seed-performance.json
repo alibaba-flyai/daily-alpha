@@ -1885,7 +1885,7 @@
       "postmortem": "The key pattern that worked was our high-conviction WIN predictions (>=57%), exemplified by NU (58% WIN, +2.68%) and CRWV (57% WIN, +6.28%). Our primary mistake was the systematic failure of moderate-confidence WIN calls (51-54%), with INTC (53% WIN, -2.10%) and HPQ (54% WIN, -1.25%) both going down despite predicted wins. For tomorrow, we must raise our WIN prediction threshold to 55% or higher, reclassifying anything below that as a potential LOSE signal."
     }
   ],
-  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **High-Conviction WIN Threshold:** Only trust \"WIN\" predictions with a confidence of **74% or higher**. Reclassify any \"WIN\" prediction below 74% as a \"HOLD\" or potential \"LOSE\" due to consistent overestimation of positive momentum, as seen in failures for WIN predictions in the 51-73% range (e.g., 04-09, 04-15, 04-14, 04-08).\n\n*   **Unreliable LOSE Range (Contrarian Indicator):** **Distrust** \"LOSE\" predictions with confidence between **30% and 50%**. This",
+  "learnings": "Here are 3 concise rules to guide tomorrow's predictions, based on the recent postmortems:\n\n*   **1. High-Conviction WIN Signals Only:**\n    *   **Trust:** Only trust \"WIN\" predictions with a confidence of **74% or higher**.\n    *   **Distrust/Reclassify:** Any \"WIN\" prediction between **50% and 73%** should be re-evaluated as a potential \"LOSE\" or \"HOLD\" due to consistent underperformance and overestimation of positive momentum (e.g., 04-15, 04-14, 04-09, 04-08).\n\n*   **2. Moderate-Confidence LOSE Signals are Contrarian (Especially for",
   "optimizationState": {
     "sourceWeights": {
       "Polymarket": 0.25,
@@ -1898,6 +1898,20 @@
     "weightLR": 0.3,
     "thresholdLR": 1.414213562373095,
     "thresholdMomentum": 0.022499999999999996,
+    "history": [
+      {
+        "date": "2026-04-15",
+        "weights": {
+          "Polymarket": 0.25,
+          "Market Data": 0.25,
+          "News Sentiment": 0.25,
+          "X / Twitter": 0.25
+        },
+        "threshold": 50.0318198051534,
+        "accuracy": 50,
+        "epoch": 1
+      }
+    ],
     "lastOptimizedDate": "2026-04-15"
   }
 }

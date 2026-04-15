@@ -1,12 +1,25 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import SearchBar from "@/components/SearchBar";
 import AgentPanel from "@/components/AgentPanel";
 import Trajectory from "@/components/Trajectory";
 import SpeedMeter from "@/components/SpeedMeter";
 import TrendingSection from "@/components/TrendingSection";
 import PerformancePanel from "@/components/PerformancePanel";
+import OptimizationPanel from "@/components/OptimizationPanel";
+
+function OptimizationPanelLoader() {
+  const [data, setData] = useState<{ optimization: unknown; records: unknown[] } | null>(null);
+  useEffect(() => {
+    fetch("/api/performance")
+      .then((r) => r.json())
+      .then(setData)
+      .catch(() => {});
+  }, []);
+  if (!data) return null;
+  return <OptimizationPanel optimization={data.optimization as never} records={data.records as never[]} />;
+}
 import { PredictionResult, TraceStep, StreamEvent, FormulaComponent } from "@/lib/types";
 import TypewriterText from "@/components/TypewriterText";
 import katex from "katex";
@@ -355,8 +368,9 @@ export default function Home() {
         {!isActive && !error && (
           <>
             <TrendingSection onSearch={handleSearch} />
-            <div className="max-w-4xl mx-auto mb-12">
+            <div className="max-w-4xl mx-auto mb-12 space-y-4">
               <PerformancePanel onSearch={handleSearch} />
+              <OptimizationPanelLoader />
             </div>
           </>
         )}
