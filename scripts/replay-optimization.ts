@@ -1,10 +1,8 @@
 /**
- * Replay optimization from day 1: re-score, evaluate, optimize, repeat.
+ * Replay optimization from day 1 with per-asset-class deltas.
  *
- * Day 1: Use original predictions as-is → evaluate → compute per-source accuracy → Hedge update
- * Day 2+: Re-score predictions using current optimized weights → evaluate → Hedge update
- *
- * This produces updated accuracies AND a full weight evolution trajectory.
+ * Day 1: Use original predictions → evaluate → Hedge update (global + class)
+ * Day 2+: Re-score using learned effective weights → evaluate → update
  *
  * Run: npx tsx scripts/replay-optimization.ts
  */
@@ -15,191 +13,171 @@ import path from "path";
 const DATA_FILE = path.join(process.cwd(), "data", "performance.json");
 const SEED_FILE = path.join(process.cwd(), "lib", "seed-performance.json");
 const SOURCES = ["Polymarket", "Market Data", "News Sentiment", "X / Twitter"];
+const ASSET_CLASSES = ["equity", "crypto", "commodity", "index", "general"];
 
-interface SourceScore { source: string; score: number; bullish: boolean; }
-interface Prediction { symbol: string; name: string; predictedWinRate: number; predictedWin: boolean; priceAtPrediction: number; sourceScores?: SourceScore[]; }
-interface Result extends Prediction { priceAtClose: number; actualWin: boolean; correct: boolean; }
-interface Record { date: string; predictions: Prediction[]; results: Result[] | null; accuracy: number | null; postmortem?: string; }
-interface OptHistory { date: string; weights: { [k: string]: number }; threshold: number; accuracy: number; accuracyBefore: number; epoch: number; }
-interface OptState {
-  sourceWeights: { [k: string]: number }; confidenceThreshold: number;
-  epoch: number; weightLR: number; thresholdLR: number; thresholdMomentum: number;
-  lastOptimizedDate?: string; history: OptHistory[];
+// Import the optimizer functions inline (can't import TS directly)
+function softmaxWeights(global: Record<string, number>, delta: Record<string, number>): Record<string, number> {
+  const logits: Record<string, number> = {};
+  let maxL = -Infinity;
+  for (const s of SOURCES) {
+    logits[s] = Math.log(Math.max(global[s] || 0.25, 1e-6)) + (delta[s] || 0);
+    if (logits[s] > maxL) maxL = logits[s];
+  }
+  let sum = 0;
+  const r: Record<string, number> = {};
+  for (const s of SOURCES) { r[s] = Math.exp(logits[s] - maxL); sum += r[s]; }
+  for (const s of SOURCES) r[s] /= sum;
+  return r;
 }
 
-// Generate deterministic per-source scores for a prediction
-function generateSourceScores(pred: Prediction, dayIdx: number, pickIdx: number): SourceScore[] {
-  const base = pred.predictedWinRate;
-  const seed = pred.symbol.charCodeAt(0) * 17 + dayIdx * 31 + pickIdx * 7;
-  const noise = (i: number) => Math.sin(seed + i * 13.7) * 15;
+interface ClassWeights { delta: Record<string, number>; epoch: number; effectiveWeights: Record<string, number>; }
 
-  const poly = Math.max(5, Math.min(95, 50 + (base - 50) * 0.6 + noise(0)));
-  const market = Math.max(5, Math.min(95, base + noise(1) * 0.8));
+interface OptState {
+  sourceWeights: Record<string, number>;
+  classDeltas: Record<string, ClassWeights>;
+  epoch: number; weightLR: number; lastOptimizedDate?: string;
+  history: { date: string; weights: Record<string, number>; classWeights?: Record<string, Record<string, number>>; accuracy: number; accuracyBefore?: number; epoch: number; assetClass?: string; }[];
+}
+
+function initOpt(): OptState {
+  const cd: Record<string, ClassWeights> = {};
+  for (const c of ASSET_CLASSES) cd[c] = { delta: zeroDelta(), epoch: 0, effectiveWeights: uniformW() };
+  return { sourceWeights: uniformW(), classDeltas: cd, epoch: 0, weightLR: 0.3, history: [] };
+}
+function uniformW() { const w: Record<string, number> = {}; for (const s of SOURCES) w[s] = 0.25; return w; }
+function zeroDelta() { const d: Record<string, number> = {}; for (const s of SOURCES) d[s] = 0; return d; }
+
+// Generate per-source scores (deterministic from symbol + day)
+function genSourceScores(symbol: string, baseRate: number, dayIdx: number, pickIdx: number) {
+  const seed = symbol.charCodeAt(0) * 17 + dayIdx * 31 + pickIdx * 7;
+  const n = (i: number) => Math.sin(seed + i * 13.7) * 15;
+  const poly = Math.max(5, Math.min(95, 50 + (baseRate - 50) * 0.6 + n(0)));
+  const mkt = Math.max(5, Math.min(95, baseRate + n(1) * 0.8));
   const newsAgree = Math.sin(seed * 3.1 + 2) > -0.3;
-  const news = newsAgree
-    ? Math.max(5, Math.min(95, base + noise(2) * 0.5))
-    : Math.max(5, Math.min(95, 100 - base + noise(2) * 0.5));
-  const twitter = Math.max(5, Math.min(95, base + noise(3) * 1.2));
-
+  const news = newsAgree ? Math.max(5, Math.min(95, baseRate + n(2) * 0.5)) : Math.max(5, Math.min(95, 100 - baseRate + n(2) * 0.5));
+  const twtr = Math.max(5, Math.min(95, baseRate + n(3) * 1.2));
   return [
     { source: "Polymarket", score: Math.round(poly), bullish: poly > 50 },
-    { source: "Market Data", score: Math.round(market), bullish: market > 50 },
+    { source: "Market Data", score: Math.round(mkt), bullish: mkt > 50 },
     { source: "News Sentiment", score: Math.round(news), bullish: news > 50 },
-    { source: "X / Twitter", score: Math.round(twitter), bullish: twitter > 50 },
+    { source: "X / Twitter", score: Math.round(twtr), bullish: twtr > 50 },
   ];
 }
 
-// Re-score a prediction using optimized weights
-function rescore(sourceScores: SourceScore[], weights: { [k: string]: number }): number {
-  let weightedSum = 0;
-  let totalWeight = 0;
-  for (const ss of sourceScores) {
-    const w = weights[ss.source] || 0.25;
-    weightedSum += ss.score * w;
-    totalWeight += w;
-  }
-  return totalWeight > 0 ? Math.round(weightedSum / totalWeight) : 50;
+function rescore(scores: { source: string; score: number }[], weights: Record<string, number>) {
+  let ws = 0, wt = 0;
+  for (const ss of scores) { const w = weights[ss.source] || 0.25; ws += ss.score * w; wt += w; }
+  return wt > 0 ? Math.round(ws / wt) : 50;
 }
 
-// Run Hedge + GD update
-function optimize(state: OptState, results: Result[], date: string, accuracy: number, accuracyBefore: number): OptState {
-  const newState: OptState = {
-    ...state,
-    sourceWeights: { ...state.sourceWeights },
-    history: [...state.history],
-  };
-  newState.epoch += 1;
-
-  const eta = 0.3 / Math.sqrt(newState.epoch);
-  newState.weightLR = eta;
-
-  // Per-source accuracy
-  const correct: { [k: string]: number } = {};
-  const total: { [k: string]: number } = {};
+function computeSourceAcc(results: { sourceScores?: { source: string; bullish: boolean }[]; actualWin: boolean }[]) {
+  const correct: Record<string, number> = {}, total: Record<string, number> = {};
   for (const r of results) {
     for (const ss of r.sourceScores || []) {
       total[ss.source] = (total[ss.source] || 0) + 1;
       if (ss.bullish === r.actualWin) correct[ss.source] = (correct[ss.source] || 0) + 1;
     }
   }
+  const acc: Record<string, number> = {};
+  for (const [s, t] of Object.entries(total)) acc[s] = Math.round(((correct[s] || 0) / t) * 100);
+  return acc;
+}
 
-  // Hedge update
-  for (const source of SOURCES) {
-    const t = total[source] || 0;
-    if (t === 0) continue;
-    const acc = (correct[source] || 0) / t;
-    const reward = (acc - 0.5) * 2;
-    newState.sourceWeights[source] = (newState.sourceWeights[source] || 0.25) * Math.exp(eta * reward);
+function optimStep(state: OptState, date: string, srcAcc: Record<string, number>, acc: number, accBefore: number): OptState {
+  const ns: OptState = { ...state, sourceWeights: { ...state.sourceWeights }, classDeltas: { ...state.classDeltas }, history: [...state.history], epoch: state.epoch + 1 };
+  const eta = 0.3 / Math.sqrt(ns.epoch);
+  ns.weightLR = eta;
+
+  // Global Hedge
+  for (const s of SOURCES) { const a = srcAcc[s]; if (a === undefined) continue; const rw = (a / 100 - 0.5) * 2; ns.sourceWeights[s] = (ns.sourceWeights[s] || 0.25) * Math.exp(eta * rw); }
+  const sum = Object.values(ns.sourceWeights).reduce((a, b) => a + b, 0);
+  for (const s of Object.keys(ns.sourceWeights)) ns.sourceWeights[s] /= sum;
+
+  // Class delta (general for daily picks)
+  const c = "general";
+  const cs = { ...ns.classDeltas[c], delta: { ...(ns.classDeltas[c]?.delta || zeroDelta()) } };
+  cs.epoch += 1;
+  const etaC = 0.5 / Math.sqrt(cs.epoch);
+  for (const s of SOURCES) { const a = srcAcc[s]; if (a === undefined) { cs.delta[s] = (cs.delta[s] || 0) * 0.95; continue; } cs.delta[s] = (cs.delta[s] || 0) * 0.95 + etaC * ((a / 100 - 0.5) * 2); }
+  cs.effectiveWeights = softmaxWeights(ns.sourceWeights, cs.delta);
+  ns.classDeltas[c] = cs;
+
+  // Decay other classes
+  for (const cc of ASSET_CLASSES) {
+    if (cc === c) continue;
+    const ccs = ns.classDeltas[cc];
+    if (!ccs) continue;
+    for (const s of SOURCES) ccs.delta[s] = (ccs.delta[s] || 0) * 0.98;
+    ccs.effectiveWeights = softmaxWeights(ns.sourceWeights, ccs.delta);
   }
-  const wSum = Object.values(newState.sourceWeights).reduce((a, b) => a + b, 0);
-  for (const s of Object.keys(newState.sourceWeights)) newState.sourceWeights[s] /= wSum;
 
-  // Threshold GD with momentum
-  const T = state.confidenceThreshold;
-  let grad = 0;
-  for (const r of results) {
-    const dist = Math.abs(r.predictedWinRate - T);
-    if (dist > 20) continue;
-    const prox = 1 - dist / 20;
-    const predicted = r.predictedWinRate > T;
-    if (predicted && !r.actualWin) grad += prox;
-    else if (!predicted && r.actualWin) grad -= prox;
-  }
-  grad /= results.length || 1;
-  const alpha = 2.0 / Math.sqrt(newState.epoch);
-  newState.thresholdLR = alpha;
-  newState.thresholdMomentum = 0.7 * state.thresholdMomentum + 0.3 * grad;
-  newState.confidenceThreshold = Math.max(30, Math.min(70, T + alpha * newState.thresholdMomentum));
+  // Collect all class effective weights
+  const cw: Record<string, Record<string, number>> = {};
+  for (const [k, v] of Object.entries(ns.classDeltas)) cw[k] = v.effectiveWeights;
 
-  // Record history
-  newState.history.push({
-    date,
-    weights: { ...newState.sourceWeights },
-    threshold: newState.confidenceThreshold,
-    accuracy,
-    accuracyBefore,
-    epoch: newState.epoch,
-  });
-  newState.lastOptimizedDate = date;
-
-  return newState;
+  ns.history.push({ date, weights: { ...ns.sourceWeights }, classWeights: cw, accuracy: acc, accuracyBefore: accBefore, epoch: ns.epoch, assetClass: c });
+  ns.lastOptimizedDate = date;
+  return ns;
 }
 
 function main() {
-  console.log("🔄 Replaying optimization from day 1 with re-scoring...\n");
-
+  console.log("🔄 Replaying two-level Hedge from day 1...\n");
   const data = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
-  const records: Record[] = data.records;
+  const evaluated = data.records.filter((r: { results: unknown }) => r.results !== null).sort((a: { date: string }, b: { date: string }) => a.date.localeCompare(b.date));
+  console.log(`${evaluated.length} evaluated days.\n`);
+  console.log("Day  Date        Before → After    Global Weights                    Class(general) Weights");
+  console.log("───  ──────────  ──────────────    ──────────────────────────────    ─────────────────────────────");
 
-  const evaluated = records
-    .filter((r) => r.results !== null)
-    .sort((a, b) => a.date.localeCompare(b.date));
+  let opt = initOpt();
 
-  console.log(`${evaluated.length} evaluated days to replay.\n`);
-  console.log("Day  Date        Acc(before) → Acc(optimized)  Weights");
-  console.log("───  ──────────  ─────────────────────────────  ───────");
+  for (let d = 0; d < evaluated.length; d++) {
+    const rec = evaluated[d];
+    const results = rec.results!;
 
-  let optState: OptState = {
-    sourceWeights: Object.fromEntries(SOURCES.map((s) => [s, 0.25])),
-    confidenceThreshold: 50, epoch: 0, weightLR: 0.3, thresholdLR: 2.0, thresholdMomentum: 0, history: [],
-  };
-
-  for (let dayIdx = 0; dayIdx < evaluated.length; dayIdx++) {
-    const record = evaluated[dayIdx];
-    const results = record.results!;
-
-    // Step 1: Generate per-source scores
+    // Gen source scores
     for (let i = 0; i < results.length; i++) {
-      const scores = generateSourceScores(results[i], dayIdx, i);
-      results[i].sourceScores = scores;
-      if (record.predictions[i]) record.predictions[i].sourceScores = scores;
+      results[i].sourceScores = genSourceScores(results[i].symbol, results[i].predictedWinRate, d, i);
+      if (rec.predictions[i]) rec.predictions[i].sourceScores = results[i].sourceScores;
     }
 
-    // Step 2: Record original accuracy
-    const originalAcc = record.accuracy || 0;
+    const origAcc = rec.accuracy || 0;
 
-    // Step 3: Re-score using current optimized weights (day 2+)
-    if (dayIdx > 0) {
+    // Rescore from day 2 using effective weights
+    if (d > 0) {
+      const ew = opt.classDeltas["general"]?.effectiveWeights || opt.sourceWeights;
       for (const r of results) {
         if (!r.sourceScores) continue;
-        r.predictedWinRate = rescore(r.sourceScores, optState.sourceWeights);
-        r.predictedWin = r.predictedWinRate > optState.confidenceThreshold;
+        r.predictedWinRate = rescore(r.sourceScores, ew);
+        r.predictedWin = r.predictedWinRate > 50;
         r.correct = r.predictedWin === r.actualWin;
       }
-      // Update predictions too
-      for (let i = 0; i < record.predictions.length; i++) {
-        record.predictions[i].predictedWinRate = results[i].predictedWinRate;
-        record.predictions[i].predictedWin = results[i].predictedWin;
+      for (let i = 0; i < rec.predictions.length; i++) {
+        rec.predictions[i].predictedWinRate = results[i].predictedWinRate;
+        rec.predictions[i].predictedWin = results[i].predictedWin;
       }
     }
 
-    // Step 4: Compute new accuracy
-    const newCorrect = results.filter((r) => r.correct).length;
+    const newCorrect = results.filter((r: { correct: boolean }) => r.correct).length;
     const newAcc = Math.round((newCorrect / results.length) * 100);
-    record.accuracy = newAcc;
+    rec.accuracy = newAcc;
 
-    // Step 5: Hedge + GD optimization
-    optState = optimize(optState, results, record.date, newAcc, originalAcc);
+    const srcAcc = computeSourceAcc(results);
+    opt = optimStep(opt, rec.date, srcAcc, newAcc, origAcc);
 
     // Print
-    const weights = SOURCES.map((s) => {
-      const w = optState.sourceWeights[s] || 0;
-      const short = s.replace("News Sentiment", "News").replace("Market Data", "Mkt").replace("X / Twitter", "Twtr").replace("Polymarket", "Poly");
-      return `${short}:${(w * 100).toFixed(0)}%`;
-    }).join(" ");
-
-    const arrow = dayIdx === 0 ? `  ${originalAcc}% (baseline)      ` : `  ${originalAcc}% → ${newAcc}%${newAcc > originalAcc ? " ↑" : newAcc < originalAcc ? " ↓" : " ="}           `.slice(0, 24);
-    console.log(`${String(dayIdx + 1).padStart(3)}  ${record.date}  ${arrow}  ${weights}`);
+    const gw = SOURCES.map(s => `${s.slice(0, 4)}:${(opt.sourceWeights[s] * 100).toFixed(0)}%`).join(" ");
+    const cw = SOURCES.map(s => `${s.slice(0, 4)}:${((opt.classDeltas["general"]?.effectiveWeights[s] || 0.25) * 100).toFixed(0)}%`).join(" ");
+    const arrow = d === 0 ? `${origAcc}% (base)    ` : `${origAcc}% → ${newAcc}%${newAcc > origAcc ? " ↑" : newAcc < origAcc ? " ↓" : " ="}    `.slice(0, 16);
+    console.log(`${String(d + 1).padStart(3)}  ${rec.date}  ${arrow}  ${gw}    ${cw}`);
   }
 
-  // Save
-  data.optimizationState = optState;
+  data.optimizationState = opt;
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
   fs.writeFileSync(SEED_FILE, JSON.stringify(data, null, 2));
 
-  console.log(`\n✅ Done. ${optState.epoch} epochs, ${optState.history.length} history points.`);
-  console.log(`Final weights: ${SOURCES.map((s) => `${s}: ${(optState.sourceWeights[s] * 100).toFixed(1)}%`).join(", ")}`);
-  console.log(`Final threshold: ${optState.confidenceThreshold.toFixed(1)}%`);
+  console.log(`\n✅ Done. ${opt.epoch} epochs.`);
+  console.log(`Global: ${SOURCES.map(s => `${s}: ${(opt.sourceWeights[s] * 100).toFixed(1)}%`).join(", ")}`);
+  console.log(`General class: ${SOURCES.map(s => `${s}: ${((opt.classDeltas["general"]?.effectiveWeights[s] || 0.25) * 100).toFixed(1)}%`).join(", ")}`);
 }
 
 main();

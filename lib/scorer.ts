@@ -50,8 +50,10 @@ Recent: ${recentDays}.`;
       context += `\n\nYesterday's postmortem (${lastPostmortem.date}):\n${lastPostmortem.postmortem}`;
     }
 
-    // Add optimization parameters (learned via Hedge algorithm)
+    // Add optimization parameters (learned via two-level Hedge)
     const optState = perf.optimizationState || initOptimizationState();
+    // We don't know asset class yet, so pass global weights
+    // The LLM will receive per-class context once asset type is classified
     context += `\n\n${formatOptimizationContext(optState)}`;
 
     return context;

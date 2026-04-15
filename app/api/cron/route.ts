@@ -234,11 +234,9 @@ export async function GET(req: NextRequest) {
 
     const { state: updatedOpt, report } = optimizationStep(optState, {
       date: latestEvaluated.date,
-      winRates: results.map((r) => r.predictedWinRate),
-      outcomes: results.map((r) => r.actualWin),
-      sourceScores: sourceAccuracyScores,
-      predictedWins: results.map((r) => r.predictedWin),
+      sourceAccuracy: sourceAccuracyScores,
       accuracy: latestEvaluated.accuracy || 50,
+      assetClass: "general", // daily picks are mixed asset classes
     });
     updatedOpt.lastOptimizedDate = latestEvaluated.date;
     perf.optimizationState = updatedOpt;

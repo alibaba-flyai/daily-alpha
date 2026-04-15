@@ -1,251 +1,297 @@
 /**
  * Principled self-improvement via online optimization.
  *
- * Two mechanisms:
- * 1. Multiplicative Weights Update (Hedge algorithm) — learns optimal source weights
- *    Regret bound: O(√T log N), provably converges to best fixed strategy
+ * Two-level Hedge algorithm:
+ * 1. Global source weights — learned across all asset classes
+ * 2. Per-asset-class deltas — adjustments from global prior
  *
- * 2. Online gradient descent on confidence threshold — learns optimal decision boundary
- *    Uses binary cross-entropy loss gradient
+ * Final weights for asset class c:
+ *   w_{i,c} = softmax(log(w_i^global) + δ_{i,c})
  *
- * All updates are incremental (no retraining), stateless across restarts
- * (state stored in performance data), and mathematically grounded.
+ * Global Hedge: η = 0.3 / √epoch (standard convergence)
+ * Class Hedge:  η_c = 0.5 / √epoch_c (faster, less data per class)
+ * Delta regularization: δ decays toward 0 each epoch (stay near global)
+ *
+ * Regret bound: O(√T log N) for global, O(√T_c log N) per class
  */
 
+export const DEFAULT_SOURCES = ["Polymarket", "Market Data", "News Sentiment", "X / Twitter"];
+export const ASSET_CLASSES = ["equity", "crypto", "commodity", "index", "general"] as const;
+export type AssetClass = typeof ASSET_CLASSES[number];
+
+export interface ClassWeights {
+  delta: Record<string, number>; // per-source delta from global
+  epoch: number; // class-specific epoch count
+  effectiveWeights: Record<string, number>; // computed: softmax(log(global) + delta)
+}
+
+export interface OptHistoryEntry {
+  date: string;
+  weights: Record<string, number>; // global weights
+  classWeights?: Record<string, Record<string, number>>; // per-class effective weights
+  accuracy: number;
+  accuracyBefore?: number;
+  epoch: number;
+  assetClass?: string;
+}
+
 export interface OptimizationState {
-  // Source weights — updated via multiplicative weights (Hedge)
+  // Global source weights — Hedge
   sourceWeights: Record<string, number>;
 
-  // Confidence threshold — win rates above this → predict "win"
-  // Updated via online gradient descent
-  confidenceThreshold: number;
+  // Per-asset-class deltas
+  classDeltas: Record<string, ClassWeights>;
 
-  // Learning rates (decayed over time)
-  epoch: number; // number of updates so far
-  weightLR: number; // η for multiplicative weights, decayed
-  thresholdLR: number; // α for gradient descent on threshold
+  // Global epoch
+  epoch: number;
+  weightLR: number;
 
-  // Momentum for threshold (SGD with momentum)
-  thresholdMomentum: number;
-
-  // Track last processed day to avoid re-optimization
+  // Track last processed day
   lastOptimizedDate?: string;
 
   // History for visualization
-  history: {
-    date: string;
-    weights: Record<string, number>;
-    threshold: number;
-    accuracy: number;
-    accuracyBefore?: number;
-    epoch: number;
-  }[];
+  history: OptHistoryEntry[];
 }
 
-const DEFAULT_SOURCES = ["Polymarket", "Market Data", "News Sentiment", "X / Twitter"];
+function uniformWeights(): Record<string, number> {
+  const w: Record<string, number> = {};
+  for (const s of DEFAULT_SOURCES) w[s] = 1 / DEFAULT_SOURCES.length;
+  return w;
+}
+
+function zeroDelta(): Record<string, number> {
+  const d: Record<string, number> = {};
+  for (const s of DEFAULT_SOURCES) d[s] = 0;
+  return d;
+}
 
 export function initOptimizationState(): OptimizationState {
-  const sourceWeights: Record<string, number> = {};
-  for (const s of DEFAULT_SOURCES) {
-    sourceWeights[s] = 1.0 / DEFAULT_SOURCES.length; // uniform prior
+  const classDeltas: Record<string, ClassWeights> = {};
+  for (const c of ASSET_CLASSES) {
+    classDeltas[c] = { delta: zeroDelta(), epoch: 0, effectiveWeights: uniformWeights() };
   }
 
   return {
-    sourceWeights,
-    confidenceThreshold: 50,
+    sourceWeights: uniformWeights(),
+    classDeltas,
     epoch: 0,
     weightLR: 0.3,
-    thresholdLR: 2.0,
-    thresholdMomentum: 0,
     history: [],
   };
 }
 
 /**
- * Multiplicative Weights Update (Hedge algorithm)
- *
- * For each source, compute a "reward" based on how well that source's
- * signal correlated with actual outcomes. Then:
- *   w_i ← w_i × exp(η × reward_i)
- *   normalize so Σw_i = 1
- *
- * reward_i = (source predicted correctly ? +1 : -1) averaged over day's picks
- *
- * η decays as 1/√epoch for convergence guarantee
+ * Softmax: convert log-weights + deltas into normalized probabilities
  */
-export function updateSourceWeights(
-  state: OptimizationState,
-  dayResults: {
-    sourceScores: Record<string, number>; // per-source average score for the day (0-100)
-    outcomes: boolean[]; // actual win/lose per pick
-    predictedWins: boolean[]; // what we predicted
+function softmaxWeights(globalWeights: Record<string, number>, delta: Record<string, number>): Record<string, number> {
+  const logits: Record<string, number> = {};
+  let maxLogit = -Infinity;
+
+  for (const s of DEFAULT_SOURCES) {
+    const gw = globalWeights[s] || (1 / DEFAULT_SOURCES.length);
+    const d = delta[s] || 0;
+    logits[s] = Math.log(Math.max(gw, 1e-6)) + d;
+    if (logits[s] > maxLogit) maxLogit = logits[s];
   }
-): OptimizationState {
-  const { sourceScores, outcomes } = dayResults;
-  const newState = { ...state };
-  newState.epoch += 1;
 
-  // Decaying learning rate: η = η₀ / √epoch (convergence guarantee)
-  const eta = 0.3 / Math.sqrt(newState.epoch);
-  newState.weightLR = eta;
+  // Stable softmax
+  let sum = 0;
+  const result: Record<string, number> = {};
+  for (const s of DEFAULT_SOURCES) {
+    result[s] = Math.exp(logits[s] - maxLogit);
+    sum += result[s];
+  }
+  for (const s of DEFAULT_SOURCES) result[s] /= sum;
 
-  // For each source, compute reward from per-source accuracy
-  // sourceScores contains accuracy (0-100) for each source on this day
+  return result;
+}
+
+/**
+ * Hedge update on global weights.
+ * sourceAccuracy: per-source accuracy (0-100) for this day
+ */
+function hedgeUpdateGlobal(
+  weights: Record<string, number>,
+  sourceAccuracy: Record<string, number>,
+  epoch: number
+): Record<string, number> {
+  const eta = 0.3 / Math.sqrt(epoch);
+  const newWeights = { ...weights };
+
   for (const source of DEFAULT_SOURCES) {
-    const accuracy = sourceScores[source];
-    const currentWeight = newState.sourceWeights[source] || (1 / DEFAULT_SOURCES.length);
+    const acc = sourceAccuracy[source];
+    if (acc === undefined) continue;
+    const reward = (acc / 100 - 0.5) * 2; // [-1, +1]
+    newWeights[source] = (newWeights[source] || 0.25) * Math.exp(eta * reward);
+  }
 
-    if (accuracy === undefined) {
-      // No data for this source — no update, keep current weight
-      newState.sourceWeights[source] = currentWeight;
+  // Normalize
+  const sum = Object.values(newWeights).reduce((a, b) => a + b, 0);
+  if (sum > 0) for (const s of Object.keys(newWeights)) newWeights[s] /= sum;
+
+  return newWeights;
+}
+
+/**
+ * Hedge update on per-class delta.
+ * Uses higher learning rate (less data per class).
+ * Delta regularized toward 0 each epoch.
+ */
+function hedgeUpdateClassDelta(
+  classState: ClassWeights,
+  globalWeights: Record<string, number>,
+  sourceAccuracy: Record<string, number>
+): ClassWeights {
+  const newState = {
+    delta: { ...classState.delta },
+    epoch: classState.epoch + 1,
+    effectiveWeights: {},
+  };
+
+  const eta = 0.5 / Math.sqrt(newState.epoch); // faster LR for classes
+  const decay = 0.95; // regularize delta toward 0
+
+  for (const source of DEFAULT_SOURCES) {
+    const acc = sourceAccuracy[source];
+    if (acc === undefined) {
+      // Decay toward 0 even without data
+      newState.delta[source] = (newState.delta[source] || 0) * decay;
       continue;
     }
 
-    // Reward: map accuracy [0, 100] → [-1, +1]
-    // 50% accuracy = 0 reward (random), 100% = +1, 0% = -1
-    const reward = (accuracy / 100 - 0.5) * 2;
-
-    // Multiplicative update: w *= exp(η × reward)
-    newState.sourceWeights[source] = currentWeight * Math.exp(eta * reward);
+    const reward = (acc / 100 - 0.5) * 2;
+    // Update delta: shift toward sources that work for this class
+    newState.delta[source] = ((newState.delta[source] || 0) * decay) + eta * reward;
   }
 
-  // Normalize weights to sum to 1
-  const weightSum = Object.values(newState.sourceWeights).reduce((a, b) => a + b, 0);
-  if (weightSum > 0) {
-    for (const source of Object.keys(newState.sourceWeights)) {
-      newState.sourceWeights[source] /= weightSum;
-    }
-  }
+  // Compute effective weights: softmax(log(global) + delta)
+  newState.effectiveWeights = softmaxWeights(globalWeights, newState.delta);
 
-  return newState;
+  return newState as ClassWeights;
 }
 
 /**
- * Online Gradient Descent on confidence threshold
- *
- * Loss function: binary cross-entropy
- *   L = -Σ[y_i log(p_i) + (1-y_i) log(1-p_i)]
- *   where y_i = actual outcome, p_i = our predicted probability
- *
- * We optimize the threshold T: predict "win" if winRate > T
- * Gradient of accuracy w.r.t. threshold:
- *   If lowering T would have caught more true wins → decrease T
- *   If raising T would have avoided more false wins → increase T
- *
- * Update: T ← T - α × gradient (with momentum)
+ * Get effective weights for a given asset class.
  */
-export function updateConfidenceThreshold(
-  state: OptimizationState,
-  dayResults: {
-    winRates: number[]; // predicted win rates (0-100)
-    outcomes: boolean[]; // actual win/lose
+export function getEffectiveWeights(state: OptimizationState, assetClass: string): Record<string, number> {
+  const classState = state.classDeltas[assetClass];
+  if (classState?.effectiveWeights && Object.keys(classState.effectiveWeights).length > 0) {
+    return classState.effectiveWeights;
   }
-): OptimizationState {
-  const { winRates, outcomes } = dayResults;
-  const newState = { ...state };
-  const T = state.confidenceThreshold;
-
-  // Compute gradient: how many correct predictions would we gain/lose
-  // by shifting the threshold by ε?
-  let gradientSignal = 0;
-
-  for (let i = 0; i < winRates.length; i++) {
-    const rate = winRates[i];
-    const actual = outcomes[i];
-    const predicted = rate > T;
-
-    // Cases near the threshold boundary matter most
-    const distFromThreshold = Math.abs(rate - T);
-    if (distFromThreshold > 20) continue; // far from boundary, doesn't matter
-
-    // Weight by proximity to threshold (closer = more signal)
-    const proximity = 1 - distFromThreshold / 20;
-
-    if (predicted && !actual) {
-      // False positive: we predicted win but it lost
-      // → should raise threshold (make it harder to predict win)
-      gradientSignal += proximity;
-    } else if (!predicted && actual) {
-      // False negative: we predicted lose but it won
-      // → should lower threshold (make it easier to predict win)
-      gradientSignal -= proximity;
-    }
-    // Correct predictions: no gradient signal needed
-  }
-
-  // Normalize gradient
-  const n = winRates.length;
-  if (n > 0) gradientSignal /= n;
-
-  // SGD with momentum (β = 0.7)
-  const beta = 0.7;
-  const alpha = 2.0 / Math.sqrt(newState.epoch + 1); // decaying LR
-  newState.thresholdLR = alpha;
-
-  newState.thresholdMomentum = beta * state.thresholdMomentum + (1 - beta) * gradientSignal;
-
-  // Update threshold (clamp to [30, 70])
-  newState.confidenceThreshold = Math.max(30, Math.min(70,
-    T + alpha * newState.thresholdMomentum
-  ));
-
-  return newState;
+  return state.sourceWeights;
 }
 
 /**
- * Full optimization step: run after each daily evaluation.
- * Combines both weight update and threshold update.
+ * Full optimization step after daily evaluation.
  */
 export function optimizationStep(
   state: OptimizationState,
   dayResults: {
     date: string;
-    winRates: number[];
-    outcomes: boolean[];
-    sourceScores: Record<string, number>;
-    predictedWins: boolean[];
-    accuracy: number;
+    sourceAccuracy: Record<string, number>; // per-source accuracy (0-100)
+    accuracy: number; // overall day accuracy
+    accuracyBefore?: number;
+    assetClass?: string; // if predictions are for a specific class
   }
 ): { state: OptimizationState; report: string } {
-  // Step 1: Update source weights (Hedge)
-  let newState = updateSourceWeights(state, dayResults);
+  const newState: OptimizationState = {
+    ...state,
+    sourceWeights: { ...state.sourceWeights },
+    classDeltas: { ...state.classDeltas },
+    history: [...(state.history || [])],
+    epoch: state.epoch + 1,
+  };
 
-  // Step 2: Update confidence threshold (Online GD)
-  newState = updateConfidenceThreshold(newState, dayResults);
+  const eta = 0.3 / Math.sqrt(newState.epoch);
+  newState.weightLR = eta;
 
-  // Step 3: Record history for visualization
-  newState.history = [...(state.history || []), {
+  // Step 1: Global Hedge update
+  newState.sourceWeights = hedgeUpdateGlobal(
+    state.sourceWeights,
+    dayResults.sourceAccuracy,
+    newState.epoch
+  );
+
+  // Step 2: Per-class delta update (if we know the class)
+  const assetClass = dayResults.assetClass || "general";
+  const currentClass = state.classDeltas[assetClass] || {
+    delta: zeroDelta(), epoch: 0, effectiveWeights: uniformWeights(),
+  };
+  newState.classDeltas[assetClass] = hedgeUpdateClassDelta(
+    currentClass,
+    newState.sourceWeights,
+    dayResults.sourceAccuracy
+  );
+
+  // Also decay deltas for non-updated classes (regularization)
+  for (const c of ASSET_CLASSES) {
+    if (c === assetClass) continue;
+    const cs = newState.classDeltas[c];
+    if (!cs) continue;
+    for (const s of DEFAULT_SOURCES) {
+      cs.delta[s] = (cs.delta[s] || 0) * 0.98;
+    }
+    cs.effectiveWeights = softmaxWeights(newState.sourceWeights, cs.delta);
+  }
+
+  // Step 3: Record history
+  const classEffective: Record<string, Record<string, number>> = {};
+  for (const [c, cs] of Object.entries(newState.classDeltas)) {
+    classEffective[c] = cs.effectiveWeights;
+  }
+
+  newState.history.push({
     date: dayResults.date,
     weights: { ...newState.sourceWeights },
-    threshold: newState.confidenceThreshold,
+    classWeights: classEffective,
     accuracy: dayResults.accuracy,
+    accuracyBefore: dayResults.accuracyBefore,
     epoch: newState.epoch,
-  }].slice(-30); // keep last 30 days
+    assetClass,
+  });
 
-  // Generate report
-  const weightStr = Object.entries(newState.sourceWeights)
+  // Keep last 30 entries
+  if (newState.history.length > 30) newState.history = newState.history.slice(-30);
+
+  newState.lastOptimizedDate = dayResults.date;
+
+  // Report
+  const gw = Object.entries(newState.sourceWeights)
     .sort((a, b) => b[1] - a[1])
-    .map(([s, w]) => `${s}: ${(w * 100).toFixed(1)}%`)
+    .map(([s, w]) => `${s.replace("News Sentiment", "News").replace("Market Data", "Mkt").replace("X / Twitter", "Twtr")}: ${(w * 100).toFixed(1)}%`)
     .join(", ");
 
-  const report = `[Epoch ${newState.epoch}] Weights: ${weightStr}. Threshold: ${newState.confidenceThreshold.toFixed(1)}%. LR: η=${newState.weightLR.toFixed(4)}, α=${newState.thresholdLR.toFixed(4)}.`;
+  const cw = Object.entries(newState.classDeltas[assetClass]?.effectiveWeights || {})
+    .sort((a, b) => b[1] - a[1])
+    .map(([s, w]) => `${s.replace("News Sentiment", "News").replace("Market Data", "Mkt").replace("X / Twitter", "Twtr")}: ${(w * 100).toFixed(1)}%`)
+    .join(", ");
+
+  const report = `[Epoch ${newState.epoch}] Global: ${gw}. ${assetClass}: ${cw}. η=${eta.toFixed(4)}.`;
 
   return { state: newState, report };
 }
 
 /**
  * Format optimization state as context for the LLM scorer.
- * This is injected into the prediction prompt.
  */
-export function formatOptimizationContext(state: OptimizationState): string {
-  const weights = Object.entries(state.sourceWeights)
+export function formatOptimizationContext(state: OptimizationState, assetClass?: string): string {
+  const effectiveWeights = assetClass
+    ? getEffectiveWeights(state, assetClass)
+    : state.sourceWeights;
+
+  const weights = Object.entries(effectiveWeights)
     .sort((a, b) => b[1] - a[1])
     .map(([s, w]) => `${s}: ${(w * 100).toFixed(1)}%`)
     .join(", ");
 
-  return `OPTIMIZED PARAMETERS (learned from ${state.epoch} days of data via Hedge algorithm):
-- Source weights: ${weights}
-- Use these weights in your formula. They are learned from actual prediction accuracy, not heuristic.
-- Confidence threshold: ${state.confidenceThreshold.toFixed(1)}% — predictions above this are more likely to be correct.
-- These parameters are updated daily via multiplicative weights update (regret-bounded, provably convergent).`;
+  const globalWeights = Object.entries(state.sourceWeights)
+    .sort((a, b) => b[1] - a[1])
+    .map(([s, w]) => `${s}: ${(w * 100).toFixed(1)}%`)
+    .join(", ");
+
+  return `OPTIMIZED PARAMETERS (learned from ${state.epoch} epochs via two-level Hedge algorithm):
+- Source weights for ${assetClass || "all"}: ${weights}
+- Global baseline weights: ${globalWeights}
+- Use the source weights above in your formula. They are learned from actual prediction accuracy per asset class.
+- These parameters update daily: global weights via Hedge (regret-bounded), per-class via delta adjustment.`;
 }
