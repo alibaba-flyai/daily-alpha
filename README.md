@@ -80,25 +80,30 @@ $$\text{Regret}(T) \leq O\left(\sqrt{T \ln N}\right)$$
 
 where $T$ is the number of trading days and $N$ is the number of sources. This means after $T$ days, our cumulative loss is within $\sqrt{T \ln N}$ of the **best possible fixed-weight strategy** we could have chosen in hindsight. This is provably optimal — no online algorithm can do better.
 
-**What you see:** On the dashboard, source weights shift over time. If News Sentiment has been the most accurate source, its weight grows from 25% toward 40%. If Twitter is noisy, it shrinks toward 5%.
+**What you see:** On the dashboard, source weights shift over time. After 11 days: Market Data rose from 25% to 30%, while Polymarket dropped to 19%.
 
-### 2. Online Gradient Descent on Confidence Threshold
+### 2. Per-Asset-Class Deltas
 
-The system learns the optimal **decision boundary** $\tau$ — above what win rate should we predict "win"?
+Different asset classes need different source weights. Polymarket is strong for crypto/politics but weak for individual stocks. Market data momentum matters more for equities.
 
-**Gradient signal** — for predictions near the boundary:
+The system learns a **class-specific delta** $\delta_{i,c}$ on top of the global weights:
 
-$$g = \frac{1}{n} \sum_{i : |p_i - \tau| < 20} \text{proximity}_i \cdot \begin{cases} +1 & \text{if false positive} \\ -1 & \text{if false negative} \\ 0 & \text{if correct} \end{cases}$$
+$$w_{i,c} = \text{softmax}\left(\log(w_i^{\text{global}}) + \delta_{i,c}\right)$$
 
-**SGD with momentum** ($\beta = 0.7$):
+**Delta update** — faster learning rate (less data per class):
 
-$$m_t = \beta \cdot m_{t-1} + (1 - \beta) \cdot g_t$$
+$$\delta_{i,c} \leftarrow 0.95 \cdot \delta_{i,c} + \frac{0.5}{\sqrt{t_c}} \cdot r_i$$
 
-$$\tau_{t+1} = \text{clamp}\left(\tau_t + \alpha_t \cdot m_t, \ 30, \ 70\right)$$
+The decay factor $0.95$ **regularizes** the delta toward zero — classes with few observations stay close to the global prior. Classes with abundant data develop their own specialized weights.
 
-$$\alpha_t = \frac{2.0}{\sqrt{t}}$$
+**After 11 epochs:**
 
-The momentum smooths noisy daily gradients. The decaying $\alpha$ ensures convergence. The clamp $[30, 70]$ prevents degenerate solutions.
+| | Polymarket | Market Data | News | Twitter |
+|---|---|---|---|---|
+| **Global** | 19% | 30% | 24% | 26% |
+| **General class** | 14% | 36% | 22% | 28% |
+
+The general class learned to rely even more on Market Data (36%) and less on Polymarket (14%) than the global baseline suggests. As equity, crypto, and commodity predictions accumulate, each class will develop its own weight profile.
 
 ### 3. LLM Postmortem Loop (Qualitative)
 
@@ -111,16 +116,20 @@ Day N closes → Evaluate → Postmortem → Synthesize learnings → Inject int
 > *"INTC (53% WIN) went down — moderate-confidence tech calls failed.*
 > *High-conviction calls ≥ 57% were 100% accurate."*
 
-The postmortem provides **qualitative** insights that complement the quantitative updates. Both are injected into the scorer prompt, creating a complete feedback loop.
+The postmortem provides **qualitative** insights that complement the quantitative Hedge updates. Both are injected into the scorer prompt, creating a complete feedback loop.
 
 ### Convergence Properties
 
 | Property | Mechanism | Guarantee |
 |----------|-----------|-----------|
-| Source weights | Hedge (multiplicative weights) | $O(\sqrt{T \ln N})$ regret |
-| Decision threshold | SGD with momentum | Convergence via decaying $\alpha_t \to 0$ |
-| Stability | Weight normalization + threshold clamp | Bounded parameter space |
-| Adaptation | Per-epoch updates | Tracks non-stationary distributions |
+| Global weights | Hedge (multiplicative) | $O(\sqrt{T \ln N})$ regret |
+| Class deltas | Hedge + L2 regularization | $O(\sqrt{T_c \ln N})$ per class |
+| Stability | Softmax normalization + delta decay | Bounded parameter space |
+| Adaptation | Per-epoch incremental updates | Tracks non-stationary distributions |
+
+### Why Not a Threshold?
+
+We deliberately removed confidence threshold optimization. With only 10 predictions/day, the gradient signal is too noisy. Instead, the per-class delta naturally handles calibration — if a class systematically over/under-predicts, the delta shifts weights to correct it. One unified mechanism (Hedge) replaces two.
 
 ### Why Online Learning?
 
@@ -146,7 +155,7 @@ Online learning algorithms like Hedge are designed exactly for this: learn incre
 | News | Google News RSS |
 | Social | X/Twitter Syndication API |
 | Streaming | Server-Sent Events (SSE) |
-| Optimization | Hedge + Online GD (`lib/optimizer.ts`) |
+| Optimization | Two-level Hedge: global + per-class (`lib/optimizer.ts`) |
 
 ---
 
@@ -203,7 +212,7 @@ components/
 
 lib/
     scorer.ts           Gemini win-rate synthesis (with optimization context injection)
-    optimizer.ts        Hedge algorithm + online GD (principled self-improvement)
+    optimizer.ts        Two-level Hedge: global weights + per-class deltas
     postmortem.ts       Daily LLM analysis of prediction accuracy
     sentiment.ts        Gemini batch sentiment classifier
     query-expander.ts   LLM query expansion (tickers, people, categories)
