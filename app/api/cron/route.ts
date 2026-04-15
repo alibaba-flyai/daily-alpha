@@ -59,6 +59,7 @@ async function fetchCurrentPrice(symbol: string): Promise<number | null> {
 interface BatchPrediction {
   symbol: string;
   winRate: number;
+  assetClass: string;
   sourceScores: { source: string; score: number }[];
 }
 
@@ -72,19 +73,16 @@ async function predictBatch(
     });
 
     const assetList = assets.map((a) => `- ${a.symbol} (${a.name}) at $${a.price.toFixed(2)}`).join("\n");
-    const prompt = `You are a quantitative analyst. For each asset, predict the probability (0-100) that tomorrow's closing price will be higher than today's.
-
-For each asset, also estimate what each data source would signal (0-100):
-- Polymarket: based on prediction market sentiment for this asset/sector
-- Market Data: based on recent price momentum and trend
-- News Sentiment: based on recent news tone for this asset
-- X / Twitter: based on social media sentiment
+    const prompt = `You are a quantitative analyst. For each asset:
+1. Classify its asset class: "equity", "crypto", "commodity", "index", or "general"
+2. Predict probability (0-100) that tomorrow's closing price > today's
+3. Estimate what each data source would signal (0-100)
 
 Assets:
 ${assetList}
 
 Return JSON array:
-[{"symbol": "NVDA", "winRate": 55, "sourceScores": [{"source": "Polymarket", "score": 45}, {"source": "Market Data", "score": 62}, {"source": "News Sentiment", "score": 58}, {"source": "X / Twitter", "score": 50}]}]`;
+[{"symbol": "NVDA", "assetClass": "equity", "winRate": 55, "sourceScores": [{"source": "Polymarket", "score": 45}, {"source": "Market Data", "score": 62}, {"source": "News Sentiment", "score": 58}, {"source": "X / Twitter", "score": 50}]}]`;
 
     const response = await model.generateContent(prompt);
     const text = response.response.text().trim().replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "");
@@ -92,6 +90,7 @@ Return JSON array:
   } catch {
     return assets.map((a) => ({
       symbol: a.symbol,
+      assetClass: "equity",
       winRate: 50,
       sourceScores: [
         { source: "Polymarket", score: 50 },
@@ -116,6 +115,7 @@ async function generatePredictions(): Promise<DailyPrediction[]> {
       symbol: asset.symbol, name: asset.name,
       predictedWinRate: winRate, predictedWin: winRate > 50,
       priceAtPrediction: asset.price,
+      assetClass: pred?.assetClass || "equity",
       sourceScores: (pred?.sourceScores || []).map((s) => ({
         source: s.source,
         score: s.score,
@@ -214,33 +214,70 @@ export async function GET(req: NextRequest) {
   if (latestEvaluated?.results && latestEvaluated.date !== perf.optimizationState?.lastOptimizedDate) {
     const results = latestEvaluated.results;
 
-    // Compute per-source accuracy: for each source, how often was its bullish/bearish call correct?
+    // Group results by asset class
+    const byClass: Record<string, typeof results> = {};
+    for (const r of results) {
+      const cls = r.assetClass || "general";
+      if (!byClass[cls]) byClass[cls] = [];
+      byClass[cls].push(r);
+    }
+
+    // Run one global update using all results, then per-class updates
+    // First: compute overall source accuracy for global Hedge
     const sourceCorrect: Record<string, number> = {};
     const sourceTotal: Record<string, number> = {};
     for (const r of results) {
       if (!r.sourceScores) continue;
       for (const ss of r.sourceScores) {
         sourceTotal[ss.source] = (sourceTotal[ss.source] || 0) + 1;
-        if (ss.bullish === r.actualWin) {
-          sourceCorrect[ss.source] = (sourceCorrect[ss.source] || 0) + 1;
-        }
+        if (ss.bullish === r.actualWin) sourceCorrect[ss.source] = (sourceCorrect[ss.source] || 0) + 1;
       }
     }
-    // Convert to 0-100 accuracy scores
-    const sourceAccuracyScores: Record<string, number> = {};
+    const globalAccuracy: Record<string, number> = {};
     for (const [source, total] of Object.entries(sourceTotal)) {
-      sourceAccuracyScores[source] = Math.round(((sourceCorrect[source] || 0) / total) * 100);
+      globalAccuracy[source] = Math.round(((sourceCorrect[source] || 0) / total) * 100);
     }
 
-    const { state: updatedOpt, report } = optimizationStep(optState, {
+    // Global optimization step (uses all results)
+    let currentOpt = optState;
+    const { state: globalOpt, report: globalReport } = optimizationStep(currentOpt, {
       date: latestEvaluated.date,
-      sourceAccuracy: sourceAccuracyScores,
+      sourceAccuracy: globalAccuracy,
       accuracy: latestEvaluated.accuracy || 50,
-      assetClass: "general", // daily picks are mixed asset classes
+      assetClass: "general",
     });
-    updatedOpt.lastOptimizedDate = latestEvaluated.date;
-    perf.optimizationState = updatedOpt;
-    log.push(`Optimization: ${report}`);
+    currentOpt = globalOpt;
+    log.push(`Global: ${globalReport}`);
+
+    // Per-class optimization (only for classes with data)
+    for (const [cls, classResults] of Object.entries(byClass)) {
+      if (cls === "general") continue; // already handled above
+      const clsCorrect: Record<string, number> = {};
+      const clsTotal: Record<string, number> = {};
+      for (const r of classResults) {
+        if (!r.sourceScores) continue;
+        for (const ss of r.sourceScores) {
+          clsTotal[ss.source] = (clsTotal[ss.source] || 0) + 1;
+          if (ss.bullish === r.actualWin) clsCorrect[ss.source] = (clsCorrect[ss.source] || 0) + 1;
+        }
+      }
+      const clsAccuracy: Record<string, number> = {};
+      for (const [source, total] of Object.entries(clsTotal)) {
+        clsAccuracy[source] = Math.round(((clsCorrect[source] || 0) / total) * 100);
+      }
+      const clsAcc = Math.round((classResults.filter((r) => r.correct).length / classResults.length) * 100);
+      const { state: clsOpt, report: clsReport } = optimizationStep(currentOpt, {
+        date: latestEvaluated.date,
+        sourceAccuracy: clsAccuracy,
+        accuracy: clsAcc,
+        assetClass: cls,
+      });
+      currentOpt = clsOpt;
+      log.push(`${cls}: ${clsReport}`);
+    }
+
+    currentOpt.lastOptimizedDate = latestEvaluated.date;
+    perf.optimizationState = currentOpt;
   }
 
   // 6. Generate today's predictions if missing

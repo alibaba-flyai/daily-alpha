@@ -214,27 +214,51 @@ export default function OptimizationPanel({ optimization, records }: Props) {
         <span className="text-[9px] font-mono text-zinc-700">η = {optimization.weightLR.toFixed(4)}</span>
       </div>
 
-      {/* Two-column: Global weights (left) + Class weights (right) */}
-      <div className="flex gap-4 mb-4">
-        <div className="flex-1">
-          <WeightBars weights={optimization.sourceWeights} label="Global Weights" />
-        </div>
-        {hasClassWeights && (
-          <div className="flex-1">
-            <WeightBars weights={generalClass.effectiveWeights} label="General Class" />
-          </div>
-        )}
+      {/* Global weights */}
+      <div className="mb-3">
+        <WeightBars weights={optimization.sourceWeights} label="Global Weights" />
       </div>
 
-      {/* Class delta — how much each source shifted from global */}
-      {hasClassWeights && (
-        <div className="mb-4">
-          <span className="text-[9px] text-zinc-600 uppercase tracking-wider">Class Delta (shift from global)</span>
-          <div className="mt-1">
-            <DeltaBars classWeights={generalClass} globalWeights={optimization.sourceWeights} />
+      {/* Per-class weights + deltas */}
+      {(() => {
+        const activeClasses = Object.entries(optimization.classDeltas || {})
+          .filter(([, cw]) => cw.epoch > 0 && Object.keys(cw.effectiveWeights).length > 0)
+          .sort((a, b) => b[1].epoch - a[1].epoch);
+        if (activeClasses.length === 0) return null;
+        return (
+          <div className="mb-3 space-y-3">
+            {activeClasses.map(([cls, cw]) => (
+              <div key={cls} className="bg-zinc-900/30 rounded-lg p-2.5">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-[9px] font-semibold text-zinc-400 uppercase tracking-wider">{cls}</span>
+                  <span className="text-[8px] text-zinc-600 font-mono">{cw.epoch} epochs</span>
+                </div>
+                <div className="flex gap-3">
+                  <div className="flex-1">
+                    <WeightBars weights={cw.effectiveWeights} label="" />
+                  </div>
+                  <div className="w-24 shrink-0">
+                    <span className="text-[7px] text-zinc-600 uppercase">Delta</span>
+                    <div className="space-y-0.5 mt-0.5">
+                      {Object.keys(optimization.sourceWeights).map((s) => {
+                        const delta = (cw.effectiveWeights[s] || 0.25) - (optimization.sourceWeights[s] || 0.25);
+                        const isUp = delta >= 0;
+                        return (
+                          <div key={s} className="flex items-center gap-1">
+                            <span className={`text-[7px] font-mono ${isUp ? "text-emerald-400" : "text-red-400"}`}>
+                              {isUp ? "+" : ""}{(delta * 100).toFixed(1)}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       <Legend />
 

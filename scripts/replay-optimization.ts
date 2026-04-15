@@ -13,6 +13,18 @@ import path from "path";
 const DATA_FILE = path.join(process.cwd(), "data", "performance.json");
 const SEED_FILE = path.join(process.cwd(), "lib", "seed-performance.json");
 const SOURCES = ["Polymarket", "Market Data", "News Sentiment", "X / Twitter"];
+
+// Simple asset class classifier
+const CRYPTO_TICKERS = new Set(["BTC-USD", "ETH-USD", "SOL-USD", "DOGE-USD", "ADA-USD", "XRP-USD", "MARA", "RIOT", "COIN"]);
+const COMMODITY_TICKERS = new Set(["GC=F", "CL=F", "SI=F", "NG=F"]);
+const INDEX_TICKERS = new Set(["^GSPC", "^IXIC", "^DJI", "SPY", "QQQ", "DIA"]);
+
+function classifyAsset(symbol: string): string {
+  if (CRYPTO_TICKERS.has(symbol)) return "crypto";
+  if (COMMODITY_TICKERS.has(symbol)) return "commodity";
+  if (INDEX_TICKERS.has(symbol)) return "index";
+  return "equity";
+}
 const ASSET_CLASSES = ["equity", "crypto", "commodity", "index", "general"];
 
 // Import the optimizer functions inline (can't import TS directly)
@@ -83,7 +95,7 @@ function computeSourceAcc(results: { sourceScores?: { source: string; bullish: b
   return acc;
 }
 
-function optimStep(state: OptState, date: string, srcAcc: Record<string, number>, acc: number, accBefore: number): OptState {
+function optimStep(state: OptState, date: string, srcAcc: Record<string, number>, acc: number, accBefore: number, assetClass: string = "general"): OptState {
   const ns: OptState = { ...state, sourceWeights: { ...state.sourceWeights }, classDeltas: { ...state.classDeltas }, history: [...state.history], epoch: state.epoch + 1 };
   const eta = 0.3 / Math.sqrt(ns.epoch);
   ns.weightLR = eta;
@@ -93,8 +105,8 @@ function optimStep(state: OptState, date: string, srcAcc: Record<string, number>
   const sum = Object.values(ns.sourceWeights).reduce((a, b) => a + b, 0);
   for (const s of Object.keys(ns.sourceWeights)) ns.sourceWeights[s] /= sum;
 
-  // Class delta (general for daily picks)
-  const c = "general";
+  // Class delta
+  const c = assetClass;
   const cs = { ...ns.classDeltas[c], delta: { ...(ns.classDeltas[c]?.delta || zeroDelta()) } };
   cs.epoch += 1;
   const etaC = 0.5 / Math.sqrt(cs.epoch);
@@ -125,8 +137,8 @@ function main() {
   const data = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
   const evaluated = data.records.filter((r: { results: unknown }) => r.results !== null).sort((a: { date: string }, b: { date: string }) => a.date.localeCompare(b.date));
   console.log(`${evaluated.length} evaluated days.\n`);
-  console.log("Day  Date        Before → After    Global Weights                    Class(general) Weights");
-  console.log("───  ──────────  ──────────────    ──────────────────────────────    ─────────────────────────────");
+  console.log("Day  Date        Before → After    Classes          Global Weights");
+  console.log("───  ──────────  ──────────────    ───────────────  ──────────────────────────────");
 
   let opt = initOpt();
 
@@ -134,19 +146,25 @@ function main() {
     const rec = evaluated[d];
     const results = rec.results!;
 
-    // Gen source scores
+    // Assign asset class + gen source scores
     for (let i = 0; i < results.length; i++) {
+      const cls = classifyAsset(results[i].symbol);
+      results[i].assetClass = cls;
       results[i].sourceScores = genSourceScores(results[i].symbol, results[i].predictedWinRate, d, i);
-      if (rec.predictions[i]) rec.predictions[i].sourceScores = results[i].sourceScores;
+      if (rec.predictions[i]) {
+        rec.predictions[i].sourceScores = results[i].sourceScores;
+        rec.predictions[i].assetClass = cls;
+      }
     }
 
     const origAcc = rec.accuracy || 0;
 
-    // Rescore from day 2 using effective weights
+    // Rescore from day 2 using per-class effective weights
     if (d > 0) {
-      const ew = opt.classDeltas["general"]?.effectiveWeights || opt.sourceWeights;
       for (const r of results) {
         if (!r.sourceScores) continue;
+        const cls = r.assetClass || "equity";
+        const ew = opt.classDeltas[cls]?.effectiveWeights || opt.sourceWeights;
         r.predictedWinRate = rescore(r.sourceScores, ew);
         r.predictedWin = r.predictedWinRate > 50;
         r.correct = r.predictedWin === r.actualWin;
@@ -161,14 +179,25 @@ function main() {
     const newAcc = Math.round((newCorrect / results.length) * 100);
     rec.accuracy = newAcc;
 
-    const srcAcc = computeSourceAcc(results);
-    opt = optimStep(opt, rec.date, srcAcc, newAcc, origAcc);
+    // Global optimization using all results
+    const allSrcAcc = computeSourceAcc(results);
+    opt = optimStep(opt, rec.date, allSrcAcc, newAcc, origAcc);
+
+    // Per-class optimization
+    const byClass: Record<string, typeof results> = {};
+    for (const r of results) { const c = r.assetClass || "equity"; if (!byClass[c]) byClass[c] = []; byClass[c].push(r); }
+
+    for (const [cls, classResults] of Object.entries(byClass)) {
+      const clsSrcAcc = computeSourceAcc(classResults);
+      const clsAcc = Math.round((classResults.filter((r: { correct: boolean }) => r.correct).length / classResults.length) * 100);
+      opt = optimStep(opt, rec.date, clsSrcAcc, clsAcc, clsAcc, cls);
+    }
 
     // Print
+    const classCounts = Object.entries(byClass).map(([c, r]) => `${c.slice(0, 3)}:${r.length}`).join(",");
     const gw = SOURCES.map(s => `${s.slice(0, 4)}:${(opt.sourceWeights[s] * 100).toFixed(0)}%`).join(" ");
-    const cw = SOURCES.map(s => `${s.slice(0, 4)}:${((opt.classDeltas["general"]?.effectiveWeights[s] || 0.25) * 100).toFixed(0)}%`).join(" ");
     const arrow = d === 0 ? `${origAcc}% (base)    ` : `${origAcc}% → ${newAcc}%${newAcc > origAcc ? " ↑" : newAcc < origAcc ? " ↓" : " ="}    `.slice(0, 16);
-    console.log(`${String(d + 1).padStart(3)}  ${rec.date}  ${arrow}  ${gw}    ${cw}`);
+    console.log(`${String(d + 1).padStart(3)}  ${rec.date}  ${arrow}  ${classCounts.padEnd(15)}  ${gw}`);
   }
 
   data.optimizationState = opt;
@@ -176,8 +205,14 @@ function main() {
   fs.writeFileSync(SEED_FILE, JSON.stringify(data, null, 2));
 
   console.log(`\n✅ Done. ${opt.epoch} epochs.`);
-  console.log(`Global: ${SOURCES.map(s => `${s}: ${(opt.sourceWeights[s] * 100).toFixed(1)}%`).join(", ")}`);
-  console.log(`General class: ${SOURCES.map(s => `${s}: ${((opt.classDeltas["general"]?.effectiveWeights[s] || 0.25) * 100).toFixed(1)}%`).join(", ")}`);
+  console.log(`\nGlobal: ${SOURCES.map(s => `${s}: ${(opt.sourceWeights[s] * 100).toFixed(1)}%`).join(", ")}`);
+
+  // Print per-class weights
+  for (const cls of ASSET_CLASSES) {
+    const cw = opt.classDeltas[cls];
+    if (!cw || cw.epoch === 0) continue;
+    console.log(`${cls}: ${SOURCES.map(s => `${s}: ${((cw.effectiveWeights[s] || 0.25) * 100).toFixed(1)}%`).join(", ")} (${cw.epoch} epochs)`);
+  }
 }
 
 main();

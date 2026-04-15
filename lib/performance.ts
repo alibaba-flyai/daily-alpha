@@ -21,7 +21,8 @@ export interface DailyPrediction {
   predictedWinRate: number; // 0-100
   predictedWin: boolean; // winRate > 50
   priceAtPrediction: number;
-  sourceScores?: SourceScore[]; // per-source signals for Hedge optimization
+  sourceScores?: SourceScore[];
+  assetClass?: string; // equity, crypto, commodity, index, general
 }
 
 export interface DailyResult extends DailyPrediction {
