@@ -74,16 +74,38 @@ function WeightBars({ weights }: { weights: Record<string, number> }) {
 function WeightEvolutionChart({ history }: { history: OptimizationState["history"] }) {
   if (history.length < 2) return null;
 
-  const cw = 280, ch = 80, pad = 6;
+  const cw = 280, ch = 100, pad = 8;
   const sources = Object.keys(history[0].weights);
+
+  // Compute min/max weight across all history for dynamic Y scaling
+  let minW = 1, maxW = 0;
+  for (const entry of history) {
+    for (const w of Object.values(entry.weights)) {
+      if (w < minW) minW = w;
+      if (w > maxW) maxW = w;
+    }
+  }
+  // Add padding to range (at least ±5% around data)
+  const rangePad = Math.max(0.05, (maxW - minW) * 0.3);
+  const yMin = Math.max(0, minW - rangePad);
+  const yMax = Math.min(1, maxW + rangePad);
+  const yRange = yMax - yMin || 0.1;
+
+  // Map weight to Y coordinate (inverted: higher weight = higher on chart)
+  const toY = (w: number) => pad + ((yMax - w) / yRange) * (ch - pad * 2);
 
   return (
     <div>
       <svg width={cw} height={ch} viewBox={`0 0 ${cw} ${ch}`} className="w-full">
+        {/* Y-axis labels */}
+        <text x={2} y={toY(yMax)} fontSize="7" fill="#52525b" dominantBaseline="middle" fontFamily="monospace">{(yMax * 100).toFixed(0)}%</text>
+        <text x={2} y={toY(yMin)} fontSize="7" fill="#52525b" dominantBaseline="middle" fontFamily="monospace">{(yMin * 100).toFixed(0)}%</text>
+
+        {/* Weight lines */}
         {sources.map((source) => {
           const points = history.map((entry, i) => ({
-            x: pad + (i / (history.length - 1)) * (cw - pad * 2),
-            y: pad + ((1 - (entry.weights[source] || 0)) / 1) * (ch - pad * 2) * 0.8 + pad,
+            x: pad + 16 + (i / (history.length - 1)) * (cw - pad * 2 - 16),
+            y: toY(entry.weights[source] || 0.25),
           }));
           const d = points.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
           return (
@@ -92,15 +114,15 @@ function WeightEvolutionChart({ history }: { history: OptimizationState["history
               d={d}
               fill="none"
               stroke={SOURCE_COLORS[source] || "#71717a"}
-              strokeWidth="1.5"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              opacity="0.8"
             />
           );
         })}
         {/* 25% baseline (uniform) */}
-        <line x1={pad} y1={ch * 0.55} x2={cw - pad} y2={ch * 0.55} stroke="#27272a" strokeWidth="0.5" strokeDasharray="3 3" />
+        <line x1={pad + 16} y1={toY(0.25)} x2={cw - pad} y2={toY(0.25)} stroke="#52525b" strokeWidth="0.5" strokeDasharray="3 3" />
+        <text x={cw - pad + 2} y={toY(0.25)} fontSize="7" fill="#52525b" dominantBaseline="middle" fontFamily="monospace">25%</text>
       </svg>
       <div className="flex justify-between text-[8px] text-zinc-700 px-1">
         <span>{history[0].date.slice(5)}</span>
