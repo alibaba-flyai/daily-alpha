@@ -28,10 +28,37 @@ export interface DailyRecord {
   predictions: DailyPrediction[];
   results: DailyResult[] | null; // null if not yet evaluated
   accuracy: number | null; // % correct, null if not evaluated
+  postmortem?: string; // LLM analysis of what went right/wrong
+}
+
+export interface SourceAccuracy {
+  source: string;
+  totalPredictions: number;
+  correctPredictions: number;
+  accuracy: number;
 }
 
 export interface PerformanceData {
   records: DailyRecord[];
+  learnings?: string; // accumulated LLM insights from postmortems
+  sourceAccuracy?: SourceAccuracy[]; // per-source track record
+  optimizationState?: import("./optimizer").OptimizationState; // learned parameters
+}
+
+// Compute per-source accuracy from historical data
+// This is approximate — tracks how well each source's score correlated with wins
+export function computeSourceAccuracy(records: DailyRecord[]): SourceAccuracy[] {
+  // We don't have per-source data in results, so we track overall patterns
+  // This will be enriched by the postmortem analysis
+  const evaluated = records.filter((r) => r.results !== null);
+  const total = evaluated.reduce((s, r) => s + (r.results?.length || 0), 0);
+  const correct = evaluated.reduce(
+    (s, r) => s + (r.results?.filter((x) => x.correct).length || 0), 0
+  );
+
+  return [
+    { source: "Overall", totalPredictions: total, correctPredictions: correct, accuracy: total > 0 ? Math.round((correct / total) * 100) : 50 },
+  ];
 }
 
 export function loadPerformance(): PerformanceData {

@@ -5,6 +5,8 @@ import {
   FormulaComponent,
 } from "./types";
 import { PolymarketMarket } from "./sources/polymarket";
+import { loadPerformance } from "./performance";
+import { formatOptimizationContext, initOptimizationState } from "./optimizer";
 
 function getGenAI() {
   const key = process.env.GEMINI_API_KEY;
@@ -16,6 +18,46 @@ interface ScorerInput {
   query: string;
   signals: SourceSignal[];
   polymarketMarkets: PolymarketMarket[];
+}
+
+function getTrackRecordContext(): string {
+  try {
+    const perf = loadPerformance();
+    const evaluated = perf.records
+      .filter((r) => r.results !== null)
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .slice(0, 7);
+
+    if (evaluated.length === 0) return "";
+
+    const totalCorrect = evaluated.reduce((s, r) => s + (r.results?.filter((x) => x.correct).length || 0), 0);
+    const totalPreds = evaluated.reduce((s, r) => s + (r.results?.length || 0), 0);
+    const accuracy = totalPreds > 0 ? Math.round((totalCorrect / totalPreds) * 100) : 50;
+
+    const recentDays = evaluated.slice(0, 3).map((r) => `${r.date}: ${r.accuracy}%`).join(", ");
+
+    let context = `\n\nSELF-IMPROVEMENT CONTEXT (use this to calibrate your prediction):
+Our prediction track record: ${accuracy}% accuracy over ${evaluated.length} days (${totalCorrect}/${totalPreds}).
+Recent: ${recentDays}.`;
+
+    if (perf.learnings) {
+      context += `\n\nLearnings from past mistakes:\n${perf.learnings}`;
+    }
+
+    // Add most recent postmortem
+    const lastPostmortem = evaluated.find((r) => r.postmortem);
+    if (lastPostmortem?.postmortem) {
+      context += `\n\nYesterday's postmortem (${lastPostmortem.date}):\n${lastPostmortem.postmortem}`;
+    }
+
+    // Add optimization parameters (learned via Hedge algorithm)
+    const optState = perf.optimizationState || initOptimizationState();
+    context += `\n\n${formatOptimizationContext(optState)}`;
+
+    return context;
+  } catch {
+    return "";
+  }
 }
 
 interface LLMScorerOutput {
@@ -76,11 +118,13 @@ async function callGemini(
     )
     .join("\n");
 
+  const trackRecord = getTrackRecordContext();
+
   const prompt = `You are a quantitative investment analyst. A user asked about: "${query}"
 
 Here are the raw data signals collected from multiple sources:
 
-${signalsContext}
+${signalsContext}${trackRecord}
 
 Polymarket prediction markets related to this query:
 ${marketsContext}

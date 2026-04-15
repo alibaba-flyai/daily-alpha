@@ -9,6 +9,8 @@ import {
   DailyRecord,
 } from "@/lib/performance";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { generatePostmortem, synthesizeLearnings } from "@/lib/postmortem";
+import { initOptimizationState, optimizationStep } from "@/lib/optimizer";
 
 // Verify cron secret to prevent unauthorized calls
 function verifyCron(req: NextRequest): boolean {
@@ -152,7 +154,50 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // 3. Generate today's predictions if missing
+  // 3. Generate postmortem for evaluated records that don't have one
+  for (const record of perf.records) {
+    if (!record.results || record.postmortem) continue;
+    try {
+      record.postmortem = await generatePostmortem(record);
+      if (record.postmortem) log.push(`Postmortem for ${record.date}: ${record.postmortem.slice(0, 80)}...`);
+    } catch (err) {
+      log.push(`Postmortem failed for ${record.date}: ${err}`);
+    }
+  }
+
+  // 4. Synthesize accumulated learnings from recent postmortems
+  try {
+    const newLearnings = await synthesizeLearnings(perf);
+    if (newLearnings) {
+      perf.learnings = newLearnings;
+      log.push(`Learnings updated: ${newLearnings.slice(0, 80)}...`);
+    }
+  } catch (err) {
+    log.push(`Learning synthesis failed: ${err}`);
+  }
+
+  // 5. Run optimization step on all newly evaluated records
+  const optState = perf.optimizationState || initOptimizationState();
+  const newlyEvaluated = perf.records.filter(
+    (r) => r.results !== null && r.date <= today
+  ).sort((a, b) => a.date.localeCompare(b.date));
+
+  // Only run optimization on the most recent evaluated day (avoid re-processing)
+  const latestEvaluated = newlyEvaluated[newlyEvaluated.length - 1];
+  if (latestEvaluated?.results && latestEvaluated.date !== perf.optimizationState?.lastOptimizedDate) {
+    const results = latestEvaluated.results;
+    const { state: updatedOpt, report } = optimizationStep(optState, {
+      winRates: results.map((r) => r.predictedWinRate),
+      outcomes: results.map((r) => r.actualWin),
+      sourceScores: {}, // we don't have per-source scores in results yet — weights still update from overall accuracy
+      predictedWins: results.map((r) => r.predictedWin),
+    });
+    updatedOpt.lastOptimizedDate = latestEvaluated.date;
+    perf.optimizationState = updatedOpt;
+    log.push(`Optimization: ${report}`);
+  }
+
+  // 6. Generate today's predictions if missing
   if (!perf.records.some((r) => r.date === today)) {
     try {
       const predictions = await generatePredictions();
@@ -167,10 +212,10 @@ export async function GET(req: NextRequest) {
     log.push(`Predictions for ${today} already exist`);
   }
 
-  // 4. Save locally
+  // 6. Save locally
   savePerformance(perf);
 
-  // 5. Persist to GitHub
+  // 7. Persist to GitHub
   const pushed = await persistToGitHub(perf);
   log.push(pushed ? "Persisted to GitHub" : "GitHub persistence skipped/failed");
 

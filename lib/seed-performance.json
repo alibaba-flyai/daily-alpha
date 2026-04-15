@@ -159,7 +159,8 @@
           "correct": false
         }
       ],
-      "accuracy": 56
+      "accuracy": 56,
+      "postmortem": "The model accurately predicted UP movements for all \"WIN\" calls, notably WMT (60%) and DIS (61%), indicating our positive sentiment signal is robust. However, our most confident \"LOSE\" predictions were consistently wrong, with BA (30% WIN) and AMZN (31% WIN) both rallying significantly despite strong \"LOSE\" calls. For tomorrow, we will invert any \"LOSE\" prediction where the WIN probability is below 35%, treating them as potential \"WIN\" opportunities instead."
     },
     {
       "date": "2026-04-01",
@@ -337,7 +338,8 @@
           "correct": false
         }
       ],
-      "accuracy": 30
+      "accuracy": 30,
+      "postmortem": "The model correctly identified upward movements for CSCO (70% WIN), GS (52% WIN), and BA (64% WIN), suggesting some validity in its positive momentum signal. However, the \"WIN\" signal was largely misleading, especially for high-confidence calls like JNJ (70% WIN, actual DOWN) and META (73% WIN, actual DOWN), while \"LOSE\" predictions were 100% wrong. For tomorrow, we must re-evaluate the \"LOSE\" signal and significantly increase the confidence threshold for \"WIN\" predictions, potentially only considering those above 70%."
     },
     {
       "date": "2026-04-02",
@@ -498,7 +500,8 @@
           "correct": true
         }
       ],
-      "accuracy": 78
+      "accuracy": 78,
+      "postmortem": "The model demonstrated exceptional accuracy in predicting downward movements, correctly identifying all three \"LOSE\" calls for PLTR (47%), META (33%), and NIO (35%). The key mistake was the overconfidence in the \"WIN\" prediction for JNJ (63%), which actually saw a significant -0.85% decline, indicating that mid-range conviction for upward moves can be misleading. For tomorrow, we will prioritize acting on \"LOSE\" predictions, given their 100% accuracy, and raise the confidence threshold for \"WIN\" predictions to above 70% to mitigate errors like JNJ's 63% miss."
     },
     {
       "date": "2026-04-06",
@@ -676,7 +679,8 @@
           "correct": true
         }
       ],
-      "accuracy": 50
+      "accuracy": 50,
+      "postmortem": "The model successfully identified significant directional moves, correctly predicting AAPL's -2.07% decline and strong upward momentum for SNAP (+1.91%) and PLTR (+1.45%). The primary error was a systematic overestimation of positive momentum, with high-conviction \"WIN\" predictions for stocks like MRK (72%) and MA (60%) failing significantly, as they actually declined by -1.30% and -0.64% respectively. For tomorrow, we will apply a more stringent downside risk filter to all \"WIN\" predictions, especially those above 60% probability, to temper this observed optimistic bias."
     },
     {
       "date": "2026-04-07",
@@ -837,7 +841,8 @@
           "correct": true
         }
       ],
-      "accuracy": 56
+      "accuracy": 56,
+      "postmortem": "Here's a review of yesterday's predictions:\n\n1.  **The key pattern you got RIGHT:**\n    The model effectively identified negative movements for stocks predicted to \"LOSE\" with probabilities around 47% (ADBE, PLTR) and 37% (SNAP). Furthermore, high-conviction \"WIN\" predictions above 60% proved reliable, correctly identifying positive days for GS (67%) and JNJ (61%).\n\n2.  **The key mistake:**\n    The most significant error was consistently underestimating strong positive momentum for stocks predicted to \"LOSE\" with low probabilities (33-41%). META (41% LOSE) surged 6.50%, NIO (37% LOSE) gained 3.91%, and AAPL (33% LOSE) rose 2.13%, indicating a blind spot for positive reversals.\n\n3.  **One specific adjustment for tomorrow:**\n    For tomorrow, we must implement a secondary momentum or sentiment filter for any stock predicted to \"LOSE\" with probabilities between 30-45%. This aims to catch potential positive reversals, like those seen in META and NIO, preventing reliance solely on low-conviction \"LOSE\" signals when other indicators might suggest an upward trend."
     },
     {
       "date": "2026-04-08",
@@ -998,7 +1003,8 @@
           "correct": false
         }
       ],
-      "accuracy": 67
+      "accuracy": 67,
+      "postmortem": "Our model demonstrated strong accuracy for low-probability \"LOSE\" predictions, correctly identifying down moves for MRK (40%), MA (30%), CSCO (29%), and COIN (30%). However, the key mistake was with moderate \"WIN\" probabilities, as NIO (55% WIN) and GS (58% WIN) both incorrectly predicted gains but actually declined. For tomorrow, we must adjust the weighting of features contributing to \"WIN\" signals in the 50-60% range, particularly for volatile stocks like NIO."
     },
     {
       "date": "2026-04-09",
@@ -1176,7 +1182,8 @@
           "correct": false
         }
       ],
-      "accuracy": 50
+      "accuracy": 50,
+      "postmortem": "The model accurately identified \"LOSE\" outcomes for BRK-B (34% WIN), SNAP (48% WIN), and ADBE (36% WIN), indicating strong performance in identifying downward trends when \"WIN\" probability is low. However, the key mistake was an overestimation of positive momentum, as seen with \"WIN\" predictions for AAPL (73%), MA (65%), and MRK (66%) which all actually went down. For tomorrow, we will apply a bearish bias to any \"WIN\" prediction below 74%, re-evaluating them as potential \"LOSE\" outcomes to mitigate this overconfidence."
     },
     {
       "date": "2026-04-10",
@@ -1337,7 +1344,8 @@
           "correct": false
         }
       ],
-      "accuracy": 44
+      "accuracy": 44,
+      "postmortem": "The model accurately identified strong upward momentum for tech/growth stocks, correctly predicting \"WIN\" for ADBE (+6.55%), COIN (+3.98%), and MA (+1.99%). However, a key mistake was its low-confidence \"LOSE\" predictions for high-beta tech, significantly missing SNAP's +6.85% surge (predicted LOSE 36%) and META's +0.74% gain (predicted LOSE 40%). For tomorrow, any \"LOSE\" prediction with confidence below 40% for high-beta tech stocks should be re-evaluated as a potential \"WIN\" or flagged for significant upside volatility."
     },
     {
       "date": "2026-04-13",
@@ -1515,7 +1523,8 @@
           "correct": true
         }
       ],
-      "accuracy": 70
+      "accuracy": 70,
+      "postmortem": "The model effectively identified winning trades, with all six \"predicted WIN\" calls (e.g., MARA +8.60%, IREN +9.54%) correctly predicting upward movement. The key mistake was the \"predicted LOSE\" signal, especially for probabilities between 45-50%, as INTC (+4.49%), NOK (+9.62%), and SNAP (+6.85%) all moved significantly up despite these calls. For tomorrow, we will flag any \"predicted LOSE\" with a probability between 40-50% for re-evaluation, as this range appears to be a contrarian indicator for significant upward moves."
     },
     {
       "date": "2026-04-14",
@@ -1693,7 +1702,8 @@
           "correct": true
         }
       ],
-      "accuracy": 70
+      "accuracy": 70,
+      "postmortem": "Our model accurately identified strong \"WIN\" signals, with all predictions at 58% or higher (TSLA, AMZN, CRWV, ORCL) correctly predicting upward movement and delivering significant gains, such as CRWV's +6.28%. The primary weakness lies in low-conviction \"WIN\" predictions, specifically those in the 53-55% range, which proved misleading for HPQ (53% WIN, actual -1.25%) and HOLX (55% WIN, actual 0.00%). For tomorrow, we should raise the minimum conviction threshold for a \"WIN\" signal to 56%, effectively treating any \"WIN\" prediction below this as a \"HOLD\" or \"LOSE\" to avoid similar misfires."
     },
     {
       "date": "2026-04-15",
@@ -1769,8 +1779,125 @@
           "priceAtPrediction": 10.36
         }
       ],
-      "results": null,
-      "accuracy": null
+      "results": [
+        {
+          "symbol": "NU",
+          "name": "Nu Holdings Ltd.",
+          "predictedWinRate": 58,
+          "predictedWin": true,
+          "priceAtPrediction": 14.95,
+          "priceAtClose": 15.35,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "BMNR",
+          "name": "BitMine Immersion Technologies,",
+          "predictedWinRate": 45,
+          "predictedWin": false,
+          "priceAtPrediction": 21.51,
+          "priceAtClose": 21.48,
+          "actualWin": false,
+          "correct": true
+        },
+        {
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 65.18,
+          "priceAtClose": 63.81,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "NOK",
+          "name": "Nokia Corporation Sponsored",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 10.37,
+          "priceAtClose": 10.35,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "DNN",
+          "name": "Denison Mines Corp",
+          "predictedWinRate": 62,
+          "predictedWin": true,
+          "priceAtPrediction": 3.73,
+          "priceAtClose": 3.76,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "CRWV",
+          "name": "CoreWeave, Inc.",
+          "predictedWinRate": 57,
+          "predictedWin": true,
+          "priceAtPrediction": 110.27,
+          "priceAtClose": 117.2,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "PATH",
+          "name": "UiPath, Inc.",
+          "predictedWinRate": 49,
+          "predictedWin": false,
+          "priceAtPrediction": 10.12,
+          "priceAtClose": 10.02,
+          "actualWin": false,
+          "correct": true
+        },
+        {
+          "symbol": "HPQ",
+          "name": "HP Inc.",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 19.23,
+          "priceAtClose": 18.99,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "T",
+          "name": "AT&T Inc.",
+          "predictedWinRate": 50,
+          "predictedWin": false,
+          "priceAtPrediction": 25.61,
+          "priceAtClose": 25.62,
+          "actualWin": true,
+          "correct": false
+        },
+        {
+          "symbol": "MARA",
+          "name": "MARA Holdings, Inc.",
+          "predictedWinRate": 47,
+          "predictedWin": false,
+          "priceAtPrediction": 10.36,
+          "priceAtClose": 10.49,
+          "actualWin": true,
+          "correct": false
+        }
+      ],
+      "accuracy": 50,
+      "postmortem": "The key pattern that worked was our high-conviction WIN predictions (>=57%), exemplified by NU (58% WIN, +2.68%) and CRWV (57% WIN, +6.28%). Our primary mistake was the systematic failure of moderate-confidence WIN calls (51-54%), with INTC (53% WIN, -2.10%) and HPQ (54% WIN, -1.25%) both going down despite predicted wins. For tomorrow, we must raise our WIN prediction threshold to 55% or higher, reclassifying anything below that as a potential LOSE signal."
     }
-  ]
+  ],
+  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **High-Conviction WIN Threshold:** Only trust \"WIN\" predictions with a confidence of **74% or higher**. Reclassify any \"WIN\" prediction below 74% as a \"HOLD\" or potential \"LOSE\" due to consistent overestimation of positive momentum, as seen in failures for WIN predictions in the 51-73% range (e.g., 04-09, 04-15, 04-14, 04-08).\n\n*   **Unreliable LOSE Range (Contrarian Indicator):** **Distrust** \"LOSE\" predictions with confidence between **30% and 50%**. This",
+  "optimizationState": {
+    "sourceWeights": {
+      "Polymarket": 0.25,
+      "Market Data": 0.25,
+      "News Sentiment": 0.25,
+      "X / Twitter": 0.25
+    },
+    "confidenceThreshold": 50.0318198051534,
+    "epoch": 1,
+    "weightLR": 0.3,
+    "thresholdLR": 1.414213562373095,
+    "thresholdMomentum": 0.022499999999999996,
+    "lastOptimizedDate": "2026-04-15"
+  }
 }
