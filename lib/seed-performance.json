@@ -3642,7 +3642,8 @@
           ]
         }
       ],
-      "accuracy": 70
+      "accuracy": 70,
+      "postmortem": "The model effectively identified strong upward trends for established assets, particularly with high-confidence \"WIN\" predictions like AMZN (58% predicted WIN, actual UP 5.60%) and CL=F (60% predicted WIN, actual UP 3.66%). A key mistake was the model's bearish bias on certain tech stocks, incorrectly predicting \"LOSE\" for META (46% predicted LOSE, actual UP 2.61%) and TSLA (41% predicted LOSE, actual UP 0.69%), indicating it missed positive catalysts. For tomorrow, we must adjust the model's sensitivity to negative signals for high-growth tech, specifically by incorporating a stronger positive sentiment factor for tickers like META and TSLA to mitigate this bearish bias."
     },
     {
       "date": "2026-04-09",
@@ -4280,7 +4281,8 @@
           ]
         }
       ],
-      "accuracy": 30
+      "accuracy": 30,
+      "postmortem": "Our model successfully identified upward trends in crypto and specific tech, correctly predicting WIN for BTC-USD (up 1.69%), ETH-USD (up 2.56%), and META (up 0.23%). The most significant error was the consistent failure of \"predicted LOSE\" signals for individual stocks, as TSLA (46% predicted LOSE) and AMZN (38% predicted LOSE) both actually rose by 0.96% and 2.02% respectively. For tomorrow, we must implement a strong bullish bias adjustment for all individual stock predictions, specifically re-evaluating any \"predicted LOSE\" calls below 50% confidence to a \"HOLD\" or \"WIN\" to counter this systemic bearishness."
     },
     {
       "date": "2026-04-10",
@@ -4414,7 +4416,8 @@
           ]
         }
       ],
-      "accuracy": 0
+      "accuracy": 0,
+      "postmortem": "Despite 0% accuracy, a key pattern emerged where high conviction predictions were contrarian, making XRP's 72% WIN forecast a significant mistake as it closed flat/down (0.00%). This indicates our model fundamentally misread positive momentum, failing to recognize the lack of upward movement even with strong signals. For tomorrow, we will implement a contrarian strategy, flipping any predicted WIN probability above 70% to a LOSE forecast."
     },
     {
       "date": "2026-04-11",
@@ -4548,7 +4551,8 @@
           ]
         }
       ],
-      "accuracy": 50
+      "accuracy": 50,
+      "postmortem": "Our model correctly identified downside risk for DOGE-USD, predicting \"LOSE\" (44%) which aligned with its actual DOWN (0.00%) movement, suggesting our lower-conviction \"LOSE\" signals are effective. However, the \"WIN\" prediction for BTC-USD (51%) was a significant miss, as it actually dropped -3.15%, highlighting a critical flaw in our model's ability to differentiate marginal \"WIN\" probabilities from actual negative outcomes. For tomorrow, we will implement a higher confidence threshold for \"WIN\" predictions, requiring at least 55% probability, particularly for major assets like BTC, to avoid similar false positives."
     },
     {
       "date": "2026-04-12",
@@ -4682,7 +4686,8 @@
           ]
         }
       ],
-      "accuracy": 100
+      "accuracy": 100,
+      "postmortem": "Here's the review:\n\nThe model accurately identified directional movements for both assets, correctly predicting a \"LOSE\" for DOGE-USD with 24% confidence (actual 0.00%) and a \"WIN\" for BTC-USD with 58% confidence (actual 5.27% UP). Despite 100% accuracy, the key mistake was the model's 58% \"WIN\" confidence for BTC-USD, which significantly underestimated the actual 5.27% UP movement, suggesting under-calibration for strong positive momentum. For tomorrow, we will recalibrate the BTC-USD prediction probabilities to better reflect strong upside momentum, aiming for higher confidence scores when substantial positive movements are indicated."
     },
     {
       "date": "2026-04-13",
@@ -5320,7 +5325,8 @@
           ]
         }
       ],
-      "accuracy": 40
+      "accuracy": 40,
+      "postmortem": "The model effectively identified downward movements for individual assets like AAPL (predicted LOSE 25%, actual DOWN -0.14%), JPM (predicted LOSE 48%, actual DOWN -0.82%), and ETH-USD (predicted LOSE 37%, actual DOWN -2.00%), indicating that low-to-moderate conviction \"LOSE\" signals were reliable. A significant mistake was the consistent bearish bias for broad market indices and strong movers; the model predicted \"LOSE\" for ^GSPC (45%), AMZN (40%), and GC=F (45%), all of which ended up significantly UP (1.18%, 3.81%, and 1.74% respectively). For tomorrow, any \"LOSE\" prediction with confidence between 40-45% for broad market indices or commodities should be inverted to a \"WIN\" or at least treated as neutral, to counteract yesterday's systemic underestimation of upward momentum."
     },
     {
       "date": "2026-04-14",
@@ -5958,7 +5964,8 @@
           ]
         }
       ],
-      "accuracy": 70
+      "accuracy": 70,
+      "postmortem": "Our model correctly identified strong upward momentum for tech stocks like MSFT (62% predicted WIN, actual UP 3.31%), but critically failed on JPM, predicting a high-confidence WIN (65%) when it actually dropped by -0.75%. For tomorrow, we must specifically adjust our 'WIN' signal for financial sector assets, potentially by incorporating sector-specific macro indicators or re-weighting existing features, to avoid similar high-confidence miscalls."
     },
     {
       "date": "2026-04-15",
@@ -6524,7 +6531,7 @@
               "bullish": true
             }
           ],
-          "priceAtClose": 9.306000000000001,
+          "priceAtClose": 9.306,
           "actualWin": false,
           "correct": false,
           "assetClass": "equity"
@@ -6590,7 +6597,7 @@
               "bullish": false
             }
           ],
-          "priceAtClose": 12.008700000000001,
+          "priceAtClose": 12.0087,
           "actualWin": false,
           "correct": false,
           "assetClass": "equity"
@@ -6603,7 +6610,7 @@
   "optimizationState": {
     "sourceWeights": {
       "Polymarket": 0.14785397598880973,
-      "Market Data": 0.20263241151189373,
+      "Market Data": 0.2026324115118937,
       "News Sentiment": 0.37958229927043974,
       "X / Twitter": 0.2699313132288569
     },
@@ -6618,7 +6625,7 @@
         "epoch": 23,
         "effectiveWeights": {
           "Polymarket": 0.1335045552884176,
-          "Market Data": 0.19717975418020514,
+          "Market Data": 0.1971797541802051,
           "News Sentiment": 0.4198425392159626,
           "X / Twitter": 0.24947315131541473
         }
@@ -6641,14 +6648,14 @@
       "commodity": {
         "delta": {
           "Polymarket": -0.4305009860246239,
-          "Market Data": 0.021459412375376002,
+          "Market Data": 0.021459412375376,
           "News Sentiment": 0.016954435899419508,
           "X / Twitter": 0.25241018961816775
         },
         "epoch": 4,
         "effectiveWeights": {
           "Polymarket": 0.09273191065566902,
-          "Market Data": 0.19970503768926434,
+          "Market Data": 0.19970503768926431,
           "News Sentiment": 0.3724170650030502,
           "X / Twitter": 0.33514598665201634
         }
@@ -6685,7 +6692,7 @@
             "Polymarket": 0.18656143042114456,
             "Market Data": 0.26955179752356995,
             "News Sentiment": 0.3214238221448041,
-            "X / Twitter": 0.22246294991048154
+            "X / Twitter": 0.22246294991048152
           },
           "crypto": {
             "Polymarket": 0.22509845925872207,
@@ -6761,9 +6768,9 @@
         "classWeights": {
           "equity": {
             "Polymarket": 0.12986939645355722,
-            "Market Data": 0.24419485224280674,
+            "Market Data": 0.2441948522428067,
             "News Sentiment": 0.4086204143693869,
-            "X / Twitter": 0.21731533693424918
+            "X / Twitter": 0.2173153369342492
           },
           "crypto": {
             "Polymarket": 0.08603572694615454,
@@ -6773,13 +6780,13 @@
           },
           "commodity": {
             "Polymarket": 0.17498214165102294,
-            "Market Data": 0.22335220902901826,
+            "Market Data": 0.22335220902901823,
             "News Sentiment": 0.3373632016497461,
             "X / Twitter": 0.2643024476702126
           },
           "index": {
             "Polymarket": 0.17498214165102294,
-            "Market Data": 0.22335220902901826,
+            "Market Data": 0.22335220902901823,
             "News Sentiment": 0.3373632016497461,
             "X / Twitter": 0.2643024476702126
           }
@@ -6805,7 +6812,7 @@
             "X / Twitter": 0.21434556780021363
           },
           "crypto": {
-            "Polymarket": 0.09042593170672139,
+            "Polymarket": 0.0904259317067214,
             "Market Data": 0.11893737553762278,
             "News Sentiment": 0.4374696185699375,
             "X / Twitter": 0.3531670741857183
@@ -6916,10 +6923,10 @@
         },
         "classWeights": {
           "equity": {
-            "Polymarket": 0.13865292401300675,
+            "Polymarket": 0.13865292401300677,
             "Market Data": 0.292731029127652,
             "News Sentiment": 0.3414828821094623,
-            "X / Twitter": 0.22713316474987894
+            "X / Twitter": 0.22713316474987896
           },
           "crypto": {
             "Polymarket": 0.04318130666016256,
@@ -6955,10 +6962,10 @@
         },
         "classWeights": {
           "equity": {
-            "Polymarket": 0.14807370500225497,
+            "Polymarket": 0.14807370500225495,
             "Market Data": 0.26401015798951927,
             "News Sentiment": 0.36193959821428506,
-            "X / Twitter": 0.22597653879394058
+            "X / Twitter": 0.22597653879394056
           },
           "crypto": {
             "Polymarket": 0.04514814918519489,
@@ -7007,13 +7014,13 @@
           },
           "commodity": {
             "Polymarket": 0.14859365639100275,
-            "Market Data": 0.22527144891062723,
+            "Market Data": 0.22527144891062725,
             "News Sentiment": 0.3146336737790386,
             "X / Twitter": 0.3115012209193314
           },
           "index": {
             "Polymarket": 0.14859365639100275,
-            "Market Data": 0.22527144891062723,
+            "Market Data": 0.22527144891062725,
             "News Sentiment": 0.3146336737790386,
             "X / Twitter": 0.3115012209193314
           }
@@ -7066,7 +7073,7 @@
         "date": "2026-04-06",
         "weights": {
           "Polymarket": 0.13414433095334025,
-          "Market Data": 0.22893458359135455,
+          "Market Data": 0.22893458359135457,
           "News Sentiment": 0.33242445236036705,
           "X / Twitter": 0.3044966330949382
         },
@@ -7105,16 +7112,16 @@
         "date": "2026-04-06",
         "weights": {
           "Polymarket": 0.13414433095334025,
-          "Market Data": 0.22893458359135455,
+          "Market Data": 0.22893458359135457,
           "News Sentiment": 0.33242445236036705,
           "X / Twitter": 0.3044966330949382
         },
         "classWeights": {
           "equity": {
-            "Polymarket": 0.10401754113304111,
+            "Polymarket": 0.10401754113304112,
             "Market Data": 0.25544986096273625,
             "News Sentiment": 0.3927490559377142,
-            "X / Twitter": 0.24778354196650842
+            "X / Twitter": 0.2477835419665084
           },
           "crypto": {
             "Polymarket": 0.035191825929403286,
@@ -7202,13 +7209,13 @@
           },
           "commodity": {
             "Polymarket": 0.1504961041696404,
-            "Market Data": 0.24288890559382414,
+            "Market Data": 0.24288890559382417,
             "News Sentiment": 0.31937648327161255,
             "X / Twitter": 0.2872385069649228
           },
           "index": {
             "Polymarket": 0.1504961041696404,
-            "Market Data": 0.24288890559382414,
+            "Market Data": 0.24288890559382417,
             "News Sentiment": 0.31937648327161255,
             "X / Twitter": 0.2872385069649228
           }
@@ -7222,7 +7229,7 @@
         "date": "2026-04-07",
         "weights": {
           "Polymarket": 0.1628889611585094,
-          "Market Data": 0.22516115205185774,
+          "Market Data": 0.22516115205185777,
           "News Sentiment": 0.3456760815544461,
           "X / Twitter": 0.2662738052351867
         },
@@ -7231,7 +7238,7 @@
             "Polymarket": 0.16030008196931558,
             "Market Data": 0.27512514485254597,
             "News Sentiment": 0.36772469619983855,
-            "X / Twitter": 0.19685007697829998
+            "X / Twitter": 0.1968500769783
           },
           "crypto": {
             "Polymarket": 0.06428726459304282,
@@ -7241,13 +7248,13 @@
           },
           "commodity": {
             "Polymarket": 0.16288896115850943,
-            "Market Data": 0.22516115205185774,
+            "Market Data": 0.22516115205185777,
             "News Sentiment": 0.3456760815544462,
             "X / Twitter": 0.2662738052351867
           },
           "index": {
             "Polymarket": 0.16288896115850943,
-            "Market Data": 0.22516115205185774,
+            "Market Data": 0.22516115205185777,
             "News Sentiment": 0.3456760815544462,
             "X / Twitter": 0.2662738052351867
           }
@@ -7318,7 +7325,7 @@
             "X / Twitter": 0.38401201868601786
           },
           "commodity": {
-            "Polymarket": 0.19623969484296822,
+            "Polymarket": 0.19623969484296824,
             "Market Data": 0.2712618182035686,
             "News Sentiment": 0.22118723603873408,
             "X / Twitter": 0.3113112509147291
@@ -7348,16 +7355,16 @@
             "Polymarket": 0.1873866869324019,
             "Market Data": 0.3136708648552796,
             "News Sentiment": 0.2807271543487251,
-            "X / Twitter": 0.21821529386359334
+            "X / Twitter": 0.21821529386359337
           },
           "crypto": {
             "Polymarket": 0.07517138138166665,
             "Market Data": 0.11307696300087774,
-            "News Sentiment": 0.42011974274635117,
+            "News Sentiment": 0.4201197427463512,
             "X / Twitter": 0.3916319128711045
           },
           "commodity": {
-            "Polymarket": 0.19823477134200526,
+            "Polymarket": 0.1982347713420053,
             "Market Data": 0.2740196092764556,
             "News Sentiment": 0.21326941368494087,
             "X / Twitter": 0.31447620569659834
@@ -7391,7 +7398,7 @@
           },
           "crypto": {
             "Polymarket": 0.08067234948520906,
-            "Market Data": 0.12114679082696089,
+            "Market Data": 0.12114679082696088,
             "News Sentiment": 0.4405446329986007,
             "X / Twitter": 0.3576362266892294
           },
@@ -7402,10 +7409,10 @@
             "X / Twitter": 0.2849612847319569
           },
           "index": {
-            "Polymarket": 0.21519430721367439,
+            "Polymarket": 0.2151943072136744,
             "Market Data": 0.2974627487499394,
             "News Sentiment": 0.377906024307762,
-            "X / Twitter": 0.10943691972862411
+            "X / Twitter": 0.10943691972862413
           }
         },
         "accuracy": 100,
@@ -7429,22 +7436,22 @@
             "X / Twitter": 0.19091429878714836
           },
           "crypto": {
-            "Polymarket": 0.10396711993210375,
-            "Market Data": 0.15548337253048133,
+            "Polymarket": 0.10396711993210377,
+            "Market Data": 0.1554833725304813,
             "News Sentiment": 0.40901785301761134,
             "X / Twitter": 0.3315316545198036
           },
           "commodity": {
-            "Polymarket": 0.21273246336851498,
+            "Polymarket": 0.21273246336851495,
             "Market Data": 0.29405974591656475,
             "News Sentiment": 0.21821077940738476,
             "X / Twitter": 0.27499701130753557
           },
           "index": {
-            "Polymarket": 0.22174743531654534,
+            "Polymarket": 0.22174743531654537,
             "Market Data": 0.30652112730850845,
-            "News Sentiment": 0.36414829679413613,
-            "X / Twitter": 0.10758314058080999
+            "News Sentiment": 0.3641482967941362,
+            "X / Twitter": 0.10758314058081
           }
         },
         "accuracy": 50,
@@ -7462,19 +7469,19 @@
         },
         "classWeights": {
           "equity": {
-            "Polymarket": 0.19620797791861802,
+            "Polymarket": 0.196207977918618,
             "Market Data": 0.3100534226470134,
             "News Sentiment": 0.3024393105155407,
             "X / Twitter": 0.1912992889188279
           },
           "crypto": {
-            "Polymarket": 0.10444944773554905,
+            "Polymarket": 0.10444944773554904,
             "Market Data": 0.15393029959456267,
             "News Sentiment": 0.41451129290456445,
             "X / Twitter": 0.3271089597653237
           },
           "commodity": {
-            "Polymarket": 0.21186746198745138,
+            "Polymarket": 0.21186746198745135,
             "Market Data": 0.2890545587328011,
             "News Sentiment": 0.22519914613271824,
             "X / Twitter": 0.2738788331470292
@@ -7483,7 +7490,7 @@
             "Polymarket": 0.2200303462852891,
             "Market Data": 0.30019132743038507,
             "News Sentiment": 0.37091530914155335,
-            "X / Twitter": 0.10886301714277245
+            "X / Twitter": 0.10886301714277244
           }
         },
         "accuracy": 30,
@@ -7494,7 +7501,7 @@
       {
         "date": "2026-04-09",
         "weights": {
-          "Polymarket": 0.18678373045481622,
+          "Polymarket": 0.18678373045481625,
           "Market Data": 0.2548323762347291,
           "News Sentiment": 0.32302954728440525,
           "X / Twitter": 0.23535434602604935
@@ -7507,19 +7514,19 @@
             "X / Twitter": 0.17713856764445
           },
           "crypto": {
-            "Polymarket": 0.10556540670394285,
+            "Polymarket": 0.10556540670394284,
             "Market Data": 0.1553350793707886,
             "News Sentiment": 0.42249941369108773,
             "X / Twitter": 0.3166001002341807
           },
           "commodity": {
-            "Polymarket": 0.21164340914844273,
+            "Polymarket": 0.2116434091484427,
             "Market Data": 0.28874887944677513,
             "News Sentiment": 0.232929259113645,
             "X / Twitter": 0.2666784522911372
           },
           "index": {
-            "Polymarket": 0.21808501708781514,
+            "Polymarket": 0.2180850170878151,
             "Market Data": 0.2975372800958341,
             "News Sentiment": 0.3771629582932565,
             "X / Twitter": 0.10721474452309442
@@ -7540,7 +7547,7 @@
         },
         "classWeights": {
           "equity": {
-            "Polymarket": 0.18928079568284742,
+            "Polymarket": 0.18928079568284745,
             "Market Data": 0.29609012506679977,
             "News Sentiment": 0.31737372202171,
             "X / Twitter": 0.19725535722864285
@@ -7552,9 +7559,9 @@
             "X / Twitter": 0.3427671658863962
           },
           "commodity": {
-            "Polymarket": 0.20396303856534806,
+            "Polymarket": 0.2039630385653481,
             "Market Data": 0.27827041281968956,
-            "News Sentiment": 0.22651472962316085,
+            "News Sentiment": 0.22651472962316083,
             "X / Twitter": 0.2912518189918015
           },
           "index": {
@@ -7585,13 +7592,13 @@
             "X / Twitter": 0.1922271656867845
           },
           "crypto": {
-            "Polymarket": 0.11891210680996779,
+            "Polymarket": 0.1189121068099678,
             "Market Data": 0.13553130495462426,
             "News Sentiment": 0.44914531164380567,
             "X / Twitter": 0.29641127659160227
           },
           "commodity": {
-            "Polymarket": 0.21066516280597503,
+            "Polymarket": 0.21066516280597505,
             "Market Data": 0.27034185243678377,
             "News Sentiment": 0.23603959609480388,
             "X / Twitter": 0.28295338866243724
@@ -7612,13 +7619,13 @@
         "date": "2026-04-09",
         "weights": {
           "Polymarket": 0.18031506202404163,
-          "Market Data": 0.23139425256908402,
+          "Market Data": 0.231394252569084,
           "News Sentiment": 0.3311256915792077,
           "X / Twitter": 0.2571649938276667
         },
         "classWeights": {
           "equity": {
-            "Polymarket": 0.18868168774462862,
+            "Polymarket": 0.18868168774462865,
             "Market Data": 0.27612123940855055,
             "News Sentiment": 0.33634425153654585,
             "X / Twitter": 0.198852821310275
@@ -7636,10 +7643,10 @@
             "X / Twitter": 0.33594545751360766
           },
           "index": {
-            "Polymarket": 0.18827553358863486,
+            "Polymarket": 0.18827553358863489,
             "Market Data": 0.24160974620067485,
             "News Sentiment": 0.34574408575290744,
-            "X / Twitter": 0.22437063445778282
+            "X / Twitter": 0.2243706344577828
           }
         },
         "accuracy": 0,
@@ -7660,7 +7667,7 @@
             "Polymarket": 0.2187806442874717,
             "Market Data": 0.2635770910627609,
             "News Sentiment": 0.32366047103583667,
-            "X / Twitter": 0.19398179361393061
+            "X / Twitter": 0.1939817936139306
           },
           "crypto": {
             "Polymarket": 0.12223051313959188,
@@ -7670,7 +7677,7 @@
           },
           "commodity": {
             "Polymarket": 0.17403501227342155,
-            "Market Data": 0.21057438630073694,
+            "Market Data": 0.21057438630073697,
             "News Sentiment": 0.2844575166950615,
             "X / Twitter": 0.3309330847307801
           },
@@ -7678,7 +7685,7 @@
             "Polymarket": 0.1972749370832355,
             "Market Data": 0.23869362989761408,
             "News Sentiment": 0.3415711168184775,
-            "X / Twitter": 0.22246031620067294
+            "X / Twitter": 0.22246031620067297
           }
         },
         "accuracy": 0,
@@ -7696,10 +7703,10 @@
         },
         "classWeights": {
           "equity": {
-            "Polymarket": 0.22820805917998194,
+            "Polymarket": 0.2282080591799819,
             "Market Data": 0.2595333309061298,
             "News Sentiment": 0.31967178640298244,
-            "X / Twitter": 0.19258682351090578
+            "X / Twitter": 0.19258682351090575
           },
           "crypto": {
             "Polymarket": 0.1533312306010946,
@@ -7735,7 +7742,7 @@
         },
         "classWeights": {
           "equity": {
-            "Polymarket": 0.22673443242751218,
+            "Polymarket": 0.22673443242751215,
             "Market Data": 0.2579118393182898,
             "News Sentiment": 0.32006552900686264,
             "X / Twitter": 0.1952881992473353
@@ -7748,7 +7755,7 @@
           },
           "commodity": {
             "Polymarket": 0.18319085381616357,
-            "Market Data": 0.20921783258405302,
+            "Market Data": 0.20921783258405305,
             "News Sentiment": 0.28327072597176056,
             "X / Twitter": 0.3243205876280229
           },
@@ -7777,7 +7784,7 @@
             "Polymarket": 0.2261735166659511,
             "Market Data": 0.25729442345320097,
             "News Sentiment": 0.32021041377121134,
-            "X / Twitter": 0.19632164610963654
+            "X / Twitter": 0.19632164610963657
           },
           "crypto": {
             "Polymarket": 0.1565395697266228,
@@ -7786,7 +7793,7 @@
             "X / Twitter": 0.2849789818953208
           },
           "commodity": {
-            "Polymarket": 0.18352809028433525,
+            "Polymarket": 0.18352809028433523,
             "Market Data": 0.20960298217787487,
             "News Sentiment": 0.28410652003580655,
             "X / Twitter": 0.3227624075019834
@@ -7806,8 +7813,8 @@
       {
         "date": "2026-04-12",
         "weights": {
-          "Polymarket": 0.20088356475816374,
-          "Market Data": 0.22942424878175302,
+          "Polymarket": 0.20088356475816377,
+          "Market Data": 0.22942424878175305,
           "News Sentiment": 0.3283066117652054,
           "X / Twitter": 0.2413855746948779
         },
@@ -7820,12 +7827,12 @@
           },
           "crypto": {
             "Polymarket": 0.15982929257165449,
-            "Market Data": 0.14074359798939381,
+            "Market Data": 0.1407435979893938,
             "News Sentiment": 0.4259474102014201,
             "X / Twitter": 0.27347969923753157
           },
           "commodity": {
-            "Polymarket": 0.18705997757280426,
+            "Polymarket": 0.18705997757280424,
             "Market Data": 0.2136366650175552,
             "News Sentiment": 0.28988828458104093,
             "X / Twitter": 0.30941507282859965
@@ -7900,7 +7907,7 @@
             "Polymarket": 0.16791548885665034,
             "Market Data": 0.1505409638491014,
             "News Sentiment": 0.4466387366548932,
-            "X / Twitter": 0.23490481063935525
+            "X / Twitter": 0.23490481063935523
           },
           "commodity": {
             "Polymarket": 0.18716378190727911,
@@ -7930,7 +7937,7 @@
         },
         "classWeights": {
           "equity": {
-            "Polymarket": 0.21181519116209482,
+            "Polymarket": 0.2118151911620948,
             "Market Data": 0.24108659934926796,
             "News Sentiment": 0.3563293984379127,
             "X / Twitter": 0.19076881105072444
@@ -7938,7 +7945,7 @@
           "crypto": {
             "Polymarket": 0.16062845141796156,
             "Market Data": 0.14470682877575855,
-            "News Sentiment": 0.44608145179491243,
+            "News Sentiment": 0.4460814517949124,
             "X / Twitter": 0.24858326801136757
           },
           "commodity": {
@@ -7970,7 +7977,7 @@
         "classWeights": {
           "equity": {
             "Polymarket": 0.2114284617754639,
-            "Market Data": 0.24066281709814275,
+            "Market Data": 0.24066281709814277,
             "News Sentiment": 0.35607116321783366,
             "X / Twitter": 0.19183755790855975
           },
@@ -8001,7 +8008,7 @@
       {
         "date": "2026-04-13",
         "weights": {
-          "Polymarket": 0.18912006905142126,
+          "Polymarket": 0.18912006905142129,
           "Market Data": 0.21598944554727345,
           "News Sentiment": 0.3430689360447804,
           "X / Twitter": 0.25182154935652507
@@ -8040,10 +8047,10 @@
       {
         "date": "2026-04-13",
         "weights": {
-          "Polymarket": 0.18253407974298622,
-          "Market Data": 0.20846774683891278,
+          "Polymarket": 0.18253407974298624,
+          "Market Data": 0.2084677468389128,
           "News Sentiment": 0.36594615359915594,
-          "X / Twitter": 0.24305201981894498
+          "X / Twitter": 0.24305201981894495
         },
         "classWeights": {
           "equity": {
@@ -8056,7 +8063,7 @@
             "Polymarket": 0.15413945722380576,
             "Market Data": 0.1417776337611767,
             "News Sentiment": 0.46426621069921825,
-            "X / Twitter": 0.23981669831579921
+            "X / Twitter": 0.2398166983157992
           },
           "commodity": {
             "Polymarket": 0.1368747871652773,
@@ -8086,7 +8093,7 @@
         },
         "classWeights": {
           "equity": {
-            "Polymarket": 0.17415861557606555,
+            "Polymarket": 0.17415861557606557,
             "Market Data": 0.21151829269458589,
             "News Sentiment": 0.4081262611422152,
             "X / Twitter": 0.20619683058713337
@@ -8128,7 +8135,7 @@
             "Polymarket": 0.16707525280471908,
             "Market Data": 0.22347215107117127,
             "News Sentiment": 0.3906920393532884,
-            "X / Twitter": 0.21876055677082126
+            "X / Twitter": 0.2187605567708213
           },
           "crypto": {
             "Polymarket": 0.14394466972548378,
@@ -8137,14 +8144,14 @@
             "X / Twitter": 0.25773547876462105
           },
           "commodity": {
-            "Polymarket": 0.10148014869880127,
+            "Polymarket": 0.10148014869880129,
             "Market Data": 0.21481375032464492,
             "News Sentiment": 0.35063590797073857,
             "X / Twitter": 0.33307019300581536
           },
           "index": {
             "Polymarket": 0.13716063965167666,
-            "Market Data": 0.17610157623001257,
+            "Market Data": 0.17610157623001255,
             "News Sentiment": 0.3750132101272454,
             "X / Twitter": 0.3117245739910654
           }
@@ -8166,7 +8173,7 @@
           "equity": {
             "Polymarket": 0.1545688820608748,
             "Market Data": 0.20632149273186745,
-            "News Sentiment": 0.40772899825178155,
+            "News Sentiment": 0.4077289982517815,
             "X / Twitter": 0.23138062695547612
           },
           "crypto": {
@@ -8177,7 +8184,7 @@
           },
           "commodity": {
             "Polymarket": 0.09989489945121052,
-            "Market Data": 0.20935404268018262,
+            "Market Data": 0.20935404268018265,
             "News Sentiment": 0.3551478731794834,
             "X / Twitter": 0.33560318468912353
           },
@@ -8205,7 +8212,7 @@
           "equity": {
             "Polymarket": 0.15178101849434436,
             "Market Data": 0.2024426878619636,
-            "News Sentiment": 0.41825973477568995,
+            "News Sentiment": 0.4182597347756899,
             "X / Twitter": 0.227516558868002
           },
           "crypto": {
@@ -8223,7 +8230,7 @@
           "index": {
             "Polymarket": 0.13230546971454354,
             "Market Data": 0.16986798705337258,
-            "News Sentiment": 0.39011969178650957,
+            "News Sentiment": 0.3901196917865096,
             "X / Twitter": 0.3077068514455743
           }
         },
@@ -8262,7 +8269,7 @@
           "index": {
             "Polymarket": 0.0824155822341965,
             "Market Data": 0.14238502436749745,
-            "News Sentiment": 0.43454028175995324,
+            "News Sentiment": 0.4345402817599533,
             "X / Twitter": 0.34065911163835283
           }
         },
@@ -8283,14 +8290,14 @@
           "equity": {
             "Polymarket": 0.13742479273917332,
             "Market Data": 0.19753102043664317,
-            "News Sentiment": 0.42343540432147436,
-            "X / Twitter": 0.24160878250270917
+            "News Sentiment": 0.4234354043214744,
+            "X / Twitter": 0.24160878250270915
           },
           "crypto": {
-            "Polymarket": 0.12017132121031883,
+            "Polymarket": 0.12017132121031884,
             "Market Data": 0.13551332036378466,
             "News Sentiment": 0.4980903068205793,
-            "X / Twitter": 0.24622505160531719
+            "X / Twitter": 0.2462250516053172
           },
           "commodity": {
             "Polymarket": 0.0928666645233386,
@@ -8314,14 +8321,14 @@
         "date": "2026-04-15",
         "weights": {
           "Polymarket": 0.14785397598880973,
-          "Market Data": 0.20263241151189373,
+          "Market Data": 0.2026324115118937,
           "News Sentiment": 0.37958229927043974,
           "X / Twitter": 0.2699313132288569
         },
         "classWeights": {
           "equity": {
             "Polymarket": 0.1335045552884176,
-            "Market Data": 0.19717975418020514,
+            "Market Data": 0.1971797541802051,
             "News Sentiment": 0.4198425392159626,
             "X / Twitter": 0.24947315131541473
           },
@@ -8333,7 +8340,7 @@
           },
           "commodity": {
             "Polymarket": 0.09273191065566902,
-            "Market Data": 0.19970503768926434,
+            "Market Data": 0.19970503768926431,
             "News Sentiment": 0.3724170650030502,
             "X / Twitter": 0.33514598665201634
           },
@@ -8351,5 +8358,6 @@
       }
     ],
     "lastOptimizedDate": "2026-04-15"
-  }
+  },
+  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **High-Conviction \"WIN\" Signal Adjustments:**\n    *   **Distrust and invert \"WIN\" predictions above 70%** (e.g., XRP 72% WIN -> LOSE, as seen on 2026-04-10).\n    *   **For financial sector assets or individual stocks, distrust \"WIN\" predictions between 56-69%** (e.g., JPM 65% WIN, PLTR 69% WIN, AAL 56% WIN, as seen on 2026-04-14 and 2026-04-15) unless strongly corroborated by a market-wide sentiment filter.\n\n*   **Reliable \"WIN\" Signals & Crypto Calibration:**\n    *   **Trust \"WIN\" predictions for tech stocks and cryptocurrencies when confidence is 55% or higher** (e.g., MSFT 62% WIN, BTC-USD 58% WIN, as seen on 2026-04-14 and 2026-04-12).\n    *   Be aware that for strong positive crypto movements, the confidence might still underestimate the actual upside (e.g., BTC-USD 58% WIN for 5.27% UP on 2026-04-12).\n\n*   **\"LOSE\" Signal Reliability & Inversion:**\n    *   **Trust \"LOSE\" predictions with confidence between 25-48% for individual stocks and cryptocurrencies** (e.g., AAPL 25% LOSE, DOGE-USD 44% LOSE, ETH-USD 37% LOSE, JPM 48% LOSE, as seen on 2026-04-13 and 2026-04-11).\n    *   **However, distrust and invert \"LOSE\" predictions below 50% for individual stocks** ("
 }
