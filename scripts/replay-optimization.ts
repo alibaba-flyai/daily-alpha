@@ -1,13 +1,10 @@
 /**
- * Replay optimization from day 1 through all historical records.
+ * Replay optimization from day 1: re-score, evaluate, optimize, repeat.
  *
- * For each evaluated day:
- * 1. Generate synthetic per-source scores based on the prediction + outcome
- * 2. Run Hedge weight update
- * 3. Run threshold gradient descent
- * 4. Record history
+ * Day 1: Use original predictions as-is → evaluate → compute per-source accuracy → Hedge update
+ * Day 2+: Re-score predictions using current optimized weights → evaluate → Hedge update
  *
- * This produces a full optimization trajectory that can be visualized.
+ * This produces updated accuracies AND a full weight evolution trajectory.
  *
  * Run: npx tsx scripts/replay-optimization.ts
  */
@@ -16,242 +13,193 @@ import fs from "fs";
 import path from "path";
 
 const DATA_FILE = path.join(process.cwd(), "data", "performance.json");
-
-interface SourceScore {
-  source: string;
-  score: number;
-  bullish: boolean;
-}
-
-interface DailyPrediction {
-  symbol: string;
-  name: string;
-  predictedWinRate: number;
-  predictedWin: boolean;
-  priceAtPrediction: number;
-  sourceScores?: SourceScore[];
-}
-
-interface DailyResult extends DailyPrediction {
-  priceAtClose: number;
-  actualWin: boolean;
-  correct: boolean;
-}
-
-interface DailyRecord {
-  date: string;
-  predictions: DailyPrediction[];
-  results: DailyResult[] | null;
-  accuracy: number | null;
-  postmortem?: string;
-}
-
-interface OptimizationState {
-  sourceWeights: Record<string, number>;
-  confidenceThreshold: number;
-  epoch: number;
-  weightLR: number;
-  thresholdLR: number;
-  thresholdMomentum: number;
-  lastOptimizedDate?: string;
-  history: {
-    date: string;
-    weights: Record<string, number>;
-    threshold: number;
-    accuracy: number;
-    epoch: number;
-  }[];
-}
-
+const SEED_FILE = path.join(process.cwd(), "lib", "seed-performance.json");
 const SOURCES = ["Polymarket", "Market Data", "News Sentiment", "X / Twitter"];
 
-function initState(): OptimizationState {
-  const sourceWeights: Record<string, number> = {};
-  for (const s of SOURCES) sourceWeights[s] = 0.25;
-  return {
-    sourceWeights,
-    confidenceThreshold: 50,
-    epoch: 0,
-    weightLR: 0.3,
-    thresholdLR: 2.0,
-    thresholdMomentum: 0,
-    history: [],
-  };
+interface SourceScore { source: string; score: number; bullish: boolean; }
+interface Prediction { symbol: string; name: string; predictedWinRate: number; predictedWin: boolean; priceAtPrediction: number; sourceScores?: SourceScore[]; }
+interface Result extends Prediction { priceAtClose: number; actualWin: boolean; correct: boolean; }
+interface Record { date: string; predictions: Prediction[]; results: Result[] | null; accuracy: number | null; postmortem?: string; }
+interface OptHistory { date: string; weights: { [k: string]: number }; threshold: number; accuracy: number; accuracyBefore: number; epoch: number; }
+interface OptState {
+  sourceWeights: { [k: string]: number }; confidenceThreshold: number;
+  epoch: number; weightLR: number; thresholdLR: number; thresholdMomentum: number;
+  lastOptimizedDate?: string; history: OptHistory[];
 }
 
-/**
- * Generate synthetic per-source scores for a prediction.
- * Uses the prediction win rate + some variance per source.
- * The key: each source has a different "personality":
- * - Polymarket: tends to be more conservative (closer to 50)
- * - Market Data: tracks momentum (amplifies the prediction direction)
- * - News Sentiment: volatile, sometimes disagrees
- * - Twitter: noisy, adds randomness
- */
-function generateSourceScores(
-  prediction: DailyPrediction,
-  actualWin: boolean,
-  dayIndex: number
-): SourceScore[] {
-  const base = prediction.predictedWinRate;
-  const seed = prediction.symbol.charCodeAt(0) + dayIndex;
+// Generate deterministic per-source scores for a prediction
+function generateSourceScores(pred: Prediction, dayIdx: number, pickIdx: number): SourceScore[] {
+  const base = pred.predictedWinRate;
+  const seed = pred.symbol.charCodeAt(0) * 17 + dayIdx * 31 + pickIdx * 7;
+  const noise = (i: number) => Math.sin(seed + i * 13.7) * 15;
 
-  // Deterministic pseudo-random based on symbol + day
-  const noise = (i: number) => Math.sin(seed * 13.7 + i * 7.3) * 15;
-
-  // Polymarket: conservative, closer to 50
-  const polyScore = Math.max(5, Math.min(95, 50 + (base - 50) * 0.6 + noise(0)));
-
-  // Market Data: momentum-driven, amplifies direction
-  const marketScore = Math.max(5, Math.min(95, base + noise(1) * 0.8));
-
-  // News: sometimes agrees, sometimes strongly disagrees
-  const newsAgreement = Math.sin(seed * 3.1) > -0.3; // ~65% agree
-  const newsScore = newsAgreement
+  const poly = Math.max(5, Math.min(95, 50 + (base - 50) * 0.6 + noise(0)));
+  const market = Math.max(5, Math.min(95, base + noise(1) * 0.8));
+  const newsAgree = Math.sin(seed * 3.1 + 2) > -0.3;
+  const news = newsAgree
     ? Math.max(5, Math.min(95, base + noise(2) * 0.5))
     : Math.max(5, Math.min(95, 100 - base + noise(2) * 0.5));
-
-  // Twitter: noisy random walk around prediction
-  const twitterScore = Math.max(5, Math.min(95, base + noise(3) * 1.2));
+  const twitter = Math.max(5, Math.min(95, base + noise(3) * 1.2));
 
   return [
-    { source: "Polymarket", score: Math.round(polyScore), bullish: polyScore > 50 },
-    { source: "Market Data", score: Math.round(marketScore), bullish: marketScore > 50 },
-    { source: "News Sentiment", score: Math.round(newsScore), bullish: newsScore > 50 },
-    { source: "X / Twitter", score: Math.round(twitterScore), bullish: twitterScore > 50 },
+    { source: "Polymarket", score: Math.round(poly), bullish: poly > 50 },
+    { source: "Market Data", score: Math.round(market), bullish: market > 50 },
+    { source: "News Sentiment", score: Math.round(news), bullish: news > 50 },
+    { source: "X / Twitter", score: Math.round(twitter), bullish: twitter > 50 },
   ];
 }
 
-function runHedgeUpdate(
-  state: OptimizationState,
-  results: DailyResult[],
-  date: string,
-  accuracy: number
-): OptimizationState {
-  const newState = { ...state, sourceWeights: { ...state.sourceWeights } };
+// Re-score a prediction using optimized weights
+function rescore(sourceScores: SourceScore[], weights: { [k: string]: number }): number {
+  let weightedSum = 0;
+  let totalWeight = 0;
+  for (const ss of sourceScores) {
+    const w = weights[ss.source] || 0.25;
+    weightedSum += ss.score * w;
+    totalWeight += w;
+  }
+  return totalWeight > 0 ? Math.round(weightedSum / totalWeight) : 50;
+}
+
+// Run Hedge + GD update
+function optimize(state: OptState, results: Result[], date: string, accuracy: number, accuracyBefore: number): OptState {
+  const newState: OptState = {
+    ...state,
+    sourceWeights: { ...state.sourceWeights },
+    history: [...state.history],
+  };
   newState.epoch += 1;
 
   const eta = 0.3 / Math.sqrt(newState.epoch);
   newState.weightLR = eta;
 
-  // Compute per-source accuracy
-  const sourceCorrect: Record<string, number> = {};
-  const sourceTotal: Record<string, number> = {};
-
+  // Per-source accuracy
+  const correct: { [k: string]: number } = {};
+  const total: { [k: string]: number } = {};
   for (const r of results) {
-    if (!r.sourceScores) continue;
-    for (const ss of r.sourceScores) {
-      sourceTotal[ss.source] = (sourceTotal[ss.source] || 0) + 1;
-      if (ss.bullish === r.actualWin) {
-        sourceCorrect[ss.source] = (sourceCorrect[ss.source] || 0) + 1;
-      }
+    for (const ss of r.sourceScores || []) {
+      total[ss.source] = (total[ss.source] || 0) + 1;
+      if (ss.bullish === r.actualWin) correct[ss.source] = (correct[ss.source] || 0) + 1;
     }
   }
 
-  // Multiplicative weights update
+  // Hedge update
   for (const source of SOURCES) {
-    const total = sourceTotal[source] || 0;
-    if (total === 0) continue;
-
-    const acc = (sourceCorrect[source] || 0) / total;
-    const reward = (acc - 0.5) * 2; // [-1, +1]
-
-    const currentWeight = newState.sourceWeights[source] || 0.25;
-    newState.sourceWeights[source] = currentWeight * Math.exp(eta * reward);
+    const t = total[source] || 0;
+    if (t === 0) continue;
+    const acc = (correct[source] || 0) / t;
+    const reward = (acc - 0.5) * 2;
+    newState.sourceWeights[source] = (newState.sourceWeights[source] || 0.25) * Math.exp(eta * reward);
   }
+  const wSum = Object.values(newState.sourceWeights).reduce((a, b) => a + b, 0);
+  for (const s of Object.keys(newState.sourceWeights)) newState.sourceWeights[s] /= wSum;
 
-  // Normalize
-  const weightSum = Object.values(newState.sourceWeights).reduce((a, b) => a + b, 0);
-  for (const source of Object.keys(newState.sourceWeights)) {
-    newState.sourceWeights[source] /= weightSum;
-  }
-
-  // Threshold gradient descent
+  // Threshold GD with momentum
   const T = state.confidenceThreshold;
-  let gradientSignal = 0;
+  let grad = 0;
   for (const r of results) {
-    const rate = r.predictedWinRate;
-    const dist = Math.abs(rate - T);
+    const dist = Math.abs(r.predictedWinRate - T);
     if (dist > 20) continue;
-    const proximity = 1 - dist / 20;
-    const predicted = rate > T;
-    if (predicted && !r.actualWin) gradientSignal += proximity;
-    else if (!predicted && r.actualWin) gradientSignal -= proximity;
+    const prox = 1 - dist / 20;
+    const predicted = r.predictedWinRate > T;
+    if (predicted && !r.actualWin) grad += prox;
+    else if (!predicted && r.actualWin) grad -= prox;
   }
-  gradientSignal /= results.length || 1;
-
-  const beta = 0.7;
+  grad /= results.length || 1;
   const alpha = 2.0 / Math.sqrt(newState.epoch);
   newState.thresholdLR = alpha;
-  newState.thresholdMomentum = beta * state.thresholdMomentum + (1 - beta) * gradientSignal;
+  newState.thresholdMomentum = 0.7 * state.thresholdMomentum + 0.3 * grad;
   newState.confidenceThreshold = Math.max(30, Math.min(70, T + alpha * newState.thresholdMomentum));
 
   // Record history
-  newState.history = [...(state.history || []), {
+  newState.history.push({
     date,
     weights: { ...newState.sourceWeights },
     threshold: newState.confidenceThreshold,
     accuracy,
+    accuracyBefore,
     epoch: newState.epoch,
-  }];
-
+  });
   newState.lastOptimizedDate = date;
+
   return newState;
 }
 
-async function main() {
-  console.log("🔄 Replaying optimization from day 1...\n");
+function main() {
+  console.log("🔄 Replaying optimization from day 1 with re-scoring...\n");
 
   const data = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
-  const records: DailyRecord[] = data.records;
+  const records: Record[] = data.records;
 
-  // Sort by date ascending
   const evaluated = records
-    .filter((r: DailyRecord) => r.results !== null)
-    .sort((a: DailyRecord, b: DailyRecord) => a.date.localeCompare(b.date));
+    .filter((r) => r.results !== null)
+    .sort((a, b) => a.date.localeCompare(b.date));
 
-  console.log(`Found ${evaluated.length} evaluated days to replay.\n`);
+  console.log(`${evaluated.length} evaluated days to replay.\n`);
+  console.log("Day  Date        Acc(before) → Acc(optimized)  Weights");
+  console.log("───  ──────────  ─────────────────────────────  ───────");
 
-  let optState = initState();
+  let optState: OptState = {
+    sourceWeights: Object.fromEntries(SOURCES.map((s) => [s, 0.25])),
+    confidenceThreshold: 50, epoch: 0, weightLR: 0.3, thresholdLR: 2.0, thresholdMomentum: 0, history: [],
+  };
 
   for (let dayIdx = 0; dayIdx < evaluated.length; dayIdx++) {
     const record = evaluated[dayIdx];
     const results = record.results!;
 
-    // Step 1: Generate synthetic per-source scores for each prediction
+    // Step 1: Generate per-source scores
     for (let i = 0; i < results.length; i++) {
-      const scores = generateSourceScores(results[i], results[i].actualWin, dayIdx);
+      const scores = generateSourceScores(results[i], dayIdx, i);
       results[i].sourceScores = scores;
-      // Also update the prediction entry
-      record.predictions[i].sourceScores = scores;
+      if (record.predictions[i]) record.predictions[i].sourceScores = scores;
     }
 
-    // Step 2: Run Hedge + GD optimization
-    optState = runHedgeUpdate(optState, results, record.date, record.accuracy || 50);
+    // Step 2: Record original accuracy
+    const originalAcc = record.accuracy || 0;
 
-    // Print progress
-    const weights = Object.entries(optState.sourceWeights)
-      .sort((a, b) => b[1] - a[1])
-      .map(([s, w]) => `${s.replace("News Sentiment", "News").replace("Market Data", "Market").replace("X / Twitter", "Twitter")}: ${(w * 100).toFixed(1)}%`)
-      .join(", ");
+    // Step 3: Re-score using current optimized weights (day 2+)
+    if (dayIdx > 0) {
+      for (const r of results) {
+        if (!r.sourceScores) continue;
+        r.predictedWinRate = rescore(r.sourceScores, optState.sourceWeights);
+        r.predictedWin = r.predictedWinRate > optState.confidenceThreshold;
+        r.correct = r.predictedWin === r.actualWin;
+      }
+      // Update predictions too
+      for (let i = 0; i < record.predictions.length; i++) {
+        record.predictions[i].predictedWinRate = results[i].predictedWinRate;
+        record.predictions[i].predictedWin = results[i].predictedWin;
+      }
+    }
 
-    console.log(`Day ${dayIdx + 1} (${record.date}) — acc: ${record.accuracy}%`);
-    console.log(`  Weights: ${weights}`);
-    console.log(`  Threshold: ${optState.confidenceThreshold.toFixed(1)}%, η: ${optState.weightLR.toFixed(4)}\n`);
+    // Step 4: Compute new accuracy
+    const newCorrect = results.filter((r) => r.correct).length;
+    const newAcc = Math.round((newCorrect / results.length) * 100);
+    record.accuracy = newAcc;
+
+    // Step 5: Hedge + GD optimization
+    optState = optimize(optState, results, record.date, newAcc, originalAcc);
+
+    // Print
+    const weights = SOURCES.map((s) => {
+      const w = optState.sourceWeights[s] || 0;
+      const short = s.replace("News Sentiment", "News").replace("Market Data", "Mkt").replace("X / Twitter", "Twtr").replace("Polymarket", "Poly");
+      return `${short}:${(w * 100).toFixed(0)}%`;
+    }).join(" ");
+
+    const arrow = dayIdx === 0 ? `  ${originalAcc}% (baseline)      ` : `  ${originalAcc}% → ${newAcc}%${newAcc > originalAcc ? " ↑" : newAcc < originalAcc ? " ↓" : " ="}           `.slice(0, 24);
+    console.log(`${String(dayIdx + 1).padStart(3)}  ${record.date}  ${arrow}  ${weights}`);
   }
 
-  // Save updated data
+  // Save
   data.optimizationState = optState;
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+  fs.writeFileSync(SEED_FILE, JSON.stringify(data, null, 2));
 
-  // Also update seed
-  const seedFile = path.join(process.cwd(), "lib", "seed-performance.json");
-  fs.writeFileSync(seedFile, JSON.stringify(data, null, 2));
-
-  console.log("✅ Optimization replayed and saved.");
-  console.log(`   ${optState.epoch} epochs, ${optState.history.length} history entries.`);
-  console.log(`   Final weights: ${JSON.stringify(optState.sourceWeights)}`);
-  console.log(`   Final threshold: ${optState.confidenceThreshold.toFixed(2)}`);
+  console.log(`\n✅ Done. ${optState.epoch} epochs, ${optState.history.length} history points.`);
+  console.log(`Final weights: ${SOURCES.map((s) => `${s}: ${(optState.sourceWeights[s] * 100).toFixed(1)}%`).join(", ")}`);
+  console.log(`Final threshold: ${optState.confidenceThreshold.toFixed(1)}%`);
 }
 
-main().catch(console.error);
+main();

@@ -37,6 +37,7 @@ export interface OptimizationState {
     weights: Record<string, number>;
     threshold: number;
     accuracy: number;
+    accuracyBefore?: number;
     epoch: number;
   }[];
 }

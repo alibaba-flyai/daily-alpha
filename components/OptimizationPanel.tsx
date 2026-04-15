@@ -11,6 +11,7 @@ interface OptimizationState {
     weights: Record<string, number>;
     threshold: number;
     accuracy: number;
+    accuracyBefore?: number;
     epoch: number;
   }[];
 }
@@ -122,24 +123,38 @@ function WeightEvolutionChart({ history }: { history: OptimizationState["history
 function ThresholdChart({ history }: { history: OptimizationState["history"] }) {
   if (history.length < 2) return null;
 
-  const tw = 280, th = 50, pad = 4;
+  const tw = 280, th = 60, pad = 4;
 
+  // Before accuracy (original, unoptimized)
+  const beforePoints = history.map((entry, i) => ({
+    x: pad + (i / (history.length - 1)) * (tw - pad * 2),
+    y: pad + ((100 - (entry.accuracyBefore ?? entry.accuracy)) / 100) * (th - pad * 2) * 0.8 + pad,
+  }));
+  // After accuracy (optimized)
+  const afterPoints = history.map((entry, i) => ({
+    x: pad + (i / (history.length - 1)) * (tw - pad * 2),
+    y: pad + ((100 - entry.accuracy) / 100) * (th - pad * 2) * 0.8 + pad,
+  }));
+  // Threshold
   const thresholdPoints = history.map((entry, i) => ({
     x: pad + (i / (history.length - 1)) * (tw - pad * 2),
     y: pad + ((70 - entry.threshold) / 40) * (th - pad * 2) * 0.8 + pad,
   }));
-  const accuracyPoints = history.map((entry, i) => ({
-    x: pad + (i / (history.length - 1)) * (tw - pad * 2),
-    y: pad + ((100 - entry.accuracy) / 100) * (th - pad * 2) * 0.8 + pad,
-  }));
 
+  const bLine = beforePoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
+  const aLine = afterPoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
   const tLine = thresholdPoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
-  const aLine = accuracyPoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
 
   return (
     <svg width={tw} height={th} viewBox={`0 0 ${tw} ${th}`} className="w-full">
-      <path d={aLine} fill="none" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
-      <path d={tLine} fill="none" stroke="#eab308" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="4 2" />
+      {/* 50% baseline */}
+      <line x1={pad} y1={th * 0.45} x2={tw - pad} y2={th * 0.45} stroke="#27272a" strokeWidth="0.5" strokeDasharray="3 3" />
+      {/* Before (original) */}
+      <path d={bLine} fill="none" stroke="#ef4444" strokeWidth="1" strokeLinecap="round" opacity="0.4" strokeDasharray="3 3" />
+      {/* After (optimized) */}
+      <path d={aLine} fill="none" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" opacity="0.8" />
+      {/* Threshold */}
+      <path d={tLine} fill="none" stroke="#eab308" strokeWidth="1" strokeLinecap="round" strokeDasharray="4 2" opacity="0.6" />
     </svg>
   );
 }
@@ -192,12 +207,16 @@ export default function OptimizationPanel({ optimization, records }: Optimizatio
           <ThresholdChart history={optimization.history} />
           <div className="flex items-center gap-3 mt-1">
             <div className="flex items-center gap-1">
-              <span className="w-3 h-0.5 rounded bg-emerald-500 opacity-60" />
-              <span className="text-[8px] text-zinc-600">Accuracy</span>
+              <span className="w-3 h-0.5 rounded bg-emerald-500" />
+              <span className="text-[8px] text-zinc-600">Optimized</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="w-3 h-0.5 rounded bg-yellow-500 border-dashed" />
-              <span className="text-[8px] text-zinc-600">Threshold ({optimization.confidenceThreshold.toFixed(1)}%)</span>
+              <span className="w-3 h-0.5 rounded bg-red-500 opacity-40" />
+              <span className="text-[8px] text-zinc-600">Before</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="w-3 h-0.5 rounded bg-yellow-500" />
+              <span className="text-[8px] text-zinc-600">Threshold</span>
             </div>
           </div>
         </div>
