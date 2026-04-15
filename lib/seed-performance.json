@@ -8,63 +8,261 @@
           "name": "Walmart Inc.",
           "predictedWinRate": 60,
           "predictedWin": true,
-          "priceAtPrediction": 124.28
+          "priceAtPrediction": 124.28,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 76,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "DIS",
           "name": "Walt Disney Company (The)",
           "predictedWinRate": 61,
           "predictedWin": true,
-          "priceAtPrediction": 96.38
+          "priceAtPrediction": 96.38,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 71,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 66,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 43,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "BA",
           "name": "Boeing Company (The)",
           "predictedWinRate": 30,
           "predictedWin": false,
-          "priceAtPrediction": 199.03
+          "priceAtPrediction": 199.03,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 30,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 77,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 41,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "HD",
           "name": "Home Depot, Inc. (The)",
           "predictedWinRate": 43,
           "predictedWin": false,
-          "priceAtPrediction": 328.89
+          "priceAtPrediction": 328.89,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 46,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "ADBE",
           "name": "Adobe Inc.",
           "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 243.08
+          "priceAtPrediction": 243.08,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 33,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 65,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MRK",
           "name": "Merck & Company, Inc.",
           "predictedWinRate": 39,
           "predictedWin": false,
-          "priceAtPrediction": 120.29
+          "priceAtPrediction": 120.29,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 51,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BABA",
           "name": "Alibaba Group Holding Limited",
           "predictedWinRate": 43,
           "predictedWin": false,
-          "priceAtPrediction": 125.46
+          "priceAtPrediction": 125.46,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 54,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "RIOT",
           "name": "Riot Platforms, Inc.",
           "predictedWinRate": 56,
           "predictedWin": true,
-          "priceAtPrediction": 12.36
+          "priceAtPrediction": 12.36,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 74,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "AMZN",
           "name": "Amazon.com, Inc.",
           "predictedWinRate": 31,
           "predictedWin": false,
-          "priceAtPrediction": 208.27
+          "priceAtPrediction": 208.27,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 24,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 23,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 33,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 49,
+              "bullish": false
+            }
+          ]
         }
       ],
       "results": [
@@ -76,7 +274,29 @@
           "priceAtPrediction": 124.28,
           "priceAtClose": 124.74,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 76,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "DIS",
@@ -86,7 +306,29 @@
           "priceAtPrediction": 96.38,
           "priceAtClose": 96.56,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 71,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 66,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 43,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "BA",
@@ -96,7 +338,29 @@
           "priceAtPrediction": 199.03,
           "priceAtClose": 207.32,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 30,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 77,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 41,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "HD",
@@ -106,7 +370,29 @@
           "priceAtPrediction": 328.89,
           "priceAtClose": 329.56,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 46,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "ADBE",
@@ -116,7 +402,29 @@
           "priceAtPrediction": 243.08,
           "priceAtClose": 241.37,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 33,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 65,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MRK",
@@ -126,7 +434,29 @@
           "priceAtPrediction": 120.29,
           "priceAtClose": 120.84,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 51,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BABA",
@@ -136,7 +466,29 @@
           "priceAtPrediction": 125.46,
           "priceAtClose": 123.73,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 54,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "RIOT",
@@ -146,7 +498,29 @@
           "priceAtPrediction": 12.36,
           "priceAtClose": 12.55,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 74,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "AMZN",
@@ -156,7 +530,29 @@
           "priceAtPrediction": 208.27,
           "priceAtClose": 210.57,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 24,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 23,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 33,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 49,
+              "bullish": false
+            }
+          ]
         }
       ],
       "accuracy": 56,
@@ -170,70 +566,290 @@
           "name": "Palantir Technologies Inc.",
           "predictedWinRate": 46,
           "predictedWin": false,
-          "priceAtPrediction": 146.49
+          "priceAtPrediction": 146.49,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "COIN",
           "name": "Coinbase Global, Inc.",
           "predictedWinRate": 50,
           "predictedWin": true,
-          "priceAtPrediction": 172.99
+          "priceAtPrediction": 172.99,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 32,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "BRK-B",
           "name": "Berkshire Hathaway Inc. New",
           "predictedWinRate": 50,
           "predictedWin": true,
-          "priceAtPrediction": 478.5
+          "priceAtPrediction": 478.5,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 42,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "JNJ",
           "name": "Johnson & Johnson",
           "predictedWinRate": 70,
           "predictedWin": true,
-          "priceAtPrediction": 244.12
+          "priceAtPrediction": 244.12,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 72,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "CSCO",
           "name": "Cisco Systems, Inc.",
           "predictedWinRate": 70,
           "predictedWin": true,
-          "priceAtPrediction": 77.93
+          "priceAtPrediction": 77.93,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 77,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 75,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 26,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "GS",
           "name": "Goldman Sachs Group, Inc. (The)",
           "predictedWinRate": 52,
           "predictedWin": true,
-          "priceAtPrediction": 860.21
+          "priceAtPrediction": 860.21,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BA",
           "name": "Boeing Company (The)",
           "predictedWinRate": 64,
           "predictedWin": true,
-          "priceAtPrediction": 207.32
+          "priceAtPrediction": 207.32,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 66,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 76,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 56,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "META",
           "name": "Meta Platforms, Inc.",
           "predictedWinRate": 73,
           "predictedWin": true,
-          "priceAtPrediction": 579.23
+          "priceAtPrediction": 579.23,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 70,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 85,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 78,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 67,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MA",
           "name": "Mastercard Incorporated",
           "predictedWinRate": 40,
           "predictedWin": false,
-          "priceAtPrediction": 491.65
+          "priceAtPrediction": 491.65,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 34,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "SNAP",
           "name": "Snap Inc.",
           "predictedWinRate": 53,
           "predictedWin": true,
-          "priceAtPrediction": 4.9
+          "priceAtPrediction": 4.9,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 39,
+              "bullish": false
+            }
+          ]
         }
       ],
       "results": [
@@ -245,7 +861,29 @@
           "priceAtPrediction": 146.49,
           "priceAtClose": 148.46,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "COIN",
@@ -255,7 +893,29 @@
           "priceAtPrediction": 172.99,
           "priceAtClose": 171.46,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 32,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "BRK-B",
@@ -265,7 +925,29 @@
           "priceAtPrediction": 478.5,
           "priceAtClose": 477.35,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 42,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "JNJ",
@@ -275,7 +957,29 @@
           "priceAtPrediction": 244.12,
           "priceAtClose": 243.04,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 72,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "CSCO",
@@ -285,7 +989,29 @@
           "priceAtPrediction": 77.93,
           "priceAtClose": 79.02,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 77,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 75,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 26,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "GS",
@@ -295,7 +1021,29 @@
           "priceAtPrediction": 860.21,
           "priceAtClose": 863.04,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BA",
@@ -305,7 +1053,29 @@
           "priceAtPrediction": 207.32,
           "priceAtClose": 208.22,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 66,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 76,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 56,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "META",
@@ -315,7 +1085,29 @@
           "priceAtPrediction": 579.23,
           "priceAtClose": 574.46,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 70,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 85,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 78,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 67,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MA",
@@ -325,7 +1117,29 @@
           "priceAtPrediction": 491.65,
           "priceAtClose": 493.44,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 34,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "SNAP",
@@ -335,7 +1149,29 @@
           "priceAtPrediction": 4.9,
           "priceAtClose": 4.63,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 39,
+              "bullish": false
+            }
+          ]
         }
       ],
       "accuracy": 30,
@@ -349,63 +1185,261 @@
           "name": "Palantir Technologies Inc.",
           "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 148.46
+          "priceAtPrediction": 148.46,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 44,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 65,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "CSCO",
           "name": "Cisco Systems, Inc.",
           "predictedWinRate": 71,
           "predictedWin": true,
-          "priceAtPrediction": 79.02
+          "priceAtPrediction": 79.02,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 67,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 63,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 64,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "SNAP",
           "name": "Snap Inc.",
           "predictedWinRate": 67,
           "predictedWin": true,
-          "priceAtPrediction": 4.63
+          "priceAtPrediction": 4.63,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 73,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 67,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 27,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 51,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MA",
           "name": "Mastercard Incorporated",
           "predictedWinRate": 46,
           "predictedWin": false,
-          "priceAtPrediction": 493.44
+          "priceAtPrediction": 493.44,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 63,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 28,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "COIN",
           "name": "Coinbase Global, Inc.",
           "predictedWinRate": 50,
           "predictedWin": true,
-          "priceAtPrediction": 171.46
+          "priceAtPrediction": 171.46,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 43,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "GS",
           "name": "Goldman Sachs Group, Inc. (The)",
           "predictedWinRate": 65,
           "predictedWin": true,
-          "priceAtPrediction": 863.04
+          "priceAtPrediction": 863.04,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 72,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 75,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "META",
           "name": "Meta Platforms, Inc.",
           "predictedWinRate": 33,
           "predictedWin": false,
-          "priceAtPrediction": 574.46
+          "priceAtPrediction": 574.46,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 30,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 15,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "JNJ",
           "name": "Johnson & Johnson",
           "predictedWinRate": 63,
           "predictedWin": true,
-          "priceAtPrediction": 243.04
+          "priceAtPrediction": 243.04,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 80,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NIO",
           "name": "NIO Inc.",
           "predictedWinRate": 35,
           "predictedWin": false,
-          "priceAtPrediction": 6.3
+          "priceAtPrediction": 6.3,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 26,
+              "bullish": false
+            }
+          ]
         }
       ],
       "results": [
@@ -417,7 +1451,29 @@
           "priceAtPrediction": 148.46,
           "priceAtClose": 147.93,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 44,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 65,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "CSCO",
@@ -427,7 +1483,29 @@
           "priceAtPrediction": 79.02,
           "priceAtClose": 80.44,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 67,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 63,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 64,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "SNAP",
@@ -437,7 +1515,29 @@
           "priceAtPrediction": 4.63,
           "priceAtClose": 4.71,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 73,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 67,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 27,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 51,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MA",
@@ -447,7 +1547,29 @@
           "priceAtPrediction": 493.44,
           "priceAtClose": 501.5,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 63,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 28,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "COIN",
@@ -457,7 +1579,29 @@
           "priceAtPrediction": 171.46,
           "priceAtClose": 174.79,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 43,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "GS",
@@ -467,7 +1611,29 @@
           "priceAtPrediction": 863.04,
           "priceAtClose": 866.05,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 72,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 75,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "META",
@@ -477,7 +1643,29 @@
           "priceAtPrediction": 574.46,
           "priceAtClose": 573.02,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 30,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 15,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "JNJ",
@@ -487,7 +1675,29 @@
           "priceAtPrediction": 243.04,
           "priceAtClose": 240.97,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 80,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NIO",
@@ -497,7 +1707,29 @@
           "priceAtPrediction": 6.3,
           "priceAtClose": 6.24,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 26,
+              "bullish": false
+            }
+          ]
         }
       ],
       "accuracy": 78,
@@ -511,70 +1743,290 @@
           "name": "Apple Inc.",
           "predictedWinRate": 45,
           "predictedWin": false,
-          "priceAtPrediction": 258.86
+          "priceAtPrediction": 258.86,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 50,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 27,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "MA",
           "name": "Mastercard Incorporated",
           "predictedWinRate": 60,
           "predictedWin": true,
-          "priceAtPrediction": 501.5
+          "priceAtPrediction": 501.5,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 51,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NIO",
           "name": "NIO Inc.",
           "predictedWinRate": 61,
           "predictedWin": true,
-          "priceAtPrediction": 6.24
+          "priceAtPrediction": 6.24,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 72,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MRK",
           "name": "Merck & Company, Inc.",
           "predictedWinRate": 72,
           "predictedWin": true,
-          "priceAtPrediction": 120.85
+          "priceAtPrediction": 120.85,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 69,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 63,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BRK-B",
           "name": "Berkshire Hathaway Inc. New",
           "predictedWinRate": 55,
           "predictedWin": true,
-          "priceAtPrediction": 476.38
+          "priceAtPrediction": 476.38,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "SNAP",
           "name": "Snap Inc.",
           "predictedWinRate": 64,
           "predictedWin": true,
-          "priceAtPrediction": 4.71
+          "priceAtPrediction": 4.71,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 64,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BA",
           "name": "Boeing Company (The)",
           "predictedWinRate": 53,
           "predictedWin": true,
-          "priceAtPrediction": 212.3
+          "priceAtPrediction": 212.3,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 46,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "PLTR",
           "name": "Palantir Technologies Inc.",
           "predictedWinRate": 62,
           "predictedWin": true,
-          "priceAtPrediction": 147.93
+          "priceAtPrediction": 147.93,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 71,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 66,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "CSCO",
           "name": "Cisco Systems, Inc.",
           "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 80.44
+          "priceAtPrediction": 80.44,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 59,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "COIN",
           "name": "Coinbase Global, Inc.",
           "predictedWinRate": 73,
           "predictedWin": true,
-          "priceAtPrediction": 174.79
+          "priceAtPrediction": 174.79,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 71,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 85,
+              "bullish": true
+            }
+          ]
         }
       ],
       "results": [
@@ -586,7 +2038,29 @@
           "priceAtPrediction": 258.86,
           "priceAtClose": 253.5,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 50,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 27,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "MA",
@@ -596,7 +2070,29 @@
           "priceAtPrediction": 501.5,
           "priceAtClose": 498.28,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 51,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NIO",
@@ -606,7 +2102,29 @@
           "priceAtPrediction": 6.24,
           "priceAtClose": 6.14,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 72,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MRK",
@@ -616,7 +2134,29 @@
           "priceAtPrediction": 120.85,
           "priceAtClose": 119.28,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 69,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 63,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BRK-B",
@@ -626,7 +2166,29 @@
           "priceAtPrediction": 476.38,
           "priceAtClose": 478.08,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "SNAP",
@@ -636,7 +2198,29 @@
           "priceAtPrediction": 4.71,
           "priceAtClose": 4.8,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 64,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BA",
@@ -646,7 +2230,29 @@
           "priceAtPrediction": 212.3,
           "priceAtClose": 210,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 46,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "PLTR",
@@ -656,7 +2262,29 @@
           "priceAtPrediction": 147.93,
           "priceAtClose": 150.07,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 71,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 66,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "CSCO",
@@ -666,7 +2294,29 @@
           "priceAtPrediction": 80.44,
           "priceAtClose": 80.68,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 59,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "COIN",
@@ -676,7 +2326,29 @@
           "priceAtPrediction": 174.79,
           "priceAtClose": 175.18,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 71,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 85,
+              "bullish": true
+            }
+          ]
         }
       ],
       "accuracy": 50,
@@ -690,63 +2362,261 @@
           "name": "Adobe Inc.",
           "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 240.14
+          "priceAtPrediction": 240.14,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 40,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "META",
           "name": "Meta Platforms, Inc.",
           "predictedWinRate": 41,
           "predictedWin": false,
-          "priceAtPrediction": 575.05
+          "priceAtPrediction": 575.05,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 29,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "PLTR",
           "name": "Palantir Technologies Inc.",
           "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 150.07
+          "priceAtPrediction": 150.07,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 33,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "NIO",
           "name": "NIO Inc.",
           "predictedWinRate": 37,
           "predictedWin": false,
-          "priceAtPrediction": 6.14
+          "priceAtPrediction": 6.14,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "GS",
           "name": "Goldman Sachs Group, Inc. (The)",
           "predictedWinRate": 67,
           "predictedWin": true,
-          "priceAtPrediction": 864.15
+          "priceAtPrediction": 864.15,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 69,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "SNAP",
           "name": "Snap Inc.",
           "predictedWinRate": 37,
           "predictedWin": false,
-          "priceAtPrediction": 4.8
+          "priceAtPrediction": 4.8,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "AAPL",
           "name": "Apple Inc.",
           "predictedWinRate": 33,
           "predictedWin": false,
-          "priceAtPrediction": 253.5
+          "priceAtPrediction": 253.5,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 25,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 26,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 26,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "COIN",
           "name": "Coinbase Global, Inc.",
           "predictedWinRate": 63,
           "predictedWin": true,
-          "priceAtPrediction": 175.18
+          "priceAtPrediction": 175.18,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 44,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 69,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 80,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "JNJ",
           "name": "Johnson & Johnson",
           "predictedWinRate": 61,
           "predictedWin": true,
-          "priceAtPrediction": 238.41
+          "priceAtPrediction": 238.41,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 63,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 73,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 66,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
         }
       ],
       "results": [
@@ -758,7 +2628,29 @@
           "priceAtPrediction": 240.14,
           "priceAtClose": 239.31,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 40,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "META",
@@ -768,7 +2660,29 @@
           "priceAtPrediction": 575.05,
           "priceAtClose": 612.42,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 29,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "PLTR",
@@ -778,7 +2692,29 @@
           "priceAtPrediction": 150.07,
           "priceAtClose": 140.76,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 33,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "NIO",
@@ -788,7 +2724,29 @@
           "priceAtPrediction": 6.14,
           "priceAtClose": 6.38,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "GS",
@@ -798,7 +2756,29 @@
           "priceAtPrediction": 864.15,
           "priceAtClose": 905.75,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 69,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "SNAP",
@@ -808,7 +2788,29 @@
           "priceAtPrediction": 4.8,
           "priceAtClose": 4.73,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "AAPL",
@@ -818,7 +2820,29 @@
           "priceAtPrediction": 253.5,
           "priceAtClose": 258.9,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 25,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 26,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 26,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "COIN",
@@ -828,7 +2852,29 @@
           "priceAtPrediction": 175.18,
           "priceAtClose": 175.09,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 44,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 69,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 80,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "JNJ",
@@ -838,7 +2884,29 @@
           "priceAtPrediction": 238.41,
           "priceAtClose": 241.3,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 63,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 73,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 66,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
         }
       ],
       "accuracy": 56,
@@ -852,63 +2920,261 @@
           "name": "Merck & Company, Inc.",
           "predictedWinRate": 40,
           "predictedWin": false,
-          "priceAtPrediction": 123.18
+          "priceAtPrediction": 123.18,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 30,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 58,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MA",
           "name": "Mastercard Incorporated",
           "predictedWinRate": 30,
           "predictedWin": false,
-          "priceAtPrediction": 507.12
+          "priceAtPrediction": 507.12,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 24,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 27,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "CSCO",
           "name": "Cisco Systems, Inc.",
           "predictedWinRate": 29,
           "predictedWin": false,
-          "priceAtPrediction": 83.7
+          "priceAtPrediction": 83.7,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 36,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 36,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 32,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "NIO",
           "name": "NIO Inc.",
           "predictedWinRate": 55,
           "predictedWin": true,
-          "priceAtPrediction": 6.38
+          "priceAtPrediction": 6.38,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 59,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "META",
           "name": "Meta Platforms, Inc.",
           "predictedWinRate": 54,
           "predictedWin": true,
-          "priceAtPrediction": 612.42
+          "priceAtPrediction": 612.42,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 72,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "GS",
           "name": "Goldman Sachs Group, Inc. (The)",
           "predictedWinRate": 58,
           "predictedWin": true,
-          "priceAtPrediction": 905.75
+          "priceAtPrediction": 905.75,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 75,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "JNJ",
           "name": "Johnson & Johnson",
           "predictedWinRate": 55,
           "predictedWin": true,
-          "priceAtPrediction": 241.3
+          "priceAtPrediction": 241.3,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 37,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "COIN",
           "name": "Coinbase Global, Inc.",
           "predictedWinRate": 30,
           "predictedWin": false,
-          "priceAtPrediction": 175.09
+          "priceAtPrediction": 175.09,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 33,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "BA",
           "name": "Boeing Company (The)",
           "predictedWinRate": 39,
           "predictedWin": false,
-          "priceAtPrediction": 217.8
+          "priceAtPrediction": 217.8,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 29,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 56,
+              "bullish": true
+            }
+          ]
         }
       ],
       "results": [
@@ -920,7 +3186,29 @@
           "priceAtPrediction": 123.18,
           "priceAtClose": 122.68,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 30,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 58,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MA",
@@ -930,7 +3218,29 @@
           "priceAtPrediction": 507.12,
           "priceAtClose": 503.57,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 24,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 27,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "CSCO",
@@ -940,7 +3250,29 @@
           "priceAtPrediction": 83.7,
           "priceAtClose": 83.17,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 36,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 36,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 32,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "NIO",
@@ -950,7 +3282,29 @@
           "priceAtPrediction": 6.38,
           "priceAtClose": 6.07,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 59,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "META",
@@ -960,7 +3314,29 @@
           "priceAtPrediction": 612.42,
           "priceAtClose": 628.39,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 72,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "GS",
@@ -970,7 +3346,29 @@
           "priceAtPrediction": 905.75,
           "priceAtClose": 903.72,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 75,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "JNJ",
@@ -980,7 +3378,29 @@
           "priceAtPrediction": 241.3,
           "priceAtClose": 241.31,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 37,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "COIN",
@@ -990,7 +3410,29 @@
           "priceAtPrediction": 175.09,
           "priceAtClose": 169.02,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 33,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "BA",
@@ -1000,7 +3442,29 @@
           "priceAtPrediction": 217.8,
           "priceAtClose": 220.06,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 29,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 56,
+              "bullish": true
+            }
+          ]
         }
       ],
       "accuracy": 67,
@@ -1014,70 +3478,290 @@
           "name": "Berkshire Hathaway Inc. New",
           "predictedWinRate": 34,
           "predictedWin": false,
-          "priceAtPrediction": 485.2
+          "priceAtPrediction": 485.2,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 44,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 37,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "GS",
           "name": "Goldman Sachs Group, Inc. (The)",
           "predictedWinRate": 74,
           "predictedWin": true,
-          "priceAtPrediction": 903.72
+          "priceAtPrediction": 903.72,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 78,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 81,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 86,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BA",
           "name": "Boeing Company (The)",
           "predictedWinRate": 50,
           "predictedWin": true,
-          "priceAtPrediction": 220.06
+          "priceAtPrediction": 220.06,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "JNJ",
           "name": "Johnson & Johnson",
           "predictedWinRate": 54,
           "predictedWin": true,
-          "priceAtPrediction": 241.31
+          "priceAtPrediction": 241.31,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "AAPL",
           "name": "Apple Inc.",
           "predictedWinRate": 73,
           "predictedWin": true,
-          "priceAtPrediction": 260.49
+          "priceAtPrediction": 260.49,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 71,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 79,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 90,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "SNAP",
           "name": "Snap Inc.",
           "predictedWinRate": 48,
           "predictedWin": false,
-          "priceAtPrediction": 4.95
+          "priceAtPrediction": 4.95,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 43,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "META",
           "name": "Meta Platforms, Inc.",
           "predictedWinRate": 70,
           "predictedWin": true,
-          "priceAtPrediction": 628.39
+          "priceAtPrediction": 628.39,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 79,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 74,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "ADBE",
           "name": "Adobe Inc.",
           "predictedWinRate": 36,
           "predictedWin": false,
-          "priceAtPrediction": 229.94
+          "priceAtPrediction": 229.94,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MA",
           "name": "Mastercard Incorporated",
           "predictedWinRate": 65,
           "predictedWin": true,
-          "priceAtPrediction": 503.57
+          "priceAtPrediction": 503.57,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 74,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 69,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MRK",
           "name": "Merck & Company, Inc.",
           "predictedWinRate": 66,
           "predictedWin": true,
-          "priceAtPrediction": 122.68
+          "priceAtPrediction": 122.68,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 75,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 70,
+              "bullish": true
+            }
+          ]
         }
       ],
       "results": [
@@ -1089,7 +3773,29 @@
           "priceAtPrediction": 485.2,
           "priceAtClose": 479.9,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 44,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 37,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "GS",
@@ -1099,7 +3805,29 @@
           "priceAtPrediction": 903.72,
           "priceAtClose": 907.8,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 78,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 81,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 86,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BA",
@@ -1109,7 +3837,29 @@
           "priceAtPrediction": 220.06,
           "priceAtClose": 217.63,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "JNJ",
@@ -1119,7 +3869,29 @@
           "priceAtPrediction": 241.31,
           "priceAtClose": 238.46,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "AAPL",
@@ -1129,7 +3901,29 @@
           "priceAtPrediction": 260.49,
           "priceAtClose": 260.48,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 71,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 79,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 90,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "SNAP",
@@ -1139,7 +3933,29 @@
           "priceAtPrediction": 4.95,
           "priceAtClose": 4.82,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 43,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "META",
@@ -1149,7 +3965,29 @@
           "priceAtPrediction": 628.39,
           "priceAtClose": 629.86,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 79,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 74,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "ADBE",
@@ -1159,7 +3997,29 @@
           "priceAtPrediction": 229.94,
           "priceAtClose": 225.35,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 28,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MA",
@@ -1169,7 +4029,29 @@
           "priceAtPrediction": 503.57,
           "priceAtClose": 498.66,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 74,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 69,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MRK",
@@ -1179,7 +4061,29 @@
           "priceAtPrediction": 122.68,
           "priceAtClose": 121.42,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 75,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 70,
+              "bullish": true
+            }
+          ]
         }
       ],
       "accuracy": 50,
@@ -1193,63 +4097,261 @@
           "name": "Adobe Inc.",
           "predictedWinRate": 54,
           "predictedWin": true,
-          "priceAtPrediction": 225.35
+          "priceAtPrediction": 225.35,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "COIN",
           "name": "Coinbase Global, Inc.",
           "predictedWinRate": 59,
           "predictedWin": true,
-          "priceAtPrediction": 167.85
+          "priceAtPrediction": 167.85,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 67,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 44,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "MRK",
           "name": "Merck & Company, Inc.",
           "predictedWinRate": 67,
           "predictedWin": true,
-          "priceAtPrediction": 121.42
+          "priceAtPrediction": 121.42,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 73,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 78,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NIO",
           "name": "NIO Inc.",
           "predictedWinRate": 68,
           "predictedWin": true,
-          "priceAtPrediction": 6.5
+          "priceAtPrediction": 6.5,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 74,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 26,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "CSCO",
           "name": "Cisco Systems, Inc.",
           "predictedWinRate": 33,
           "predictedWin": false,
-          "priceAtPrediction": 82.22
+          "priceAtPrediction": 82.22,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 32,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 26,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 18,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "JNJ",
           "name": "Johnson & Johnson",
           "predictedWinRate": 46,
           "predictedWin": false,
-          "priceAtPrediction": 238.46
+          "priceAtPrediction": 238.46,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "META",
           "name": "Meta Platforms, Inc.",
           "predictedWinRate": 40,
           "predictedWin": false,
-          "priceAtPrediction": 629.86
+          "priceAtPrediction": 629.86,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 26,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "MA",
           "name": "Mastercard Incorporated",
           "predictedWinRate": 71,
           "predictedWin": true,
-          "priceAtPrediction": 498.66
+          "priceAtPrediction": 498.66,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 75,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 82,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 72,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "SNAP",
           "name": "Snap Inc.",
           "predictedWinRate": 36,
           "predictedWin": false,
-          "priceAtPrediction": 4.82
+          "priceAtPrediction": 4.82,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 33,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 18,
+              "bullish": false
+            }
+          ]
         }
       ],
       "results": [
@@ -1261,7 +4363,29 @@
           "priceAtPrediction": 225.35,
           "priceAtClose": 240.11,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "COIN",
@@ -1271,7 +4395,29 @@
           "priceAtPrediction": 167.85,
           "priceAtClose": 174.53,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 67,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 44,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "MRK",
@@ -1281,7 +4427,29 @@
           "priceAtPrediction": 121.42,
           "priceAtClose": 120.15,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 73,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 78,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NIO",
@@ -1291,7 +4459,29 @@
           "priceAtPrediction": 6.5,
           "priceAtClose": 6.47,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 74,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 26,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "CSCO",
@@ -1301,7 +4491,29 @@
           "priceAtPrediction": 82.22,
           "priceAtClose": 82.35,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 32,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 26,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 18,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "JNJ",
@@ -1311,7 +4523,29 @@
           "priceAtPrediction": 238.46,
           "priceAtClose": 237.96,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "META",
@@ -1321,7 +4555,29 @@
           "priceAtPrediction": 629.86,
           "priceAtClose": 634.53,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 26,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "MA",
@@ -1331,7 +4587,29 @@
           "priceAtPrediction": 498.66,
           "priceAtClose": 508.58,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 75,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 82,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 72,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "SNAP",
@@ -1341,7 +4619,29 @@
           "priceAtPrediction": 4.82,
           "priceAtClose": 5.15,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 33,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 18,
+              "bullish": false
+            }
+          ]
         }
       ],
       "accuracy": 44,
@@ -1355,70 +4655,290 @@
           "name": "Palantir Technologies Inc.",
           "predictedWinRate": 58,
           "predictedWin": true,
-          "priceAtPrediction": 128.06
+          "priceAtPrediction": 128.06,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 44,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 72,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MARA",
           "name": "MARA Holdings, Inc.",
           "predictedWinRate": 52,
           "predictedWin": true,
-          "priceAtPrediction": 9.54
+          "priceAtPrediction": 9.54,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 36,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "AMZN",
           "name": "Amazon.com, Inc.",
           "predictedWinRate": 60,
           "predictedWin": true,
-          "priceAtPrediction": 238.38
+          "priceAtPrediction": 238.38,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 69,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 70,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "MU",
           "name": "Micron Technology, Inc.",
           "predictedWinRate": 65,
           "predictedWin": true,
-          "priceAtPrediction": 420.59
+          "priceAtPrediction": 420.59,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 72,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 29,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 49,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "INTC",
           "name": "Intel Corporation",
           "predictedWinRate": 50,
           "predictedWin": false,
-          "priceAtPrediction": 62.38
+          "priceAtPrediction": 62.38,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 61,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NIO",
           "name": "NIO Inc.",
           "predictedWinRate": 40,
           "predictedWin": false,
-          "priceAtPrediction": 6.5
+          "priceAtPrediction": 6.5,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 29,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 40,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "NOK",
           "name": "Nokia Corporation Sponsored",
           "predictedWinRate": 48,
           "predictedWin": false,
-          "priceAtPrediction": 9.46
+          "priceAtPrediction": 9.46,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "SNAP",
           "name": "Snap Inc.",
           "predictedWinRate": 45,
           "predictedWin": false,
-          "priceAtPrediction": 4.82
+          "priceAtPrediction": 4.82,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 35,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "GRAB",
           "name": "Grab Holdings Limited",
           "predictedWinRate": 53,
           "predictedWin": true,
-          "priceAtPrediction": 3.68
+          "priceAtPrediction": 3.68,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 67,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 35,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "IREN",
           "name": "IREN LIMITED",
           "predictedWinRate": 54,
           "predictedWin": true,
-          "priceAtPrediction": 39.32
+          "priceAtPrediction": 39.32,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 65,
+              "bullish": true
+            }
+          ]
         }
       ],
       "results": [
@@ -1430,7 +4950,29 @@
           "priceAtPrediction": 128.06,
           "priceAtClose": 132.37,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 44,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 72,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MARA",
@@ -1440,7 +4982,29 @@
           "priceAtPrediction": 9.54,
           "priceAtClose": 10.36,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 64,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 36,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "AMZN",
@@ -1450,7 +5014,29 @@
           "priceAtPrediction": 238.38,
           "priceAtClose": 239.89,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 69,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 70,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "MU",
@@ -1460,7 +5046,29 @@
           "priceAtPrediction": 420.59,
           "priceAtClose": 426.56,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 72,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 29,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 49,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "INTC",
@@ -1470,7 +5078,29 @@
           "priceAtPrediction": 62.38,
           "priceAtClose": 65.18,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 61,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NIO",
@@ -1480,7 +5110,29 @@
           "priceAtPrediction": 6.5,
           "priceAtClose": 6.47,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 29,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 34,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 40,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "NOK",
@@ -1490,7 +5142,29 @@
           "priceAtPrediction": 9.46,
           "priceAtClose": 10.37,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 37,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "SNAP",
@@ -1500,7 +5174,29 @@
           "priceAtPrediction": 4.82,
           "priceAtClose": 5.15,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 35,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "GRAB",
@@ -1510,7 +5206,29 @@
           "priceAtPrediction": 3.68,
           "priceAtClose": 3.73,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 67,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 35,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "IREN",
@@ -1520,7 +5238,29 @@
           "priceAtPrediction": 39.32,
           "priceAtClose": 43.07,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 65,
+              "bullish": true
+            }
+          ]
         }
       ],
       "accuracy": 70,
@@ -1534,70 +5274,290 @@
           "name": "HP Inc.",
           "predictedWinRate": 53,
           "predictedWin": true,
-          "priceAtPrediction": 19.23
+          "priceAtPrediction": 19.23,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 64,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NOK",
           "name": "Nokia Corporation Sponsored",
           "predictedWinRate": 48,
           "predictedWin": false,
-          "priceAtPrediction": 10.37
+          "priceAtPrediction": 10.37,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 64,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "HOLX",
           "name": "Hologic, Inc.",
           "predictedWinRate": 55,
           "predictedWin": true,
-          "priceAtPrediction": 76.01
+          "priceAtPrediction": 76.01,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 66,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "TSLA",
           "name": "Tesla, Inc.",
           "predictedWinRate": 58,
           "predictedWin": true,
-          "priceAtPrediction": 352.42
+          "priceAtPrediction": 352.42,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 76,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MARA",
           "name": "MARA Holdings, Inc.",
           "predictedWinRate": 52,
           "predictedWin": true,
-          "priceAtPrediction": 10.36
+          "priceAtPrediction": 10.36,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "PFE",
           "name": "Pfizer, Inc.",
           "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 27.34
+          "priceAtPrediction": 27.34,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 42,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "AMZN",
           "name": "Amazon.com, Inc.",
           "predictedWinRate": 60,
           "predictedWin": true,
-          "priceAtPrediction": 239.89
+          "priceAtPrediction": 239.89,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "CRWV",
           "name": "CoreWeave, Inc.",
           "predictedWinRate": 65,
           "predictedWin": true,
-          "priceAtPrediction": 110.27
+          "priceAtPrediction": 110.27,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 44,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 67,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 82,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BBD",
           "name": "Banco Bradesco Sa",
           "predictedWinRate": 49,
           "predictedWin": false,
-          "priceAtPrediction": 4.09
+          "priceAtPrediction": 4.09,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 51,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "ORCL",
           "name": "Oracle Corporation",
           "predictedWinRate": 59,
           "predictedWin": true,
-          "priceAtPrediction": 155.62
+          "priceAtPrediction": 155.62,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 66,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 73,
+              "bullish": true
+            }
+          ]
         }
       ],
       "results": [
@@ -1609,7 +5569,29 @@
           "priceAtPrediction": 19.23,
           "priceAtClose": 18.99,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 64,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "NOK",
@@ -1619,7 +5601,29 @@
           "priceAtPrediction": 10.37,
           "priceAtClose": 10.35,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 39,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 64,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "HOLX",
@@ -1629,7 +5633,29 @@
           "priceAtPrediction": 76.01,
           "priceAtClose": 76.01,
           "actualWin": false,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 66,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "TSLA",
@@ -1639,7 +5665,29 @@
           "priceAtPrediction": 352.42,
           "priceAtClose": 364.2,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 76,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "MARA",
@@ -1649,7 +5697,29 @@
           "priceAtPrediction": 10.36,
           "priceAtClose": 10.49,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 41,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "PFE",
@@ -1659,7 +5729,29 @@
           "priceAtPrediction": 27.34,
           "priceAtClose": 27.11,
           "actualWin": false,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 42,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "AMZN",
@@ -1669,7 +5761,29 @@
           "priceAtPrediction": 239.89,
           "priceAtClose": 249.02,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
         },
         {
           "symbol": "CRWV",
@@ -1679,7 +5793,29 @@
           "priceAtPrediction": 110.27,
           "priceAtClose": 117.2,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 44,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 67,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 82,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "BBD",
@@ -1689,7 +5825,29 @@
           "priceAtPrediction": 4.09,
           "priceAtClose": 4.11,
           "actualWin": true,
-          "correct": false
+          "correct": false,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 38,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 51,
+              "bullish": true
+            }
+          ]
         },
         {
           "symbol": "ORCL",
@@ -1699,7 +5857,29 @@
           "priceAtPrediction": 155.62,
           "priceAtClose": 163,
           "actualWin": true,
-          "correct": true
+          "correct": true,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 66,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 73,
+              "bullish": true
+            }
+          ]
         }
       ],
       "accuracy": 70,
@@ -1717,22 +5897,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 55,
+              "score": 52,
               "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 60,
+              "score": 66,
               "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 58,
+              "score": 50,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 52,
+              "score": 61,
               "bullish": true
             }
           ]
@@ -1746,23 +5926,23 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 40,
+              "score": 31,
               "bullish": false
             },
             {
               "source": "Market Data",
-              "score": 45,
+              "score": 39,
               "bullish": false
             },
             {
               "source": "News Sentiment",
-              "score": 48,
-              "bullish": false
+              "score": 62,
+              "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 42,
-              "bullish": false
+              "score": 61,
+              "bullish": true
             }
           ]
         },
@@ -1775,22 +5955,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 65,
+              "score": 57,
               "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 70,
+              "score": 76,
               "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 60,
+              "score": 75,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 75,
+              "score": 74,
               "bullish": true
             }
           ]
@@ -1804,23 +5984,23 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 50,
+              "score": 41,
               "bullish": false
             },
             {
               "source": "Market Data",
-              "score": 53,
+              "score": 55,
               "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 52,
+              "score": 59,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 50,
-              "bullish": false
+              "score": 66,
+              "bullish": true
             }
           ]
         },
@@ -1833,22 +6013,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 60,
+              "score": 55,
               "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 65,
+              "score": 72,
               "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 58,
-              "bullish": true
+              "score": 44,
+              "bullish": false
             },
             {
               "source": "X / Twitter",
-              "score": 62,
+              "score": 67,
               "bullish": true
             }
           ]
@@ -1862,22 +6042,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 68,
+              "score": 76,
               "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 72,
+              "score": 76,
               "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 65,
+              "score": 66,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 70,
+              "score": 51,
               "bullish": true
             }
           ]
@@ -1891,7 +6071,36 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 58,
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 66,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 73,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "ONDS",
+          "name": "Ondas Inc",
+          "predictedWinRate": 50,
+          "predictedWin": false,
+          "priceAtPrediction": 9.4,
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
               "bullish": true
             },
             {
@@ -1906,36 +6115,7 @@
             },
             {
               "source": "X / Twitter",
-              "score": 57,
-              "bullish": true
-            }
-          ]
-        },
-        {
-          "symbol": "ONDS",
-          "name": "Ondas Inc",
-          "predictedWinRate": 50,
-          "predictedWin": false,
-          "priceAtPrediction": 9.4,
-          "sourceScores": [
-            {
-              "source": "Polymarket",
-              "score": 48,
-              "bullish": false
-            },
-            {
-              "source": "Market Data",
-              "score": 50,
-              "bullish": false
-            },
-            {
-              "source": "News Sentiment",
-              "score": 52,
-              "bullish": true
-            },
-            {
-              "source": "X / Twitter",
-              "score": 49,
+              "score": 45,
               "bullish": false
             }
           ]
@@ -1949,23 +6129,23 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 50,
-              "bullish": false
-            },
-            {
-              "source": "Market Data",
-              "score": 52,
+              "score": 57,
               "bullish": true
             },
             {
+              "source": "Market Data",
+              "score": 44,
+              "bullish": false
+            },
+            {
               "source": "News Sentiment",
-              "score": 50,
+              "score": 44,
               "bullish": false
             },
             {
               "source": "X / Twitter",
-              "score": 51,
-              "bullish": true
+              "score": 42,
+              "bullish": false
             }
           ]
         },
@@ -1978,22 +6158,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 55,
+              "score": 51,
               "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 58,
-              "bullish": true
+              "score": 45,
+              "bullish": false
             },
             {
               "source": "News Sentiment",
-              "score": 53,
+              "score": 50,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 54,
+              "score": 58,
               "bullish": true
             }
           ]
@@ -2009,22 +6189,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 55,
+              "score": 52,
               "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 60,
+              "score": 66,
               "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 58,
+              "score": 50,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 52,
+              "score": 61,
               "bullish": true
             }
           ],
@@ -2041,23 +6221,23 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 40,
+              "score": 31,
               "bullish": false
             },
             {
               "source": "Market Data",
-              "score": 45,
+              "score": 39,
               "bullish": false
             },
             {
               "source": "News Sentiment",
-              "score": 48,
-              "bullish": false
+              "score": 62,
+              "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 42,
-              "bullish": false
+              "score": 61,
+              "bullish": true
             }
           ],
           "priceAtClose": 5.544,
@@ -2073,22 +6253,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 65,
+              "score": 57,
               "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 70,
+              "score": 76,
               "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 60,
+              "score": 75,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 75,
+              "score": 74,
               "bullish": true
             }
           ],
@@ -2105,23 +6285,23 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 50,
+              "score": 41,
               "bullish": false
             },
             {
               "source": "Market Data",
-              "score": 53,
+              "score": 55,
               "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 52,
+              "score": 59,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 50,
-              "bullish": false
+              "score": 66,
+              "bullish": true
             }
           ],
           "priceAtClose": 10.2465,
@@ -2137,22 +6317,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 60,
+              "score": 55,
               "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 65,
+              "score": 72,
               "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 58,
-              "bullish": true
+              "score": 44,
+              "bullish": false
             },
             {
               "source": "X / Twitter",
-              "score": 62,
+              "score": 67,
               "bullish": true
             }
           ],
@@ -2169,22 +6349,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 68,
+              "score": 76,
               "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 72,
+              "score": 76,
               "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 65,
+              "score": 66,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 70,
+              "score": 51,
               "bullish": true
             }
           ],
@@ -2201,8 +6381,8 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 58,
-              "bullish": true
+              "score": 45,
+              "bullish": false
             },
             {
               "source": "Market Data",
@@ -2211,12 +6391,12 @@
             },
             {
               "source": "News Sentiment",
-              "score": 55,
+              "score": 66,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 57,
+              "score": 73,
               "bullish": true
             }
           ],
@@ -2233,22 +6413,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 48,
-              "bullish": false
+              "score": 55,
+              "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 50,
-              "bullish": false
+              "score": 62,
+              "bullish": true
             },
             {
               "source": "News Sentiment",
-              "score": 52,
+              "score": 55,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 49,
+              "score": 45,
               "bullish": false
             }
           ],
@@ -2265,23 +6445,23 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 50,
-              "bullish": false
-            },
-            {
-              "source": "Market Data",
-              "score": 52,
+              "score": 57,
               "bullish": true
             },
             {
+              "source": "Market Data",
+              "score": 44,
+              "bullish": false
+            },
+            {
               "source": "News Sentiment",
-              "score": 50,
+              "score": 44,
               "bullish": false
             },
             {
               "source": "X / Twitter",
-              "score": 51,
-              "bullish": true
+              "score": 42,
+              "bullish": false
             }
           ],
           "priceAtClose": 12.964200000000002,
@@ -2297,22 +6477,22 @@
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 55,
+              "score": 51,
               "bullish": true
             },
             {
               "source": "Market Data",
-              "score": 58,
-              "bullish": true
+              "score": 45,
+              "bullish": false
             },
             {
               "source": "News Sentiment",
-              "score": 53,
+              "score": 50,
               "bullish": true
             },
             {
               "source": "X / Twitter",
-              "score": 54,
+              "score": 58,
               "bullish": true
             }
           ],
@@ -2328,28 +6508,148 @@
   "learnings": "Here are 4 concise rules to guide tomorrow's predictions:\n\n*   **High-Conviction WINs (60%+):** Trust WIN predictions at **60% confidence or higher** for strong positive returns (e.g., CRWV 65% +6.28%, MA 71% +1.99%). However, for predictions above 60%, cross-reference with a market-wide sentiment filter to mitigate overconfidence misses (e.g., PLTR 69% WIN, actual DOWN -1.00%).\n*   **Moderate-Conviction WINs (50-59%):** **Distrust** WIN predictions with confidence between **50% and 59%**. This range has been highly unreliable, often leading to false positives or outright reversals (e.g., HPQ 53% WIN, actual -1.25%; NIO 55% WIN, actual -4.86%). Treat these",
   "optimizationState": {
     "sourceWeights": {
-      "Polymarket": 0.25324424983321875,
-      "Market Data": 0.25324424983321875,
-      "News Sentiment": 0.2246075006581873,
-      "X / Twitter": 0.2689039996753752
+      "Polymarket": 0.26535155241353964,
+      "Market Data": 0.3163612547551742,
+      "News Sentiment": 0.17491198787322745,
+      "X / Twitter": 0.24337520495805887
     },
-    "confidenceThreshold": 50.070003571337466,
-    "epoch": 1,
-    "weightLR": 0.3,
-    "thresholdLR": 1.414213562373095,
-    "thresholdMomentum": 0.0495,
+    "confidenceThreshold": 50.060635578681044,
+    "epoch": 11,
+    "weightLR": 0.09045340337332908,
+    "thresholdLR": 0.6030226891555273,
+    "thresholdMomentum": 0.037535066429608334,
     "history": [
+      {
+        "date": "2026-03-31",
+        "weights": {
+          "Polymarket": 0.2368880813532784,
+          "Market Data": 0.289335755940165,
+          "News Sentiment": 0.2368880813532784,
+          "X / Twitter": 0.2368880813532784
+        },
+        "threshold": 49.92333333333333,
+        "accuracy": 56,
+        "epoch": 1
+      },
+      {
+        "date": "2026-04-01",
+        "weights": {
+          "Polymarket": 0.23171760541641992,
+          "Market Data": 0.28302052236988523,
+          "News Sentiment": 0.22209228758936397,
+          "X / Twitter": 0.2631695846243309
+        },
+        "threshold": 49.950333027261635,
+        "accuracy": 30,
+        "epoch": 2
+      },
+      {
+        "date": "2026-04-02",
+        "weights": {
+          "Polymarket": 0.24944760040901695,
+          "Market Data": 0.2931718209567629,
+          "News Sentiment": 0.2049697477051971,
+          "X / Twitter": 0.252410830929023
+        },
+        "threshold": 49.948252961363735,
+        "accuracy": 78,
+        "epoch": 3
+      },
+      {
+        "date": "2026-04-06",
+        "weights": {
+          "Polymarket": 0.2505121403858468,
+          "Market Data": 0.29442295796099444,
+          "News Sentiment": 0.19385702548250533,
+          "X / Twitter": 0.26120787617065344
+        },
+        "threshold": 49.975181506195526,
+        "accuracy": 50,
+        "epoch": 4
+      },
+      {
+        "date": "2026-04-07",
+        "weights": {
+          "Polymarket": 0.24655513579902114,
+          "Market Data": 0.2897723530309339,
+          "News Sentiment": 0.190794925826013,
+          "X / Twitter": 0.272877585344032
+        },
+        "threshold": 49.971023485399,
+        "accuracy": 56,
+        "epoch": 5
+      },
+      {
+        "date": "2026-04-08",
+        "weights": {
+          "Polymarket": 0.24639047899602476,
+          "Market Data": 0.29756840318420885,
+          "News Sentiment": 0.1906675073384093,
+          "X / Twitter": 0.26537361048135705
+        },
+        "threshold": 49.9927430712857,
+        "accuracy": 67,
+        "epoch": 6
+      },
+      {
+        "date": "2026-04-09",
+        "weights": {
+          "Polymarket": 0.24954034099192776,
+          "Market Data": 0.2946149518616122,
+          "News Sentiment": 0.19310500548227424,
+          "X / Twitter": 0.2627397016641859
+        },
+        "threshold": 50.057811261227954,
+        "accuracy": 50,
+        "epoch": 7
+      },
+      {
+        "date": "2026-04-10",
+        "weights": {
+          "Polymarket": 0.2631357902298914,
+          "Market Data": 0.29636103558409493,
+          "News Sentiment": 0.19424947389662994,
+          "X / Twitter": 0.24625370028938368
+        },
+        "threshold": 50.08425876199371,
+        "accuracy": 44,
+        "epoch": 8
+      },
+      {
+        "date": "2026-04-13",
+        "weights": {
+          "Polymarket": 0.2677606530451944,
+          "Market Data": 0.3015698638175333,
+          "News Sentiment": 0.18991309353748775,
+          "X / Twitter": 0.24075638959978446
+        },
+        "threshold": 50.048965998274134,
+        "accuracy": 70,
+        "epoch": 9
+      },
+      {
+        "date": "2026-04-14",
+        "weights": {
+          "Polymarket": 0.261636821868754,
+          "Market Data": 0.3119324251307133,
+          "News Sentiment": 0.18208193341284307,
+          "X / Twitter": 0.24434881958768973
+        },
+        "threshold": 50.03800108198503,
+        "accuracy": 70,
+        "epoch": 10
+      },
       {
         "date": "2026-04-15",
         "weights": {
-          "Polymarket": 0.25324424983321875,
-          "Market Data": 0.25324424983321875,
-          "News Sentiment": 0.2246075006581873,
-          "X / Twitter": 0.2689039996753752
+          "Polymarket": 0.26535155241353964,
+          "Market Data": 0.3163612547551742,
+          "News Sentiment": 0.17491198787322745,
+          "X / Twitter": 0.24337520495805887
         },
-        "threshold": 50.070003571337466,
+        "threshold": 50.060635578681044,
         "accuracy": 70,
-        "epoch": 1
+        "epoch": 11
       }
     ],
     "lastOptimizedDate": "2026-04-15"
