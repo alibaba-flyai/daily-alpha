@@ -64,13 +64,10 @@ function WeightBars({ weights, label }: { weights: Record<string, number>; label
 }
 
 // --- Weight evolution chart (auto-scaled Y) ---
-function WeightChart({ history, field }: { history: OptHistoryEntry[]; field: "weights" | "classWeights" }) {
+function WeightChart({ history }: { history: OptHistoryEntry[] }) {
   if (history.length < 2) return null;
 
   const getW = (entry: OptHistoryEntry, source: string) => {
-    if (field === "classWeights") {
-      return entry.classWeights?.["general"]?.[source] ?? entry.weights[source] ?? 0.25;
-    }
     return entry.weights[source] ?? 0.25;
   };
 
@@ -198,8 +195,6 @@ export default function OptimizationPanel({ optimization, records }: Props) {
   if (!optimization || optimization.epoch === 0) return null;
 
   const lastPostmortem = records.find((r) => r.postmortem);
-  const generalClass = optimization.classDeltas?.["general"];
-  const hasClassWeights = generalClass && Object.keys(generalClass.effectiveWeights).length > 0;
   const h = optimization.history;
 
   return (
@@ -270,17 +265,9 @@ export default function OptimizationPanel({ optimization, records }: Props) {
               <span className="text-[9px] text-zinc-600 uppercase tracking-wider">Global Weight Evolution</span>
               <span className="text-[8px] text-zinc-700">{h.length} epochs</span>
             </div>
-            <WeightChart history={h} field="weights" />
+            <WeightChart history={h} />
           </div>
 
-          {h.some((e) => e.classWeights) && (
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-[9px] text-zinc-600 uppercase tracking-wider">General Class Weight Evolution</span>
-              </div>
-              <WeightChart history={h} field="classWeights" />
-            </div>
-          )}
         </div>
       )}
 
