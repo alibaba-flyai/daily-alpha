@@ -129,6 +129,18 @@ export async function GET() {
   const perf = loadPerformance();
   const today = getTodayDate();
 
+  // Safety: if today's record was wrongly evaluated (market not closed), reset it
+  const todayRecord = perf.records.find((r) => r.date === today);
+  if (todayRecord && todayRecord.results !== null) {
+    // Check if market has closed today (after 4 PM ET)
+    const et = new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }));
+    const marketClosed = et.getHours() >= 16;
+    if (!marketClosed) {
+      todayRecord.results = null;
+      todayRecord.accuracy = null;
+    }
+  }
+
   const hasToday = perf.records.some((r) => r.date === today);
   // Only return records up to today — no future dates
   const filtered = perf.records.filter((r) => r.date <= today);
