@@ -25,7 +25,7 @@ function classifyAsset(symbol: string): string {
   if (INDEX_TICKERS.has(symbol)) return "index";
   return "equity";
 }
-const ASSET_CLASSES = ["equity", "crypto", "commodity", "index", "general"];
+const ASSET_CLASSES = ["equity", "crypto", "commodity", "index"];
 
 // Import the optimizer functions inline (can't import TS directly)
 function softmaxWeights(global: Record<string, number>, delta: Record<string, number>): Record<string, number> {
@@ -95,7 +95,7 @@ function computeSourceAcc(results: { sourceScores?: { source: string; bullish: b
   return acc;
 }
 
-function optimStep(state: OptState, date: string, srcAcc: Record<string, number>, acc: number, accBefore: number, assetClass: string = "general"): OptState {
+function optimStep(state: OptState, date: string, srcAcc: Record<string, number>, acc: number, accBefore: number, assetClass: string = "equity"): OptState {
   const ns: OptState = { ...state, sourceWeights: { ...state.sourceWeights }, classDeltas: { ...state.classDeltas }, history: [...state.history], epoch: state.epoch + 1 };
   const eta = 0.3 / Math.sqrt(ns.epoch);
   ns.weightLR = eta;

@@ -16,7 +16,7 @@
  */
 
 export const DEFAULT_SOURCES = ["Polymarket", "Market Data", "News Sentiment", "X / Twitter"];
-export const ASSET_CLASSES = ["equity", "crypto", "commodity", "index", "general"] as const;
+export const ASSET_CLASSES = ["equity", "crypto", "commodity", "index"] as const;
 export type AssetClass = typeof ASSET_CLASSES[number];
 
 export interface ClassWeights {
@@ -213,7 +213,7 @@ export function optimizationStep(
   );
 
   // Step 2: Per-class delta update (if we know the class)
-  const assetClass = dayResults.assetClass || "general";
+  const assetClass = dayResults.assetClass || "equity";
   const currentClass = state.classDeltas[assetClass] || {
     delta: zeroDelta(), epoch: 0, effectiveWeights: uniformWeights(),
   };

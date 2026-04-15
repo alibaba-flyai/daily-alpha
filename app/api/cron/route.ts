@@ -74,7 +74,7 @@ async function predictBatch(
 
     const assetList = assets.map((a) => `- ${a.symbol} (${a.name}) at $${a.price.toFixed(2)}`).join("\n");
     const prompt = `You are a quantitative analyst. For each asset:
-1. Classify its asset class: "equity", "crypto", "commodity", "index", or "general"
+1. Classify its asset class: "equity", "crypto", "commodity", or "index"
 2. Predict probability (0-100) that tomorrow's closing price > today's
 3. Estimate what each data source would signal (0-100)
 
@@ -217,7 +217,7 @@ export async function GET(req: NextRequest) {
     // Group results by asset class
     const byClass: Record<string, typeof results> = {};
     for (const r of results) {
-      const cls = r.assetClass || "general";
+      const cls = r.assetClass || "equity";
       if (!byClass[cls]) byClass[cls] = [];
       byClass[cls].push(r);
     }
@@ -238,20 +238,18 @@ export async function GET(req: NextRequest) {
       globalAccuracy[source] = Math.round(((sourceCorrect[source] || 0) / total) * 100);
     }
 
-    // Global optimization step (uses all results)
+    // Global Hedge update (uses all results, updates global weights only)
     let currentOpt = optState;
     const { state: globalOpt, report: globalReport } = optimizationStep(currentOpt, {
       date: latestEvaluated.date,
       sourceAccuracy: globalAccuracy,
       accuracy: latestEvaluated.accuracy || 50,
-      assetClass: "general",
     });
     currentOpt = globalOpt;
     log.push(`Global: ${globalReport}`);
 
-    // Per-class optimization (only for classes with data)
+    // Per-class delta updates
     for (const [cls, classResults] of Object.entries(byClass)) {
-      if (cls === "general") continue; // already handled above
       const clsCorrect: Record<string, number> = {};
       const clsTotal: Record<string, number> = {};
       for (const r of classResults) {
