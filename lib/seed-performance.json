@@ -3643,7 +3643,7 @@
         }
       ],
       "accuracy": 70,
-      "postmortem": "The model effectively identified strong upward trends, correctly predicting \"WIN\" for high-conviction calls like CL=F (60% pred, 3.66% actual UP) and AMZN (58% pred, 5.60% actual UP). However, the key mistake was its tendency to incorrectly predict \"LOSE\" for stocks that subsequently rose, notably META (predicted LOSE 46%, actual UP 2.61%) and TSLA (predicted LOSE 41%, actual UP 0.69%). For tomorrow, we will adjust by treating \"LOSE\" predictions in the 40-49% range as \"neutral\" or \"potential upside\" signals, rather than outright \"LOSE.\""
+      "postmortem": "1.  **Key Pattern RIGHT:** The model effectively identified upward movements for traditional assets with moderate to high \"WIN\" confidence, such as CL=F (60% WIN, actual UP 3.66%) and AMZN (58% WIN, actual UP 5.60%).\n2.  **Key Mistake:** The primary error was underestimating upward momentum in growth/tech stocks, particularly when predicting \"LOSE\" with moderate confidence (e.g., META predicted LOSE 46%, actual UP 2.61%; TSLA predicted LOSE 41%, actual UP 0.69%).\n3.  **One Specific Adjustment:** For tomorrow, any \"LOSE\" predictions for high-growth tech stocks with confidence above 40% should be re-evaluated with a bias towards potential upside, or the \"LOSE\" threshold should be lowered significantly (e.g., below 35%)."
     },
     {
       "date": "2026-04-09",
@@ -4282,7 +4282,7 @@
         }
       ],
       "accuracy": 30,
-      "postmortem": "Our \"WIN\" signal accurately identified positive movements for crypto assets (BTC-USD up 1.69%, ETH-USD up 2.56%) and META (up 0.23%). However, the key mistake was consistently overestimating \"WIN\" probabilities for traditional equities, with high-confidence predictions for PLTR (63%) and MSFT (61%) both resulting in significant actual DOWN movements. For tomorrow, we will apply a 25-percentage-point haircut to all \"WIN\" predictions for traditional equities, especially those above 60% confidence, to recalibrate for this systemic overconfidence."
+      "postmortem": "The model accurately predicted upward movements for crypto assets and specific tech stocks, correctly identifying \"WIN\" for BTC-USD (54% confidence, +1.69%), ETH-USD (57% confidence, +2.56%), and META (58% confidence, +0.23%). A key mistake was the consistent failure of \"LOSE\" predictions, as TSLA (46%), AMZN (38%), and SI=F (35%) were all predicted to LOSE but actually moved significantly UP. For tomorrow, we should specifically re-evaluate any \"LOSE\" predictions below 45% confidence, as they appear to be strong contrarian indicators for an upward move."
     },
     {
       "date": "2026-04-10",
@@ -4417,7 +4417,7 @@
         }
       ],
       "accuracy": 0,
-      "postmortem": "While both predictions were incorrect, the model's relative confidence levels did somewhat align with the *magnitude* of the actual deviation from prediction: the high 72% WIN conviction for XRP-USD resulted in a flat 0.00% outcome (less extreme than a significant loss), whereas the weaker 45% LOSE conviction for ETH-USD saw a more substantial 1.79% UP move.\n\nThe key mistake was the model's complete misjudgment of directional momentum, particularly the overconfident 72% WIN prediction for XRP-USD which ended flat, and entirely missing ETH-USD's 1.79% UP move despite a weak 45% LOSE signal. For tomorrow, we must specifically re-calibrate the features driving high-conviction bullish"
+      "postmortem": "The only consistent pattern observed was the model's complete directional inversion for both XRP-USD and ETH-USD, where predicted WINs became DOWN and LOSE became UP. The key mistake was the severe miscalibration of our directional signals, particularly the 72% WIN confidence for XRP-USD which resulted in a 0.00% actual DOWN. For tomorrow, we will implement an inverse strategy for any prediction with confidence above 60%, starting with XRP-USD, and conduct a deep dive into ETH-USD's feature importance."
     },
     {
       "date": "2026-04-11",
@@ -4552,7 +4552,7 @@
         }
       ],
       "accuracy": 50,
-      "postmortem": "Our model correctly identified the low probability of a positive outcome for DOGE-USD with its 44% 'LOSE' prediction, which aligned with its 0.00% actual change. However, the marginal 51% 'WIN' prediction for BTC-USD was a key mistake, failing to capture its actual -3.15% decline. For tomorrow, we will implement a stricter confidence threshold, only issuing a 'WIN' prediction if the probability exceeds 55%, to avoid similar false positives."
+      "postmortem": "The model correctly identified a 'LOSE' scenario for DOGE-USD (44% predicted) as it ended flat (0.00%), indicating its ability to predict non-positive outcomes. However, the marginal 'WIN' prediction for BTC-USD (51%) was a critical error, resulting in a significant -3.15% actual loss. For tomorrow, we must increase the confidence threshold for 'WIN' signals, especially for BTC-USD, requiring a probability >55% to issue a 'WIN' prediction to avoid similar costly false positives."
     },
     {
       "date": "2026-04-12",
@@ -4687,7 +4687,7 @@
         }
       ],
       "accuracy": 100,
-      "postmortem": "The model's directional signals proved highly effective, with the \"predicted WIN (58%)\" for BTC-USD accurately capturing a 5.27% gain and the \"predicted LOSE (24%)\" for DOGE-USD correctly identifying a flat/down day (0.00%). However, the key mistake was the significant underconfidence in the DOGE-USD LOSE prediction; a 24% probability was correct, suggesting the model's internal confidence for non-positive outcomes is miscalibrated. For tomorrow, we will adjust the confidence weighting for low-probability \"LOSE\" predictions, treating them with higher conviction given their proven accuracy."
+      "postmortem": "The model's directional predictions were robust, accurately capturing BTC-USD's significant 5.27% UP movement with 58% confidence, and correctly identifying DOGE-USD would not be a \"WIN\". However, the 24% LOSE prediction for DOGE-USD, which resulted in a 0.00% actual DOWN, suggests the model's \"LOSE\" signal was overly sensitive to negligible negative pressure, potentially misinterpreting neutrality as a weak LOSE. For tomorrow, I will implement a \"neutral\" prediction category for signals below 25% confidence, reclassifying similar DOGE-USD type predictions as \"NEUTRAL\" to better reflect flat outcomes."
     },
     {
       "date": "2026-04-13",
@@ -5326,7 +5326,7 @@
         }
       ],
       "accuracy": 40,
-      "postmortem": "Our model accurately identified downward trends when the 'WIN' probability was low, correctly predicting LOSE for AAPL (25% WIN) and ETH-USD (37% WIN) as they both declined. However, the key mistake was a systemic underestimation of upward momentum; we predicted LOSE for ^GSPC (45% WIN), AMZN (40% WIN), PLTR (42% WIN), ^DJI (41% WIN), and GC=F (45% WIN), yet all these assets actually went UP significantly. For tomorrow, we will implement a bias correction, adding 5-10 percentage points to the 'WIN' probability for broad market indices and high-growth tech stocks when our initial 'WIN' probability falls between 40-49%."
+      "postmortem": "The model correctly identified downside for specific assets like AAPL (-0.14%) and ETH-USD (-2.00%) despite low 'LOSE' confidence (25-37%), but consistently missed broader market upside, turning 'LOSE' predictions for ^GSPC (45%) and AMZN (40%) into significant gains of 1.18% and 3.81% respectively. For tomorrow, we must apply a positive momentum filter, particularly for 'LOSE' predictions on major indices and growth tech, re-evaluating any 'LOSE' call under 45% confidence as a potential 'WIN' if broader market sentiment is positive."
     },
     {
       "date": "2026-04-14",
@@ -5965,7 +5965,7 @@
         }
       ],
       "accuracy": 70,
-      "postmortem": "The model accurately identified upward trends for established tech like MSFT (62% predicted WIN, actual UP 3.31%) and correctly predicted downward movements for indices such as ^DJI (37% predicted WIN, actual DOWN -0.24%). The key mistake was overconfidence in the wrong direction, particularly with JPM, where a 65% predicted WIN resulted in a -0.75% actual DOWN, indicating a significant misjudgment for financial stocks. For tomorrow, we will specifically adjust the model to reduce the confidence threshold for \"WIN\" predictions above 60% for financial sector assets, to mitigate similar high-confidence errors."
+      "postmortem": "Our model accurately identified upward trends for tech stocks like MSFT (62% WIN, 3.31% UP) and GOOGL (55% WIN, 0.47% UP), alongside correct low-confidence \"LOSE\" calls for indices such as ^DJI (37% LOSE, -0.24% DOWN). However, the key mistake was JPM, where a high-confidence WIN (65%) resulted in a -0.75% DOWN movement, indicating a critical miscalibration for high-conviction long calls in the financial sector. For tomorrow, we will apply a stricter filter to \"WIN\" predictions for financial stocks, specifically those with confidence >60%, and re-evaluate their underlying signals."
     },
     {
       "date": "2026-04-15",
@@ -6607,44 +6607,14 @@
       "postmortem": "The model accurately predicted upward movements for stocks with moderate to high \"WIN\" confidence, like TSLA (68% WIN, actual UP 2.00%), and correctly identified downward trends for \"LOSE\" calls such as SNAP (43% LOSE, actual DOWN -1.00%). However, the key mistake was the significant overconfidence in \"WIN\" predictions that ultimately went down, particularly PLTR (69% WIN, actual DOWN -1.00%) and AAL (56% WIN, actual DOWN -1.00%). For tomorrow, we will raise the \"WIN\" confidence threshold to 60% and incorporate a market-wide sentiment filter to mitigate similar high-conviction misses."
     },
     {
-      "date": "2026-04-17",
+      "date": "2026-04-20",
       "predictions": [
         {
-          "symbol": "NFLX",
-          "name": "Netflix, Inc.",
-          "predictedWinRate": 52,
-          "predictedWin": true,
-          "priceAtPrediction": 97.31,
-          "assetClass": "equity",
-          "sourceScores": [
-            {
-              "source": "Polymarket",
-              "score": 48,
-              "bullish": false
-            },
-            {
-              "source": "Market Data",
-              "score": 55,
-              "bullish": true
-            },
-            {
-              "source": "News Sentiment",
-              "score": 50,
-              "bullish": false
-            },
-            {
-              "source": "X / Twitter",
-              "score": 52,
-              "bullish": true
-            }
-          ]
-        },
-        {
-          "symbol": "ONDS",
-          "name": "Ondas Inc",
+          "symbol": "MARA",
+          "name": "MARA Holdings, Inc.",
           "predictedWinRate": 48,
           "predictedWin": false,
-          "priceAtPrediction": 10,
+          "priceAtPrediction": 11.63,
           "assetClass": "equity",
           "sourceScores": [
             {
@@ -6654,43 +6624,13 @@
             },
             {
               "source": "Market Data",
-              "score": 49,
+              "score": 40,
               "bullish": false
             },
             {
               "source": "News Sentiment",
-              "score": 47,
-              "bullish": false
-            },
-            {
-              "source": "X / Twitter",
-              "score": 48,
-              "bullish": false
-            }
-          ]
-        },
-        {
-          "symbol": "HIMS",
-          "name": "Hims & Hers Health, Inc.",
-          "predictedWinRate": 54,
-          "predictedWin": true,
-          "priceAtPrediction": 28.82,
-          "assetClass": "equity",
-          "sourceScores": [
-            {
-              "source": "Polymarket",
               "score": 50,
               "bullish": false
-            },
-            {
-              "source": "Market Data",
-              "score": 56,
-              "bullish": true
-            },
-            {
-              "source": "News Sentiment",
-              "score": 53,
-              "bullish": true
             },
             {
               "source": "X / Twitter",
@@ -6702,45 +6642,15 @@
         {
           "symbol": "AMZN",
           "name": "Amazon.com, Inc.",
-          "predictedWinRate": 56,
+          "predictedWinRate": 58,
           "predictedWin": true,
-          "priceAtPrediction": 250.56,
+          "priceAtPrediction": 248.28,
           "assetClass": "equity",
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 52,
-              "bullish": true
-            },
-            {
-              "source": "Market Data",
-              "score": 58,
-              "bullish": true
-            },
-            {
-              "source": "News Sentiment",
-              "score": 55,
-              "bullish": true
-            },
-            {
-              "source": "X / Twitter",
-              "score": 54,
-              "bullish": true
-            }
-          ]
-        },
-        {
-          "symbol": "NVDA",
-          "name": "NVIDIA Corporation",
-          "predictedWinRate": 60,
-          "predictedWin": true,
-          "priceAtPrediction": 201.68,
-          "assetClass": "equity",
-          "sourceScores": [
-            {
-              "source": "Polymarket",
-              "score": 55,
-              "bullish": true
+              "score": 50,
+              "bullish": false
             },
             {
               "source": "Market Data",
@@ -6749,7 +6659,157 @@
             },
             {
               "source": "News Sentiment",
-              "score": 62,
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "BAC",
+          "name": "Bank of America Corporation",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 53.95,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "QXO",
+          "name": "QXO, Inc.",
+          "predictedWinRate": 52,
+          "predictedWin": true,
+          "priceAtPrediction": 24.22,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "SNAP",
+          "name": "Snap Inc.",
+          "predictedWinRate": 45,
+          "predictedWin": false,
+          "priceAtPrediction": 6,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "AAL",
+          "name": "American Airlines Group, Inc.",
+          "predictedWinRate": 50,
+          "predictedWin": false,
+          "priceAtPrediction": 12.24,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "IONQ",
+          "name": "IonQ, Inc.",
+          "predictedWinRate": 47,
+          "predictedWin": false,
+          "priceAtPrediction": 48.32,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
               "bullish": true
             },
             {
@@ -6760,11 +6820,11 @@
           ]
         },
         {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 50,
+          "symbol": "ASTS",
+          "name": "AST SpaceMobile, Inc.",
+          "predictedWinRate": 46,
           "predictedWin": false,
-          "priceAtPrediction": 11.6,
+          "priceAtPrediction": 81,
           "assetClass": "equity",
           "sourceScores": [
             {
@@ -6774,37 +6834,37 @@
             },
             {
               "source": "Market Data",
-              "score": 52,
-              "bullish": true
-            },
-            {
-              "source": "News Sentiment",
-              "score": 48,
-              "bullish": false
-            },
-            {
-              "source": "X / Twitter",
-              "score": 50,
-              "bullish": false
-            }
-          ]
-        },
-        {
-          "symbol": "OPEN",
-          "name": "Opendoor Technologies Inc",
-          "predictedWinRate": 45,
-          "predictedWin": false,
-          "priceAtPrediction": 5.29,
-          "assetClass": "equity",
-          "sourceScores": [
-            {
-              "source": "Polymarket",
               "score": 40,
               "bullish": false
             },
             {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 65,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "FRMI",
+          "name": "Fermi Inc.",
+          "predictedWinRate": 44,
+          "predictedWin": false,
+          "priceAtPrediction": 5.4,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
               "source": "Market Data",
-              "score": 47,
+              "score": 40,
               "bullish": false
             },
             {
@@ -6814,97 +6874,37 @@
             },
             {
               "source": "X / Twitter",
-              "score": 42,
-              "bullish": false
-            }
-          ]
-        },
-        {
-          "symbol": "F",
-          "name": "Ford Motor Company",
-          "predictedWinRate": 51,
-          "predictedWin": true,
-          "priceAtPrediction": 12.87,
-          "assetClass": "equity",
-          "sourceScores": [
-            {
-              "source": "Polymarket",
-              "score": 48,
-              "bullish": false
-            },
-            {
-              "source": "Market Data",
-              "score": 53,
-              "bullish": true
-            },
-            {
-              "source": "News Sentiment",
               "score": 50,
               "bullish": false
-            },
-            {
-              "source": "X / Twitter",
-              "score": 51,
-              "bullish": true
             }
           ]
         },
         {
-          "symbol": "INTC",
-          "name": "Intel Corporation",
-          "predictedWinRate": 53,
-          "predictedWin": true,
-          "priceAtPrediction": 68.5,
-          "assetClass": "equity",
-          "sourceScores": [
-            {
-              "source": "Polymarket",
-              "score": 50,
-              "bullish": false
-            },
-            {
-              "source": "Market Data",
-              "score": 55,
-              "bullish": true
-            },
-            {
-              "source": "News Sentiment",
-              "score": 52,
-              "bullish": true
-            },
-            {
-              "source": "X / Twitter",
-              "score": 53,
-              "bullish": true
-            }
-          ]
-        },
-        {
-          "symbol": "SOFI",
-          "name": "SoFi Technologies, Inc.",
-          "predictedWinRate": 50,
+          "symbol": "PLUG",
+          "name": "Plug Power, Inc.",
+          "predictedWinRate": 42,
           "predictedWin": false,
-          "priceAtPrediction": 19.43,
+          "priceAtPrediction": 3.22,
           "assetClass": "equity",
           "sourceScores": [
             {
               "source": "Polymarket",
-              "score": 48,
-              "bullish": false
-            },
-            {
-              "source": "Market Data",
-              "score": 52,
-              "bullish": true
-            },
-            {
-              "source": "News Sentiment",
               "score": 50,
               "bullish": false
             },
             {
+              "source": "Market Data",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 40,
+              "bullish": false
+            },
+            {
               "source": "X / Twitter",
-              "score": 51,
+              "score": 55,
               "bullish": true
             }
           ]
@@ -8666,5 +8666,5 @@
     ],
     "lastOptimizedDate": "2026-04-15"
   },
-  "learnings": "Here are 3-5 concise rules to guide tomorrow's predictions, based on the recent postmortems:\n\n*   **Conditional Adjustments for \"WIN\" Probabilities:**\n    *   **Pattern:** The model shows systemic overconfidence in \"WIN\" predictions for traditional equities and financials, but underestimation for broad market indices and high-growth tech in specific ranges.\n    *   **Action:**\n        1.  **Traditional Equities & Financials Haircut:** For traditional equities (e.g., PLTR, MSFT, AAL) and financial sector assets (e.g., JPM), apply a 25-percentage-point haircut to the predicted \"WIN\" probability if it's initially above 60%.\n        2.  **Broad"
+  "learnings": "Here are 3 concise rules to guide tomorrow's predictions:\n\n*   **Confidence Thresholds & Neutral Zone:** Reclassify any prediction with confidence below 25% as \"NEUTRAL\". For \"WIN\" predictions, a minimum confidence of 60% is required to issue a call, as marginal \"WIN\" calls (e.g., BTC-USD 51% on 04-11) have proven costly.\n*   **Contrarian \"LOSE\" Signals:** Distrust \"LOSE\" predictions with confidence below 45% for major indices, growth tech, and commodities (e.g., ^GSPC, AMZN, TSLA, SI=F). These have consistently acted as strong contrarian \"WIN\" signals, especially if broader market sentiment is positive.\n*   **High-Conviction \"WIN\" Filters & Crypto Inversions:** Distrust \"WIN\" predictions above 60% confidence for financial stocks (e.g., JPM). For specific crypto assets (e.g., XRP-USD, ETH-USD), apply an inverse strategy for any prediction with confidence above 60% (WIN becomes DOWN, LOSE becomes UP). All \"WIN\" predictions above 60% confidence require confirmation from a positive market-wide sentiment filter to mitigate overconfidence misses (e.g., PLTR, AAL on 04-15)."
 }
