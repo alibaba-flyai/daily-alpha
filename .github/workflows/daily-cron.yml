@@ -1,0 +1,38 @@
+name: Daily Alpha Cron
+
+on:
+  schedule:
+    # Mon-Fri at 20:05 UTC (matches previous Vercel cron)
+    - cron: "5 20 * * 1-5"
+  workflow_dispatch: # allow manual trigger
+
+jobs:
+  daily-update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run daily cron
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: npx tsx scripts/daily-cron.ts
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lib/seed-performance.json data/performance.json
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "[auto] Update predictions — $(date -u +%Y-%m-%d)"
+          git push
