@@ -8489,5 +8489,5 @@
     ],
     "lastOptimizedDate": "2026-04-21"
   },
-  "learnings": "Here are 3-5 concise rules to guide tomorrow's predictions, based on the provided postmortems:\n\n*   **Rule 1: General Directional Inversion (Primary Adjustment)**\n    Given the recent consistent inverse correlation observed on 2026-04-10 (0% accuracy) and 2026-04-21 (40% accuracy), temporarily invert all directional signals: treat any original \"WIN\" prediction as a \"LOSE\" and any original \"LOSE\" prediction as a \"WIN\". This adjustment applies to all assets unless explicitly overridden by Rule 3.\n    *   **Trust:** The inverted signal.\n    *   **Distrust:** The original signal.\n\n*   **Rule 2: Confidence Threshold"
+  "learnings": "Here are 3-5 concise rules to guide tomorrow's predictions, based on the recent postmortems:\n\n*   **Universal \"WIN\" Inversion:** Due to consistent failure of upside signals, temporarily invert all \"WIN\" predictions. Any stock with a predicted 'WIN' probability above 50% should be treated as a strong 'LOSE' candidate.\n*   **Indices/Commodities \"LOSE\" Flip:** For broad market indices and commodities (e.g., ^GSPC, ^DJI, GC=F), if the model predicts \"LOSE\" with a 40-45% win probability, *invert* this to a \"WIN\" signal to correct for a systemic upward bias miss.\n*   **Low-Volatility \"LOSE\""
 }
