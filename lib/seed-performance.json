@@ -28897,158 +28897,721 @@
           ]
         }
       ],
+      "results": [
+        {
+          "symbol": "KEEL",
+          "name": "Keel Infrastructure Corp.",
+          "predictedWinRate": 52,
+          "predictedWin": true,
+          "priceAtPrediction": 5.93,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ],
+          "priceAtClose": 5.13,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "IREN",
+          "name": "IREN LIMITED",
+          "predictedWinRate": 58,
+          "predictedWin": true,
+          "priceAtPrediction": 61.86,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ],
+          "priceAtClose": 54.35,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "OWL",
+          "name": "Blue Owl Capital Inc.",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 10.19,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ],
+          "priceAtClose": 9.8,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "MRVL",
+          "name": "Marvell Technology, Inc.",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 316.43,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ],
+          "priceAtClose": 263.47,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "IONQ",
+          "name": "IonQ, Inc.",
+          "predictedWinRate": 57,
+          "predictedWin": true,
+          "priceAtPrediction": 65.66,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ],
+          "priceAtClose": 56.78,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "SOFI",
+          "name": "SoFi Technologies, Inc.",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 17.15,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 47,
+              "bullish": false
+            }
+          ],
+          "priceAtClose": 16.03,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "RGTI",
+          "name": "Rigetti Computing, Inc.",
+          "predictedWinRate": 56,
+          "predictedWin": true,
+          "priceAtPrediction": 24.16,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 49,
+              "bullish": false
+            }
+          ],
+          "priceAtClose": 20.68,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "PATH",
+          "name": "UiPath, Inc.",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 11.67,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 46,
+              "bullish": false
+            }
+          ],
+          "priceAtClose": 11.24,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "GRAB",
+          "name": "Grab Holdings Limited",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 3.46,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 44,
+              "bullish": false
+            }
+          ],
+          "priceAtClose": 3.34,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "NVTS",
+          "name": "Navitas Semiconductor Corporati",
+          "predictedWinRate": 59,
+          "predictedWin": true,
+          "priceAtPrediction": 30.67,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 59,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ],
+          "priceAtClose": 25.08,
+          "actualWin": false,
+          "correct": false
+        }
+      ],
+      "accuracy": 0,
+      "postmortem": "The most striking pattern is the consistent inverse correlation: every stock our model predicted to WIN (e.g., NVTS 59%, MRVL 60%) actually experienced significant losses, plummeting -18.23% and -16.74% respectively. The key mistake was the fundamental misinterpretation or inversion of our primary \"WIN\" signal, as it consistently led us to predict gains for stocks like KEEL (52% WIN) and IREN (58% WIN) that instead dropped -13.49% and -12.14%. For tomorrow, we will invert the model's output: any stock with a \"WIN\" probability above 50% (e.g., GRAB 51%, PATH 53%) will now be flagged as a strong \"SELL\" or \"SHORT\" candidate, anticipating a downward move."
+    },
+    {
+      "date": "2026-06-05",
+      "predictions": [
+        {
+          "symbol": "BMNR",
+          "name": "BitMine Immersion Technologies,",
+          "predictedWinRate": 52,
+          "predictedWin": true,
+          "priceAtPrediction": 15.9,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "T",
+          "name": "AT&T Inc.",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 22.75,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "IREN",
+          "name": "IREN LIMITED",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 54.35,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "KEEL",
+          "name": "Keel Infrastructure Corp.",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 5.13,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 49,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corporation",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 205.1,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "NOK",
+          "name": "Nokia Corporation Sponsored",
+          "predictedWinRate": 50,
+          "predictedWin": false,
+          "priceAtPrediction": 14.38,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "SMCI",
+          "name": "Super Micro Computer, Inc.",
+          "predictedWinRate": 56,
+          "predictedWin": true,
+          "priceAtPrediction": 41.64,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "RDW",
+          "name": "Redwire Corporation",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 18.45,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "MU",
+          "name": "Micron Technology, Inc.",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 864.01,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "MSTR",
+          "name": "Strategy Inc",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 120.44,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 58,
+              "bullish": true
+            }
+          ]
+        }
+      ],
       "results": null,
       "accuracy": null
     }
   ],
   "optimizationState": {
     "sourceWeights": {
-      "Polymarket": 0.18496598619940452,
-      "Market Data": 0.13175561220910517,
-      "News Sentiment": 0.389010457756222,
-      "X / Twitter": 0.2942679438352683
+      "Polymarket": 0.18821961143320903,
+      "Market Data": 0.12688333823126843,
+      "News Sentiment": 0.3787775711910133,
+      "X / Twitter": 0.30611947914450915
     },
     "classDeltas": {
       "equity": {
         "delta": {
-          "Polymarket": 0.028674993988959275,
-          "Market Data": -0.21599432278855396,
-          "News Sentiment": -0.014334563217275853,
-          "X / Twitter": 0.05403899295037659
+          "Polymarket": 0.025879182075035742,
+          "Market Data": -0.2957611441293048,
+          "News Sentiment": -0.09359795755369935,
+          "X / Twitter": 0.0891006982627688
         },
-        "epoch": 92,
+        "epoch": 94,
         "effectiveWeights": {
-          "Polymarket": 0.1921550816798644,
-          "Market Data": 0.10716934859208851,
-          "News Sentiment": 0.38711719747336415,
-          "X / Twitter": 0.313558372254683
+          "Polymarket": 0.19971865836705846,
+          "Market Data": 0.09760492786089685,
+          "News Sentiment": 0.3566561851086004,
+          "X / Twitter": 0.3460202286634444
         }
       },
       "crypto": {
         "delta": {
-          "Polymarket": 0.05948202166336269,
-          "Market Data": -0.022108881951014688,
-          "News Sentiment": 0.1749253209237666,
-          "X / Twitter": 0.08624478363666357
+          "Polymarket": 0.057126533605493524,
+          "Market Data": -0.021233370225754507,
+          "News Sentiment": 0.16799827821518543,
+          "X / Twitter": 0.08282949020465169
         },
         "epoch": 15,
         "effectiveWeights": {
-          "Polymarket": 0.17695655912283786,
-          "Market Data": 0.11617413209646045,
-          "News Sentiment": 0.417707676845387,
-          "X / Twitter": 0.2891616319353145
+          "Polymarket": 0.18049108298909963,
+          "Market Data": 0.1125030251702587,
+          "News Sentiment": 0.40581315399553847,
+          "X / Twitter": 0.3011927378451032
         }
       },
       "commodity": {
         "delta": {
-          "Polymarket": -0.03464449146036986,
-          "Market Data": 0.06360436712872772,
-          "News Sentiment": 0.06262505832578757,
-          "X / Twitter": 0.11380931945352686
+          "Polymarket": -0.03327256959853921,
+          "Market Data": 0.061085634190430095,
+          "News Sentiment": 0.06014510601608638,
+          "X / Twitter": 0.10930247040316719
         },
         "epoch": 5,
         "effectiveWeights": {
-          "Polymarket": 0.1680841504333501,
-          "Market Data": 0.1320909158783867,
-          "News Sentiment": 0.38961870304413876,
-          "X / Twitter": 0.31020623064412434
+          "Polymarket": 0.1716462806570437,
+          "Market Data": 0.12716083416247115,
+          "News Sentiment": 0.3792491016617209,
+          "X / Twitter": 0.32194378351876435
         }
       },
       "index": {
         "delta": {
-          "Polymarket": -0.0325397310649769,
-          "Market Data": 0.019654113862039874,
-          "News Sentiment": 0.12155235406243621,
-          "X / Twitter": 0.14575060551187474
+          "Polymarket": -0.031251157714803815,
+          "Market Data": 0.018875810953103093,
+          "News Sentiment": 0.11673888084156374,
+          "X / Twitter": 0.1399788815336045
         },
         "epoch": 5,
         "effectiveWeights": {
-          "Polymarket": 0.1637880464703258,
-          "Market Data": 0.1229212457001167,
-          "News Sentiment": 0.4018583063291964,
-          "X / Twitter": 0.3114324015003611
+          "Polymarket": 0.16743879435035403,
+          "Market Data": 0.11867675907809304,
+          "News Sentiment": 0.3907029835988902,
+          "X / Twitter": 0.3231814629726627
         }
       }
     },
-    "epoch": 117,
-    "weightLR": 0.027735009811261452,
+    "epoch": 119,
+    "weightLR": 0.02750095491084634,
     "history": [
-      {
-        "date": "2026-05-14",
-        "weights": {
-          "Polymarket": 0.1804527165552785,
-          "Market Data": 0.1479205638980146,
-          "News Sentiment": 0.3867158666759364,
-          "X / Twitter": 0.2849108528707705
-        },
-        "classWeights": {
-          "equity": {
-            "Polymarket": 0.20608382928102026,
-            "Market Data": 0.1141646246504433,
-            "News Sentiment": 0.3878074045664404,
-            "X / Twitter": 0.29194414150209597
-          },
-          "crypto": {
-            "Polymarket": 0.16662391122469633,
-            "Market Data": 0.11796196035880481,
-            "News Sentiment": 0.43937905614752926,
-            "X / Twitter": 0.2760350722689697
-          },
-          "commodity": {
-            "Polymarket": 0.15170665420715643,
-            "Market Data": 0.14836362378064027,
-            "News Sentiment": 0.387192355412958,
-            "X / Twitter": 0.3127373665992454
-          },
-          "index": {
-            "Polymarket": 0.14488899740685407,
-            "Market Data": 0.13044404370957252,
-            "News Sentiment": 0.40953663383295114,
-            "X / Twitter": 0.3151303250506222
-          }
-        },
-        "accuracy": 40,
-        "epoch": 88,
-        "assetClass": "equity"
-      },
-      {
-        "date": "2026-05-14",
-        "weights": {
-          "Polymarket": 0.18155161408544476,
-          "Market Data": 0.14882135134766508,
-          "News Sentiment": 0.3866042053717657,
-          "X / Twitter": 0.28302282919512445
-        },
-        "classWeights": {
-          "equity": {
-            "Polymarket": 0.20854123517431852,
-            "Market Data": 0.11781170839383426,
-            "News Sentiment": 0.38761105400793916,
-            "X / Twitter": 0.28603600242390803
-          },
-          "crypto": {
-            "Polymarket": 0.16796720919084743,
-            "Market Data": 0.11926207810451164,
-            "News Sentiment": 0.43829140769031233,
-            "X / Twitter": 0.27447930501432855
-          },
-          "commodity": {
-            "Polymarket": 0.15322595299066294,
-            "Market Data": 0.1493213747714912,
-            "News Sentiment": 0.387234903840578,
-            "X / Twitter": 0.3102177683972678
-          },
-          "index": {
-            "Polymarket": 0.14650904363095454,
-            "Market Data": 0.13165543887279932,
-            "News Sentiment": 0.40921834955656305,
-            "X / Twitter": 0.31261716793968297
-          }
-        },
-        "accuracy": 40,
-        "epoch": 89,
-        "assetClass": "equity"
-      },
       {
         "date": "2026-05-15",
         "weights": {
@@ -30112,9 +30675,85 @@
         "accuracy": 30,
         "epoch": 117,
         "assetClass": "equity"
+      },
+      {
+        "date": "2026-06-04",
+        "weights": {
+          "Polymarket": 0.18661202312904449,
+          "Market Data": 0.12930724472529634,
+          "News Sentiment": 0.38389620067154145,
+          "X / Twitter": 0.3001845314741177
+        },
+        "classWeights": {
+          "equity": {
+            "Polymarket": 0.19613934915602316,
+            "Market Data": 0.10227870935679995,
+            "News Sentiment": 0.3716039776085165,
+            "X / Twitter": 0.3299779638786604
+          },
+          "crypto": {
+            "Polymarket": 0.17874294581892675,
+            "Market Data": 0.11433688554253894,
+            "News Sentiment": 0.4117529923585788,
+            "X / Twitter": 0.29516717627995553
+          },
+          "commodity": {
+            "Polymarket": 0.16988300894286298,
+            "Market Data": 0.12961305274468568,
+            "News Sentiment": 0.3844349764081326,
+            "X / Twitter": 0.3160689619043186
+          },
+          "index": {
+            "Polymarket": 0.1656307228903744,
+            "Market Data": 0.12079203079318895,
+            "News Sentiment": 0.3962762143912459,
+            "X / Twitter": 0.3173010319251909
+          }
+        },
+        "accuracy": 50,
+        "epoch": 118,
+        "assetClass": "equity"
+      },
+      {
+        "date": "2026-06-04",
+        "weights": {
+          "Polymarket": 0.18821961143320903,
+          "Market Data": 0.12688333823126843,
+          "News Sentiment": 0.3787775711910133,
+          "X / Twitter": 0.30611947914450915
+        },
+        "classWeights": {
+          "equity": {
+            "Polymarket": 0.19971865836705846,
+            "Market Data": 0.09760492786089685,
+            "News Sentiment": 0.3566561851086004,
+            "X / Twitter": 0.3460202286634444
+          },
+          "crypto": {
+            "Polymarket": 0.18049108298909963,
+            "Market Data": 0.1125030251702587,
+            "News Sentiment": 0.40581315399553847,
+            "X / Twitter": 0.3011927378451032
+          },
+          "commodity": {
+            "Polymarket": 0.1716462806570437,
+            "Market Data": 0.12716083416247115,
+            "News Sentiment": 0.3792491016617209,
+            "X / Twitter": 0.32194378351876435
+          },
+          "index": {
+            "Polymarket": 0.16743879435035403,
+            "Market Data": 0.11867675907809304,
+            "News Sentiment": 0.3907029835988902,
+            "X / Twitter": 0.3231814629726627
+          }
+        },
+        "accuracy": 0,
+        "epoch": 119,
+        "assetClass": "equity"
       }
     ],
-    "lastOptimizedDate": "2026-06-03"
+    "lastOptimizedDate": "2026-06-04"
   },
-  "learnings": "Here are 3 concise rules to guide tomorrow's predictions:\n\n*   **Invert \"LOSE\" Signals:** Consistently, \"LOSE\" predictions (especially those between 48-50%) have resulted in significant upward movements for stocks like NIO, BB, and ONDS (2026-06-03, 2026-06-01, 2026-05-29). Therefore, treat any \"LOSE\" prediction as a strong contrarian \"BUY\" signal.\n*   **Strict Confidence Threshold for \"WIN\" Predictions:** The model exhibits a strong upward bias and overconfidence in \"WIN\" predictions below 60% confidence, frequently leading to false positives and missed declines (e.g., SMCI 60%, HPE 54%, NVDA 59%, NIO 55%, SMR 54-57%). Only trust \"WIN\" predictions with a confidence score strictly above 60%; disregard or critically re-evaluate any \"WIN\" prediction at 60% or below.\n*   **Filter \"WIN\" Signals by Prior Day's Performance:** Distrust any \"WIN\" prediction for a stock that closed flat (0.00%) or negative on the previous trading day. The model's pervasive bullish bias has led to incorrect \"WIN\" calls for such stocks, failing to discern flat or negative outcomes (e.g., NVDA -1.45% and ACHR 0.00% despite high \"WIN\" predictions on 2026-05-28)."
+  "learnings": "Here are 3 concise rules to guide tomorrow's predictions:\n\n*   **Invert the Primary \"WIN\" Signal:** The model's primary \"WIN\" signal is currently inverted. Any stock with a \"WIN\" probability above 50% should be treated as a strong \"SELL\" or \"SHORT\" candidate, anticipating a downward move. This adjustment is critical given the consistent inverse correlation observed on 2026-06-04, where \"WIN\" predictions consistently led to significant losses.\n*   **Invert the \"LOSE\" Signal to a \"BUY\":** The model's \"LOSE\" signal is fundamentally flawed and inversely correlated with actual outcomes. Any stock with a \"LOSE\" probability should be treated as a \"BUY\" signal, anticipating an upward move. This pattern has been consistently observed since 2026-05-29, with \"LOSE\" predictions frequently resulting in significant upward surges.\n*   **Mitigate Bullish Bias and Overconfidence:** Suppress any \"SELL/SHORT\" signals (derived from inverted \"WIN\" predictions) when the broader market sentiment is strongly positive. Additionally, avoid any \"SELL/SHORT\" positions for stocks that closed flat (0.00%) or negative on the previous day, as the model's pervasive bullish bias often leads to overconfident and incorrect predictions in such scenarios, even when signals are inverted (as seen on 2026-05-2"
 }
