@@ -8323,6 +8323,313 @@
       ],
       "accuracy": 40,
       "postmortem": "The \"LOSE\" signal was effective, correctly identifying significant downside for BMNR (-8.39%) and CIFR (-3.49%), while the highest confidence \"WIN\" for NVDA (60%) also worked. However, the model's key mistake was the consistent failure of \"WIN\" predictions in the 53-58% confidence range, with stocks like SPCX (-3.15%) and PATH (-2.93%) moving opposite. For tomorrow, we must raise the \"WIN\" prediction confidence threshold to at least 58% and investigate the features causing these false positives."
+    },
+    {
+      "date": "2026-09-16",
+      "predictions": [
+        {
+          "symbol": "PATH",
+          "name": "UiPath, Inc.",
+          "predictedWinRate": 58,
+          "predictedWin": true,
+          "priceAtPrediction": 13.63,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 62,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "T",
+          "name": "AT&T Inc.",
+          "predictedWinRate": 52,
+          "predictedWin": true,
+          "priceAtPrediction": 25.86,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "AUR",
+          "name": "Aurora Innovation, Inc.",
+          "predictedWinRate": 50,
+          "predictedWin": false,
+          "priceAtPrediction": 6.36,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 65,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 332.41,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 58,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "NOK",
+          "name": "Nokia Corporation Sponsored",
+          "predictedWinRate": 48,
+          "predictedWin": false,
+          "priceAtPrediction": 10.14,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "KEEL",
+          "name": "Keel Infrastructure Corp.",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 3.4,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "F",
+          "name": "Ford Motor Company",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 13.35,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 60,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "BAC",
+          "name": "Bank of America Corporation",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 57.9,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corporation",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 213.9,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "RIG",
+          "name": "Transocean Ltd (Switzerland)",
+          "predictedWinRate": 47,
+          "predictedWin": false,
+          "priceAtPrediction": 5.54,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
+        }
+      ],
+      "results": null,
+      "accuracy": null
     }
   ],
   "optimizationState": {
@@ -9558,5 +9865,5 @@
     ],
     "lastOptimizedDate": "2026-09-15"
   },
-  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **\"WIN\" Signal Confidence Threshold:** Trust \"WIN\" predictions only if confidence is 60% or higher for general equities and tech stocks; otherwise, distrust \"WIN\" signals below this threshold as they frequently resulted in losses (e.g., SPCX, PATH, PLTR) in the 53-58% range (2026-09-15, 2026-04-15).\n*   **Cryptocurrency \"WIN\" Inversion:** Invert all \"WIN\" predictions for cryptocurrency assets (e.g., BTC, ETH, XRP, DOGE); treat them as \"LOSE\" signals regardless of confidence, as they consistently resulted in significant downward movements (avg -3.06%) on 2026-04-18.\n*   **\"LOSE\" Signal Caution and Specific Inversion:** Distrust all \"LOSE\" predictions below 50% confidence, particularly for high-growth tech stocks (e.g., AMZN, PLTR) or broad market indices, as they frequently invert or are incorrect (2026-04-16, 2026-04-14, 2026-04-13). Only consider \"LOSE\" signals with 50% or higher confidence for non-growth individual assets, and even then, seek additional bearish confirmation due to past systemic flaws."
+  "learnings": "Here are 3-5 concise rules to guide TOMORROW's predictions:\n\n*   **Only trust \"WIN\" predictions with a confidence of 60% or higher.** \"WIN\" signals between 52-59% have consistently failed or been unreliable, often resulting in negative movements (e.g., SPCX, PATH, PLTR, AAL).\n*   **Invert all predictions for crypto assets.** Any \"WIN\" signal for crypto (e.g., BTC, XRP, DOGE, ETH) should be treated as a strong \"LOSE\", and any \"LOSE\" signal for crypto below 50% should be treated as a \"WIN\", as these have consistently shown inverse correlation in recent observations.\n*   **Distrust \"LOSE\" predictions below 50% confidence for high-growth tech stocks.** These signals (e.g., AMZN, PLTR) have frequently been inverted, indicating a positive movement, and should be re-evaluated towards a neutral or slightly positive outlook.\n*   **Exercise extreme caution with \"LOSE\" predictions between 40-49% confidence for non-growth/tech stocks.** These signals have a high tendency to be incorrect or even inverted (e.g., NIO, BABA, AAPL), requiring strong additional bearish confirmation to be trusted."
 }
