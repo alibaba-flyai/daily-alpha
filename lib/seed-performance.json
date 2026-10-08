@@ -16630,6 +16630,313 @@
       ],
       "accuracy": 40,
       "postmortem": "The model correctly identified positive momentum for NU (predicted WIN 58%, actual UP 3.16%) and NFLX (predicted WIN 62%, actual UP 1.76%), but consistently failed to predict strong upward movements, notably with CTVA (predicted LOSE 50%, actual UP 12.27%) and NOK (predicted LOSE 45%, actual UP 7.55%). For tomorrow, we must re-evaluate any 'LOSE' predictions with probabilities between 45-50%, as these appear highly susceptible to significant positive reversals."
+    },
+    {
+      "date": "2026-10-08",
+      "predictions": [
+        {
+          "symbol": "QXO",
+          "name": "QXO, Inc.",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 11.31,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "MARA",
+          "name": "MARA Holdings, Inc.",
+          "predictedWinRate": 58,
+          "predictedWin": true,
+          "priceAtPrediction": 10.36,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 70,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "FRSH",
+          "name": "Freshworks Inc.",
+          "predictedWinRate": 52,
+          "predictedWin": true,
+          "priceAtPrediction": 13.6,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 53,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "PLUG",
+          "name": "Plug Power, Inc.",
+          "predictedWinRate": 45,
+          "predictedWin": false,
+          "priceAtPrediction": 1.78,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 35,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "AGNC",
+          "name": "AGNC Investment Corp.",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 8.46,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "NOK",
+          "name": "Nokia Corporation Sponsored",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 10.62,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 47,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "VALE",
+          "name": "VALE S.A.",
+          "predictedWinRate": 56,
+          "predictedWin": true,
+          "priceAtPrediction": 13.61,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 49,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "RKT",
+          "name": "Rocket Companies, Inc.",
+          "predictedWinRate": 48,
+          "predictedWin": false,
+          "priceAtPrediction": 11.44,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "SKYD",
+          "name": "Paramount Skydance Corporation",
+          "predictedWinRate": 50,
+          "predictedWin": false,
+          "priceAtPrediction": 8.89,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 65,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "MDT",
+          "name": "Medtronic plc.",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 85.51,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 40,
+              "bullish": false
+            }
+          ]
+        }
+      ],
+      "results": null,
+      "accuracy": null
     }
   ],
   "optimizationState": {
@@ -17847,5 +18154,5 @@
     ],
     "lastOptimizedDate": "2026-10-06"
   },
-  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **Invert Mid-Confidence \"WIN\" Signals (50-57%):** Any \"WIN\" prediction with a probability between 50% and 57% should be inverted and treated as a \"LOSE\" signal. This range has consistently acted as a strong contrarian indicator for significant downside (e.g., AAL, INTC, MU on 2026-10-01; SPCX, MARA on 2026-09-30; PURR, CDE on 2026-09-25).\n*   **Conditional Trust for High-Confidence \"WIN\" Signals (58%+):** High-confidence \"WIN\" predictions (58% and above) should generally be trusted for positive momentum. However, they must be subjected to a stricter negative sentiment overlay to filter out potential false positives that led to sharp reversals (e.g., IREN on 2026-10-02).\n*   **Invert Low-Confidence \"LOSE\" Signals (45-50%):** \"LOSE\" predictions with probabilities between 45% and 50% should be inverted and treated as potential \"WIN\" signals. These have shown a high susceptibility to significant positive reversals, acting as strong buy indicators (e.g., CTVA, NOK on 2026-10-06)."
+  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **Invert Mid-to-High Confidence \"WIN\" Signals (50-70%):** Any \"WIN\" prediction with a probability between 50% and 70% should be treated as a \"LOSE\" signal. This range has consistently acted as a strong contrarian indicator for significant downside across multiple recent postmortems (e.g., 2026-09-25, 2026-09-30, 2026-10-01).\n*   **Re-evaluate Low-Confidence \"LOSE\" Signals (45-50%):** \"LOSE\" predictions with probabilities between 4"
 }
