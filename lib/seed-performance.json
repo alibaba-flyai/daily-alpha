@@ -17908,6 +17908,313 @@
       ],
       "accuracy": 90,
       "postmortem": "The model accurately identified strong upward momentum, with 9 out of 10 \"WIN\" predictions proving correct, exemplified by NU's 4.81% gain and PCG's 3.63% rise. The key mistake was the \"WIN\" prediction for CMG (57%), which instead saw a significant -3.34% decline, indicating a misleading signal for this specific stock. For tomorrow, we will implement a specific filter to re-evaluate \"WIN\" predictions with moderate confidence (e.g., 55-60%), like CMG's 57%, by cross-referencing with real-time news sentiment to flag potential false positives and avoid similar downside surprises."
+    },
+    {
+      "date": "2026-10-13",
+      "predictions": [
+        {
+          "symbol": "SPCX",
+          "name": "Space Exploration Technologies ",
+          "predictedWinRate": 58,
+          "predictedWin": true,
+          "priceAtPrediction": 163.42,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 62,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "SMCI",
+          "name": "Super Micro Computer, Inc.",
+          "predictedWinRate": 65,
+          "predictedWin": true,
+          "priceAtPrediction": 39.98,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 70,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 68,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 65,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "MMED",
+          "name": "MiniMed Group, Inc.",
+          "predictedWinRate": 52,
+          "predictedWin": true,
+          "priceAtPrediction": 18.8,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "NOK",
+          "name": "Nokia Corporation Sponsored",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 9.9,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "MDT",
+          "name": "Medtronic plc.",
+          "predictedWinRate": 56,
+          "predictedWin": true,
+          "priceAtPrediction": 91.93,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "NU",
+          "name": "Nu Holdings Ltd.",
+          "predictedWinRate": 59,
+          "predictedWin": true,
+          "priceAtPrediction": 16.01,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "RKT",
+          "name": "Rocket Companies, Inc.",
+          "predictedWinRate": 48,
+          "predictedWin": false,
+          "priceAtPrediction": 10.87,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 40,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "SMR",
+          "name": "NuScale Power Corporation",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 6.7,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 63,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 60,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "AGNC",
+          "name": "AGNC Investment Corp.",
+          "predictedWinRate": 47,
+          "predictedWin": false,
+          "priceAtPrediction": 8.68,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 46,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 40,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "AAL",
+          "name": "American Airlines Group, Inc.",
+          "predictedWinRate": 50,
+          "predictedWin": false,
+          "priceAtPrediction": 12.62,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
+        }
+      ],
+      "results": null,
+      "accuracy": null
     }
   ],
   "optimizationState": {
@@ -19125,5 +19432,5 @@
     ],
     "lastOptimizedDate": "2026-10-09"
   },
-  "learnings": "Here are 4 concise rules to guide TOMORROW's predictions:\n\n*   **Adjust \"WIN\" Probabilities Downward:** Apply a universal 0.5% downward adjustment to all raw \"WIN\" probabilities to counter the observed over-optimistic bias (e.g., 09-29). All subsequent rule evaluations should use this adjusted probability.\n*   **Distrust Low-Confidence \"WIN\" Signals:** \"WIN\" predictions with an *adjusted* confidence below 60% are highly unreliable. Specifically, any \"WIN\" prediction between 52-59% should be treated as a \"LOSE\" signal, given their consistent failure and inverse correlation in recent postmortems (e.g., 10-08, 10-01, 09-30).\n*   **Validate High-Confidence \"WIN\" Signals with Sentiment:** All \"WIN\" predictions, especially those with an *adjusted* confidence of 55% or higher, require a real-time news sentiment cross-reference. A strong negative sentiment signal should override the \"WIN\" prediction, treating it as a \"LOSE\" signal, to prevent sharp reversals (e.g., CMG on 10-09, IREN on 10-02).\n*   **Re-evaluate Moderate-Confidence \"LOSE\" Signals:** \"LOSE\" predictions with probabilities between 45-50% are highly unreliable and prone to significant positive reversals (e.g., CTVA, NOK on 10-06). These should be re-evaluated as potential \"WIN\" signals or disregarded."
+  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **Distrust Moderate Confidence \"WIN\" Predictions (Below 60%):** For any \"WIN\" prediction with confidence below 60% (e.g., 52-59%), apply a strict negative sentiment overlay. If any significant negative news or sentiment is detected, override the \"WIN\" prediction and treat it as a \"LOSE\" signal. Otherwise, consider these predictions highly suspect and reduce position size, as they have consistently led to losses (e.g., MARA, NOK, AAL, INTC, RIG, MU).\n*   **Re-evaluate Moderate Confidence \"LOSE\" Predictions (45-50%):** For \"LOSE\" predictions with confidence between 45% and 50%, treat them as highly suspect and potential \"WIN\" signals. These predictions have frequently reversed into significant gains (e.g., CTVA, NOK), indicating a strong susceptibility to positive reversals.\n*   **Invert \"WIN\" Signals (52-70%) in Bearish Markets:** If the overall market sentiment is bearish, any \"WIN\" prediction with confidence between 52% and 70% should be inverted and treated as a \"LOSE\" signal. This range has shown a consistent inverse correlation in bearish environments, where \"WIN\" predictions overwhelmingly resulted in actual declines (e.g., SPCX, MARA on 2026-09-30)."
 }
