@@ -18547,6 +18547,313 @@
       ],
       "accuracy": 40,
       "postmortem": "The model's \"LOSE\" signal was highly effective, correctly identifying downside for RKT, AGNC, and AAL with 100% accuracy. Conversely, the \"WIN\" signal was severely misleading, with six out of seven predictions, including high-confidence calls for SPCX (58%) and SMCI (65%), resulting in significant losses like -4.21% and -2.28% respectively. For tomorrow, I will drastically increase the confidence threshold for \"WIN\" predictions to above 70% and prioritize acting on \"LOSE\" signals, which demonstrated robust predictive power."
+    },
+    {
+      "date": "2026-10-14",
+      "predictions": [
+        {
+          "symbol": "IONQ",
+          "name": "IonQ, Inc.",
+          "predictedWinRate": 58,
+          "predictedWin": true,
+          "priceAtPrediction": 31.42,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 58,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "BBD",
+          "name": "Banco Bradesco Sa",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 4.14,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "ONDS",
+          "name": "Ondas Inc",
+          "predictedWinRate": 49,
+          "predictedWin": false,
+          "priceAtPrediction": 6.14,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 47,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "predictedWinRate": 62,
+          "predictedWin": true,
+          "priceAtPrediction": 98.12,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 60,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 65,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 63,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "ORCL",
+          "name": "Oracle Corporation",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 130.55,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 63,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 59,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "NFLX",
+          "name": "Netflix, Inc.",
+          "predictedWinRate": 56,
+          "predictedWin": true,
+          "priceAtPrediction": 70.57,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 54,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 57,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "GRAB",
+          "name": "Grab Holdings Limited",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 2.91,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 52,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "NU",
+          "name": "Nu Holdings Ltd.",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 14.93,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "SNAP",
+          "name": "Snap Inc.",
+          "predictedWinRate": 47,
+          "predictedWin": false,
+          "priceAtPrediction": 6.1,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 43,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "IREN",
+          "name": "IREN LIMITED",
+          "predictedWinRate": 59,
+          "predictedWin": true,
+          "priceAtPrediction": 30.56,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 61,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 57,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 60,
+              "bullish": true
+            }
+          ]
+        }
+      ],
+      "results": null,
+      "accuracy": null
     }
   ],
   "optimizationState": {
@@ -19764,5 +20071,5 @@
     ],
     "lastOptimizedDate": "2026-10-13"
   },
-  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **\"WIN\" Signal Threshold & Inverse Correlation:** \"WIN\" predictions between 52% and 69% have consistently proven misleading or inversely correlated, leading to significant losses (e.g., SPCX 70% on 09/30, SMCI 65% on 10/13, CMG 57% on 10/09). For tomorrow, **only trust \"WIN\" signals with confidence above 70%**. Any \"WIN\" prediction between 52% and 69% should be treated as a potential \"LOSE\" signal.\n\n*   **\"LOSE\" Signal Reliability & Reversal Risk:** \"LOSE\" signals have demonstrated robust predictive power, accurately identifying downside (e.g., RKT, AGNC, AAL on 10/13, STLA, WBD on 10/01). **Trust \"LOSE\" predictions with confidence above 50%**. However, \"LOSE\" predictions between 45-50% are highly susceptible to significant positive reversals (e.g., CTVA +12.27%, NOK +7.55% on 10/06) and should be disregarded.\n\n*   **Sentiment Overlay for Moderate-to-High \"WIN\" Signals:** Even \"WIN\" predictions with moderate-to-high confidence (55-70%) have resulted in sharp reversals and significant losses (e.g., IREN 60% on 10/02, CMG 57% on 10/09). For tomorrow, implement a **stricter negative sentiment overlay for all \"WIN\" predictions between 55% and 70%**. If negative news sentiment is detected, these signals must be flagged as potential false positives and avoided."
+  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **Distrust \"WIN\" signals with confidence between 52% and 70%.** Based on consistent failures and inverse correlations (09/30, 10/01, 10/08, 10/13), these predictions are highly suspect and have frequently resulted in significant losses. Consider them as potential \"LOSE\" signals unless strong, independent corroborating evidence exists.\n*   **Exercise extreme caution with all \"WIN\" predictions, even those above 70%.** While some high-confidence \"WIN\" signals have worked, others (e.g., SPCX 70%, SMCI 65%) have led to significant losses (09/30, 10/13). For any \"WIN\" prediction above 55%, a strict negative sentiment overlay is crucial to filter out potential false positives and avoid sharp reversals (10/02, 10/09).\n*   **Prioritize and trust \"LOSE\" signals with confidence below 45%.** These signals have consistently demonstrated robust predictive power for downside movements (10/13, 10/01, 09/30). Conversely, **distrust \"LOSE\" predictions with probabilities between 45% and 50%**, as these have frequently been susceptible to significant positive reversals (10/06)."
 }
