@@ -8142,74 +8142,74 @@
       "date": "2026-10-15",
       "predictions": [
         {
+          "symbol": "SKYD",
+          "name": "Skydance Corporation",
+          "predictedWinRate": 50,
+          "predictedWin": false,
+          "priceAtPrediction": 7.42
+        },
+        {
           "symbol": "VG",
           "name": "Venture Global, Inc.",
-          "predictedWinRate": 52,
+          "predictedWinRate": 55,
           "predictedWin": true,
-          "priceAtPrediction": 12.065
+          "priceAtPrediction": 12.09
         },
         {
           "symbol": "NVDA",
           "name": "NVIDIA Corporation",
-          "predictedWinRate": 68,
+          "predictedWinRate": 60,
           "predictedWin": true,
-          "priceAtPrediction": 216.39
+          "priceAtPrediction": 216.246
         },
         {
-          "symbol": "ERIC",
-          "name": "Ericsson",
+          "symbol": "SPCX",
+          "name": "Space Exploration Technologies ",
+          "predictedWinRate": 58,
+          "predictedWin": true,
+          "priceAtPrediction": 145.18
+        },
+        {
+          "symbol": "RKT",
+          "name": "Rocket Companies, Inc.",
           "predictedWinRate": 48,
           "predictedWin": false,
-          "priceAtPrediction": 10.425
-        },
-        {
-          "symbol": "CRWV",
-          "name": "CoreWeave, Inc.",
-          "predictedWinRate": 65,
-          "predictedWin": true,
-          "priceAtPrediction": 60.87
+          "priceAtPrediction": 11.0895
         },
         {
           "symbol": "WMT",
           "name": "Walmart Inc.",
-          "predictedWinRate": 51,
+          "predictedWinRate": 53,
           "predictedWin": true,
-          "priceAtPrediction": 120.235
+          "priceAtPrediction": 120.54
         },
         {
-          "symbol": "IONQ",
-          "name": "IonQ, Inc.",
-          "predictedWinRate": 55,
+          "symbol": "CRWV",
+          "name": "CoreWeave, Inc.",
+          "predictedWinRate": 62,
           "predictedWin": true,
-          "priceAtPrediction": 31.01
+          "priceAtPrediction": 60.625
         },
         {
-          "symbol": "BAC",
-          "name": "Bank of America Corporation",
-          "predictedWinRate": 50,
-          "predictedWin": false,
-          "priceAtPrediction": 51.245
+          "symbol": "SMCI",
+          "name": "Super Micro Computer, Inc.",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 33.22
+        },
+        {
+          "symbol": "BMNR",
+          "name": "BitMine Immersion Technologies,",
+          "predictedWinRate": 52,
+          "predictedWin": true,
+          "priceAtPrediction": 21.229
         },
         {
           "symbol": "NKE",
           "name": "Nike, Inc.",
           "predictedWinRate": 47,
           "predictedWin": false,
-          "priceAtPrediction": 36.915
-        },
-        {
-          "symbol": "BMNR",
-          "name": "BitMine Immersion Technologies,",
-          "predictedWinRate": 53,
-          "predictedWin": true,
-          "priceAtPrediction": 21.195
-        },
-        {
-          "symbol": "MARA",
-          "name": "MARA Holdings, Inc.",
-          "predictedWinRate": 54,
-          "predictedWin": true,
-          "priceAtPrediction": 7.875
+          "priceAtPrediction": 36.89
         }
       ],
       "results": null,
