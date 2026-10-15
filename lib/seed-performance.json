@@ -3642,7 +3642,8 @@
           ]
         }
       ],
-      "accuracy": 70
+      "accuracy": 70,
+      "postmortem": "The model accurately identified strong upward trends for traditional assets with conviction, exemplified by AMZN (58% WIN, UP 5.60%) and CL=F (60% WIN, UP 3.66%). However, our \"LOSE\" predictions for high-volatility tech stocks were notably misleading, as META (46% LOSE, actual UP 2.61%) and TSLA (41% LOSE, actual UP 0.69%) both rallied against expectations. For tomorrow, we will specifically adjust the \"LOSE\" signal threshold for growth equities, particularly when conviction is between 40-50%, to prevent misinterpreting potential upward momentum."
     },
     {
       "date": "2026-04-09",
@@ -4280,7 +4281,8 @@
           ]
         }
       ],
-      "accuracy": 30
+      "accuracy": 30,
+      "postmortem": "Our \"WIN\" signal for crypto assets (BTC-USD, ETH-USD) and specific tech like META proved accurate, with all three predictions (54-58% confidence) correctly identifying upward movement. The key mistake was the consistent failure of \"LOSE\" predictions, as TSLA (46%), AMZN (38%), and SI=F (35%) were all predicted LOSE but actually moved UP. For tomorrow, we will **invert all \"LOSE\" predictions**, treating them as \"WIN\" signals, and apply a similar inversion to high-confidence \"WIN\" equity predictions like PLTR (63%) and MSFT (61%) which were actually \"LOSE\"."
     },
     {
       "date": "2026-04-10",
@@ -4414,7 +4416,8 @@
           ]
         }
       ],
-      "accuracy": 0
+      "accuracy": 0,
+      "postmortem": "While accuracy was 0%, the model's high confidence (72%) for XRP-USD was associated with minimal actual movement (0.00%), suggesting a misinterpretation of low-volatility signals as strong directional moves. The key mistake was this consistent directional misjudgment, also seen with ETH-USD where a LOSE prediction (45% WIN) was wrong as it gained 1.79%. For tomorrow, we will implement a volatility-based filter: any prediction for XRP-USD with >70% confidence for WIN/LOSE will be downgraded to 'HOLD' if its 1-day historical volatility is below 0.5%, to avoid overconfident calls in flat markets."
     },
     {
       "date": "2026-04-11",
@@ -4548,7 +4551,8 @@
           ]
         }
       ],
-      "accuracy": 50
+      "accuracy": 50,
+      "postmortem": "The signal predicting a \"LOSE\" for DOGE-USD (44% probability, actual 0.00% change) correctly identified the lack of positive momentum. However, the marginal \"WIN\" prediction for BTC-USD (51% probability) was a key mistake, completely missing its -3.15% downturn. For tomorrow, we will raise our confidence threshold for \"WIN\" predictions to 55% to filter out such low-conviction calls and prevent similar misfires."
     },
     {
       "date": "2026-04-12",
@@ -4682,7 +4686,8 @@
           ]
         }
       ],
-      "accuracy": 100
+      "accuracy": 100,
+      "postmortem": "The model's directional signals were highly effective, accurately predicting BTC-USD's 5.27% UP move with 58% confidence and DOGE-USD's 0.00% DOWN move even with a low 24% LOSE probability. While correct, the 24% LOSE probability for DOGE-USD suggests a potential miscalibration of confidence for low-probability, yet accurate, directional calls, as 0.00% is definitively not an \"UP\" move. For tomorrow, we must analyze the features driving DOGE-USD's low confidence score to determine if the model is overly conservative in assigning probabilities to correct \"LOSE\" predictions."
     },
     {
       "date": "2026-04-13",
@@ -5320,7 +5325,8 @@
           ]
         }
       ],
-      "accuracy": 40
+      "accuracy": 40,
+      "postmortem": "The model effectively identified negative momentum for individual assets, correctly predicting \"LOSE\" for AAPL (-0.14%), JPM (-0.82%), and ETH-USD (-2.00%). The primary mistake was a consistent bearish bias, predicting \"LOSE\" for major indices like ^GSPC (45%) and ^DJI (41%), and growth stocks like AMZN (40%) and PLTR (42%), all of which ended significantly UP. For tomorrow, we must apply a positive drift adjustment to \"LOSE\" predictions, particularly for broad market indices and high-beta stocks, if their predicted LOSE confidence is below 50% and early market indicators are positive."
     },
     {
       "date": "2026-04-14",
@@ -5958,7 +5964,8 @@
           ]
         }
       ],
-      "accuracy": 70
+      "accuracy": 70,
+      "postmortem": "The model effectively identified upward momentum in tech stocks, correctly predicting WIN for MSFT (62%) and GOOGL (55%) which saw gains of 3.31% and 0.47% respectively, alongside accurate LOSE calls for indices like ^DJI (37%, down 0.24%). The key mistake was the strong conviction \"WIN\" prediction for JPM (65%), which instead saw a significant decline of -0.75%, indicating a flaw in our signal for financial sector performance. For tomorrow, we must specifically adjust the \"WIN\" signal's weighting for financial stocks, potentially by integrating real-time interest rate or sector-specific economic indicators, to prevent similar high-conviction misses."
     },
     {
       "date": "2026-04-15",
@@ -8212,8 +8219,110 @@
           "priceAtPrediction": 36.89
         }
       ],
-      "results": null,
-      "accuracy": null
+      "results": [
+        {
+          "symbol": "SKYD",
+          "name": "Skydance Corporation",
+          "predictedWinRate": 50,
+          "predictedWin": false,
+          "priceAtPrediction": 7.42,
+          "priceAtClose": 7.26,
+          "actualWin": false,
+          "correct": true
+        },
+        {
+          "symbol": "VG",
+          "name": "Venture Global, Inc.",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 12.09,
+          "priceAtClose": 12.5,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corporation",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 216.246,
+          "priceAtClose": 217.23,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "SPCX",
+          "name": "Space Exploration Technologies ",
+          "predictedWinRate": 58,
+          "predictedWin": true,
+          "priceAtPrediction": 145.18,
+          "priceAtClose": 148.62,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "RKT",
+          "name": "Rocket Companies, Inc.",
+          "predictedWinRate": 48,
+          "predictedWin": false,
+          "priceAtPrediction": 11.0895,
+          "priceAtClose": 11.07,
+          "actualWin": false,
+          "correct": true
+        },
+        {
+          "symbol": "WMT",
+          "name": "Walmart Inc.",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 120.54,
+          "priceAtClose": 117.87,
+          "actualWin": false,
+          "correct": false
+        },
+        {
+          "symbol": "CRWV",
+          "name": "CoreWeave, Inc.",
+          "predictedWinRate": 62,
+          "predictedWin": true,
+          "priceAtPrediction": 60.625,
+          "priceAtClose": 69.69,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "SMCI",
+          "name": "Super Micro Computer, Inc.",
+          "predictedWinRate": 60,
+          "predictedWin": true,
+          "priceAtPrediction": 33.22,
+          "priceAtClose": 35.09,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "BMNR",
+          "name": "BitMine Immersion Technologies,",
+          "predictedWinRate": 52,
+          "predictedWin": true,
+          "priceAtPrediction": 21.229,
+          "priceAtClose": 23.36,
+          "actualWin": true,
+          "correct": true
+        },
+        {
+          "symbol": "NKE",
+          "name": "Nike, Inc.",
+          "predictedWinRate": 47,
+          "predictedWin": false,
+          "priceAtPrediction": 36.89,
+          "priceAtClose": 37.14,
+          "actualWin": true,
+          "correct": false
+        }
+      ],
+      "accuracy": 80,
+      "postmortem": "The model effectively identified strong upward movements, particularly for high-conviction WIN predictions like CRWV (predicted WIN 62%, actual UP 14.95%) and SMCI (predicted WIN 60%, actual UP 5.63%). The primary mistake was the unreliability of predictions with confidence levels close to 50%, as demonstrated by WMT (predicted WIN 53%, actual DOWN -2.22%) and NKE (predicted LOSE 47%, actual UP 0.68%). For tomorrow, I will implement a filter to disregard or re-evaluate any predictions with confidence between 47% and 53%, as this range appears to be a source of significant error."
     }
   ],
   "optimizationState": {
@@ -8226,146 +8335,68 @@
     "classDeltas": {
       "equity": {
         "delta": {
-          "Polymarket": -0.03253870521142107,
-          "Market Data": -0.03049543148663673,
-          "News Sentiment": 0.10774989825015106,
-          "X / Twitter": 0.009512456905273496
+          "Polymarket": -0.029366181453307515,
+          "Market Data": -0.02752212691668965,
+          "News Sentiment": 0.09724428317076132,
+          "X / Twitter": 0.00858499235700933
         },
-        "epoch": 28,
+        "epoch": 30,
         "effectiveWeights": {
-          "Polymarket": 0.1390489690731226,
-          "Market Data": 0.1730039023916262,
-          "News Sentiment": 0.41843699986768707,
-          "X / Twitter": 0.26951012866756413
+          "Polymarket": 0.14000402934522135,
+          "Market Data": 0.1741574837473705,
+          "News Sentiment": 0.41558752355840195,
+          "X / Twitter": 0.2702509633490062
         }
       },
       "crypto": {
         "delta": {
-          "Polymarket": 0.2167289248258662,
-          "Market Data": -0.08055600802312288,
-          "News Sentiment": 0.6373585777428046,
-          "X / Twitter": 0.31424182814765594
+          "Polymarket": 0.20814645940276189,
+          "Market Data": -0.0773659901054072,
+          "News Sentiment": 0.6121191780641896,
+          "X / Twitter": 0.3017978517530087
         },
         "epoch": 15,
         "effectiveWeights": {
-          "Polymarket": 0.12572071617079372,
-          "Market Data": 0.1159573773253726,
-          "News Sentiment": 0.5007485765923402,
-          "X / Twitter": 0.2575733299114934
+          "Polymarket": 0.12672071802796417,
+          "Market Data": 0.11826381578213827,
+          "News Sentiment": 0.4963939589694765,
+          "X / Twitter": 0.2586215072204211
         }
       },
       "commodity": {
         "delta": {
-          "Polymarket": -0.12623080344913057,
-          "Market Data": 0.23174911875144769,
-          "News Sentiment": 0.22818090539893388,
-          "X / Twitter": 0.41467607775542425
+          "Polymarket": -0.12123206363254499,
+          "Market Data": 0.22257185364889034,
+          "News Sentiment": 0.21914494154513608,
+          "X / Twitter": 0.39825490507630945
         },
         "epoch": 5,
         "effectiveWeights": {
-          "Polymarket": 0.10313650187715064,
-          "Market Data": 0.1831815990093249,
-          "News Sentiment": 0.3844741864201746,
-          "X / Twitter": 0.32920771269334975
+          "Polymarket": 0.10469790047094714,
+          "Market Data": 0.18333731238932574,
+          "News Sentiment": 0.3848553851168699,
+          "X / Twitter": 0.3271094020228572
         }
       },
       "index": {
         "delta": {
-          "Polymarket": -0.11856189030943903,
-          "Market Data": 0.07161180549363738,
-          "News Sentiment": 0.44288862868679313,
-          "X / Twitter": 0.5310574715177194
+          "Polymarket": -0.11386683945318525,
+          "Market Data": 0.06877597799608934,
+          "News Sentiment": 0.4253502389907961,
+          "X / Twitter": 0.5100275956456177
         },
         "epoch": 5,
         "effectiveWeights": {
-          "Polymarket": 0.09393558734880568,
-          "Market Data": 0.14106597846873872,
-          "News Sentiment": 0.4307256721894556,
-          "X / Twitter": 0.3342727619929999
+          "Polymarket": 0.09575675421267195,
+          "Market Data": 0.14272200171726138,
+          "News Sentiment": 0.4294218695804805,
+          "X / Twitter": 0.3320993744895862
         }
       }
     },
-    "epoch": 53,
-    "weightLR": 0.04120816918460671,
+    "epoch": 55,
+    "weightLR": 0.04045199174779452,
     "history": [
-      {
-        "date": "2026-04-09",
-        "weights": {
-          "Polymarket": 0.1867116891924785,
-          "Market Data": 0.239602899955436,
-          "News Sentiment": 0.3229049569022445,
-          "X / Twitter": 0.2507804539498409
-        },
-        "classWeights": {
-          "equity": {
-            "Polymarket": 0.19487297129262088,
-            "Market Data": 0.285947263237499,
-            "News Sentiment": 0.32695259978309554,
-            "X / Twitter": 0.1922271656867845
-          },
-          "crypto": {
-            "Polymarket": 0.1189121068099678,
-            "Market Data": 0.13553130495462426,
-            "News Sentiment": 0.44914531164380567,
-            "X / Twitter": 0.29641127659160227
-          },
-          "commodity": {
-            "Polymarket": 0.21066516280597505,
-            "Market Data": 0.27034185243678377,
-            "News Sentiment": 0.23603959609480388,
-            "X / Twitter": 0.28295338866243724
-          },
-          "index": {
-            "Polymarket": 0.1948969745766937,
-            "Market Data": 0.25010689209167025,
-            "News Sentiment": 0.33706084203002507,
-            "X / Twitter": 0.21793529130161104
-          }
-        },
-        "accuracy": 100,
-        "accuracyBefore": 100,
-        "epoch": 24,
-        "assetClass": "crypto"
-      },
-      {
-        "date": "2026-04-09",
-        "weights": {
-          "Polymarket": 0.18031506202404163,
-          "Market Data": 0.231394252569084,
-          "News Sentiment": 0.3311256915792077,
-          "X / Twitter": 0.2571649938276667
-        },
-        "classWeights": {
-          "equity": {
-            "Polymarket": 0.18868168774462865,
-            "Market Data": 0.27612123940855055,
-            "News Sentiment": 0.33634425153654585,
-            "X / Twitter": 0.198852821310275
-          },
-          "crypto": {
-            "Polymarket": 0.11487284583898974,
-            "Market Data": 0.1312384422508404,
-            "News Sentiment": 0.4535766554841788,
-            "X / Twitter": 0.30031205642599107
-          },
-          "commodity": {
-            "Polymarket": 0.16540271786588506,
-            "Market Data": 0.21225757761915945,
-            "News Sentiment": 0.28639424700134786,
-            "X / Twitter": 0.33594545751360766
-          },
-          "index": {
-            "Polymarket": 0.18827553358863489,
-            "Market Data": 0.24160974620067485,
-            "News Sentiment": 0.34574408575290744,
-            "X / Twitter": 0.2243706344577828
-          }
-        },
-        "accuracy": 0,
-        "accuracyBefore": 0,
-        "epoch": 25,
-        "assetClass": "commodity"
-      },
       {
         "date": "2026-04-10",
         "weights": {
@@ -9447,9 +9478,85 @@
         "accuracy": 0,
         "epoch": 53,
         "assetClass": "crypto"
+      },
+      {
+        "date": "2026-10-15",
+        "weights": {
+          "Polymarket": 0.14891004288425405,
+          "Market Data": 0.1848948149798841,
+          "News Sentiment": 0.3894571923627954,
+          "X / Twitter": 0.27673794977306637
+        },
+        "classWeights": {
+          "equity": {
+            "Polymarket": 0.13953854933116744,
+            "Market Data": 0.1735952992025217,
+            "News Sentiment": 0.41697515774569544,
+            "X / Twitter": 0.2698909937206154
+          },
+          "crypto": {
+            "Polymarket": 0.1262262862495267,
+            "Market Data": 0.11711796746296299,
+            "News Sentiment": 0.49855048061035206,
+            "X / Twitter": 0.2581052656771582
+          },
+          "commodity": {
+            "Polymarket": 0.10392264026747045,
+            "Market Data": 0.18326108198970936,
+            "News Sentiment": 0.38466846139001715,
+            "X / Twitter": 0.32814781635280305
+          },
+          "index": {
+            "Polymarket": 0.0948518563606923,
+            "Market Data": 0.14190122269628666,
+            "News Sentiment": 0.4300705852469282,
+            "X / Twitter": 0.33317633569609284
+          }
+        },
+        "accuracy": 80,
+        "epoch": 54,
+        "assetClass": "equity"
+      },
+      {
+        "date": "2026-10-15",
+        "weights": {
+          "Polymarket": 0.14891004288425405,
+          "Market Data": 0.1848948149798841,
+          "News Sentiment": 0.3894571923627954,
+          "X / Twitter": 0.27673794977306637
+        },
+        "classWeights": {
+          "equity": {
+            "Polymarket": 0.14000402934522135,
+            "Market Data": 0.1741574837473705,
+            "News Sentiment": 0.41558752355840195,
+            "X / Twitter": 0.2702509633490062
+          },
+          "crypto": {
+            "Polymarket": 0.12672071802796417,
+            "Market Data": 0.11826381578213827,
+            "News Sentiment": 0.4963939589694765,
+            "X / Twitter": 0.2586215072204211
+          },
+          "commodity": {
+            "Polymarket": 0.10469790047094714,
+            "Market Data": 0.18333731238932574,
+            "News Sentiment": 0.3848553851168699,
+            "X / Twitter": 0.3271094020228572
+          },
+          "index": {
+            "Polymarket": 0.09575675421267195,
+            "Market Data": 0.14272200171726138,
+            "News Sentiment": 0.4294218695804805,
+            "X / Twitter": 0.3320993744895862
+          }
+        },
+        "accuracy": 80,
+        "epoch": 55,
+        "assetClass": "equity"
       }
     ],
-    "lastOptimizedDate": "2026-04-18"
+    "lastOptimizedDate": "2026-10-15"
   },
-  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **Market-Wide Inversion & High-Confidence \"WIN\" Threshold:** If the overall market is experiencing a broad downturn (as observed on 2026-04-18, where all \"WIN\" predictions resulted in significant \"DOWN\" movements), **invert all \"WIN\" predictions to \"DOWN\"**. Otherwise, only **trust \"WIN\" predictions with a probability of 65% or higher**, as lower confidence \"WIN\" signals (below 65%) have frequently resulted in losses or false positives (e.g., 2026-04-02, 2026-04-15).\n\n*   **\"LOSE\" Signal Reliability & Re-evaluation:** For \"LOSE\" predictions (i.e., WIN probability below 50%):\n    *   **Trust \"LOSE\" signals with a WIN probability of 30% or lower**, as these have consistently identified significant downturns (e.g., 2026-04-07, 2026-04-02).\n    *   **Distrust and re-evaluate \"LOSE\" signals with a WIN probability between 31% and 49%**. These are highly unreliable and often inverted (e.g., 2026-04-16, 2026-04-07). For this range, cross-reference with real-time news sentiment and short-term volume indicators; if external signals suggest upside, invert the prediction to \"WIN\".\n\n*   **Individual Negative Momentum Override for \"WIN\" Calls:** For any \"WIN\" prediction, regardless of its confidence level, if the specific asset exhibits strong short-term negative momentum or conflicting market sentiment (e.g., 2026-04-06's MRK and NIO cases where high-confidence \"WIN\" calls failed), **override the \"WIN\" signal and predict \"DOWN\"**."
+  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **Trust 'WIN' predictions only if confidence is 60% or higher.** Disregard or re-evaluate any 'WIN' predictions with confidence between 47% and 59%, as this range has frequently resulted in false positives or actual losses (e.g., WMT, NKE, JNJ, NOK, PLTR, AAL).\n*   **Trust 'LOSE' predictions only if confidence is 40% or lower.** Be highly skeptical of 'LOSE' predictions between 41% and 49%, as they have shown an inverse correlation (e.g., NIO, BABA) or a consistent bearish bias for broad market indices and high-beta growth stocks that ultimately moved up (e.g., ^GSPC, ^DJI, AMZN, PLTR).\n*   **Apply asset-specific inversions and discounts.** For cryptocurrency assets, invert all 'WIN' predictions (i.e., predict 'DOWN' if the model flags 'WIN'), as they have consistently resulted in significant negative movements (e.g., BTC, XRP, DOGE, ETH). For financial sector stocks, significantly discount 'WIN' predictions, especially those with high confidence, as they have frequently resulted in losses (e.g., JPM)."
 }
