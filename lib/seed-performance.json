@@ -8323,6 +8323,313 @@
       ],
       "accuracy": 80,
       "postmortem": "The model effectively identified strong upward movements, particularly for high-conviction WIN predictions like CRWV (predicted WIN 62%, actual UP 14.95%) and SMCI (predicted WIN 60%, actual UP 5.63%). The primary mistake was the unreliability of predictions with confidence levels close to 50%, as demonstrated by WMT (predicted WIN 53%, actual DOWN -2.22%) and NKE (predicted LOSE 47%, actual UP 0.68%). For tomorrow, I will implement a filter to disregard or re-evaluate any predictions with confidence between 47% and 53%, as this range appears to be a source of significant error."
+    },
+    {
+      "date": "2026-10-16",
+      "predictions": [
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corporation",
+          "predictedWinRate": 55,
+          "predictedWin": true,
+          "priceAtPrediction": 214.13,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 62,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "WULF",
+          "name": "TeraWulf Inc.",
+          "predictedWinRate": 52,
+          "predictedWin": true,
+          "priceAtPrediction": 11.68,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 55,
+              "bullish": true
+            }
+          ]
+        },
+        {
+          "symbol": "NU",
+          "name": "Nu Holdings Ltd.",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 14.56,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "CCC",
+          "name": "CCC Intelligent Solutions Holdi",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 7.61,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "FRMI",
+          "name": "Fermi Inc.",
+          "predictedWinRate": 49,
+          "predictedWin": false,
+          "priceAtPrediction": 3.16,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 48,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 40,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "ONDS",
+          "name": "Ondas Inc",
+          "predictedWinRate": 50,
+          "predictedWin": false,
+          "priceAtPrediction": 6.04,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 47,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "NFLX",
+          "name": "Netflix, Inc.",
+          "predictedWinRate": 54,
+          "predictedWin": true,
+          "priceAtPrediction": 70.53,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 52,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 58,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 55,
+              "bullish": true
+            },
+            {
+              "source": "X / Twitter",
+              "score": 50,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "NOK",
+          "name": "Nokia Corporation Sponsored",
+          "predictedWinRate": 51,
+          "predictedWin": true,
+          "priceAtPrediction": 9.14,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 53,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 50,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 48,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "OPEN",
+          "name": "Opendoor Technologies Inc",
+          "predictedWinRate": 48,
+          "predictedWin": false,
+          "priceAtPrediction": 2.115,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 40,
+              "bullish": false
+            },
+            {
+              "source": "Market Data",
+              "score": 45,
+              "bullish": false
+            },
+            {
+              "source": "News Sentiment",
+              "score": 42,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 45,
+              "bullish": false
+            }
+          ]
+        },
+        {
+          "symbol": "BMNR",
+          "name": "BitMine Immersion Technologies,",
+          "predictedWinRate": 53,
+          "predictedWin": true,
+          "priceAtPrediction": 21.66,
+          "assetClass": "equity",
+          "sourceScores": [
+            {
+              "source": "Polymarket",
+              "score": 56,
+              "bullish": true
+            },
+            {
+              "source": "Market Data",
+              "score": 51,
+              "bullish": true
+            },
+            {
+              "source": "News Sentiment",
+              "score": 49,
+              "bullish": false
+            },
+            {
+              "source": "X / Twitter",
+              "score": 56,
+              "bullish": true
+            }
+          ]
+        }
+      ],
+      "results": null,
+      "accuracy": null
     }
   ],
   "optimizationState": {
@@ -9558,5 +9865,5 @@
     ],
     "lastOptimizedDate": "2026-10-15"
   },
-  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **Trust 'WIN' predictions only if confidence is 60% or higher.** Disregard or re-evaluate any 'WIN' predictions with confidence between 47% and 59%, as this range has frequently resulted in false positives or actual losses (e.g., WMT, NKE, JNJ, NOK, PLTR, AAL).\n*   **Trust 'LOSE' predictions only if confidence is 40% or lower.** Be highly skeptical of 'LOSE' predictions between 41% and 49%, as they have shown an inverse correlation (e.g., NIO, BABA) or a consistent bearish bias for broad market indices and high-beta growth stocks that ultimately moved up (e.g., ^GSPC, ^DJI, AMZN, PLTR).\n*   **Apply asset-specific inversions and discounts.** For cryptocurrency assets, invert all 'WIN' predictions (i.e., predict 'DOWN' if the model flags 'WIN'), as they have consistently resulted in significant negative movements (e.g., BTC, XRP, DOGE, ETH). For financial sector stocks, significantly discount 'WIN' predictions, especially those with high confidence, as they have frequently resulted in losses (e.g., JPM)."
+  "learnings": "Here are 3 concise rules to guide TOMORROW's predictions:\n\n*   **High-Conviction WIN Signals (General & Sector-Specific):**\n    *   **Trust:** WIN predictions with confidence 60% or higher are generally reliable for non-financial and non-cryptocurrency assets, particularly for tech stocks (e.g., MSFT, GOOGL, CRWV, SMCI).\n    *   **Distrust/Action:** For financial sector stocks (e.g., JPM) and cryptocurrencies (e.g., BTC, ETH, XRP, DOGE), treat any \"WIN\" prediction as an inverse signal (i.e., predict \"DOWN\"), regardless of confidence, due to observed failures and inverse correlations.\n\n*   **Unreliable Confidence Range:**\n    *   **Action:** Disregard all predictions where the confidence level falls between 47% and 53%, as this range consistently produces unreliable and often incorrect signals (e.g., WMT, NKE, JNJ, NOK).\n\n*   **LOSE Signal Reliability and Bias:**\n    *   **Trust:** \"LOSE\" predictions for individual assets are reliable when confidence is below 45% (e.g., AAPL, SNAP, NIO).\n    *   **Distrust/Action:** For broad market indices (e.g., ^GSPC, ^DJI) and high-beta growth stocks (e.g., AMZN, PLTR), \"LOSE\" predictions (especially those below 50% confidence) are often inverted or reflect a bearish bias; consider these as \"UP\" predictions if early market indicators are positive."
 }
